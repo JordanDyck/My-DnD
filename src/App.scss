@@ -11,17 +11,31 @@
 
   .name-container {
     position: absolute;
+    display: flex;
+    padding: 5px;
+    align-items: center;
+    width: calc(100% - 100px);
+    #name {
+      width: 100%;
+    }
   }
 
   .lvl-containter {
     display: flex;
-    position: absolute;
-    left: 220px;
-    top: 5px;
+    padding: 10px;
+    justify-content: flex-end;
     align-items: center;
     #level {
       width: 45px;
       border: 1px solid;
+    }
+  }
+
+  .race-container {
+    display: flex;
+    #race {
+      margin-left: 4px;
+      border-bottom: 2px solid;
     }
   }
 

@@ -1,3 +1,5 @@
+import Select from "react-select"
+
 const Class = () => {
   return (
     <div className="class-container">
@@ -7,14 +9,16 @@ const Class = () => {
       </div>
       <div className="lvl-containter">
         <label id="lvl-label" htmlFor="level">
-          level:
+          Lvl:
         </label>
         <input id="level" />
       </div>
-      {/* <label htmlFor="race">race:</label>
-      <input id="race" />
-      <label htmlFor="background">background:</label>
-      <input id="background" />*/}
+      <div className="race-container">
+        <label htmlFor="race">Race:</label>
+        <h4 id="race">placeholder</h4>
+      </div>
+      {/* <label htmlFor="background">background:</label>
+      <input id="background" /> */}
     </div>
   )
 }
