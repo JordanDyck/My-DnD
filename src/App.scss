@@ -1,0 +1,34 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.class-container {
+  position: relative;
+  margin: 10px;
+  height: 150px;
+  border: 2px solid;
+
+  .name-container {
+    position: absolute;
+  }
+
+  .lvl-containter {
+    display: flex;
+    position: absolute;
+    left: 220px;
+    top: 5px;
+    align-items: center;
+    #level {
+      width: 45px;
+      border: 1px solid;
+    }
+  }
+
+  input {
+    height: 25px;
+    border: none;
+    border-bottom: 2px solid;
+    text-align: center;
+  }
+}
