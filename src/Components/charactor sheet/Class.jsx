@@ -4,9 +4,10 @@ import ClassPopup from "../ClassPopup"
 
 const Class = () => {
   const [popUp, setPopUp] = useState(false)
+  const [raceName, setRaceName] = useState("")
 
   return (
-    <div className="class-container">
+    <div className="character-info-container">
       <div className="name-container">
         <label htmlFor="name">Name:</label>
         <input id="name" />
@@ -16,18 +17,36 @@ const Class = () => {
         <label id="lvl-label" htmlFor="level">
           Lvl:
         </label>
-        <input type="number" id="level" />
+        <input type="number" id="level" defaultValue={1} />
       </div>
 
+      <div className="class-container">
+        <label htmlFor="class">Class: </label>
+        <input id="class" />
+      </div>
       <div className="race-container">
-        <label htmlFor="race">Race:</label>
-        <h4 id="race">placeholder</h4>
+        <label id="race-label" htmlFor="race">
+          Race:
+        </label>
+        <h4 id="race">{raceName}</h4>
 
-        <button onClick={() => setPopUp(true)}>select race</button>
+        <button
+          className="race-btn"
+          onClick={() => setPopUp(true)}
+          disabled={raceName}
+        >
+          select race
+        </button>
+        <button
+          className="delete-race-btn"
+          onClick={() => setRaceName("")}
+          disabled={!raceName}
+        >
+          X
+        </button>
       </div>
-      {/* <label htmlFor="background">background:</label>
-      <input id="background" /> */}
-      {popUp && <ClassPopup setPopUp={setPopUp} />}
+
+      {popUp && <ClassPopup setPopUp={setPopUp} setRaceName={setRaceName} />}
     </div>
   )
 }

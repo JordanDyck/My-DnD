@@ -1,9 +1,8 @@
 import axios from "axios"
 import {useEffect, useState} from "react"
 
-const ClassPopup = ({setPopUp}) => {
+const ClassPopup = ({setPopUp, setRaceName}) => {
   const [races, setRaces] = useState([])
-  console.log(races)
 
   useEffect(() => {
     axios.get(`https://www.dnd5eapi.co/api/races/`).then((res) => {
@@ -16,7 +15,11 @@ const ClassPopup = ({setPopUp}) => {
     <div className="popup-container">
       <input id="race-input" type="text" placeholder="Make your own" />
       {races.map((race, index) => (
-        <button className="race-option" key={index}>
+        <button
+          className="race-option"
+          key={index}
+          onClick={() => setRaceName(race.name)}
+        >
           {race.name}
         </button>
       ))}
