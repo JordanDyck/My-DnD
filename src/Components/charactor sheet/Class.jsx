@@ -1,9 +1,10 @@
 // import Select from "react-select"
 import {useState} from "react"
-import ClassPopup from "../ClassPopup"
+
+import CharacterDetails from "../CharacterDetails"
 
 const Class = () => {
-  const [popUp, setPopUp] = useState(false)
+  const [details, setDetails] = useState(false)
   const [raceName, setRaceName] = useState("")
 
   return (
@@ -20,33 +21,13 @@ const Class = () => {
         <input type="number" id="level" defaultValue={1} />
       </div>
 
-      <div className="class-container">
-        <label htmlFor="class">Class: </label>
-        <input id="class" />
-      </div>
-      <div className="race-container">
-        <label id="race-label" htmlFor="race">
-          Race:
-        </label>
-        <h4 id="race">{raceName}</h4>
+      <button className="details-btn" onClick={() => setDetails(!details)}>
+        details
+      </button>
 
-        <button
-          className="race-btn"
-          onClick={() => setPopUp(true)}
-          disabled={raceName}
-        >
-          select race
-        </button>
-        <button
-          className="delete-race-btn"
-          onClick={() => setRaceName("")}
-          disabled={!raceName}
-        >
-          X
-        </button>
-      </div>
-
-      {popUp && <ClassPopup setPopUp={setPopUp} setRaceName={setRaceName} />}
+      {details && (
+        <CharacterDetails raceName={raceName} setRaceName={setRaceName} />
+      )}
     </div>
   )
 }

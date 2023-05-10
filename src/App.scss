@@ -42,27 +42,6 @@ $dndFont: Castoro Titling, sans-sarif;
     }
   }
 
-  .race-container {
-    display: flex;
-    padding: 10px 0;
-    #race-label {
-      align-self: center;
-    }
-    #race {
-      margin: 0 4px;
-      padding: 5px 7px 0 5px;
-      border: 2px solid;
-      font-size: 15px;
-      &:empty {
-        border: none;
-      }
-    }
-
-    .delete-race-btn {
-      padding: 3px;
-    }
-  }
-
   .popup-container {
     display: flex;
     flex-direction: column;
@@ -95,16 +74,65 @@ $dndFont: Castoro Titling, sans-sarif;
       margin-top: 3px;
     }
   }
+  .details-btn {
+    font-size: 20px;
+  }
+}
 
-  input {
-    height: 25px;
-    border: none;
-    border-bottom: 2px solid;
-    text-align: center;
+.details-container {
+  box-shadow: 0px 0px 9px 4px rgba(0, 0, 0, 0.31);
+  padding: 10px 7px;
+  margin-top: 10px;
+  .class-container {
+    display: flex;
+    margin-top: 10px;
+    #class {
+      border: 2px solid;
+      font-size: 17px;
+      width: 135px;
+      padding-top: 2px;
+      font-weight: bold;
+    }
+    #class-label {
+      align-self: center;
+      padding-right: 5px;
+    }
+    #save-class-btn {
+      margin-left: 5px;
+      font-size: 17px;
+    }
   }
 
-  .race-btn:disabled,
-  .delete-race-btn:disabled {
-    display: none;
+  .race-container {
+    display: flex;
+    padding: 10px 0;
+    #race-label {
+      align-self: center;
+    }
+    #race {
+      margin: 0 4px;
+      padding: 5px 7px 0 5px;
+      border: 2px solid;
+      font-size: 15px;
+      &:empty {
+        border: none;
+      }
+    }
+
+    .delete-race-btn {
+      padding: 3px;
+    }
   }
+}
+
+input {
+  height: 25px;
+  border: none;
+  border-bottom: 2px solid;
+  text-align: center;
+}
+
+.race-btn:disabled,
+.delete-race-btn:disabled {
+  display: none;
 }
