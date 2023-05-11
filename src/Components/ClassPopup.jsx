@@ -14,15 +14,20 @@ const ClassPopup = ({setPopUp, setRaceName}) => {
   return (
     <div className="popup-container">
       <input id="race-input" type="text" placeholder="Make your own" />
-      {races.map((race, index) => (
-        <button
-          className="race-option"
-          key={index}
-          onClick={() => setRaceName(race.name)}
-        >
-          {race.name}
-        </button>
-      ))}
+      {races.length ? (
+        races.map((race, index) => (
+          <button
+            className="race-option"
+            key={index}
+            onClick={() => setRaceName(race.name)}
+          >
+            {race.name}
+          </button>
+        ))
+      ) : (
+        <p className="loading">loading</p>
+      )}
+
       <button id="save-race-btn" onClick={() => setPopUp(false)}>
         Save
       </button>
