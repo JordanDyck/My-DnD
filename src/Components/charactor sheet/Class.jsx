@@ -2,6 +2,7 @@
 import {useState} from "react"
 
 import CharacterDetails from "../CharacterDetails"
+import BaseStats from "./BaseStats"
 
 const Class = () => {
   const [details, setDetails] = useState(false)
@@ -28,6 +29,7 @@ const Class = () => {
       {details && (
         <CharacterDetails raceName={raceName} setRaceName={setRaceName} />
       )}
+      <BaseStats />
     </div>
   )
 }
