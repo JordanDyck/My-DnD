@@ -11,20 +11,43 @@ const BaseStats = () => {
   })
 
   return (
-    <div className="stat-wrapper">
-      {Object.keys(baseStats).map((stat, index) => (
-        <div className="stat-container" key={index}>
-          <label className="stat-name" htmlFor="bonus-stat">
-            {stat}
+    <>
+      <div className="passive-stats stat-wrapper">
+        <div className="initiative stat-container">
+          <label id="initiative-label" htmlFor="initiative-input">
+            initiative
           </label>
-          <label className="bonus-label" htmlFor="bonus-stat">
-            +
-          </label>
-          <input className="bonus-stat" type="number" defaultValue={5} />
-          <input className="base-stat" type="number" defaultValue={10} />
+          <input type="number" id="initiative-input" />
         </div>
-      ))}
-    </div>
+        <div className="armour-class stat-container">
+          <label id="ac-label" htmlFor="ac-input">
+            AC
+          </label>
+          <input type="number" id="ac-input" />
+        </div>
+        <div className="speed stat-container">
+          <label id="speed-label" htmlFor="speed-input">
+            wlk-speed
+          </label>
+          <input type="number" id="speed-input" />
+        </div>
+      </div>
+
+      <div className="stat-wrapper">
+        {Object.keys(baseStats).map((stat, index) => (
+          <div className="stat-container" key={index}>
+            <label className="stat-name" htmlFor="bonus-stat">
+              {stat}
+            </label>
+            <label className="bonus-label" htmlFor="bonus-stat">
+              +
+            </label>
+            <input className="bonus-stat" type="number" defaultValue={5} />
+            <input className="base-stat" type="number" defaultValue={10} />
+          </div>
+        ))}
+      </div>
+    </>
   )
 }
 export default BaseStats
