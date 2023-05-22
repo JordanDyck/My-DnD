@@ -17,19 +17,19 @@ const BaseStats = () => {
           <label id="initiative-label" htmlFor="initiative-input">
             initiative
           </label>
-          <input type="number" id="initiative-input" />
+          <input type="number" id="initiative-input" defaultValue={1} />
         </div>
         <div className="armour-class stat-container">
           <label id="ac-label" htmlFor="ac-input">
             AC
           </label>
-          <input type="number" id="ac-input" />
+          <input type="number" id="ac-input" defaultValue={10} />
         </div>
         <div className="speed stat-container">
           <label id="speed-label" htmlFor="speed-input">
             wlk-speed
           </label>
-          <input type="number" id="speed-input" />
+          <input type="number" id="speed-input" defaultValue={10} />
         </div>
       </div>
 

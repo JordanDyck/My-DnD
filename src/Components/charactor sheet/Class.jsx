@@ -12,9 +12,6 @@ const Class = () => {
       <div className="name-container">
         <label htmlFor="name">Name:</label>
         <input id="name" />
-      </div>
-
-      <div className="lvl-containter">
         <label id="lvl-label" htmlFor="level">
           Lvl:
         </label>
