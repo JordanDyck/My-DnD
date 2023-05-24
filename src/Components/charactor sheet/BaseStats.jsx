@@ -12,20 +12,20 @@ const BaseStats = () => {
 
   return (
     <>
-      <div className="passive-stats stat-wrapper">
-        <div className="initiative stat-container">
+      <div className="passive-stats base-stat-wrapper">
+        <div className="initiative base-stat-container">
           <label id="initiative-label" htmlFor="initiative-input">
             initiative
           </label>
           <input type="number" id="initiative-input" defaultValue={1} />
         </div>
-        <div className="armour-class stat-container">
+        <div className="armour-class base-stat-container">
           <label id="ac-label" htmlFor="ac-input">
             AC
           </label>
           <input type="number" id="ac-input" defaultValue={10} />
         </div>
-        <div className="speed stat-container">
+        <div className="speed base-stat-container">
           <label id="speed-label" htmlFor="speed-input">
             wlk-speed
           </label>
@@ -33,9 +33,9 @@ const BaseStats = () => {
         </div>
       </div>
 
-      <div className="stat-wrapper">
+      <div className="base-stat-wrapper">
         {Object.keys(baseStats).map((stat, index) => (
-          <div className="stat-container" key={index}>
+          <div className="base-stat-container" key={index}>
             <label className="stat-name" htmlFor="bonus-stat">
               {stat}
             </label>

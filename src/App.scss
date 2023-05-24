@@ -70,7 +70,8 @@ $dndFont: Castoro Titling, sans-sarif;
   }
   .details-btn {
     font-size: 20px;
-    margin-top: 3px;
+    margin: 3px 2px 0;
+    padding: 2px 2px 0;
   }
 }
 
@@ -79,6 +80,8 @@ $dndFont: Castoro Titling, sans-sarif;
   z-index: 1;
   top: 31%;
   left: 50%;
+  border: 15px solid transparent;
+  border-image: url("./assets/border.png") 109;
   transform: translate(-50%, -50%);
   box-shadow: 0px 0px 9px 4px rgba(0, 0, 0, 0.31);
   padding: 10px 7px;
@@ -126,7 +129,7 @@ $dndFont: Castoro Titling, sans-sarif;
   }
 }
 .loading {
-  color: white;
+  // color: white;
   text-align: center;
   font-size: 30px;
 }
@@ -143,7 +146,7 @@ input {
   display: none;
 }
 
-.stat-wrapper {
+.base-stat-wrapper {
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -154,7 +157,7 @@ input {
   margin: 21px auto;
   padding: 29px 12px 15px 0;
 
-  .stat-container {
+  .base-stat-container {
     position: relative;
     border: 11px solid transparent;
     border-image: url("./assets/border.png") 81;
@@ -213,5 +216,38 @@ input {
     position: absolute;
     font-size: 12px;
     top: -31px;
+  }
+}
+.stat-wrapper {
+  position: absolute;
+  z-index: 1;
+  top: 67%;
+  left: 38%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0px 0px 9px 4px rgba(0, 0, 0, 0.31);
+  border: 17px solid transparent;
+  border-image: url("./assets/border.png") 116;
+  padding: 10px 7px;
+
+  background-color: white;
+  width: 221px;
+  .stat-container {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid;
+    padding-top: 2px;
+    align-items: flex-end;
+    .stat-input {
+      width: 30px;
+      height: 30px;
+
+      font-size: 23px;
+    }
+  }
+  .close-stats {
+    font-size: 15px;
+  }
+  .loading {
+    color: black;
   }
 }
