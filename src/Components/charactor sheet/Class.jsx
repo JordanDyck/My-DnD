@@ -3,6 +3,7 @@ import {useState} from "react"
 import CharacterDetails from "../CharacterDetails"
 import BaseStats from "./BaseStats"
 import ProfStats from "./ProfStats"
+import Inventory from "./Inventory"
 
 const Class = () => {
   const [showCharDetails, setShowCharDetails] = useState(false)
@@ -37,6 +38,7 @@ const Class = () => {
         <ProfStats showStats={showStats} setShowStats={setShowStats} />
       )}
       <BaseStats />
+      <Inventory />
     </div>
   )
 }

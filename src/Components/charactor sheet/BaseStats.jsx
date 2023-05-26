@@ -36,12 +36,8 @@ const BaseStats = () => {
       <div className="base-stat-wrapper">
         {Object.keys(baseStats).map((stat, index) => (
           <div className="base-stat-container" key={index}>
-            <label className="stat-name" htmlFor="bonus-stat">
-              {stat}
-            </label>
-            <label className="bonus-label" htmlFor="bonus-stat">
-              +
-            </label>
+            <label className="stat-name">{stat}</label>
+            <label className="bonus-label">+</label>
             <input className="bonus-stat" type="number" defaultValue={5} />
             <input className="base-stat" type="number" defaultValue={10} />
           </div>
