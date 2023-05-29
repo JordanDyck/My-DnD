@@ -19,8 +19,13 @@ const ProfStats = ({showStats, setShowStats}) => {
       {stats.length ? (
         stats.map((stat, index) => (
           <div className="stat-container" key={index}>
-            <label>{stat.name}: </label>
-            <input className="stat-input" type="number" />
+            <label htmlFor={stat.name}>{stat.name}: </label>
+            <input
+              className="stat-input"
+              id={stat.name}
+              type="number"
+              defaultValue={0}
+            />
           </div>
         ))
       ) : (
