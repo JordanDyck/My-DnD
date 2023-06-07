@@ -5,11 +5,13 @@ import BaseStats from "./BaseStats"
 import ProfStats from "./ProfStats"
 import Inventory from "./Inventory"
 import Gear from "./Gear"
+import ItemsTab from "../ItemsTab"
 
 const Class = () => {
   const [showCharDetails, setShowCharDetails] = useState(false)
   const [showStats, setShowStats] = useState(false)
   const [showGear, setShowGear] = useState(false)
+  const [showItems, setShowItems] = useState(false)
   const [raceName, setRaceName] = useState("")
 
   return (
@@ -37,6 +39,11 @@ const Class = () => {
       <button className="details-btn" onClick={() => setShowGear(!showGear)}>
         Gear
       </button>
+      <button className="details-btn" onClick={() => setShowItems(!showItems)}>
+        ItemList
+      </button>
+
+      {showItems && <ItemsTab />}
 
       {showCharDetails && (
         <CharacterDetails raceName={raceName} setRaceName={setRaceName} />

@@ -1,0 +1,27 @@
+{
+  "base": ["name", "desc", "gear_category", "cost", "special", "rarity"],
+
+  "ammunition": ["quantity"],
+
+  "armor": [
+    "armor_category",
+    "armor_class",
+    "stealth_disadvantage",
+    "str_minimum"
+  ],
+
+  "weapon": [
+    "damage",
+    "equipment_category",
+    "range",
+    "two_handed_damage",
+    "weapon_category",
+    "weapon_range"
+  ],
+
+  "scroll": ["equipment_category"],
+
+  "tools": ["equipment_category", "tool_category"],
+
+  "mounts-and-vehicles": ["capacity", "equipment_category", "speed"]
+}
