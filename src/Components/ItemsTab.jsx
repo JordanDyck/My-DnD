@@ -1,8 +1,10 @@
 import Select from "react-select"
 import axios from "axios"
 import {useState, useEffect} from "react"
+import {v4 as uuid} from "uuid"
 
 import equipmentFilter from "./EquipmentFilter.json"
+import {filter} from "./FilterValues"
 
 const ItemsTab = () => {
   const [itemCategories, setItemCategories] = useState([])
@@ -10,6 +12,8 @@ const ItemsTab = () => {
   const [currentItem, setCurrentItem] = useState()
   const [categoryURL, setCategoryURL] = useState("")
   const [currentItemData, setCurrentItemData] = useState([])
+
+  console.log(currentItemData)
 
   // changes category object names to work with react select options.
   const categoryOptions = itemCategories.map(({index, name}) => ({
@@ -86,13 +90,40 @@ const ItemsTab = () => {
       }
     })
 
-    // console.log(currentItemData.cost.quantity)
-    return filteredInfo.map(([key, value]) => (
-      <div className="item-info" key={key}>
-        <h4>{key}</h4>
-        <p>{JSON.stringify(value)}</p>
-      </div>
-    ))
+    const handleformat = (itemValue) => {
+      // goes through filteredInfo item values to check for arrays and objects. returns the values
+
+      if (Array.isArray(itemValue)) {
+        return itemValue.map((item) => handleformat(item))
+      } else if (
+        typeof itemValue === "string" ||
+        typeof itemValue === "number"
+      ) {
+        // returns the value
+        return <p key={uuid()}>{itemValue}</p>
+      } else if (Object.keys(itemValue)) {
+        const keys = Object.keys(itemValue)
+        return keys.map((value) => (
+          // this returns just the value keys
+          <div className="item-value" key={uuid()}>
+            <h4>{value}:</h4>
+            {handleformat(itemValue[value])}
+          </div>
+        ))
+      } else {
+        return ""
+      }
+    }
+
+    return filteredInfo.map(([key, value]) => {
+      return (
+        // displays the values
+        <div className="item-info" key={uuid()}>
+          <h3>{key}: </h3>
+          {handleformat(filter?.[key]?.(value) || value)}
+        </div>
+      )
+    })
   }
   return (
     <div className="items-tab-wrapper">
@@ -109,6 +140,11 @@ const ItemsTab = () => {
         />
       )}
       {currentItemData && displayItemData()}
+      {currentItemData.stealth_disadvantage ? (
+        <h4>*stealth disadvantage*</h4>
+      ) : (
+        ""
+      )}
     </div>
   )
 }

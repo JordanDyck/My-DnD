@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Castoro+Titling&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2&display=swap");
 $dndFont: Castoro Titling, sans-sarif;
+$parFont: Baloo2, sans-sarif;
 
 * {
   margin: 0;
@@ -76,8 +78,8 @@ body {
     }
   }
   .details-btn {
-    font-size: 20px;
-    margin: 3px 2px 0;
+    font-size: 19px;
+    margin: 3px;
     padding: 2px 2px 0;
   }
 }
@@ -331,6 +333,23 @@ input {
   border-image: url("./assets/border.png") 116;
   .item-info {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
+    padding-block: 5px;
+
+    h3 {
+      font-size: 17px;
+      text-decoration: underline;
+      padding-right: 6px;
+    }
+    p {
+      font-family: $parFont;
+      font-size: 19px;
+    }
+    .item-value {
+      display: flex;
+
+      gap: 4px;
+    }
   }
 }
