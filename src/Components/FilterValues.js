@@ -32,8 +32,7 @@ export const filter = {
   damage: (value) => {
     return `${value.damage_dice} ${value.damage_type.name}`
   },
-
-  range: (value) => {
-    // return value.normal + "ft"
+  stealth_disadvantage: (value) => {
+    return ""
   },
 }

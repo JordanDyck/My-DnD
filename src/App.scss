@@ -333,7 +333,7 @@ input {
   border-image: url("./assets/border.png") 116;
   .item-info {
     display: flex;
-    flex-direction: column;
+    // flex-direction: column;
     flex-wrap: wrap;
     padding-block: 5px;
 
@@ -346,10 +346,31 @@ input {
       font-family: $parFont;
       font-size: 19px;
     }
+
     .item-value {
       display: flex;
 
       gap: 4px;
+    }
+  }
+  .key_desc {
+    display: flex;
+    flex-direction: column;
+    p {
+      padding-block: 4px;
+    }
+  }
+
+  .key_range {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .key_stealth_disadvantage {
+    h3 {
+      font-weight: 500;
+      color: #9d4242;
+      text-decoration: none;
     }
   }
 }

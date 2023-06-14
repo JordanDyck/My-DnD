@@ -3,7 +3,12 @@
 
   "ammunition": ["quantity"],
 
-  "armor": ["armor_category", "armor_class", "str_minimum"],
+  "armor": [
+    "armor_category",
+    "armor_class",
+    "str_minimum",
+    "stealth_disadvantage"
+  ],
 
   "weapon": ["damage", "equipment_category", "range", "two_handed_damage"],
 

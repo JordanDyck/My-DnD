@@ -13,8 +13,6 @@ const ItemsTab = () => {
   const [categoryURL, setCategoryURL] = useState("")
   const [currentItemData, setCurrentItemData] = useState([])
 
-  console.log(currentItemData)
-
   // changes category object names to work with react select options.
   const categoryOptions = itemCategories.map(({index, name}) => ({
     value: index,
@@ -90,18 +88,23 @@ const ItemsTab = () => {
       }
     })
 
-    const handleformat = (itemValue) => {
+    const handleformat = (itemValue, key) => {
       // goes through filteredInfo item values to check for arrays and objects. returns the values
-
       if (Array.isArray(itemValue)) {
         return itemValue.map((item) => handleformat(item))
       } else if (
-        typeof itemValue === "string" ||
+        (typeof itemValue === "string" && itemValue.length) ||
         typeof itemValue === "number"
       ) {
         // returns the value
-        return <p key={uuid()}>{itemValue}</p>
-      } else if (Object.keys(itemValue)) {
+        return (
+          <p className={key} key={uuid()}>
+            {itemValue}
+          </p>
+        )
+      } else if (typeof itemValue === "boolean") {
+        return itemValue.toString()
+      } else if (Object.keys(itemValue)?.length) {
         const keys = Object.keys(itemValue)
         return keys.map((value) => (
           // this returns just the value keys
@@ -116,11 +119,18 @@ const ItemsTab = () => {
     }
 
     return filteredInfo.map(([key, value]) => {
+      const customizeValue = filter?.[key]?.(value)
+      const valueToCheck = customizeValue === undefined ? value : customizeValue
+      const renderedValue = handleformat(valueToCheck, key)
+
       return (
         // displays the values
-        <div className="item-info" key={uuid()}>
-          <h3>{key}: </h3>
-          {handleformat(filter?.[key]?.(value) || value)}
+        <div className={`item-info key_${key}`} key={uuid()}>
+          <h3>
+            {key.replace("_", " ")}
+            {renderedValue ? ":" : ""}
+          </h3>
+          {renderedValue}
         </div>
       )
     })
@@ -140,11 +150,11 @@ const ItemsTab = () => {
         />
       )}
       {currentItemData && displayItemData()}
-      {currentItemData.stealth_disadvantage ? (
+      {/* {currentItemData.stealth_disadvantage ? (
         <h4>*stealth disadvantage*</h4>
       ) : (
         ""
-      )}
+      )} */}
     </div>
   )
 }
