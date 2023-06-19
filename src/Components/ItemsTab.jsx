@@ -1,4 +1,4 @@
-import Select from "react-select"
+import Select, {components} from "react-select"
 import axios from "axios"
 import {useState, useEffect} from "react"
 import {v4 as uuid} from "uuid"
@@ -8,7 +8,7 @@ import {filter} from "./FilterValues"
 
 const ItemsTab = () => {
   const [itemCategories, setItemCategories] = useState([])
-  const [itemList, setItemList] = useState([])
+  const [itemList, setItemList] = useState()
   const [currentItem, setCurrentItem] = useState()
   const [categoryURL, setCategoryURL] = useState("")
   const [currentItemData, setCurrentItemData] = useState([])
@@ -126,23 +126,39 @@ const ItemsTab = () => {
       return (
         // displays the values
         <div className={`item-info key_${key}`} key={uuid()}>
-          <h3>
-            {key.replace("_", " ")}
+          <h4>
+            {key.replaceAll("_", " ")}
             {renderedValue ? ":" : ""}
-          </h3>
+          </h4>
           {renderedValue}
         </div>
       )
     })
   }
+
+  // placeholder for select
+  const Placeholder = (props) => {
+    return <components.Placeholder {...props} />
+  }
+
   return (
     <div className="items-tab-wrapper">
       <Select
         options={categoryOptions}
-        onChange={(choice) => setCategoryURL(choice.value)}
+        components={{Placeholder}}
+        placeholder={"Categories"}
+        onChange={(choice) => {
+          setCategoryURL(choice.value)
+          setCurrentItem(null)
+          setCurrentItemData(null)
+        }}
       />
       {itemList && (
         <Select
+          // key={currentItem?.label || "empty"}
+          components={{Placeholder}}
+          placeholder={"Items"}
+          value={currentItem}
           options={itemOptions}
           onChange={(choice) => {
             setCurrentItem(choice)
@@ -150,11 +166,6 @@ const ItemsTab = () => {
         />
       )}
       {currentItemData && displayItemData()}
-      {/* {currentItemData.stealth_disadvantage ? (
-        <h4>*stealth disadvantage*</h4>
-      ) : (
-        ""
-      )} */}
     </div>
   )
 }

@@ -333,13 +333,13 @@ input {
   border-image: url("./assets/border.png") 116;
   .item-info {
     display: flex;
-    // flex-direction: column;
     flex-wrap: wrap;
+    align-items: baseline;
     padding-block: 5px;
 
-    h3 {
+    h4 {
       font-size: 17px;
-      text-decoration: underline;
+      // text-decoration: underline;
       padding-right: 6px;
     }
     p {
@@ -349,15 +349,15 @@ input {
 
     .item-value {
       display: flex;
-
       gap: 4px;
     }
   }
   .key_desc {
-    display: flex;
+    border-top: 1px solid;
+
     flex-direction: column;
     p {
-      padding-block: 4px;
+      padding-block: 5px;
     }
   }
 
@@ -367,7 +367,7 @@ input {
   }
 
   .key_stealth_disadvantage {
-    h3 {
+    h4 {
       font-weight: 500;
       color: #9d4242;
       text-decoration: none;
