@@ -5,6 +5,7 @@ import {v4 as uuid} from "uuid"
 
 import equipmentFilter from "./EquipmentFilter.json"
 import {filter} from "./FilterValues"
+import ItemCreator from "./charactor sheet/ItemCreator"
 
 const ItemsTab = () => {
   const [itemCategories, setItemCategories] = useState([])
@@ -12,6 +13,7 @@ const ItemsTab = () => {
   const [currentItem, setCurrentItem] = useState()
   const [categoryURL, setCategoryURL] = useState("")
   const [currentItemData, setCurrentItemData] = useState([])
+  const [showItemCreator, setShowItemCreator] = useState(false)
 
   // changes category object names to work with react select options.
   const categoryOptions = itemCategories.map(({index, name}) => ({
@@ -122,40 +124,53 @@ const ItemsTab = () => {
       const customizeValue = filter?.[key]?.(value)
       const valueToCheck = customizeValue === undefined ? value : customizeValue
       const renderedValue = handleformat(valueToCheck, key)
-
-      return (
-        // displays the values
-        <div className={`item-info key_${key}`} key={uuid()}>
-          <h4>
-            {key.replaceAll("_", " ")}
-            {renderedValue ? ":" : ""}
-          </h4>
-          {renderedValue}
-        </div>
-      )
+      if (!showItemCreator) {
+        return (
+          // displays the values
+          <div className={`item-info key_${key}`} key={uuid()}>
+            <h4>
+              {key.replaceAll("_", " ")}
+              {renderedValue ? ":" : ""}
+            </h4>
+            {renderedValue}
+          </div>
+        )
+      } else {
+        return ""
+      }
     })
   }
 
-  // placeholder for select
+  // placeholder function for select
   const Placeholder = (props) => {
     return <components.Placeholder {...props} />
   }
 
   return (
     <div className="items-tab-wrapper">
-      <Select
-        options={categoryOptions}
-        components={{Placeholder}}
-        placeholder={"Categories"}
-        onChange={(choice) => {
-          setCategoryURL(choice.value)
-          setCurrentItem(null)
-          setCurrentItemData(null)
+      <button
+        onClick={() => {
+          setShowItemCreator(!showItemCreator)
         }}
-      />
-      {itemList && (
+      >
+        +
+      </button>
+
+      {showItemCreator && <ItemCreator />}
+      {!showItemCreator && (
         <Select
-          // key={currentItem?.label || "empty"}
+          options={categoryOptions}
+          components={{Placeholder}}
+          placeholder={"Categories"}
+          onChange={(choice) => {
+            setCategoryURL(choice.value)
+            setCurrentItem(null)
+            setCurrentItemData(null)
+          }}
+        />
+      )}
+      {itemList && !showItemCreator ? (
+        <Select
           components={{Placeholder}}
           placeholder={"Items"}
           value={currentItem}
@@ -164,6 +179,8 @@ const ItemsTab = () => {
             setCurrentItem(choice)
           }}
         />
+      ) : (
+        ""
       )}
       {currentItemData && displayItemData()}
     </div>
