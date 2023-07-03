@@ -311,18 +311,16 @@ input {
 }
 
 .items-tab-wrapper {
-  min-height: 400px;
+  height: 400px;
   border: 17px solid transparent;
   border-image: url("./assets/border.png") 116;
   .item-info {
     display: flex;
-    flex-wrap: wrap;
     align-items: baseline;
     padding-block: 5px;
 
     h4 {
       font-size: 17px;
-      // text-decoration: underline;
       padding-right: 6px;
     }
     p {
@@ -353,40 +351,73 @@ input {
     h4 {
       font-weight: 500;
       color: #9d4242;
-      text-decoration: none;
-    }
-  }
-}
-.item-creator-container {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  .item-types {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    border-bottom: 1px solid;
-    margin-bottom: 14px;
-    input {
-      margin: 0 4px 0 11px;
+      text-decoration: underline;
     }
   }
 
-  .item-creator {
+  .create-item-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 25px;
+    text-align: center;
+    border: 1px solid;
+    border-radius: 7px;
+    margin-bottom: 10px;
+  }
+
+  .item-creator-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-
-    input {
-      font-size: 17px;
-      margin-block: 7px;
+    height: 100%;
+    .item-types {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      border-bottom: 1px solid;
+      margin-bottom: 14px;
+      input {
+        margin: 0 4px 0 11px;
+      }
     }
-    textarea {
-      width: 240px;
-      height: 100px;
-      padding: 5px;
-      font-size: 17px;
-      font-family: $parFont;
+
+    .item-creator {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+
+      input {
+        font-size: 17px;
+      }
+      textarea {
+        width: 240px;
+        height: 100px;
+        padding: 5px;
+        font-size: 17px;
+        font-family: $parFont;
+      }
+
+      .input-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .input-group {
+          margin-block: 10px;
+        }
+
+        .add-input {
+          width: 180px;
+          margin-top: 10px;
+        }
+      }
+
+      .add-btn-container {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 40px;
+      }
     }
   }
 }

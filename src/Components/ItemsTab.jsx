@@ -149,6 +149,7 @@ const ItemsTab = () => {
   return (
     <div className="items-tab-wrapper">
       <button
+        className="create-item-btn"
         onClick={() => {
           setShowItemCreator(!showItemCreator)
         }}
@@ -167,6 +168,12 @@ const ItemsTab = () => {
             setCurrentItem(null)
             setCurrentItemData(null)
           }}
+          styles={{
+            option: (base) => ({
+              ...base,
+              border: "1px solid #a9a9a9",
+            }),
+          }}
         />
       )}
       {itemList && !showItemCreator ? (
@@ -177,6 +184,12 @@ const ItemsTab = () => {
           options={itemOptions}
           onChange={(choice) => {
             setCurrentItem(choice)
+          }}
+          styles={{
+            option: (base) => ({
+              ...base,
+              border: "1px solid #a9a9a9",
+            }),
           }}
         />
       ) : (
