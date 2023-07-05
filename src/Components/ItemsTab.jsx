@@ -7,6 +7,8 @@ import equipmentFilter from "./EquipmentFilter.json"
 import {filter} from "./FilterValues"
 import ItemCreator from "./charactor sheet/ItemCreator"
 
+// TODO: store filteredInfo for inventory/gear.
+
 const ItemsTab = () => {
   const [itemCategories, setItemCategories] = useState([])
   const [itemList, setItemList] = useState()
@@ -120,27 +122,33 @@ const ItemsTab = () => {
       }
     }
 
-    return filteredInfo.map(([key, value]) => {
-      const customizeValue = filter?.[key]?.(value)
-      const valueToCheck = customizeValue === undefined ? value : customizeValue
-      const renderedValue = handleformat(valueToCheck, key)
-      if (!showItemCreator) {
-        return (
-          // displays the values
-          <div className={`item-info key_${key}`} key={uuid()}>
-            <h4>
-              {key.replaceAll("_", " ")}
-              {renderedValue ? ":" : ""}
-            </h4>
-            {renderedValue}
-          </div>
-        )
-      } else {
-        return ""
-      }
-    })
+    return (
+      !showItemCreator && (
+        <div className="item-info-container">
+          {filteredInfo.map(([key, value]) => {
+            const customizeValue = filter?.[key]?.(value)
+            const valueToCheck =
+              customizeValue === undefined ? value : customizeValue
+            const renderedValue = handleformat(valueToCheck, key)
+            if (!showItemCreator) {
+              return (
+                // displays the values
+                <div className={`item-info key_${key}`} key={uuid()}>
+                  <h4>
+                    {key.replaceAll("_", " ")}
+                    {renderedValue ? ":" : ""}
+                  </h4>
+                  {renderedValue}
+                </div>
+              )
+            } else {
+              return ""
+            }
+          })}
+        </div>
+      )
+    )
   }
-
   // placeholder function for select
   const Placeholder = (props) => {
     return <components.Placeholder {...props} />
@@ -182,6 +190,7 @@ const ItemsTab = () => {
           placeholder={"Items"}
           value={currentItem}
           options={itemOptions}
+          maxMenuHeight={270}
           onChange={(choice) => {
             setCurrentItem(choice)
           }}
@@ -196,6 +205,14 @@ const ItemsTab = () => {
         ""
       )}
       {currentItemData && displayItemData()}
+      {currentItem && !showItemCreator ? (
+        <div className="add-btn-container">
+          <button className="add-item">add to gear</button>
+          <button className="add-item">add to inventory</button>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   )
 }

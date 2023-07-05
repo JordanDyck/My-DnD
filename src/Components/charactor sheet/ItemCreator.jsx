@@ -1,11 +1,8 @@
 import {useState} from "react"
-import {v4 as uuid} from "uuid"
 
 const ItemCreator = () => {
   const [itemType, setItemType] = useState()
   const [createdItem, setCreatedItem] = useState({})
-  // inputList is just for making an input. not for storing values
-  const [inputList, setInputList] = useState([])
 
   const createItem = () => {
     if (itemType === "weapon") {
@@ -59,34 +56,10 @@ const ItemCreator = () => {
     } else if (itemType === "other") {
       // html for 'other' category
       return (
-        <div className="item-creator">
-          <div className="input-container">
-            <input placeholder="Name" />
-            {inputList.map((input) => {
-              return (
-                <div className="input-group" key={input.key}>
-                  <input />
-                  <button
-                    onClick={() => {
-                      setInputList(
-                        inputList.filter((item) => item.key !== input.key)
-                      )
-                    }}
-                  >
-                    X
-                  </button>
-                </div>
-              )
-            })}
-            <button
-              className="add-input"
-              // creates new input field.
-              onClick={() => setInputList((prev) => [...prev, {key: uuid()}])}
-              disabled={inputList.length >= 5}
-            >
-              Add New Property
-            </button>
-          </div>
+        <div className="item-creator other">
+          <input placeholder="Name" />
+          <textarea className="item-desc" placeholder="Description"></textarea>
+
           <div className="add-btn-container">
             <button className="add-item">add to gear</button>
             <button className="add-item">add to inventory</button>
