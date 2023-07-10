@@ -16,8 +16,9 @@ const ItemCreator = () => {
               [e.target.name]: e.target.value,
             }))
           }}
+          key={"weapon"}
         >
-          <input type="text" name="name" id="item-name" placeholder="Name" />
+          <input name="name" id="item-name" placeholder="Name" />
           <input name="damage" id="item-damage" placeholder="damage: 1 d6" />
           <input name="range" id="item-range" placeholder="range: 5ft" />
           <textarea
@@ -34,7 +35,16 @@ const ItemCreator = () => {
     } else if (itemType === "armor") {
       // html for armor category
       return (
-        <div className="item-creator">
+        <div
+          className="item-creator"
+          onChange={(e) => {
+            setCreatedItem((prev) => ({
+              ...prev,
+              [e.target.name]: e.target.value,
+            }))
+          }}
+          key={"armor"}
+        >
           <input type="text" name="name" id="item-name" placeholder="Name" />
           <input
             name="category"
@@ -56,9 +66,22 @@ const ItemCreator = () => {
     } else if (itemType === "other") {
       // html for 'other' category
       return (
-        <div className="item-creator other">
-          <input placeholder="Name" />
-          <textarea className="item-desc" placeholder="Description"></textarea>
+        <div
+          className="item-creator"
+          onChange={(e) => {
+            setCreatedItem((prev) => ({
+              ...prev,
+              [e.target.name]: e.target.value,
+            }))
+          }}
+          key={"other"}
+        >
+          <input name="name" placeholder="Name" />
+          <textarea
+            name="description"
+            className="item-desc"
+            placeholder="Description"
+          ></textarea>
 
           <div className="add-btn-container">
             <button className="add-item">add to gear</button>
@@ -74,6 +97,7 @@ const ItemCreator = () => {
         className="item-types"
         onChange={(e) => {
           setItemType(e.target.value)
+          setCreatedItem("")
         }}
       >
         <input type="radio" value="weapon" id="weapon" name="category" />

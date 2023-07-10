@@ -2,12 +2,12 @@ import Select, {components} from "react-select"
 import axios from "axios"
 import {useState, useEffect} from "react"
 import {v4 as uuid} from "uuid"
+import {useDispatch} from "react-redux"
 
 import equipmentFilter from "./EquipmentFilter.json"
 import {filter} from "./FilterValues"
 import ItemCreator from "./charactor sheet/ItemCreator"
-
-// TODO: store filteredInfo for inventory/gear.
+import {setInventory} from "../Store/slices/inventorySlice"
 
 const ItemsTab = () => {
   const [itemCategories, setItemCategories] = useState([])
@@ -16,6 +16,11 @@ const ItemsTab = () => {
   const [categoryURL, setCategoryURL] = useState("")
   const [currentItemData, setCurrentItemData] = useState([])
   const [showItemCreator, setShowItemCreator] = useState(false)
+  const [item, setItem] = useState()
+
+  // const inventory = useSelector((store) => store.inventory)
+
+  const dispatch = useDispatch()
 
   // changes category object names to work with react select options.
   const categoryOptions = itemCategories.map(({index, name}) => ({
@@ -101,6 +106,7 @@ const ItemsTab = () => {
         typeof itemValue === "number"
       ) {
         // returns the value
+
         return (
           <p className={key} key={uuid()}>
             {itemValue}
@@ -124,7 +130,7 @@ const ItemsTab = () => {
 
     return (
       !showItemCreator && (
-        <div className="item-info-container">
+        <div className="item-info-container ">
           {filteredInfo.map(([key, value]) => {
             const customizeValue = filter?.[key]?.(value)
             const valueToCheck =
@@ -145,6 +151,15 @@ const ItemsTab = () => {
               return ""
             }
           })}
+          <div className="add-btn-container">
+            <button className="add-item">add to gear</button>
+            <button
+              className="add-item"
+              onClick={() => dispatch(setInventory(filteredInfo))}
+            >
+              add to inventory
+            </button>
+          </div>
         </div>
       )
     )
@@ -205,14 +220,6 @@ const ItemsTab = () => {
         ""
       )}
       {currentItemData && displayItemData()}
-      {currentItem && !showItemCreator ? (
-        <div className="add-btn-container">
-          <button className="add-item">add to gear</button>
-          <button className="add-item">add to inventory</button>
-        </div>
-      ) : (
-        ""
-      )}
     </div>
   )
 }
