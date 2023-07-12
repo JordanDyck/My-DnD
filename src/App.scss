@@ -276,22 +276,16 @@ input {
   border: 17px solid transparent;
   border-image: url("./assets/border.png") 116;
   min-height: 300px;
-  #add-gear-btn {
-    font-size: 20px;
-    width: 30px;
-  }
-  .add-gear {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    label {
-      margin-bottom: -5px;
-    }
-  }
 
-  #description {
-    height: 150px;
-    margin-top: -10px;
+  .gear-item {
+    margin-bottom: 10px;
+    border-bottom: 2px solid;
+    .gear-info {
+      display: flex;
+      h4 {
+        padding-right: 5px;
+      }
+    }
   }
 }
 

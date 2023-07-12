@@ -6,8 +6,6 @@ const Inventory = () => {
   const [items, setItems] = useState([])
   const inventory = useSelector((store) => store.inventory)
 
-  console.log("inventory ", inventory)
-
   const deleteItem = (index) => {
     setItems((prev) => {
       return prev.filter((_, i) => i !== index)
