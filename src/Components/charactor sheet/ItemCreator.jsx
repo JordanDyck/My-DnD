@@ -1,8 +1,12 @@
 import {useState} from "react"
+import {useDispatch} from "react-redux"
+
+import {setInventory} from "../../Store/slices/inventorySlice"
 
 const ItemCreator = () => {
   const [itemType, setItemType] = useState()
-  const [createdItem, setCreatedItem] = useState({})
+  const [createdItem, setCreatedItem] = useState([])
+  const dispatch = useDispatch()
 
   const createItem = () => {
     if (itemType === "weapon") {
@@ -27,8 +31,15 @@ const ItemCreator = () => {
             placeholder="Description"
           />
           <div className="add-btn-container">
-            <button className="add-item">add to gear</button>
-            <button className="add-item">add to inventory</button>
+            <button className="add-item">Equip Item</button>
+            <button
+              className="add-item"
+              onClick={() =>
+                dispatch(setInventory(Object.entries(createdItem)))
+              }
+            >
+              add to inventory
+            </button>
           </div>
         </div>
       )
@@ -58,8 +69,15 @@ const ItemCreator = () => {
             placeholder="Description"
           ></textarea>
           <div className="add-btn-container">
-            <button className="add-item">add to gear</button>
-            <button className="add-item">add to inventory</button>
+            <button className="add-item">Equip Item</button>
+            <button
+              className="add-item"
+              onClick={() =>
+                dispatch(setInventory(Object.entries(createdItem)))
+              }
+            >
+              add to inventory
+            </button>
           </div>
         </div>
       )
@@ -84,8 +102,15 @@ const ItemCreator = () => {
           ></textarea>
 
           <div className="add-btn-container">
-            <button className="add-item">add to gear</button>
-            <button className="add-item">add to inventory</button>
+            <button className="add-item">Equip Item</button>
+            <button
+              className="add-item"
+              onClick={() =>
+                dispatch(setInventory(Object.entries(createdItem)))
+              }
+            >
+              add to inventory
+            </button>
           </div>
         </div>
       )

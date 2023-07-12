@@ -267,24 +267,9 @@ input {
   border-image: url("./assets/border.png") 116;
   min-height: 250px;
   min-width: 265px;
-
-  // .item-container {
-  //   display: flex;
-  //   gap: 7px;
-  //   justify-content: space-between;
-  //   align-items: flex-end;
-  //   font-size: 17px;
-  //   &:nth-child(even) {
-  //     border-block: 1px solid;
-  //   }
-  //   &:last-child {
-  //     border-bottom: 1px solid;
-  //   }
-  //   button {
-  //     width: 30px;
-  //     font-size: 17px;
-  //   }
-  // }
+  .inventory-item {
+    margin-block: 10px;
+  }
 }
 
 .gear-wrapper {
@@ -318,7 +303,8 @@ input {
   .item-info-container {
     display: flex;
     flex-direction: column;
-    min-height: 250px;
+    justify-content: space-evenly;
+    min-height: 295px;
 
     .item-info {
       display: flex;

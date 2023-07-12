@@ -8,6 +8,7 @@ import equipmentFilter from "./EquipmentFilter.json"
 import {filter} from "./FilterValues"
 import ItemCreator from "./charactor sheet/ItemCreator"
 import {setInventory} from "../Store/slices/inventorySlice"
+import {setGear} from "../Store/slices/gearSlice"
 
 const ItemsTab = () => {
   const [itemCategories, setItemCategories] = useState([])
@@ -16,7 +17,6 @@ const ItemsTab = () => {
   const [categoryURL, setCategoryURL] = useState("")
   const [currentItemData, setCurrentItemData] = useState([])
   const [showItemCreator, setShowItemCreator] = useState(false)
-  const [item, setItem] = useState()
 
   // const inventory = useSelector((store) => store.inventory)
 
@@ -151,15 +151,29 @@ const ItemsTab = () => {
               return ""
             }
           })}
-          <div className="add-btn-container">
-            <button className="add-item">add to gear</button>
-            <button
-              className="add-item"
-              onClick={() => dispatch(setInventory(filteredInfo))}
-            >
-              add to inventory
-            </button>
-          </div>
+
+          {itemList && (
+            <div className="add-btn-container">
+              <button
+                className="add-item"
+                onClick={() =>
+                  filteredInfo.length ? dispatch(setGear(filteredInfo)) : ""
+                }
+              >
+                Equip Item
+              </button>
+              <button
+                className="add-item"
+                onClick={() =>
+                  filteredInfo.length
+                    ? dispatch(setInventory(filteredInfo))
+                    : ""
+                }
+              >
+                add to inventory
+              </button>
+            </div>
+          )}
         </div>
       )
     )
