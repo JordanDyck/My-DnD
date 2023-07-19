@@ -282,6 +282,7 @@ input {
     border-bottom: 2px solid;
     .gear-info {
       display: flex;
+      flex-wrap: wrap;
       h4 {
         padding-right: 5px;
       }

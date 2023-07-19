@@ -38,6 +38,14 @@ export const filter = {
     return ""
   },
 
+  id: () => {
+    return ""
+  },
+
+  // desc: (value) => {
+  //   return ""
+  // },
+
   range: (value) => {
     if (value.normal && !value.long) {
       return `${value.normal}ft`

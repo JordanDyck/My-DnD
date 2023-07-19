@@ -126,7 +126,9 @@ const ItemsTab = () => {
               <button
                 className="add-item"
                 onClick={() =>
-                  filteredInfo.length ? dispatch(setGear(filteredInfo)) : ""
+                  filteredInfo.length
+                    ? dispatch(setGear([...filteredInfo, ["id", uuid()]]))
+                    : ""
                 }
               >
                 Equip Item
