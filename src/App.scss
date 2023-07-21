@@ -394,6 +394,14 @@ input {
         font-size: 17px;
         font-family: $parFont;
       }
+      .dmg-container {
+        display: flex;
+        input {
+          width: 115px;
+          font-size: 14px;
+          margin-inline: 8px;
+        }
+      }
     }
   }
 }

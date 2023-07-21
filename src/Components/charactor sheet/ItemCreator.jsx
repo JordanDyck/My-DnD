@@ -1,37 +1,86 @@
 import {useState} from "react"
 import {useDispatch} from "react-redux"
+import {v4 as uuid} from "uuid"
 
 import {setInventory} from "../../Store/slices/inventorySlice"
+import {setGear} from "../../Store/slices/gearSlice"
 
 const ItemCreator = () => {
   const [itemType, setItemType] = useState()
   const [createdItem, setCreatedItem] = useState([])
   const dispatch = useDispatch()
-
+  console.log("item", createdItem)
   const createItem = () => {
     if (itemType === "weapon") {
       // html for weapon category
       return (
-        <div
-          className="item-creator"
-          onChange={(e) => {
-            setCreatedItem((prev) => ({
-              ...prev,
-              [e.target.name]: e.target.value,
-            }))
-          }}
-          key={"weapon"}
-        >
-          <input name="name" id="item-name" placeholder="Name" />
-          <input name="damage" id="item-damage" placeholder="damage: 1 d6" />
+        <div className="item-creator" key={"weapon"}>
+          <input
+            name="name"
+            id="item-name"
+            placeholder="Name"
+            onChange={(e) => {
+              setCreatedItem((prev) => ({
+                ...prev,
+                [e.target.name]: e.target.value,
+              }))
+            }}
+          />
+          <div className="dmg-container">
+            <input
+              onChange={(e) => {
+                setCreatedItem((prev) => ({
+                  ...prev,
+                  damage: {
+                    ...prev?.damage,
+                    [e.target.name]: e.target.value,
+                  },
+                }))
+              }}
+              name="damage_dice"
+              id="item-damage-dice"
+              placeholder="damage: 1 d6"
+            />
+            <input
+              onChange={(e) => {
+                setCreatedItem((prev) => ({
+                  ...prev,
+                  damage: {
+                    ...prev?.damage,
+                    [e.target.name]: {
+                      name: e.target.value,
+                    },
+                  },
+                }))
+              }}
+              name="damage_type"
+              id="item-damage-type"
+              placeholder="bludgeoning"
+            />
+          </div>
           <input name="range" id="item-range" placeholder="range: 5ft" />
           <textarea
-            name="description"
+            onChange={(e) => {
+              setCreatedItem((prev) => ({
+                ...prev,
+                [e.target.name]: e.target.value,
+              }))
+            }}
+            name="desc"
             className="item-desc"
             placeholder="Description"
           />
           <div className="add-btn-container">
-            <button className="add-item">Equip Item</button>
+            <button
+              className="add-item"
+              onClick={() => {
+                dispatch(
+                  setGear([...Object.entries(createdItem), ["id", uuid()]])
+                )
+              }}
+            >
+              Equip Item
+            </button>
             <button
               className="add-item"
               onClick={() =>

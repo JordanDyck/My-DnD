@@ -9,17 +9,17 @@ import GearItem from "../GearItem"
 const Gear = () => {
   const gear = useSelector((store) => store.gear)
   const [showDesc, setShowDesc] = useState([])
-  console.log("beep")
-
   return (
     <div className="gear-wrapper">
       {gear.value.map((item) => {
+        console.log("gear", item)
         return (
           <div className="gear-item" key={uuid()}>
             {item.map(([key, value]) => {
               const customizeValue = filter?.[key]?.(value)
               const valueToCheck =
                 customizeValue === undefined ? value : customizeValue
+
               const renderedValue = handleformat(valueToCheck, key)
 
               if (key === "desc") {
@@ -38,7 +38,11 @@ const Gear = () => {
                 )
               }
 
+              // so the id does not get displayed
               if (key === "id") {
+                return ""
+              }
+              if (key === "custom") {
                 return ""
               }
 
