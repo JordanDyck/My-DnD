@@ -48,7 +48,9 @@ export const filter = {
 
   range: (value) => {
     if (value.normal && !value.long) {
-      return `${value.normal}ft`
+      return {
+        normal: `${value.normal}ft`,
+      }
     } else if (value.long && !value.normal) {
       return {
         long: `${value.long}ft`,
@@ -71,7 +73,6 @@ export const handleformat = (itemValue, key) => {
     typeof itemValue === "number"
   ) {
     // returns the value
-
     return (
       <p className={key} key={uuid()}>
         {itemValue}

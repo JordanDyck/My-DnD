@@ -58,7 +58,38 @@ const ItemCreator = () => {
               placeholder="bludgeoning"
             />
           </div>
-          <input name="range" id="item-range" placeholder="range: 5ft" />
+
+          <div className="range-container">
+            <input
+              onChange={(e) => {
+                setCreatedItem((prev) => ({
+                  ...prev,
+                  range: {
+                    ...prev?.range,
+                    [e.target.name]: e.target.value,
+                  },
+                }))
+              }}
+              name="normal"
+              id="item-range-normal"
+              placeholder="range: 15ft"
+            />
+            <input
+              onChange={(e) => {
+                setCreatedItem((prev) => ({
+                  ...prev,
+                  range: {
+                    ...prev?.range,
+                    [e.target.name]: e.target.value,
+                  },
+                }))
+              }}
+              name="long"
+              id="item-range-long"
+              placeholder="range: 30ft"
+            />
+          </div>
+
           <textarea
             onChange={(e) => {
               setCreatedItem((prev) => ({

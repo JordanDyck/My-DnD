@@ -262,7 +262,6 @@ input {
   }
 }
 .inventory-wrapper {
-  // display: flex;
   border: 17px solid transparent;
   border-image: url("./assets/border.png") 116;
   min-height: 250px;
@@ -277,6 +276,24 @@ input {
   border-image: url("./assets/border.png") 116;
   min-height: 300px;
 
+  .key_range {
+    flex-direction: column;
+    flex-wrap: nowrap;
+
+    .item-value {
+      display: flex;
+      flex-direction: row;
+      margin-left: 10px;
+      h4 {
+        padding: 0;
+        font-size: 15px;
+        font-weight: 600;
+      }
+      p {
+        padding-right: 5px;
+      }
+    }
+  }
   .gear-item {
     margin-bottom: 10px;
     border-bottom: 2px solid;
@@ -394,7 +411,8 @@ input {
         font-size: 17px;
         font-family: $parFont;
       }
-      .dmg-container {
+      .dmg-container,
+      .range-container {
         display: flex;
         input {
           width: 115px;
