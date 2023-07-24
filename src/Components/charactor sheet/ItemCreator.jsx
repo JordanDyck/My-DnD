@@ -102,6 +102,7 @@ const ItemCreator = () => {
             placeholder="Description"
           />
           <div className="add-btn-container">
+            {/* add item to gear tab */}
             <button
               className="add-item"
               onClick={() => {
@@ -112,6 +113,7 @@ const ItemCreator = () => {
             >
               Equip Item
             </button>
+            {/* add item to inventory */}
             <button
               className="add-item"
               onClick={() =>
@@ -137,19 +139,32 @@ const ItemCreator = () => {
           key={"armor"}
         >
           <input type="text" name="name" id="item-name" placeholder="Name" />
+
           <input
             name="category"
             id="item-category"
             placeholder="light, medium, heavy"
           />
+
           <input name="AC" id="armor-class" placeholder="AC: 12 + dex" />
           <textarea
-            name="description"
+            name="desc"
             className="item-desc"
             placeholder="Description"
           ></textarea>
+
           <div className="add-btn-container">
-            <button className="add-item">Equip Item</button>
+            <button
+              className="add-item"
+              onClick={() => {
+                dispatch(
+                  setGear([...Object.entries(createdItem), ["id", uuid()]])
+                )
+              }}
+            >
+              Equip Item
+            </button>
+
             <button
               className="add-item"
               onClick={() =>
@@ -176,13 +191,22 @@ const ItemCreator = () => {
         >
           <input name="name" placeholder="Name" />
           <textarea
-            name="description"
+            name="desc"
             className="item-desc"
             placeholder="Description"
           ></textarea>
 
           <div className="add-btn-container">
-            <button className="add-item">Equip Item</button>
+            <button
+              onClick={() => {
+                dispatch(
+                  setGear([...Object.entries(createdItem), ["id", uuid()]])
+                )
+              }}
+              className="add-item"
+            >
+              Equip Item
+            </button>
             <button
               className="add-item"
               onClick={() =>

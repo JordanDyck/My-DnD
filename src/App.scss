@@ -297,6 +297,10 @@ input {
   .gear-item {
     margin-bottom: 10px;
     border-bottom: 2px solid;
+
+    .desc-container {
+      word-wrap: break-word;
+    }
     .gear-info {
       display: flex;
       flex-wrap: wrap;
