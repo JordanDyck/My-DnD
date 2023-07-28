@@ -1,15 +1,12 @@
 import {useState} from "react"
-import {useDispatch} from "react-redux"
-import {v4 as uuid} from "uuid"
 
-import {setInventory} from "../Store/slices/inventorySlice"
-import {setGear} from "../Store/slices/gearSlice"
 import WeaponCategory from "./GearItemCategories/WeaponCategory"
+import ArmorCategory from "./GearItemCategories/ArmorCategory"
+import OtherCategory from "./GearItemCategories/OtherCategory"
 
 const ItemCreator = () => {
   const [itemType, setItemType] = useState()
   const [createdItem, setCreatedItem] = useState([])
-  const dispatch = useDispatch()
 
   const createItem = () => {
     if (itemType === "weapon") {
@@ -23,95 +20,18 @@ const ItemCreator = () => {
     } else if (itemType === "armor") {
       // html for armor category
       return (
-        <div
-          className="item-creator"
-          onChange={(e) => {
-            setCreatedItem((prev) => ({
-              ...prev,
-              [e.target.name]: e.target.value,
-            }))
-          }}
-          key={"armor"}
-        >
-          <input type="text" name="name" id="item-name" placeholder="Name" />
-
-          <input
-            name="category"
-            id="item-category"
-            placeholder="light, medium, heavy"
-          />
-
-          <input name="AC" id="armor-class" placeholder="AC: 12 + dex" />
-          <textarea
-            name="desc"
-            className="item-desc"
-            placeholder="Description"
-          ></textarea>
-
-          <div className="add-btn-container">
-            <button
-              className="add-item"
-              onClick={() => {
-                dispatch(
-                  setGear([...Object.entries(createdItem), ["id", uuid()]])
-                )
-              }}
-            >
-              Equip Item
-            </button>
-
-            <button
-              className="add-item"
-              onClick={() =>
-                dispatch(setInventory(Object.entries(createdItem)))
-              }
-            >
-              add to inventory
-            </button>
-          </div>
-        </div>
+        <ArmorCategory
+          createdItem={createdItem}
+          setCreatedItem={setCreatedItem}
+        />
       )
     } else if (itemType === "other") {
       // html for 'other' category
       return (
-        <div
-          className="item-creator"
-          onChange={(e) => {
-            setCreatedItem((prev) => ({
-              ...prev,
-              [e.target.name]: e.target.value,
-            }))
-          }}
-          key={"other"}
-        >
-          <input name="name" placeholder="Name" />
-          <textarea
-            name="desc"
-            className="item-desc"
-            placeholder="Description"
-          ></textarea>
-
-          <div className="add-btn-container">
-            <button
-              onClick={() => {
-                dispatch(
-                  setGear([...Object.entries(createdItem), ["id", uuid()]])
-                )
-              }}
-              className="add-item"
-            >
-              Equip Item
-            </button>
-            <button
-              className="add-item"
-              onClick={() =>
-                dispatch(setInventory(Object.entries(createdItem)))
-              }
-            >
-              add to inventory
-            </button>
-          </div>
-        </div>
+        <OtherCategory
+          createdItem={createdItem}
+          setCreatedItem={setCreatedItem}
+        />
       )
     }
   }

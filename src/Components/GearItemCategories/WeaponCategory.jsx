@@ -15,7 +15,6 @@ const WeaponCategory = ({createdItem, setCreatedItem}) => {
       createdItem?.damage?.damage_type?.name
     )
   }, [createdItem])
-  console.log(createdItem)
 
   return (
     <div className="item-creator" key={"weapon"}>
