@@ -1,10 +1,10 @@
 import {useState} from "react"
 
-import CharacterDetails from "../CharacterDetails"
+import CharacterDetails from "./CharacterDetails"
 import BaseStats from "./BaseStats"
 import ProfStats from "./ProfStats"
 import Inventory from "./Inventory"
-import Gear from "./Gear"
+import Gear from "../Gear"
 import ItemsTab from "../ItemsTab"
 
 const Class = () => {

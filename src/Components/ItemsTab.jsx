@@ -6,7 +6,7 @@ import {useDispatch} from "react-redux"
 
 import equipmentFilter from "./EquipmentFilter.json"
 import {filter, handleformat} from "./FilterValues"
-import ItemCreator from "./charactor sheet/ItemCreator"
+import ItemCreator from "./ItemCreator"
 import {setInventory} from "../Store/slices/inventorySlice"
 import {setGear} from "../Store/slices/gearSlice"
 

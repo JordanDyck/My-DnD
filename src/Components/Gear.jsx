@@ -2,9 +2,9 @@ import {useState} from "react"
 import {useSelector} from "react-redux"
 import {v4 as uuid} from "uuid"
 
-import {filter, handleformat} from "../FilterValues"
-import GearItemDesc from "../GearItemDesc"
-import GearItem from "../GearItem"
+import {filter, handleformat} from "./FilterValues"
+import GearItemDesc from "./charactor sheet/GearItemDesc"
+import GearItem from "./charactor sheet/GearItem"
 
 const Gear = () => {
   const gear = useSelector((store) => store.gear)
@@ -12,7 +12,6 @@ const Gear = () => {
   return (
     <div className="gear-wrapper">
       {gear.value.map((item) => {
-        console.log("gear", item)
         return (
           <div className="gear-item" key={uuid()}>
             {item.map(([key, value]) => {

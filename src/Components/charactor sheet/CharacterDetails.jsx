@@ -1,5 +1,5 @@
 import {useState} from "react"
-import ClassPopup from "./ClassPopup"
+import ClassPopup from "../ClassPopup"
 
 const CharacterDetails = ({raceName, setRaceName}) => {
   const [popUp, setPopUp] = useState(false)
