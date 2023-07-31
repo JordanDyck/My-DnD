@@ -61,7 +61,7 @@ const WeaponCategory = ({createdItem, setCreatedItem}) => {
           name="damage_type"
           id="item-damage-type"
           placeholder="bludgeoning"
-          value={createdItem?.damage?.damage_type || ""}
+          value={createdItem?.damage?.damage_type?.name || ""}
         />
       </div>
 
@@ -115,18 +115,22 @@ const WeaponCategory = ({createdItem, setCreatedItem}) => {
         {/* add item to gear tab */}
         <button
           className="add-item"
+          disabled={!isValid}
           onClick={() => {
             dispatch(setGear([...Object.entries(createdItem), ["id", uuid()]]))
             setCreatedItem({})
           }}
-          disabled={!isValid}
         >
           Equip Item
         </button>
         {/* add item to inventory */}
         <button
           className="add-item"
-          onClick={() => dispatch(setInventory(Object.entries(createdItem)))}
+          disabled={!isValid}
+          onClick={() => {
+            dispatch(setInventory(Object.entries(createdItem)))
+            setCreatedItem({})
+          }}
         >
           add to inventory
         </button>
