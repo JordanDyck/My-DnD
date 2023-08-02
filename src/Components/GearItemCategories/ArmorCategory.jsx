@@ -3,13 +3,17 @@ import {v4 as uuid} from "uuid"
 import {useMemo} from "react"
 
 import {setInventory} from "../../Store/slices/inventorySlice"
-import {setGear} from "../../Store/slices/gearSlice"
+import {addGear} from "../../Store/slices/gearSlice"
 
 const ArmorCategory = ({createdItem, setCreatedItem}) => {
   const dispatch = useDispatch()
-  console.log(createdItem)
+
   const isValid = useMemo(() => {
-    return !!(createdItem?.name && createdItem?.category && createdItem?.AC)
+    return !!(
+      createdItem?.name &&
+      createdItem?.armor_category &&
+      createdItem?.armor_Class
+    )
   }, [createdItem])
 
   const handleChange = (e) => {
@@ -35,20 +39,22 @@ const ArmorCategory = ({createdItem, setCreatedItem}) => {
         onChange={(e) => {
           handleChange(e)
         }}
-        name="category"
+        name="armor_category"
         id="item-category"
         placeholder="light, medium, heavy"
-        value={createdItem?.category || ""}
+        value={createdItem?.armor_category || ""}
+        disabled={!createdItem.name}
       />
 
       <input
         onChange={(e) => {
           handleChange(e)
         }}
-        name="AC"
+        name="armor_Class"
         id="armor-class"
         placeholder="AC: 12 + dex"
-        value={createdItem?.AC || ""}
+        value={createdItem?.armor_Class || ""}
+        disabled={!createdItem.armor_category}
       />
       <textarea
         onChange={(e) => {
@@ -58,6 +64,7 @@ const ArmorCategory = ({createdItem, setCreatedItem}) => {
         className="item-desc"
         placeholder="Description"
         value={createdItem?.desc || ""}
+        disabled={!createdItem.name}
       ></textarea>
 
       <div className="add-btn-container">
@@ -65,7 +72,7 @@ const ArmorCategory = ({createdItem, setCreatedItem}) => {
           className="add-item"
           disabled={!isValid}
           onClick={() => {
-            dispatch(setGear([...Object.entries(createdItem), ["id", uuid()]]))
+            dispatch(addGear([...Object.entries(createdItem), ["id", uuid()]]))
             setCreatedItem({})
           }}
         >

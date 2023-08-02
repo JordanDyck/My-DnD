@@ -2,12 +2,10 @@ import {useDispatch} from "react-redux"
 import {v4 as uuid} from "uuid"
 
 import {setInventory} from "../../Store/slices/inventorySlice"
-import {setGear} from "../../Store/slices/gearSlice"
+import {addGear} from "../../Store/slices/gearSlice"
 
 const OtherCategory = ({createdItem, setCreatedItem}) => {
   const dispatch = useDispatch()
-
-  console.log(createdItem)
 
   return (
     <div className="item-creator" key={"other"}>
@@ -27,6 +25,7 @@ const OtherCategory = ({createdItem, setCreatedItem}) => {
         className="item-desc"
         placeholder="Description"
         value={createdItem?.desc || ""}
+        disabled={!createdItem.name}
         onChange={(e) => {
           setCreatedItem((prev) => ({
             ...prev,
@@ -40,7 +39,7 @@ const OtherCategory = ({createdItem, setCreatedItem}) => {
           className="add-item"
           disabled={!createdItem.name}
           onClick={() => {
-            dispatch(setGear([...Object.entries(createdItem), ["id", uuid()]]))
+            dispatch(addGear([...Object.entries(createdItem), ["id", uuid()]]))
             setCreatedItem({})
           }}
         >

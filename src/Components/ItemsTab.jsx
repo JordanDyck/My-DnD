@@ -8,7 +8,7 @@ import equipmentFilter from "./EquipmentFilter.json"
 import {filter, handleformat} from "./FilterValues"
 import ItemCreator from "./ItemCreator"
 import {setInventory} from "../Store/slices/inventorySlice"
-import {setGear} from "../Store/slices/gearSlice"
+import {addGear} from "../Store/slices/gearSlice"
 
 const ItemsTab = () => {
   const [itemCategories, setItemCategories] = useState([])
@@ -127,7 +127,7 @@ const ItemsTab = () => {
                 className="add-item"
                 onClick={() =>
                   filteredInfo.length
-                    ? dispatch(setGear([...filteredInfo, ["id", uuid()]]))
+                    ? dispatch(addGear([...filteredInfo, ["id", uuid()]]))
                     : ""
                 }
               >

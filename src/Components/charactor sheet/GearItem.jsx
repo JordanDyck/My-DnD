@@ -1,13 +1,13 @@
 import {v4 as uuid} from "uuid"
 
-const GearItem = ({title, renderedValue}) => {
+const GearItem = ({title, value}) => {
   return (
     <div className={`gear-info key_${title}`} key={uuid()}>
       <h4>
         {title.replaceAll("_", " ")}
-        {renderedValue ? ":" : ""}
+        {value ? ":" : ""}
       </h4>
-      {renderedValue}
+      {value}
     </div>
   )
 }

@@ -3,7 +3,7 @@ import {v4 as uuid} from "uuid"
 import {useMemo} from "react"
 
 import {setInventory} from "../../Store/slices/inventorySlice"
-import {setGear} from "../../Store/slices/gearSlice"
+import {addGear} from "../../Store/slices/gearSlice"
 
 const WeaponCategory = ({createdItem, setCreatedItem}) => {
   const dispatch = useDispatch()
@@ -45,6 +45,7 @@ const WeaponCategory = ({createdItem, setCreatedItem}) => {
           id="item-damage-dice"
           placeholder="damage: 1 d6"
           value={createdItem?.damage?.damage_dice || ""}
+          disabled={!createdItem.name}
         />
         <input
           onChange={(e) => {
@@ -62,6 +63,7 @@ const WeaponCategory = ({createdItem, setCreatedItem}) => {
           id="item-damage-type"
           placeholder="bludgeoning"
           value={createdItem?.damage?.damage_type?.name || ""}
+          disabled={!createdItem.damage?.damage_dice}
         />
       </div>
 
@@ -80,6 +82,7 @@ const WeaponCategory = ({createdItem, setCreatedItem}) => {
           id="item-range-normal"
           placeholder="range: 15ft"
           value={createdItem?.range?.normal || ""}
+          disabled={!createdItem.damage?.damage_type}
         />
         <input
           onChange={(e) => {
@@ -95,6 +98,7 @@ const WeaponCategory = ({createdItem, setCreatedItem}) => {
           id="item-range-long"
           placeholder="range: 30ft"
           value={createdItem?.range?.long || ""}
+          disabled={!createdItem.range?.normal}
         />
       </div>
 
@@ -117,7 +121,7 @@ const WeaponCategory = ({createdItem, setCreatedItem}) => {
           className="add-item"
           disabled={!isValid}
           onClick={() => {
-            dispatch(setGear([...Object.entries(createdItem), ["id", uuid()]]))
+            dispatch(addGear([...Object.entries(createdItem), ["id", uuid()]]))
             setCreatedItem({})
           }}
         >
