@@ -271,6 +271,15 @@ input {
   }
 }
 
+.tab-header {
+  display: flex;
+  color: gray;
+  justify-content: center;
+  border-bottom: 2px solid;
+  border-radius: 15px;
+  font-weight: 700;
+  margin-bottom: 17px;
+}
 .gear-wrapper {
   border: 17px solid transparent;
   border-image: url("./assets/border.png") 116;
@@ -295,8 +304,17 @@ input {
     }
   }
   .gear-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
     margin-bottom: 10px;
     border-bottom: 2px solid;
+    hyphens: auto;
+
+    .key_name {
+      width: 244px;
+    }
 
     .desc-container {
       word-wrap: break-word;
@@ -304,10 +322,23 @@ input {
     .gear-info {
       display: flex;
       flex-wrap: wrap;
+      overflow-wrap: anywhere;
+
       h4 {
         padding-right: 5px;
       }
     }
+    .delete-item-btn {
+      position: absolute;
+      left: calc(100% - 65px);
+    }
+  }
+}
+.key_stealth_disadvantage {
+  h4 {
+    font-weight: 500;
+    color: #9d4242;
+    text-decoration: underline;
   }
 }
 
@@ -353,14 +384,6 @@ input {
     .key_range {
       display: flex;
       flex-direction: column;
-    }
-
-    .key_stealth_disadvantage {
-      h4 {
-        font-weight: 500;
-        color: #9d4242;
-        text-decoration: underline;
-      }
     }
   }
 

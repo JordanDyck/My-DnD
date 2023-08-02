@@ -12,7 +12,6 @@ const Gear = () => {
   const gear = useSelector((store) => store.gear)
   const [showDesc, setShowDesc] = useState([])
   const dispatch = useDispatch()
-  console.log(gear)
 
   const deleteItem = (id) => {
     //finds the id of item & removes it. setGear replaces gear array with new updated array
@@ -24,10 +23,16 @@ const Gear = () => {
 
   return (
     <div className="gear-wrapper">
+      <div className="tab-header">
+        <header>Gear</header>
+      </div>
       {gear.value.map((item) => {
         const id = item.find((prop) => prop[0] === "id")?.[1]
         return (
           <div className="gear-item" key={uuid()}>
+            <button className="delete-item-btn" onClick={() => deleteItem(id)}>
+              delete
+            </button>
             {item.map(([key, value]) => {
               const customizeValue = filter?.[key]?.(value)
               const valueToCheck =
@@ -59,14 +64,15 @@ const Gear = () => {
               if (key === "cost") {
                 return ""
               }
+              if (key === "str_minimum") {
+                return ""
+              }
 
               return (
                 // displays the items in gear tab
-
                 <GearItem key={uuid()} title={key} value={renderedValue} />
               )
             })}
-            <button onClick={() => deleteItem(id)}>delete</button>
           </div>
         )
       })}

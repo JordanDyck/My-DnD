@@ -7,7 +7,7 @@ import {useDispatch} from "react-redux"
 import equipmentFilter from "./EquipmentFilter.json"
 import {filter, handleformat} from "./FilterValues"
 import ItemCreator from "./ItemCreator"
-import {setInventory} from "../Store/slices/inventorySlice"
+import {addInventory} from "../Store/slices/inventorySlice"
 import {addGear} from "../Store/slices/gearSlice"
 
 const ItemsTab = () => {
@@ -137,7 +137,7 @@ const ItemsTab = () => {
                 className="add-item"
                 onClick={() =>
                   filteredInfo.length
-                    ? dispatch(setInventory(filteredInfo))
+                    ? dispatch(addInventory([...filteredInfo, ["id", uuid()]]))
                     : ""
                 }
               >

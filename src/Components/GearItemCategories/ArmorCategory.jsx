@@ -2,7 +2,7 @@ import {useDispatch} from "react-redux"
 import {v4 as uuid} from "uuid"
 import {useMemo} from "react"
 
-import {setInventory} from "../../Store/slices/inventorySlice"
+import {addInventory} from "../../Store/slices/inventorySlice"
 import {addGear} from "../../Store/slices/gearSlice"
 
 const ArmorCategory = ({createdItem, setCreatedItem}) => {
@@ -83,7 +83,9 @@ const ArmorCategory = ({createdItem, setCreatedItem}) => {
           className="add-item"
           disabled={!isValid}
           onClick={() => {
-            dispatch(setInventory(Object.entries(createdItem)))
+            dispatch(
+              addInventory([...Object.entries(createdItem), ["id", uuid()]])
+            )
             setCreatedItem({})
           }}
         >
