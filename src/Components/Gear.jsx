@@ -4,7 +4,7 @@ import {v4 as uuid} from "uuid"
 import {useDispatch} from "react-redux"
 
 import {setGear} from "../Store/slices/gearSlice"
-import {filter, handleformat} from "./FilterValues"
+import {filter, handleformat} from "./utilities.js"
 import GearItemDesc from "./charactor sheet/GearItemDesc"
 import GearItem from "./charactor sheet/GearItem"
 

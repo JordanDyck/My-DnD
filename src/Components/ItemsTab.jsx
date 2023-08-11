@@ -1,11 +1,11 @@
-import Select, {components} from "react-select"
+import Select from "react-select"
 import axios from "axios"
 import {useState, useEffect} from "react"
 import {v4 as uuid} from "uuid"
 import {useDispatch} from "react-redux"
 
 import equipmentFilter from "./EquipmentFilter.json"
-import {filter, handleformat} from "./FilterValues"
+import {filter, handleformat} from "./utilities.js"
 import ItemCreator from "./ItemCreator"
 import {addInventory} from "../Store/slices/inventorySlice"
 import {addGear} from "../Store/slices/gearSlice"
@@ -149,10 +149,6 @@ const ItemsTab = () => {
       )
     )
   }
-  // placeholder function for select
-  const Placeholder = (props) => {
-    return <components.Placeholder {...props} />
-  }
 
   return (
     <div className="items-tab-wrapper">
@@ -169,8 +165,7 @@ const ItemsTab = () => {
       {!showItemCreator && (
         <Select
           options={categoryOptions}
-          components={{Placeholder}}
-          placeholder={"Categories"}
+          placeholder="Categories"
           onChange={(choice) => {
             setCategoryURL(choice.value)
             setCurrentItem(null)
@@ -186,8 +181,7 @@ const ItemsTab = () => {
       )}
       {itemList && !showItemCreator ? (
         <Select
-          components={{Placeholder}}
-          placeholder={"Items"}
+          placeholder="Items"
           value={currentItem}
           options={itemOptions}
           maxMenuHeight={270}

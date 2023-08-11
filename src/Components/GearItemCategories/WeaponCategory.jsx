@@ -1,12 +1,15 @@
 import {useDispatch} from "react-redux"
 import {v4 as uuid} from "uuid"
-import {useMemo} from "react"
+import {useMemo, useState} from "react"
+import Select from "react-select"
 
 import {addInventory} from "../../Store/slices/inventorySlice"
 import {addGear} from "../../Store/slices/gearSlice"
+import {damageTypes} from "../utilities"
 
 const WeaponCategory = ({createdItem, setCreatedItem}) => {
   const dispatch = useDispatch()
+  const [resetInput, setResetInput] = useState(false)
 
   const isValid = useMemo(() => {
     return !!(
@@ -47,23 +50,45 @@ const WeaponCategory = ({createdItem, setCreatedItem}) => {
           value={createdItem?.damage?.damage_dice || ""}
           disabled={!createdItem.name}
         />
-        <input
+        <Select
           onChange={(e) => {
+            // console.log(e.value)
             setCreatedItem((prev) => ({
               ...prev,
               damage: {
                 ...prev?.damage,
-                [e.target.name]: {
-                  name: e.target.value,
+                damage_type: {
+                  name: e.value,
                 },
               },
             }))
           }}
           name="damage_type"
           id="item-damage-type"
-          placeholder="bludgeoning"
-          value={createdItem?.damage?.damage_type?.name || ""}
-          disabled={!createdItem.damage?.damage_dice}
+          placeholder="type: slash"
+          key={resetInput ? 1 : 0}
+          options={damageTypes}
+          defaultValue={createdItem?.damage?.damage_type?.name || ""}
+          // value={createdItem?.damage?.damage_type?.name || damageTypes[0]}
+          components={{
+            DropdownIndicator: () => null,
+            IndicatorSeparator: () => null,
+          }}
+          styles={{
+            control: (base, {isDisabled}) => ({
+              ...base,
+              border: "none",
+              borderBottom: "2px solid",
+              borderRadius: "0",
+              width: "137px",
+              height: "32px",
+              minHeight: "32px",
+              fontSize: "14px",
+              top: "-5px",
+              backgroundColor: isDisabled ? "transparent" : "transparent",
+            }),
+          }}
+          isDisabled={!createdItem.damage?.damage_dice}
         />
       </div>
 
@@ -113,7 +138,7 @@ const WeaponCategory = ({createdItem, setCreatedItem}) => {
         className="item-desc"
         placeholder="Description"
         value={createdItem?.desc || ""}
-        disabled={!createdItem.name}
+        disabled={!createdItem?.damage?.damage_type}
       />
       <div className="add-btn-container">
         {/* add item to gear tab */}
@@ -123,6 +148,7 @@ const WeaponCategory = ({createdItem, setCreatedItem}) => {
           onClick={() => {
             dispatch(addGear([...Object.entries(createdItem), ["id", uuid()]]))
             setCreatedItem({})
+            setResetInput(!resetInput)
           }}
         >
           Equip Item
@@ -136,6 +162,7 @@ const WeaponCategory = ({createdItem, setCreatedItem}) => {
               addInventory([...Object.entries(createdItem), ["id", uuid()]])
             )
             setCreatedItem({})
+            setResetInput(!resetInput)
           }}
         >
           add to inventory

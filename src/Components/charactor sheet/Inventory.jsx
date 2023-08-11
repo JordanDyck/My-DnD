@@ -1,4 +1,3 @@
-import {useState} from "react"
 import {useSelector, useDispatch} from "react-redux"
 import {v4 as uuid} from "uuid"
 import {setInventory} from "../../Store/slices/inventorySlice"
@@ -14,8 +13,6 @@ const Inventory = () => {
     )
     dispatch(setInventory(updatedGear))
   }
-
-  console.log(inventory)
 
   return (
     <div className="inventory-wrapper">

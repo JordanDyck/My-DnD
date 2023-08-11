@@ -93,3 +93,19 @@ export const handleformat = (itemValue, key) => {
     return ""
   }
 }
+
+export const damageTypes = [
+  {value: "Slashing", label: "Slashing"},
+  {value: "Piercing", label: "Piercing"},
+  {value: "Bludgeoning", label: "Bludgeoning"},
+  {value: "Poison", label: "Poison"},
+  {value: "Acid", label: "Acid"},
+  {value: "Fire", label: "Fire"},
+  {value: "Cold", label: "Cold"},
+  {value: "Radiant", label: "Radiant"},
+  {value: "Necrotic", label: "Necrotic"},
+  {value: "Lightning", label: "Lightning"},
+  {value: "Thunder", label: "Thunder"},
+  {value: "Force", label: "Force"},
+  {value: "Psychic", label: "Psychic"},
+]
