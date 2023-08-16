@@ -1,5 +1,7 @@
 import {useSelector, useDispatch} from "react-redux"
 import {v4 as uuid} from "uuid"
+import {RiDeleteBinLine} from "react-icons/ri"
+
 import {setInventory} from "../../Store/slices/inventorySlice"
 
 const Inventory = () => {
@@ -23,10 +25,10 @@ const Inventory = () => {
         const id = item.find((prop) => prop[0] === "id")?.[1]
         return (
           <div className="inventory-item" key={`inventoryId${uuid()}`}>
-            <h5>{item[0][1]}</h5>
             <button className="delete-item-btn" onClick={() => deleteItem(id)}>
-              delete
+              <RiDeleteBinLine />
             </button>
+            <h5>{item[0][1]}</h5>
           </div>
         )
       })}

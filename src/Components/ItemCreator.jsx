@@ -1,4 +1,5 @@
 import {useState} from "react"
+import {GiChestArmor, GiCrossedSwords, GiPotionBall} from "react-icons/gi"
 
 import WeaponCategory from "./GearItemCategories/WeaponCategory"
 import ArmorCategory from "./GearItemCategories/ArmorCategory"
@@ -7,6 +8,7 @@ import OtherCategory from "./GearItemCategories/OtherCategory"
 const ItemCreator = () => {
   const [itemType, setItemType] = useState()
   const [createdItem, setCreatedItem] = useState([])
+  const [activeButton, setActiveButton] = useState()
 
   const createItem = () => {
     if (itemType === "weapon") {
@@ -35,23 +37,52 @@ const ItemCreator = () => {
       )
     }
   }
+
   return (
     <div className="item-creator-container">
-      <div
-        className="item-types"
-        onChange={(e) => {
-          setItemType(e.target.value)
-          setCreatedItem("")
-        }}
-      >
-        <input type="radio" value="weapon" id="weapon" name="category" />
-        <label htmlFor="weapon">Weapon</label>
+      <div className="item-types">
+        {/* <input type="radio" value="weapon" id="weapon" name="category" /> */}
+        <button
+          className={`option ${activeButton === "weapon" && "active"}`}
+          name="weapon"
+          onClick={(e) => {
+            setItemType(e.target.name)
+            setCreatedItem("")
+            setActiveButton(e.target.name)
+          }}
+        >
+          Weapon <GiCrossedSwords />
+        </button>
 
-        <input type="radio" value="armor" id="armor" name="category" />
-        <label htmlFor="armor">armor</label>
+        <div className="divider"></div>
 
-        <input type="radio" value="other" id="other" name="category" />
-        <label htmlFor="other">other</label>
+        {/* <input type="radio" value="armor" id="armor" name="category" /> */}
+        <button
+          className={`option ${activeButton === "armor" && "active"}`}
+          name="armor"
+          onClick={(e) => {
+            setItemType(e.target.name)
+            setCreatedItem("")
+            setActiveButton(e.target.name)
+          }}
+        >
+          armor <GiChestArmor />
+        </button>
+
+        <div className="divider"></div>
+
+        {/* <input type="radio" value="other" id="other" name="category" /> */}
+        <button
+          className={`option ${activeButton === "other" && "active"}`}
+          name="other"
+          onClick={(e) => {
+            setItemType(e.target.name)
+            setCreatedItem("")
+            setActiveButton(e.target.name)
+          }}
+        >
+          other <GiPotionBall />
+        </button>
       </div>
       <div className="item-creator">{itemType && createItem()}</div>
     </div>

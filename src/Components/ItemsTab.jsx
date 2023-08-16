@@ -3,6 +3,7 @@ import axios from "axios"
 import {useState, useEffect} from "react"
 import {v4 as uuid} from "uuid"
 import {useDispatch} from "react-redux"
+import {MdCreate, MdClose} from "react-icons/md"
 
 import equipmentFilter from "./EquipmentFilter.json"
 import {filter, handleformat} from "./utilities.js"
@@ -158,7 +159,7 @@ const ItemsTab = () => {
           setShowItemCreator(!showItemCreator)
         }}
       >
-        +
+        {!showItemCreator ? <MdCreate /> : <MdClose />}
       </button>
 
       {showItemCreator && <ItemCreator />}

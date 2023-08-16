@@ -2,6 +2,7 @@ import {useState} from "react"
 import {useSelector} from "react-redux"
 import {v4 as uuid} from "uuid"
 import {useDispatch} from "react-redux"
+import {RiDeleteBinLine} from "react-icons/ri"
 
 import {setGear} from "../Store/slices/gearSlice"
 import {filter, handleformat} from "./utilities.js"
@@ -31,7 +32,7 @@ const Gear = () => {
         return (
           <div className="gear-item" key={uuid()}>
             <button className="delete-item-btn" onClick={() => deleteItem(id)}>
-              delete
+              <RiDeleteBinLine />
             </button>
             {item.map(([key, value]) => {
               const customizeValue = filter?.[key]?.(value)

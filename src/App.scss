@@ -265,7 +265,6 @@ input {
   border: 17px solid transparent;
   border-image: url("./assets/border.png") 116;
   min-height: 250px;
-  // min-width: 265px;
   .inventory-item {
     display: flex;
     position: relative;
@@ -273,10 +272,14 @@ input {
     word-wrap: break-word;
     margin-block: 10px;
     border-bottom: 2px solid #ababab;
-    align-items: flex-end;
+    align-items: center;
+
+    .delete-item-btn {
+      font-size: 23px;
+    }
 
     h5 {
-      width: 222px;
+      width: 265px;
     }
   }
 }
@@ -323,7 +326,10 @@ input {
     font-size: 15px;
 
     .key_name {
-      width: 235px;
+      width: 275px;
+      .name {
+        word-break: break-all;
+      }
     }
     .desc-container {
       word-wrap: break-word;
@@ -339,7 +345,11 @@ input {
 }
 .delete-item-btn {
   position: absolute;
-  left: calc(100% - 65px);
+  left: calc(100% - 29px);
+  height: 30px;
+  font-size: 27px;
+  border: none;
+  background-color: transparent;
 }
 .key_stealth_disadvantage {
   h4 {
@@ -403,6 +413,9 @@ input {
     border: 1px solid;
     border-radius: 7px;
     margin-bottom: 10px;
+    svg {
+      font-size: 20px;
+    }
   }
 
   .item-creator-container {
@@ -413,11 +426,38 @@ input {
     .item-types {
       display: flex;
       justify-content: center;
-      align-items: flex-end;
+
       border-bottom: 1px solid;
       margin-bottom: 14px;
-      input {
-        margin: 0 4px 0 11px;
+      button {
+        display: flex;
+        align-items: center;
+        font-size: 15px;
+        border: none;
+        height: 25px;
+        border-radius: 15px;
+        margin: 0 5px 4px;
+        padding-inline: 4px;
+        background-color: transparent;
+        // &:not(:last-child) {
+        //   border-right: 1px solid;
+        // }
+
+        // &:not(:last-child):after {
+        //   content: "|";
+        // }
+      }
+      .divider {
+        background-color: black;
+        width: 1px;
+        height: 25px;
+        margin-bottom: 4px;
+      }
+      svg {
+        margin-inline: 3px;
+      }
+      .active {
+        background-color: #d9d9d9;
       }
     }
 
