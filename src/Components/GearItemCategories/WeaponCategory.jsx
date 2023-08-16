@@ -80,12 +80,18 @@ const WeaponCategory = ({createdItem, setCreatedItem}) => {
               border: "none",
               borderBottom: "2px solid",
               borderRadius: "0",
-              width: "137px",
+              textAlign: "center",
+              maxWidth: "137px",
+              minWidth: "115px",
               height: "32px",
               minHeight: "32px",
               fontSize: "14px",
               top: "-5px",
               backgroundColor: isDisabled ? "transparent" : "transparent",
+            }),
+            menu: (base) => ({
+              ...base,
+              width: "150px",
             }),
           }}
           isDisabled={!createdItem.damage?.damage_dice}
@@ -106,6 +112,7 @@ const WeaponCategory = ({createdItem, setCreatedItem}) => {
           name="normal"
           id="item-range-normal"
           placeholder="range: 15ft"
+          type="number"
           value={createdItem?.range?.normal || ""}
           disabled={!createdItem.damage?.damage_type}
         />
@@ -122,6 +129,7 @@ const WeaponCategory = ({createdItem, setCreatedItem}) => {
           name="long"
           id="item-range-long"
           placeholder="range: 30ft"
+          type="number"
           value={createdItem?.range?.long || ""}
           disabled={!createdItem.range?.normal}
         />

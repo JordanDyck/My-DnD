@@ -265,9 +265,19 @@ input {
   border: 17px solid transparent;
   border-image: url("./assets/border.png") 116;
   min-height: 250px;
-  min-width: 265px;
+  // min-width: 265px;
   .inventory-item {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    word-wrap: break-word;
     margin-block: 10px;
+    border-bottom: 2px solid #ababab;
+    align-items: flex-end;
+
+    h5 {
+      width: 222px;
+    }
   }
 }
 
@@ -309,30 +319,27 @@ input {
     flex-direction: column;
     gap: 5px;
     margin-bottom: 10px;
-    border-bottom: 2px solid;
-    hyphens: auto;
+    border-bottom: 2px solid #ababab;
+    font-size: 15px;
 
     .key_name {
-      width: 244px;
+      width: 235px;
     }
-
     .desc-container {
       word-wrap: break-word;
     }
     .gear-info {
       display: flex;
-      flex-wrap: wrap;
-      overflow-wrap: anywhere;
 
       h4 {
         padding-right: 5px;
       }
     }
-    .delete-item-btn {
-      position: absolute;
-      left: calc(100% - 65px);
-    }
   }
+}
+.delete-item-btn {
+  position: absolute;
+  left: calc(100% - 65px);
 }
 .key_stealth_disadvantage {
   h4 {
@@ -431,7 +438,7 @@ input {
         min-width: 50px;
 
         height: 170px;
-        max-height: 245px;
+        max-height: 176px;
         min-height: 50px;
 
         padding: 5px;

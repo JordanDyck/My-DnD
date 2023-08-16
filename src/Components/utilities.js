@@ -42,10 +42,6 @@ export const filter = {
     return ""
   },
 
-  // desc: (value) => {
-  //   return ""
-  // },
-
   range: (value) => {
     if (value.normal && !value.long) {
       return {

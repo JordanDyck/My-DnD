@@ -1,17 +1,20 @@
 import {useDispatch} from "react-redux"
 import {v4 as uuid} from "uuid"
-import {useMemo} from "react"
+import {useMemo, useState} from "react"
+import Select from "react-select"
 
 import {addInventory} from "../../Store/slices/inventorySlice"
 import {addGear} from "../../Store/slices/gearSlice"
 
 const ArmorCategory = ({createdItem, setCreatedItem}) => {
+  const [resetInput, setResetInput] = useState(false)
+
   const dispatch = useDispatch()
 
   const isValid = useMemo(() => {
     return !!(
       createdItem?.name &&
-      createdItem?.armor_category &&
+      createdItem?.category &&
       createdItem?.armor_Class
     )
   }, [createdItem])
@@ -22,6 +25,12 @@ const ArmorCategory = ({createdItem, setCreatedItem}) => {
       [e.target.name]: e.target.value,
     }))
   }
+
+  const armorOptions = [
+    {value: "Light", label: "Light"},
+    {value: "Medium", label: "Medium"},
+    {value: "Heavy", label: "Heavy"},
+  ]
 
   return (
     <div className="item-creator" key={"armor"}>
@@ -35,14 +44,44 @@ const ArmorCategory = ({createdItem, setCreatedItem}) => {
         value={createdItem?.name || ""}
       />
 
-      <input
+      <Select
         onChange={(e) => {
-          handleChange(e)
+          setCreatedItem((prev) => ({
+            ...prev,
+            category: e.value,
+          }))
         }}
         name="armor_category"
         id="item-category"
         placeholder="light, medium, heavy"
-        value={createdItem?.armor_category || ""}
+        key={resetInput ? 1 : 0}
+        options={armorOptions}
+        defaultValue={createdItem?.category || ""}
+        isSearchable={false}
+        components={{
+          DropdownIndicator: () => null,
+          IndicatorSeparator: () => null,
+        }}
+        styles={{
+          control: (base, state) => ({
+            ...base,
+            border: state.isFocused ? "2px solid orange" : "none",
+            borderBottom: "2px solid",
+            // borderRadius: "0",
+            boxShadow: "none",
+            textAlign: "center",
+            width: "245px",
+            height: "35px",
+            minHeight: "32px",
+            fontSize: "17px",
+            top: "-8px",
+            // backgroundColor: isDisabled ? "transparent" : "transparent",
+          }),
+          option: (base) => ({
+            ...base,
+            textAlign: "center",
+          }),
+        }}
         disabled={!createdItem.name}
       />
 
@@ -54,7 +93,7 @@ const ArmorCategory = ({createdItem, setCreatedItem}) => {
         id="armor-class"
         placeholder="AC: 12 + dex"
         value={createdItem?.armor_Class || ""}
-        disabled={!createdItem.armor_category}
+        disabled={!createdItem.category}
       />
       <textarea
         onChange={(e) => {
@@ -74,6 +113,7 @@ const ArmorCategory = ({createdItem, setCreatedItem}) => {
           onClick={() => {
             dispatch(addGear([...Object.entries(createdItem), ["id", uuid()]]))
             setCreatedItem({})
+            setResetInput(!resetInput)
           }}
         >
           Equip Item
@@ -87,6 +127,7 @@ const ArmorCategory = ({createdItem, setCreatedItem}) => {
               addInventory([...Object.entries(createdItem), ["id", uuid()]])
             )
             setCreatedItem({})
+            setResetInput(!resetInput)
           }}
         >
           add to inventory

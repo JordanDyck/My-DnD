@@ -23,10 +23,10 @@ const Inventory = () => {
         const id = item.find((prop) => prop[0] === "id")?.[1]
         return (
           <div className="inventory-item" key={`inventoryId${uuid()}`}>
+            <h5>{item[0][1]}</h5>
             <button className="delete-item-btn" onClick={() => deleteItem(id)}>
               delete
             </button>
-            <h5>{item[0][1]}</h5>
           </div>
         )
       })}
