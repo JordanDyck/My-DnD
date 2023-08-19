@@ -54,7 +54,7 @@ const ItemCreator = () => {
           Weapon <GiCrossedSwords />
         </button>
 
-        <div className="divider"></div>
+        <div className="divider" />
 
         {/* <input type="radio" value="armor" id="armor" name="category" /> */}
         <button
@@ -69,7 +69,7 @@ const ItemCreator = () => {
           armor <GiChestArmor />
         </button>
 
-        <div className="divider"></div>
+        <div className="divider" />
 
         {/* <input type="radio" value="other" id="other" name="category" /> */}
         <button

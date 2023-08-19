@@ -52,7 +52,6 @@ const WeaponCategory = ({createdItem, setCreatedItem}) => {
         />
         <Select
           onChange={(e) => {
-            // console.log(e.value)
             setCreatedItem((prev) => ({
               ...prev,
               damage: {

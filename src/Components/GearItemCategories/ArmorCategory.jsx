@@ -31,7 +31,7 @@ const ArmorCategory = ({createdItem, setCreatedItem}) => {
     {value: "Medium", label: "Medium"},
     {value: "Heavy", label: "Heavy"},
   ]
-
+  console.log(createdItem.name)
   return (
     <div className="item-creator" key={"armor"}>
       <input
@@ -58,6 +58,7 @@ const ArmorCategory = ({createdItem, setCreatedItem}) => {
         options={armorOptions}
         defaultValue={createdItem?.category || ""}
         isSearchable={false}
+        isDisabled={!createdItem?.name}
         components={{
           DropdownIndicator: () => null,
           IndicatorSeparator: () => null,
@@ -67,7 +68,7 @@ const ArmorCategory = ({createdItem, setCreatedItem}) => {
             ...base,
             border: state.isFocused ? "2px solid orange" : "none",
             borderBottom: "2px solid",
-            // borderRadius: "0",
+            borderRadius: "0",
             boxShadow: "none",
             textAlign: "center",
             width: "245px",
@@ -75,14 +76,12 @@ const ArmorCategory = ({createdItem, setCreatedItem}) => {
             minHeight: "32px",
             fontSize: "17px",
             top: "-8px",
-            // backgroundColor: isDisabled ? "transparent" : "transparent",
           }),
           option: (base) => ({
             ...base,
             textAlign: "center",
           }),
         }}
-        disabled={!createdItem.name}
       />
 
       <input

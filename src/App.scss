@@ -262,24 +262,43 @@ input {
   }
 }
 .inventory-wrapper {
+  display: flex;
+  flex-direction: column;
   border: 17px solid transparent;
   border-image: url("./assets/border.png") 116;
   min-height: 250px;
   .inventory-item {
     display: flex;
-    position: relative;
+
     justify-content: space-between;
     word-wrap: break-word;
-    margin-block: 10px;
+    margin-bottom: 13px;
     border-bottom: 2px solid #ababab;
-    align-items: center;
+    align-items: flex-end;
 
     .delete-item-btn {
       font-size: 23px;
     }
 
     h5 {
-      width: 265px;
+      max-width: 152px;
+      flex-grow: 1;
+    }
+    .counter-container {
+      display: flex;
+      font-size: 20px;
+      .item-count {
+        margin-right: 10px;
+        &::before {
+          content: "x";
+          font-size: 12px;
+          margin-right: 2px;
+        }
+      }
+      button {
+        width: 20px;
+        font-size: 17px;
+      }
     }
   }
 }
@@ -319,11 +338,17 @@ input {
   .gear-item {
     position: relative;
     display: flex;
-    flex-direction: column;
+    flex-direction: row-reverse;
     gap: 5px;
     margin-bottom: 10px;
     border-bottom: 2px solid #ababab;
     font-size: 15px;
+
+    .gear-item-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
 
     .key_name {
       width: 275px;
@@ -344,9 +369,7 @@ input {
   }
 }
 .delete-item-btn {
-  position: absolute;
-  left: calc(100% - 29px);
-  height: 30px;
+  height: 20px;
   font-size: 27px;
   border: none;
   background-color: transparent;
@@ -360,15 +383,15 @@ input {
 }
 
 .items-tab-wrapper {
-  min-height: 413px;
+  display: flex;
+  flex-direction: column;
   border: 17px solid transparent;
   border-image: url("./assets/border.png") 116;
-
+  min-height: 288px;
   .item-info-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    min-height: 295px;
+    min-height: 170px;
 
     .item-info {
       display: flex;
@@ -412,7 +435,8 @@ input {
     text-align: center;
     border: 1px solid;
     border-radius: 7px;
-    margin-bottom: 10px;
+    margin: 0 8px 10px auto;
+
     svg {
       font-size: 20px;
     }
@@ -439,13 +463,6 @@ input {
         margin: 0 5px 4px;
         padding-inline: 4px;
         background-color: transparent;
-        // &:not(:last-child) {
-        //   border-right: 1px solid;
-        // }
-
-        // &:not(:last-child):after {
-        //   content: "|";
-        // }
       }
       .divider {
         background-color: black;
@@ -455,7 +472,9 @@ input {
       }
       svg {
         margin-inline: 3px;
+        pointer-events: none;
       }
+
       .active {
         background-color: #d9d9d9;
       }
@@ -500,7 +519,7 @@ input {
 .add-btn-container {
   display: flex;
   gap: 15px;
-  margin-top: 10px;
+  margin-top: 38px;
   justify-content: center;
   .add-item {
     background-color: lightgrey;

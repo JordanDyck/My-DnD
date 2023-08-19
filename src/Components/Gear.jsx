@@ -34,46 +34,48 @@ const Gear = () => {
             <button className="delete-item-btn" onClick={() => deleteItem(id)}>
               <RiDeleteBinLine />
             </button>
-            {item.map(([key, value]) => {
-              const customizeValue = filter?.[key]?.(value)
-              const valueToCheck =
-                customizeValue === undefined ? value : customizeValue
+            <div className="gear-item-stats">
+              {item.map(([key, value]) => {
+                const customizeValue = filter?.[key]?.(value)
+                const valueToCheck =
+                  customizeValue === undefined ? value : customizeValue
 
-              const renderedValue = handleformat(valueToCheck, key)
+                const renderedValue = handleformat(valueToCheck, key)
 
-              if (key === "desc") {
+                if (key === "desc") {
+                  return (
+                    // displays description for items in gear tab
+
+                    <GearItemDesc
+                      key={uuid()}
+                      id={id}
+                      update={setShowDesc}
+                      showDesc={showDesc.includes(id)}
+                      value={value}
+                    />
+                  )
+                }
+
+                // so the key does not get displayed in gear tab
+                if (key === "id") {
+                  return ""
+                }
+                if (key === "custom") {
+                  return ""
+                }
+                if (key === "cost") {
+                  return ""
+                }
+                if (key === "str_minimum") {
+                  return ""
+                }
+
                 return (
-                  // displays description for items in gear tab
-
-                  <GearItemDesc
-                    key={uuid()}
-                    id={id}
-                    update={setShowDesc}
-                    showDesc={showDesc.includes(id)}
-                    value={value}
-                  />
+                  // displays the items in gear tab
+                  <GearItem key={uuid()} title={key} value={renderedValue} />
                 )
-              }
-
-              // so the key does not get displayed in gear tab
-              if (key === "id") {
-                return ""
-              }
-              if (key === "custom") {
-                return ""
-              }
-              if (key === "cost") {
-                return ""
-              }
-              if (key === "str_minimum") {
-                return ""
-              }
-
-              return (
-                // displays the items in gear tab
-                <GearItem key={uuid()} title={key} value={renderedValue} />
-              )
-            })}
+              })}
+            </div>
           </div>
         )
       })}
