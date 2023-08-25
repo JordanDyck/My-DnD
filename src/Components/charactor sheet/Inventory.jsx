@@ -1,22 +1,9 @@
-import {useSelector, useDispatch} from "react-redux"
-import {v4 as uuid} from "uuid"
-import {RiDeleteBinLine} from "react-icons/ri"
-import {useState} from "react"
+import {useSelector} from "react-redux"
 
-import {setInventory} from "../../Store/slices/inventorySlice"
-import InventoryCounter from "../InventoryCounter"
+import InventoryItem from "../InventoryItem"
 
 const Inventory = () => {
   const inventory = useSelector((store) => store.inventory)
-  const dispatch = useDispatch()
-
-  const deleteItem = (id) => {
-    //finds the id of item & removes it. setGear replaces gear array with new updated array
-    let updatedGear = inventory.value.filter(
-      (item) => item.find((prop) => prop[0] === "id")[1] !== id
-    )
-    dispatch(setInventory(updatedGear))
-  }
 
   return (
     <div className="inventory-wrapper">
@@ -27,13 +14,7 @@ const Inventory = () => {
         const id = item.find((prop) => prop[0] === "id")?.[1]
 
         return (
-          <div className="inventory-item" key={`inventoryId${uuid()}`}>
-            <h5>{item[0][1]}</h5>
-            <InventoryCounter />
-            <button className="delete-item-btn" onClick={() => deleteItem(id)}>
-              <RiDeleteBinLine />
-            </button>
-          </div>
+          <InventoryItem item={item} id={id} key={id} inventory={inventory} />
         )
       })}
     </div>

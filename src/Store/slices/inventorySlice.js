@@ -12,8 +12,11 @@ export const inventorySlice = createSlice({
     setInventory: (state, action) => {
       state.value = action.payload
     },
+    setcounter: (state, action) => {
+      state.value = action.payload
+    },
   },
 })
 
-export const {addInventory, setInventory} = inventorySlice.actions
+export const {addInventory, setInventory, setcounter} = inventorySlice.actions
 export default inventorySlice.reducer

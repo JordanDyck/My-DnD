@@ -90,6 +90,7 @@ const ItemsTab = () => {
           return false
         } else if (Object.keys(value[1])?.length) {
           // if values exist.
+
           return true
         }
         return !!value[1]

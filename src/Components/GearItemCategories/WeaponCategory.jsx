@@ -5,7 +5,7 @@ import Select from "react-select"
 
 import {addInventory} from "../../Store/slices/inventorySlice"
 import {addGear} from "../../Store/slices/gearSlice"
-import {damageTypes} from "../utilities"
+import {damageTypes, weaponStyles} from "../utilities"
 
 const WeaponCategory = ({createdItem, setCreatedItem}) => {
   const dispatch = useDispatch()
@@ -68,31 +68,11 @@ const WeaponCategory = ({createdItem, setCreatedItem}) => {
           key={resetInput ? 1 : 0}
           options={damageTypes}
           defaultValue={createdItem?.damage?.damage_type?.name || ""}
-          // value={createdItem?.damage?.damage_type?.name || damageTypes[0]}
           components={{
             DropdownIndicator: () => null,
             IndicatorSeparator: () => null,
           }}
-          styles={{
-            control: (base, {isDisabled}) => ({
-              ...base,
-              border: "none",
-              borderBottom: "2px solid",
-              borderRadius: "0",
-              textAlign: "center",
-              maxWidth: "137px",
-              minWidth: "115px",
-              height: "32px",
-              minHeight: "32px",
-              fontSize: "14px",
-              top: "-5px",
-              backgroundColor: isDisabled ? "transparent" : "transparent",
-            }),
-            menu: (base) => ({
-              ...base,
-              width: "150px",
-            }),
-          }}
+          styles={weaponStyles}
           isDisabled={!createdItem.damage?.damage_dice}
         />
       </div>

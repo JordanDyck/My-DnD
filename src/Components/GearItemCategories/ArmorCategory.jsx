@@ -5,6 +5,7 @@ import Select from "react-select"
 
 import {addInventory} from "../../Store/slices/inventorySlice"
 import {addGear} from "../../Store/slices/gearSlice"
+import {armorStyles} from "../utilities"
 
 const ArmorCategory = ({createdItem, setCreatedItem}) => {
   const [resetInput, setResetInput] = useState(false)
@@ -31,7 +32,7 @@ const ArmorCategory = ({createdItem, setCreatedItem}) => {
     {value: "Medium", label: "Medium"},
     {value: "Heavy", label: "Heavy"},
   ]
-  console.log(createdItem.name)
+
   return (
     <div className="item-creator" key={"armor"}>
       <input
@@ -58,30 +59,12 @@ const ArmorCategory = ({createdItem, setCreatedItem}) => {
         options={armorOptions}
         defaultValue={createdItem?.category || ""}
         isSearchable={false}
-        isDisabled={!createdItem?.name}
         components={{
           DropdownIndicator: () => null,
           IndicatorSeparator: () => null,
         }}
-        styles={{
-          control: (base, state) => ({
-            ...base,
-            border: state.isFocused ? "2px solid orange" : "none",
-            borderBottom: "2px solid",
-            borderRadius: "0",
-            boxShadow: "none",
-            textAlign: "center",
-            width: "245px",
-            height: "35px",
-            minHeight: "32px",
-            fontSize: "17px",
-            top: "-8px",
-          }),
-          option: (base) => ({
-            ...base,
-            textAlign: "center",
-          }),
-        }}
+        styles={armorStyles}
+        isDisabled={!createdItem?.name}
       />
 
       <input

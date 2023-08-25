@@ -267,37 +267,46 @@ input {
   border: 17px solid transparent;
   border-image: url("./assets/border.png") 116;
   min-height: 250px;
-  .inventory-item {
-    display: flex;
-
-    justify-content: space-between;
-    word-wrap: break-word;
-    margin-bottom: 13px;
+  .inventory-container {
     border-bottom: 2px solid #ababab;
-    align-items: flex-end;
 
-    .delete-item-btn {
-      font-size: 23px;
+    .inventory-detail-container {
+      overflow: hidden;
     }
-
-    h5 {
-      max-width: 152px;
-      flex-grow: 1;
+    .hidden {
+      display: none;
     }
-    .counter-container {
+    .inventory-item {
       display: flex;
-      font-size: 20px;
-      .item-count {
-        margin-right: 10px;
-        &::before {
-          content: "x";
-          font-size: 12px;
-          margin-right: 2px;
-        }
+
+      justify-content: space-between;
+      word-wrap: break-word;
+      margin-bottom: 13px;
+      align-items: flex-end;
+
+      .delete-item-btn {
+        font-size: 23px;
       }
-      button {
-        width: 20px;
-        font-size: 17px;
+
+      h5 {
+        max-width: 152px;
+        flex-grow: 1;
+      }
+      .counter-container {
+        display: flex;
+        font-size: 20px;
+        .item-count {
+          margin-right: 10px;
+          &::before {
+            content: "x";
+            font-size: 12px;
+            margin-right: 2px;
+          }
+        }
+        button {
+          width: 20px;
+          font-size: 17px;
+        }
       }
     }
   }
@@ -445,7 +454,6 @@ input {
   .item-creator-container {
     display: flex;
     flex-direction: column;
-    height: 373px;
 
     .item-types {
       display: flex;
@@ -490,6 +498,9 @@ input {
       input {
         font-size: 17px;
         margin-bottom: 10px;
+        &:disabled {
+          color: #d9d9d9;
+        }
       }
       textarea {
         width: 240px;
@@ -504,7 +515,15 @@ input {
         font-size: 17px;
         font-family: $parFont;
       }
-      .dmg-container,
+      .dmg-container {
+        display: flex;
+        input {
+          width: 115px;
+          font-size: 14px;
+          // margin-right: 8px;
+        }
+      }
+
       .range-container {
         display: flex;
         input {
@@ -513,6 +532,9 @@ input {
           margin-inline: 8px;
         }
       }
+      // .css-1n6sfyn-menuList {
+      //   padding: 0;
+      // }
     }
   }
 }

@@ -105,3 +105,81 @@ export const damageTypes = [
   {value: "Force", label: "Force"},
   {value: "Psychic", label: "Psychic"},
 ]
+
+export const armorStyles = {
+  control: (base, {isDisabled, isFocused}) => ({
+    ...base,
+    border: isFocused ? "2px solid orange" : "none",
+    borderBottom: "2px solid",
+    borderRadius: "0",
+    boxShadow: "none",
+    textAlign: "center",
+    width: "245px",
+    height: "35px",
+    fontSize: "17px",
+    top: "-8px",
+    color: isDisabled ? "#d9d9d9" : "black",
+    backgroundColor: isDisabled ? "transparent" : "white",
+  }),
+  option: (base, state) => ({
+    ...base,
+    textAlign: "center",
+    backgroundColor: state.isSelected ? "lightgrey" : "white",
+    color: "black",
+    margin: "0",
+    borderBlock: "0.2px solid grey",
+  }),
+  menuList: (base) => ({
+    ...base,
+    padding: "0",
+  }),
+
+  menu: (base) => ({
+    ...base,
+    border: "1px solid",
+    marginTop: "-5px",
+    height: "119px",
+  }),
+}
+
+export const weaponStyles = {
+  control: (base, {isDisabled, isFocused}) => ({
+    ...base,
+    border: isFocused ? "2px solid orange" : "none",
+
+    borderBottom: "2px solid",
+    borderRadius: "0",
+    marginLeft: "17px",
+    textAlign: "center",
+    maxWidth: "137px",
+    minWidth: "115px",
+    height: "32px",
+    minHeight: "32px",
+    fontSize: "14px",
+    top: "-5px",
+    color: isDisabled ? "#d9d9d9" : "black",
+    backgroundColor: isDisabled ? "transparent" : "transparent",
+  }),
+
+  option: (base, state) => ({
+    ...base,
+    margin: "0",
+    backgroundColor: state.isSelected ? "lightgrey" : "white",
+    color: "black",
+    borderBlock: "0.2px solid grey",
+  }),
+
+  menuList: (base) => ({
+    ...base,
+    padding: "0",
+    height: "220px",
+  }),
+
+  menu: (base) => ({
+    ...base,
+    top: "21px",
+    left: "0px",
+    textAlign: "center",
+    width: "150px",
+  }),
+}
