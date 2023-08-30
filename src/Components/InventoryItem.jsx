@@ -1,6 +1,7 @@
 import {v4 as uuid} from "uuid"
-
 import {useState} from "react"
+import {RxDropdownMenu} from "react-icons/rx"
+
 import InventoryCounter from "./InventoryCounter"
 import {filter, handleformat} from "./utilities"
 import GearItem from "./charactor sheet/GearItem"
@@ -16,12 +17,15 @@ const InventoryItem = ({item, id, inventory}) => {
   }
 
   return (
-    <div className="inventory-container">
+    <div className="inventory-item-container">
       <div className="inventory-item">
-        <h5>
-          {item[0][1]}
-          <button onClick={() => showDetails(id)}>details</button>
-        </h5>
+        <button
+          className="inventory-details-btn"
+          onClick={() => showDetails(id)}
+        >
+          <RxDropdownMenu />
+        </button>
+        <h5>{item[0][1]}</h5>
         <InventoryCounter />
         <DeleteInventoryBtn
           inventory={inventory}
@@ -31,7 +35,11 @@ const InventoryItem = ({item, id, inventory}) => {
         />
       </div>
       <div
-        className={activeDetails[id] ? "inventory-detail-container" : "hidden"}
+        className={
+          activeDetails[id]
+            ? "inventory-detail-container"
+            : "inventory-detail-container hidden"
+        }
       >
         {item.map(([key, value]) => {
           const customizeValue = filter?.[key]?.(value)

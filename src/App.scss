@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Castoro+Titling&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Baloo+2&display=swap");
+
 $dndFont: Castoro Titling, sans-sarif;
 $parFont: Baloo2, sans-sarif;
 
@@ -138,7 +139,6 @@ body {
   }
 }
 .loading {
-  // color: white;
   text-align: center;
   font-size: 30px;
 }
@@ -267,36 +267,53 @@ input {
   border: 17px solid transparent;
   border-image: url("./assets/border.png") 116;
   min-height: 250px;
-  .inventory-container {
+  .inventory-item-container {
     border-bottom: 2px solid #ababab;
 
     .inventory-detail-container {
       overflow: hidden;
+      max-height: 100vh;
+      transition: max-height 0.5s ease-in;
+      .inventory-detail {
+        margin-block: 5px;
+      }
     }
     .hidden {
-      display: none;
+      max-height: 0vh;
+      transition: max-height 0.5s ease-in-out;
     }
     .inventory-item {
       display: flex;
-
       justify-content: space-between;
       word-wrap: break-word;
-      margin-bottom: 13px;
-      align-items: flex-end;
+      padding-block: 6px;
+      align-items: center;
 
-      .delete-item-btn {
-        font-size: 23px;
+      .inventory-details-btn {
+        position: relative;
+        font-size: 20px;
+        width: 30px;
+        height: 25px;
+        margin-right: 5px;
       }
 
       h5 {
         max-width: 152px;
         flex-grow: 1;
+        border-left: 1px solid;
+        padding-left: 5px;
+      }
+      .delete-item-btn {
+        font-size: 23px;
+        margin-left: 25px;
       }
       .counter-container {
         display: flex;
         font-size: 20px;
+        align-items: center;
         .item-count {
           margin-right: 10px;
+          height: 22px;
           &::before {
             content: "x";
             font-size: 12px;
@@ -304,8 +321,13 @@ input {
           }
         }
         button {
-          width: 20px;
-          font-size: 17px;
+          width: 28px;
+          font-size: 28px;
+          height: 28px;
+          padding-top: 7px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
       }
     }
