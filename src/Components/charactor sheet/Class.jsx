@@ -1,19 +1,6 @@
-import {useState} from "react"
-
-import CharacterDetails from "./CharacterDetails"
-import BaseStats from "./BaseStats"
-import ProfStats from "./ProfStats"
-import Inventory from "./Inventory"
-import Gear from "../Gear"
-import ItemsTab from "../ItemsTab"
+import ClassDetails from "./ClassDetails"
 
 const Class = () => {
-  const [showCharDetails, setShowCharDetails] = useState(false)
-  const [showStats, setShowStats] = useState(false)
-  const [showGear, setShowGear] = useState(false)
-  const [showItems, setShowItems] = useState(false)
-  const [raceName, setRaceName] = useState("")
-
   return (
     <div className="character-info-container">
       <div className="name-container">
@@ -23,40 +10,10 @@ const Class = () => {
           Lvl:
         </label>
         <input type="number" id="level" defaultValue={1} />
+        <div className="class-details-container">
+          <ClassDetails />
+        </div>
       </div>
-
-      <button
-        className="details-btn"
-        onClick={() => setShowCharDetails(!showCharDetails)}
-      >
-        details
-      </button>
-
-      <button className="details-btn" onClick={() => setShowStats(!showStats)}>
-        stats
-      </button>
-
-      <button className="details-btn" onClick={() => setShowGear(!showGear)}>
-        Gear
-      </button>
-      <button className="details-btn" onClick={() => setShowItems(!showItems)}>
-        ItemList
-      </button>
-
-      {showItems && <ItemsTab />}
-
-      {showCharDetails && (
-        <CharacterDetails raceName={raceName} setRaceName={setRaceName} />
-      )}
-
-      {showStats && (
-        <ProfStats showStats={showStats} setShowStats={setShowStats} />
-      )}
-
-      {showGear && <Gear />}
-
-      <BaseStats />
-      <Inventory />
     </div>
   )
 }

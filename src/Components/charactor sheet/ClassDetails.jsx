@@ -1,8 +1,9 @@
 import {useState} from "react"
-import ClassPopup from "../ClassPopup"
+import RacePopUp from "../RacePopup"
 
-const CharacterDetails = ({raceName, setRaceName}) => {
+const ClassDetails = () => {
   const [popUp, setPopUp] = useState(false)
+  const [raceName, setRaceName] = useState("")
   return (
     <div className="details-container">
       <div className="class-container">
@@ -35,8 +36,8 @@ const CharacterDetails = ({raceName, setRaceName}) => {
         </button>
       </div>
 
-      {popUp && <ClassPopup setPopUp={setPopUp} setRaceName={setRaceName} />}
+      {popUp && <RacePopUp setPopUp={setPopUp} setRaceName={setRaceName} />}
     </div>
   )
 }
-export default CharacterDetails
+export default ClassDetails

@@ -1,7 +1,7 @@
 import axios from "axios"
 import {useEffect, useState} from "react"
 
-const ClassPopup = ({setPopUp, setRaceName}) => {
+const RacePopUp = ({setPopUp, setRaceName}) => {
   const [races, setRaces] = useState([])
 
   useEffect(() => {
@@ -34,4 +34,4 @@ const ClassPopup = ({setPopUp, setRaceName}) => {
     </div>
   )
 }
-export default ClassPopup
+export default RacePopUp
