@@ -1,10 +1,10 @@
 import "./App.scss"
 import {useState} from "react"
 
-import Class from "./Components/charactor sheet/Class"
-import BaseStats from "./Components/charactor sheet/BaseStats"
-import ProfStats from "./Components/charactor sheet/ProfStats"
-import Inventory from "./Components/charactor sheet/Inventory"
+import CharacterDetails from "./Components/character sheet/CharacterDetails"
+import BaseStats from "./Components/character sheet/BaseStats"
+import ProfStats from "./Components/character sheet/ProfStats"
+import Inventory from "./Components/character sheet/Inventory"
 import Gear from "./Components/Gear"
 import ItemsTab from "./Components/ItemsTab"
 
@@ -16,7 +16,7 @@ function App() {
 
   return (
     <div className="App">
-      <Class />
+      <CharacterDetails />
       <div className="category-tabs">
         <button
           className="category-btn"

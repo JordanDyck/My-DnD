@@ -1,9 +1,11 @@
 import {useState} from "react"
+
 import RacePopUp from "../RacePopup"
 
-const ClassDetails = () => {
+const CharacterCreator = () => {
   const [popUp, setPopUp] = useState(false)
   const [raceName, setRaceName] = useState("")
+
   return (
     <div className="details-container">
       <div className="class-container">
@@ -40,4 +42,4 @@ const ClassDetails = () => {
     </div>
   )
 }
-export default ClassDetails
+export default CharacterCreator

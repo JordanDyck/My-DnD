@@ -6,8 +6,8 @@ import {RiDeleteBinLine} from "react-icons/ri"
 
 import {setGear} from "../Store/slices/gearSlice"
 import {filter, handleformat} from "./utilities.js"
-import GearItemDesc from "./charactor sheet/GearItemDesc"
-import GearItem from "./charactor sheet/GearItem"
+import GearItemDesc from "./character sheet/GearItemDesc"
+import GearItem from "./character sheet/GearItem"
 
 const Gear = () => {
   const gear = useSelector((store) => store.gear)

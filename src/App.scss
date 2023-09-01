@@ -18,12 +18,11 @@ body {
   position: static;
 }
 .character-info-container {
-  // position: relative;
   margin: 10px;
+  border: 17px solid transparent;
+  border-image: url("./assets/border.png") 116;
 
   .name-container {
-    border: 17px solid transparent;
-    border-image: url("./assets/border.png") 116;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -43,10 +42,8 @@ body {
       border: 2px solid;
     }
     .class-details-container {
-      // display: flex;
       margin-top: 10px;
       #class {
-        // border: 2px solid;
         font-size: 17px;
         width: 135px;
         padding-top: 2px;

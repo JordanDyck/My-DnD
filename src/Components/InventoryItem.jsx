@@ -4,7 +4,7 @@ import {RxDropdownMenu} from "react-icons/rx"
 
 import InventoryCounter from "./InventoryCounter"
 import {filter, handleformat} from "./utilities"
-import GearItem from "./charactor sheet/GearItem"
+import GearItem from "./character sheet/GearItem"
 import DeleteInventoryBtn from "./DeleteInventoryBtn"
 
 const InventoryItem = ({item, id, inventory}) => {

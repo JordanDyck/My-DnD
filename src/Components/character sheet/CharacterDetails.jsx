@@ -1,8 +1,10 @@
 import ClassDetails from "./ClassDetails"
+import CharacterCreator from "./CharacterCreator"
 
-const Class = () => {
+const CharacterDetails = () => {
   return (
     <div className="character-info-container">
+      <CharacterCreator />
       <div className="name-container">
         <label htmlFor="name">Name:</label>
         <input id="name" />
@@ -17,4 +19,4 @@ const Class = () => {
     </div>
   )
 }
-export default Class
+export default CharacterDetails
