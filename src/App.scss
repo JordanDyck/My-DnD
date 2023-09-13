@@ -29,53 +29,54 @@ body {
 
     padding: 5px;
 
-    #name {
-      width: calc(100% - 141px);
-      font-size: 15px;
-    }
-    #lvl-label {
-      padding-inline: 5px;
-    }
-    #level {
-      width: 35px;
-      font-size: 20px;
-      border: 2px solid;
-    }
-    .class-details-container {
-      margin-top: 10px;
-      #class {
-        font-size: 17px;
-        width: 135px;
-        padding-top: 2px;
-        font-weight: bold;
-      }
-      #class-label {
-        align-self: center;
-        padding-right: 5px;
-      }
-      #save-class-btn {
-        margin-left: 5px;
-        font-size: 17px;
-      }
-      .race-container {
-        display: flex;
-        padding: 10px 0;
-        align-items: center;
-        #race-label {
-          align-self: flex-end;
-        }
-        #race {
-          margin: 0 4px;
-          padding: 5px 7px 0 5px;
-          font-size: 15px;
-          &:empty {
-            border: none;
-          }
-        }
+    // #name {
+    //   width: calc(100% - 141px);
+    //   font-size: 15px;
+    // }
+    // #lvl-label {
+    //   padding-inline: 5px;
+    // }
+    // #level {
+    //   width: 35px;
+    //   font-size: 20px;
+    //   border: 2px solid;
+    // }
+  }
+}
+.character-creator {
+  margin-top: 10px;
+  #class-label {
+    align-self: center;
+    padding-right: 5px;
+  }
+  #class-name {
+    font-size: 17px;
+    width: 135px;
+    padding-top: 2px;
+    font-weight: bold;
+  }
 
-        .delete-race-btn {
-          padding: 3px;
+  .race-container {
+    padding: 10px 0;
+    .race-name {
+      display: flex;
+
+      #race-label {
+        align-self: flex-end;
+      }
+      #race {
+        margin: 0 4px;
+        padding: 5px 7px 0 5px;
+        font-size: 15px;
+        &:empty {
+          border: none;
         }
+      }
+      .delete-race-btn {
+        font-size: 23px;
+        height: 25px;
+        border: none;
+        background: none;
       }
     }
   }

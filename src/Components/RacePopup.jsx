@@ -19,7 +19,12 @@ const RacePopUp = ({setPopUp, setRaceName}) => {
           <button
             className="race-option"
             key={index}
-            onClick={() => setRaceName(race.name)}
+            onClick={() => {
+              setTimeout(() => {
+                setRaceName(race.name)
+                setPopUp(false)
+              }, 300)
+            }}
           >
             {race.name}
           </button>
@@ -27,10 +32,6 @@ const RacePopUp = ({setPopUp, setRaceName}) => {
       ) : (
         <p className="loading">loading</p>
       )}
-
-      <button id="save-race-btn" onClick={() => setPopUp(false)}>
-        Save
-      </button>
     </div>
   )
 }

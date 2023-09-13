@@ -1,0 +1,3 @@
+{
+  "base": ["language_desc", "alignment", "url", "index", "name"]
+}

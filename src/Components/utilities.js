@@ -60,8 +60,57 @@ export const filter = {
   },
 }
 
+export const perkFilter = {
+  ability_bonuses: (value) => {
+    const abilitybonus = value.map((element) => {
+      return element.ability_score.name
+    })
+    return `${abilitybonus} + ${value[0].bonus}`
+  },
+
+  languages: (value) => {
+    const langFilter = value
+      .map((element) => {
+        return element.name
+      })
+      .join(", ")
+    return langFilter
+  },
+  subraces: (value) => {
+    const sub = value
+      .map((element) => {
+        return element.name
+      })
+      .join(", ")
+    return sub
+  },
+  starting_proficiencies: (value) => {
+    const prof = value.map((element) => {
+      return element.name
+    })
+    return prof
+  },
+  starting_proficiency_options: (value) => {
+    // console.log(value.from.options[0].item)
+    const options = value.from.options.map((element) => {
+      return element.item.name
+    })
+    console.log(options)
+    return options
+  },
+  traits: (value) => {
+    // console.log(value)
+    const trait = value
+      .map((element) => {
+        return element.name
+      })
+      .join(", ")
+    return trait
+  },
+}
+
 export const handleformat = (itemValue, key) => {
-  // goes through filteredInfo item values to check for arrays and objects. returns the values
+  // goes through api item values to sort through arrays and objects. returns the values so they can be mapped
   if (Array.isArray(itemValue)) {
     return itemValue.map((item) => handleformat(item))
   } else if (

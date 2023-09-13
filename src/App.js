@@ -17,6 +17,7 @@ function App() {
   return (
     <div className="App">
       <CharacterDetails />
+
       <div className="category-tabs">
         <button
           className="category-btn"

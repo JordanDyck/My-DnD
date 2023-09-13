@@ -1,2 +1,2 @@
-const ClassDetails = () => {}
+const ClassDetails = ({details}) => {}
 export default ClassDetails
