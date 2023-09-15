@@ -44,9 +44,9 @@ const CharacterCreator = () => {
         >
           select race
         </button>
+        {raceName && <RacePerks raceName={raceName.toLowerCase()} />}
       </div>
       {popUp && <RacePopUp setPopUp={setPopUp} setRaceName={setRaceName} />}
-      {raceName && <RacePerks raceName={raceName.toLowerCase()} />}
     </div>
   )
 }

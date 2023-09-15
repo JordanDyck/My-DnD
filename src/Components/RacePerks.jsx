@@ -17,20 +17,18 @@ const RacePerks = ({raceName}) => {
   }, [raceName])
   const filteredRaceDetails = Object.entries(raceDetails).filter((value) => {
     if (!PerkFilterBlackList.base.includes(value[0])) {
-      // console.log(value)
       return value
     }
     return ""
   })
 
-  // console.log(filteredRaceDetails)
   return filteredRaceDetails.map(([key, value]) => {
     const customizeValue = perkFilter?.[key]?.(value)
     const valueToCheck = customizeValue === undefined ? value : customizeValue
     const renderedValue = handleformat(valueToCheck, key)
 
     return (
-      <div key={uuid()}>
+      <div className={`race-perk ${key}`} key={uuid()}>
         <h4>
           {key.replaceAll("_", " ")}
           {renderedValue ? ":" : ""}

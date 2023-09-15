@@ -1,3 +1,4 @@
+import {isValidElement} from "react"
 import {v4 as uuid} from "uuid"
 
 export const filter = {
@@ -74,6 +75,7 @@ export const perkFilter = {
         return element.name
       })
       .join(", ")
+
     return langFilter
   },
   subraces: (value) => {
@@ -88,18 +90,16 @@ export const perkFilter = {
     const prof = value.map((element) => {
       return element.name
     })
-    return prof
+    return prof.length ? prof : "none"
   },
   starting_proficiency_options: (value) => {
-    // console.log(value.from.options[0].item)
     const options = value.from.options.map((element) => {
-      return element.item.name
+      return <button key={uuid()}>{element.item.name}</button>
     })
-    console.log(options)
+
     return options
   },
   traits: (value) => {
-    // console.log(value)
     const trait = value
       .map((element) => {
         return element.name
@@ -109,9 +109,12 @@ export const perkFilter = {
   },
 }
 
+// goes through api item values to sort through arrays and objects. returns the values so they can be mapped
 export const handleformat = (itemValue, key) => {
-  // goes through api item values to sort through arrays and objects. returns the values so they can be mapped
-  if (Array.isArray(itemValue)) {
+  // if element has a different div tag, display it
+  if (isValidElement(itemValue)) {
+    return itemValue
+  } else if (Array.isArray(itemValue)) {
     return itemValue.map((item) => handleformat(item))
   } else if (
     (typeof itemValue === "string" && itemValue.length) ||
