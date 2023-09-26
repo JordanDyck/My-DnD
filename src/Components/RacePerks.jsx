@@ -7,12 +7,11 @@ import PerkFilterBlackList from "./PerkFilterBlackList.json"
 import RacePerkMap from "./RacePerkMap"
 import {saveCharacterDetails} from "../Store/slices/characterSlice"
 
-const RacePerks = ({raceName, characterName}) => {
+const RacePerks = ({raceName}) => {
   const [raceDetails, setRaceDetails] = useState({})
 
   const characterDetails = useSelector((store) => store.character)
   const dispatch = useDispatch()
-  console.log(characterDetails)
 
   useEffect(() => {
     if (raceName.length) {
@@ -38,7 +37,6 @@ const RacePerks = ({raceName, characterName}) => {
         className="save-race-btn"
         onClick={() => {
           dispatch(saveCharacterDetails(filteredRaceDetails))
-          dispatch(saveCharacterDetails(characterName))
         }}
         disabled={characterDetails.value.length}
       >

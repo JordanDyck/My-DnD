@@ -3,11 +3,13 @@ import {RiDeleteBinLine} from "react-icons/ri"
 import {useDispatch} from "react-redux"
 
 import {clearCharacterDetails} from "../../Store/slices/characterSlice"
-import RacePopUp from "../RacePopup"
+import CharacterOptionsPopUp from "../CharacterOptionsPopup"
 import RacePerks from "../RacePerks"
 
 const CharacterCreator = () => {
-  const [popUp, setPopUp] = useState(false)
+  const [racePopUp, setRacePopUp] = useState(false)
+  const [classPopUp, setClassPopUp] = useState(false)
+  const [classNameOption, setClassNameOption] = useState("")
   const [raceName, setRaceName] = useState("")
   const [characterName, setcharacterName] = useState([])
   const dispatch = useDispatch()
@@ -25,8 +27,19 @@ const CharacterCreator = () => {
       </label>
 
       <div className="class">
-        <label id="class-label">Class:</label>
-        <button id="class-name"> select class </button>
+        {classNameOption && (
+          <div className="class-name">
+            <label id="class-label">Class:</label>
+            <h4>{classNameOption}</h4>
+          </div>
+        )}
+        <button
+          id="class-btn"
+          onClick={() => setClassPopUp(true)}
+          disabled={classNameOption}
+        >
+          select class
+        </button>
       </div>
 
       <div className="race-container">
@@ -51,19 +64,27 @@ const CharacterCreator = () => {
 
         <button
           className="race-btn"
-          onClick={() => setPopUp(true)}
+          onClick={() => setRacePopUp(true)}
           disabled={raceName}
         >
           select race
         </button>
-        {raceName && (
-          <RacePerks
-            raceName={raceName.toLowerCase()}
-            characterName={characterName}
-          />
-        )}
+        {raceName && <RacePerks raceName={raceName.toLowerCase()} />}
       </div>
-      {popUp && <RacePopUp setPopUp={setPopUp} setRaceName={setRaceName} />}
+      {classPopUp && (
+        <CharacterOptionsPopUp
+          setPopUp={setClassPopUp}
+          setOptionName={setClassNameOption}
+          type={{name: "classes"}}
+        />
+      )}
+      {racePopUp && (
+        <CharacterOptionsPopUp
+          setPopUp={setRacePopUp}
+          setOptionName={setRaceName}
+          type={{name: "races"}}
+        />
+      )}
     </div>
   )
 }

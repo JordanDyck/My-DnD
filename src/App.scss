@@ -51,21 +51,37 @@ body {
     width: calc(100% - 83px);
     font-size: 15px;
   }
-  #class-label {
-    align-self: center;
-    padding-right: 5px;
-  }
-  #class-name {
-    font-size: 15px;
-    width: 135px;
-    margin-top: 15px;
+
+  .class {
+    display: flex;
+    flex-direction: column;
+
+    .class-name {
+      display: flex;
+      margin-top: 20px;
+      #class-label {
+        align-self: center;
+        padding-right: 5px;
+      }
+      h4 {
+        text-decoration: underline;
+      }
+    }
+    #class-btn {
+      font-size: 15px;
+      width: 135px;
+      margin: 15px auto 0;
+      &:disabled {
+        display: none;
+      }
+    }
   }
 
   .race-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-top: 30px;
+    margin-top: 15px;
 
     .race-btn {
       margin: auto;
@@ -157,7 +173,7 @@ body {
   box-shadow: 0px 0px 11px 8px rgba(0, 0, 0, 0.56);
   z-index: 1;
 
-  .race-option {
+  .type-option {
     font-size: 20px;
     background: none;
     color: white;
@@ -168,15 +184,11 @@ body {
     }
   }
 
-  #race-input {
+  #type-input {
     font-size: 20px;
     padding: 5px;
     margin: 5px;
     background-color: white;
-  }
-
-  #save-race-btn {
-    font-size: 25px;
   }
 }
 .category-tabs {
