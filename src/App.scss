@@ -29,6 +29,8 @@ body {
 
     padding: 5px;
 
+    // styles for after character creator!!!!!
+
     // #name {
     //   width: calc(100% - 141px);
     //   font-size: 15px;
@@ -45,19 +47,31 @@ body {
 }
 .character-creator {
   margin-top: 10px;
+  .name {
+    width: calc(100% - 83px);
+    font-size: 15px;
+  }
   #class-label {
     align-self: center;
     padding-right: 5px;
   }
   #class-name {
-    font-size: 17px;
+    font-size: 15px;
     width: 135px;
-    padding-top: 2px;
-    font-weight: bold;
+    margin-top: 15px;
   }
 
   .race-container {
-    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 30px;
+
+    .race-btn {
+      margin: auto;
+      width: 155px;
+    }
+
     .race-name {
       display: flex;
 
@@ -68,6 +82,8 @@ body {
         margin: 0 4px;
         padding: 5px 7px 0 5px;
         font-size: 15px;
+        flex-grow: 1;
+        text-decoration: underline;
         &:empty {
           border: none;
         }
@@ -77,6 +93,52 @@ body {
         height: 25px;
         border: none;
         background: none;
+        margin-right: 10px;
+      }
+    }
+    .race-perk-wrapper {
+      display: flex;
+      flex-direction: column;
+      .perk_speed {
+        border-top: 1px solid #808080d9;
+      }
+      .perk_starting_proficiency_options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+
+        button {
+          padding: 4px;
+          font-size: 14px;
+          font-weight: 600;
+        }
+      }
+      .perk_ability_bonus_options {
+        button {
+          margin-inline: 2px;
+          width: 50px;
+        }
+      }
+
+      .race-perk {
+        border-bottom: 1px solid #808080d9;
+        padding-block: 4px;
+        h4 {
+          font-size: 16px;
+          text-decoration: underline;
+        }
+        p {
+          font-family: $parFont;
+          font-size: 18px;
+        }
+      }
+      .save-race-btn {
+        font-size: 17px;
+        width: 130px;
+        margin: 15px auto 0;
+        &:disabled {
+          display: none;
+        }
       }
     }
   }

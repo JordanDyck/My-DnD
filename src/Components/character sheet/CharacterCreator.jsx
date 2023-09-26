@@ -1,27 +1,32 @@
 import {useState} from "react"
 import {RiDeleteBinLine} from "react-icons/ri"
+import {useDispatch} from "react-redux"
 
+import {clearCharacterDetails} from "../../Store/slices/characterSlice"
 import RacePopUp from "../RacePopup"
 import RacePerks from "../RacePerks"
 
 const CharacterCreator = () => {
   const [popUp, setPopUp] = useState(false)
   const [raceName, setRaceName] = useState("")
+  const [characterName, setcharacterName] = useState([])
+  const dispatch = useDispatch()
 
   return (
     <div className="character-creator">
       <header className="tab-header">Create Character</header>
 
-      <label>
+      <label id="character-name">
         Name:
-        <input />
+        <input
+          className="name"
+          onBlur={(e) => setcharacterName(["characterName", e.target.value])}
+        />
       </label>
 
       <div className="class">
-        <label id="class-label" htmlFor="class">
-          Class:
-        </label>
-        <input id="class-name" />
+        <label id="class-label">Class:</label>
+        <button id="class-name"> select class </button>
       </div>
 
       <div className="race-container">
@@ -31,7 +36,14 @@ const CharacterCreator = () => {
               Race:
             </label>
             <h4 id="race">{raceName}</h4>
-            <button className="delete-race-btn" onClick={() => setRaceName("")}>
+            <button
+              className="delete-race-btn"
+              onClick={() => {
+                setRaceName("")
+                dispatch(clearCharacterDetails([]))
+                localStorage.removeItem("raceStats")
+              }}
+            >
               <RiDeleteBinLine />
             </button>
           </div>
@@ -44,7 +56,12 @@ const CharacterCreator = () => {
         >
           select race
         </button>
-        {raceName && <RacePerks raceName={raceName.toLowerCase()} />}
+        {raceName && (
+          <RacePerks
+            raceName={raceName.toLowerCase()}
+            characterName={characterName}
+          />
+        )}
       </div>
       {popUp && <RacePopUp setPopUp={setPopUp} setRaceName={setRaceName} />}
     </div>

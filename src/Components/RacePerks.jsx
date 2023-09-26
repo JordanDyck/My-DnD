@@ -1,12 +1,19 @@
 import axios from "axios"
 import {useEffect, useState} from "react"
-import {v4 as uuid} from "uuid"
 
-import {handleformat, perkFilter} from "./utilities"
+import {useDispatch, useSelector} from "react-redux"
+
 import PerkFilterBlackList from "./PerkFilterBlackList.json"
+import RacePerkMap from "./RacePerkMap"
+import {saveCharacterDetails} from "../Store/slices/characterSlice"
 
-const RacePerks = ({raceName}) => {
+const RacePerks = ({raceName, characterName}) => {
   const [raceDetails, setRaceDetails] = useState({})
+
+  const characterDetails = useSelector((store) => store.character)
+  const dispatch = useDispatch()
+  console.log(characterDetails)
+
   useEffect(() => {
     if (raceName.length) {
       axios.get(`https://www.dnd5eapi.co/api/races/${raceName}`).then((res) => {
@@ -15,27 +22,29 @@ const RacePerks = ({raceName}) => {
       })
     }
   }, [raceName])
+
   const filteredRaceDetails = Object.entries(raceDetails).filter((value) => {
     if (!PerkFilterBlackList.base.includes(value[0])) {
       return value
     }
     return ""
   })
-
-  return filteredRaceDetails.map(([key, value]) => {
-    const customizeValue = perkFilter?.[key]?.(value)
-    const valueToCheck = customizeValue === undefined ? value : customizeValue
-    const renderedValue = handleformat(valueToCheck, key)
-
-    return (
-      <div className={`race-perk ${key}`} key={uuid()}>
-        <h4>
-          {key.replaceAll("_", " ")}
-          {renderedValue ? ":" : ""}
-        </h4>
-        {renderedValue}
-      </div>
-    )
-  })
+  return (
+    <div className="race-perk-wrapper">
+      {!characterDetails.value.length && (
+        <RacePerkMap filteredRaceDetails={filteredRaceDetails} />
+      )}
+      <button
+        className="save-race-btn"
+        onClick={() => {
+          dispatch(saveCharacterDetails(filteredRaceDetails))
+          dispatch(saveCharacterDetails(characterName))
+        }}
+        disabled={characterDetails.value.length}
+      >
+        save
+      </button>
+    </div>
+  )
 }
 export default RacePerks

@@ -1,3 +1,11 @@
 {
-  "base": ["language_desc", "alignment", "url", "index", "name"]
+  "base": [
+    "language_desc",
+    "language_options",
+    "alignment",
+    "url",
+    "index",
+    "name",
+    "size"
+  ]
 }

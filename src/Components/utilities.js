@@ -63,10 +63,25 @@ export const filter = {
 
 export const perkFilter = {
   ability_bonuses: (value) => {
-    const abilitybonus = value.map((element) => {
-      return element.ability_score.name
-    })
+    const abilitybonus = value
+      .map((element) => {
+        return element.ability_score.name
+      })
+      .join(", ")
     return `${abilitybonus} + ${value[0].bonus}`
+  },
+
+  ability_bonus_options: (value) => {
+    const options = value.from.options.map((element) => {
+      return <button key={uuid()}>{element.ability_score.name}</button>
+    })
+
+    return (
+      <>
+        <p>choose {value.choose}</p>
+        {options}
+      </>
+    )
   },
 
   languages: (value) => {
@@ -94,7 +109,15 @@ export const perkFilter = {
   },
   starting_proficiency_options: (value) => {
     const options = value.from.options.map((element) => {
-      return <button key={uuid()}>{element.item.name}</button>
+      return (
+        <button
+          onClick={(e) => console.log(e.target.value)}
+          key={uuid()}
+          value={element.item.name}
+        >
+          {element.item.name}
+        </button>
+      )
     })
 
     return options
@@ -105,7 +128,7 @@ export const perkFilter = {
         return element.name
       })
       .join(", ")
-    return trait
+    return trait.length ? trait : "none"
   },
 }
 
