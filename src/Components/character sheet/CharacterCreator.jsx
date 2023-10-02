@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux"
 
 import {clearCharacterDetails} from "../../Store/slices/characterSlice"
 import CharacterOptionsPopUp from "../CharacterOptionsPopup"
-import RacePerks from "../RacePerks"
+import Perks from "../Perks"
 
 const CharacterCreator = () => {
   const [racePopUp, setRacePopUp] = useState(false)
@@ -26,11 +26,19 @@ const CharacterCreator = () => {
         />
       </label>
 
-      <div className="class">
+      <div className="class-container">
         {classNameOption && (
           <div className="class-name">
             <label id="class-label">Class:</label>
-            <h4>{classNameOption}</h4>
+            <h4 className="class">{classNameOption}</h4>
+            <button
+              className="delete-class-btn"
+              onClick={() => {
+                setClassNameOption("")
+              }}
+            >
+              <RiDeleteBinLine />
+            </button>
           </div>
         )}
         <button
@@ -40,6 +48,20 @@ const CharacterCreator = () => {
         >
           select class
         </button>
+        {classNameOption && (
+          <>
+            <Perks
+              category={"classes"}
+              subCategory={classNameOption.toLowerCase()}
+              optionalURL={""}
+            />
+            <Perks
+              category={"classes"}
+              subCategory={classNameOption.toLowerCase()}
+              optionalURL={"/levels"}
+            />
+          </>
+        )}
       </div>
 
       <div className="race-container">
@@ -69,7 +91,13 @@ const CharacterCreator = () => {
         >
           select race
         </button>
-        {raceName && <RacePerks raceName={raceName.toLowerCase()} />}
+        {raceName && (
+          <Perks
+            category={"races"}
+            subCategory={raceName.toLowerCase()}
+            optionalURL={""}
+          />
+        )}
       </div>
       {classPopUp && (
         <CharacterOptionsPopUp

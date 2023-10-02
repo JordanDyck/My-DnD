@@ -7,6 +7,7 @@ const CharacterOptionsPopUp = ({setPopUp, setOptionName, type}) => {
   useEffect(() => {
     axios.get(`https://www.dnd5eapi.co/api/${type.name}/`).then((res) => {
       const data = res.data.results
+
       setoptions(data)
     })
   }, [type])

@@ -6,6 +6,11 @@
     "url",
     "index",
     "name",
-    "size"
+    "size",
+    "multi_classing",
+    "class_levels",
+    "subclasses",
+    "spells",
+    "class"
   ]
 }

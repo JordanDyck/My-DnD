@@ -61,7 +61,7 @@ export const filter = {
   },
 }
 
-export const perkFilter = {
+export const racePerkFilter = {
   ability_bonuses: (value) => {
     const abilitybonus = value
       .map((element) => {
@@ -115,7 +115,7 @@ export const perkFilter = {
           key={uuid()}
           value={element.item.name}
         >
-          {element.item.name}
+          {element.item.name.replace("Skill", "")}
         </button>
       )
     })
@@ -132,7 +132,77 @@ export const perkFilter = {
   },
 }
 
-// goes through api item values to sort through arrays and objects. returns the values so they can be mapped
+export const classPerkFilter = {
+  hit_die: (value) => {
+    return "D" + value
+  },
+  proficiencies: (value) => {
+    const prof = value.map((element) => {
+      if (element.name.includes("Saving Throw:")) {
+        return ""
+      }
+      return element.name
+    })
+    return prof
+  },
+  proficiency_choices: (value) => {
+    const options = value[0].from.options.map((element) => {
+      return (
+        <button key={uuid()}>{element.item.name.replace("Skill:", "")}</button>
+      )
+    })
+
+    return (
+      <>
+        <p>choose {value[0].choose}</p>
+        {options}
+      </>
+    )
+  },
+  saving_throws: (value) => {
+    const throws = value
+      .map((element) => {
+        return element.name
+      })
+      .join(", ")
+    return throws
+  },
+  starting_equipment: (value) => {
+    const startingEquipment = value.map((element) => {
+      const quantity = element.quantity
+      if (quantity > 1) {
+        return `${element.equipment.name} (${quantity})`
+      } else return element.equipment.name
+    })
+    return startingEquipment
+  },
+  starting_equipment_options: (value) => {
+    const choice = value.map((choices) => {
+      return (
+        <div className="gear-choices" key={uuid()}>
+          <b>Choose {choices.choose}:</b>
+          <p>
+            {choices.desc
+              .replace("(a)", "")
+              .replace("(b)", "")
+              .replace("(c)", "")
+              .replace(" or ", " | OR | ")}
+          </p>
+        </div>
+      )
+    })
+
+    return choice
+  },
+}
+
+export const classLvlFilter = {
+  level: (value) => {
+    return console.log(value)
+  },
+}
+
+// goes through api item values to sort through arrays and objects. returns the values so they can be mapped and displayed
 export const handleformat = (itemValue, key) => {
   // if element has a different div tag, display it
   if (isValidElement(itemValue)) {

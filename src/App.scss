@@ -52,7 +52,7 @@ body {
     font-size: 15px;
   }
 
-  .class {
+  .class-container {
     display: flex;
     flex-direction: column;
 
@@ -63,8 +63,16 @@ body {
         align-self: center;
         padding-right: 5px;
       }
-      h4 {
+      .class {
         text-decoration: underline;
+        flex-grow: 1;
+      }
+      .delete-class-btn {
+        font-size: 23px;
+        height: 25px;
+        border: none;
+        background: none;
+        margin-right: 10px;
       }
     }
     #class-btn {
@@ -112,49 +120,67 @@ body {
         margin-right: 10px;
       }
     }
-    .race-perk-wrapper {
+  }
+  .perk-wrapper {
+    display: flex;
+    flex-direction: column;
+    .perk_speed {
+      border-top: 1px solid #808080d9;
+    }
+    .perk_starting_proficiency_options {
       display: flex;
-      flex-direction: column;
-      .perk_speed {
-        border-top: 1px solid #808080d9;
-      }
-      .perk_starting_proficiency_options {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 5px;
+      flex-wrap: wrap;
+      gap: 5px;
 
-        button {
-          padding: 4px;
-          font-size: 14px;
-          font-weight: 600;
-        }
+      button {
+        padding: 4px;
+        font-size: 14px;
+        font-weight: 600;
       }
-      .perk_ability_bonus_options {
-        button {
-          margin-inline: 2px;
-          width: 50px;
-        }
+    }
+    .perk_ability_bonus_options,
+    .perk_proficiency_choices {
+      button {
+        margin: 2px;
+        // width: 50px;
       }
-
-      .race-perk {
-        border-bottom: 1px solid #808080d9;
-        padding-block: 4px;
-        h4 {
-          font-size: 16px;
-          text-decoration: underline;
+    }
+    .perk_starting_equipment_options {
+      .gear-choices {
+        margin-block: 5px;
+        border-bottom: 1px solid;
+        b {
+          font-size: 15px;
         }
         p {
-          font-family: $parFont;
-          font-size: 18px;
+          margin-bottom: 10px;
         }
       }
-      .save-race-btn {
-        font-size: 17px;
-        width: 130px;
-        margin: 15px auto 0;
-        &:disabled {
-          display: none;
-        }
+    }
+    .perk_spellcasting {
+      b {
+        text-decoration: underline;
+      }
+    }
+
+    .perk {
+      border-bottom: 1px solid #808080d9;
+      padding-block: 4px;
+      h4 {
+        font-size: 16px;
+        text-decoration: underline;
+      }
+      p {
+        font-family: $parFont;
+        font-size: 18px;
+      }
+    }
+    .save-race-btn {
+      font-size: 17px;
+      width: 130px;
+      margin: 15px auto 0;
+      &:disabled {
+        display: none;
       }
     }
   }
