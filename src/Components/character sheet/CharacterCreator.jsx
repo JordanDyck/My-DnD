@@ -1,17 +1,25 @@
 import {useState} from "react"
 import {RiDeleteBinLine} from "react-icons/ri"
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 
-import {clearCharacterDetails} from "../../Store/slices/characterSlice"
+import {
+  clearCharacterDetails,
+  saveCharacterDetails,
+} from "../../Store/slices/characterSlice"
 import CharacterOptionsPopUp from "../CharacterOptionsPopup"
 import Perks from "../Perks"
 
 const CharacterCreator = () => {
   const [racePopUp, setRacePopUp] = useState(false)
   const [classPopUp, setClassPopUp] = useState(false)
+  const [showCharacterDetails, setshowCharacterDetails] = useState({
+    class: false,
+    race: false,
+  })
   const [classNameOption, setClassNameOption] = useState("")
   const [raceName, setRaceName] = useState("")
   const [characterName, setcharacterName] = useState([])
+  const characterDetails = useSelector((store) => store.character)
   const dispatch = useDispatch()
 
   return (
@@ -43,23 +51,38 @@ const CharacterCreator = () => {
         )}
         <button
           id="class-btn"
-          onClick={() => setClassPopUp(true)}
-          disabled={classNameOption}
+          onClick={() => {
+            setClassPopUp(true)
+            setshowCharacterDetails({class: true})
+          }}
+          disabled={showCharacterDetails.race || classNameOption}
         >
           select class
         </button>
-        {classNameOption && (
+        {classNameOption && showCharacterDetails.class && (
           <>
+            {/* for choosing your class */}
             <Perks
               category={"classes"}
               subCategory={classNameOption.toLowerCase()}
               optionalURL={""}
             />
+            {/* displays the level info */}
             <Perks
               category={"classes"}
               subCategory={classNameOption.toLowerCase()}
               optionalURL={"/levels"}
             />
+            <button
+              className="save-race-btn"
+              // onClick={() => {
+              //   dispatch(saveCharacterDetails(filteredRaceDetails))
+              // }}
+              // disabled={characterDetails.value.length}
+              onClick={() => setshowCharacterDetails({class: false})}
+            >
+              save
+            </button>
           </>
         )}
       </div>
@@ -86,17 +109,32 @@ const CharacterCreator = () => {
 
         <button
           className="race-btn"
-          onClick={() => setRacePopUp(true)}
-          disabled={raceName}
+          onClick={() => {
+            setRacePopUp(true)
+            setshowCharacterDetails({race: true})
+          }}
+          disabled={showCharacterDetails.class || raceName}
         >
           select race
         </button>
-        {raceName && (
-          <Perks
-            category={"races"}
-            subCategory={raceName.toLowerCase()}
-            optionalURL={""}
-          />
+        {raceName && showCharacterDetails.race && (
+          <>
+            <Perks
+              category={"races"}
+              subCategory={raceName.toLowerCase()}
+              optionalURL={""}
+            />
+            <button
+              className="save-race-btn"
+              // onClick={() => {
+              //   dispatch(saveCharacterDetails(filteredRaceDetails))
+              // }}
+              // disabled={characterDetails.value.length}
+              onClick={() => setshowCharacterDetails({race: false})}
+            >
+              save
+            </button>
+          </>
         )}
       </div>
       {classPopUp && (

@@ -12,5 +12,6 @@
     "subclasses",
     "spells",
     "class"
-  ]
+  ],
+  "level": ["index", "url"]
 }

@@ -1,17 +1,15 @@
 import axios from "axios"
-import {useEffect, useState} from "react"
-
+import {useEffect, useMemo, useState} from "react"
 import {useDispatch, useSelector} from "react-redux"
+import {classPerkFilter, racePerkFilter} from "./utilities"
 
 import PerkFilterBlackList from "./PerkFilterBlackList.json"
 import PerkMap from "./PerkMap"
-import {saveCharacterDetails} from "../Store/slices/characterSlice"
-import {classLvlFilter, classPerkFilter, racePerkFilter} from "./utilities"
+import ClassLvlMap from "./ClassLvlMap"
 
 const Perks = ({category, subCategory, optionalURL}) => {
   const [raceDetails, setRaceDetails] = useState([])
-  const [classDetails, setClassDetails] = useState([])
-  console.log(optionalURL & "class", classDetails)
+
   const characterDetails = useSelector((store) => store.character)
   const dispatch = useDispatch()
 
@@ -23,42 +21,44 @@ const Perks = ({category, subCategory, optionalURL}) => {
         )
         .then((res) => {
           const data = res.data
-          optionalURL && setClassDetails(data)
-          !optionalURL && setRaceDetails(data)
+
+          setRaceDetails(data)
         })
     }
   }, [category, subCategory, optionalURL])
 
-  const filteredRaceDetails = Object.entries(raceDetails).filter((value) => {
-    if (!PerkFilterBlackList.base.includes(value[0])) {
-      return true
-    }
-    return false
-  })
+  // classlvl atarts as an ARRAY of objects.
+  // racedetails start as just an object.
+  // classlvl needs to start as only objects.
+
+  const filteredRaceDetails = useMemo(() => {
+    return Object.entries(raceDetails).filter((value) => {
+      if (!PerkFilterBlackList.base.includes(value[0])) {
+        return true
+      }
+
+      return false
+    })
+  }, [raceDetails])
 
   return (
     <div className="perk-wrapper">
-      {!characterDetails.value.length && filteredRaceDetails.length && (
-        <PerkMap
-          filteredRaceDetails={filteredRaceDetails}
-          perkFilter={
-            category === "races"
-              ? racePerkFilter
-              : category === "classes"
-              ? classPerkFilter
-              : classLvlFilter
-          }
-        />
+      {!characterDetails.value.length && (
+        <>
+          {!optionalURL && (
+            <PerkMap
+              filteredRaceDetails={filteredRaceDetails}
+              perkFilter={
+                category === "races" ? racePerkFilter : classPerkFilter
+              }
+            />
+          )}
+
+          {optionalURL && (
+            <ClassLvlMap classDetails={optionalURL && raceDetails} />
+          )}
+        </>
       )}
-      <button
-        className="save-race-btn"
-        onClick={() => {
-          dispatch(saveCharacterDetails(filteredRaceDetails))
-        }}
-        disabled={characterDetails.value.length}
-      >
-        save
-      </button>
     </div>
   )
 }

@@ -115,7 +115,7 @@ export const racePerkFilter = {
           key={uuid()}
           value={element.item.name}
         >
-          {element.item.name.replace("Skill", "")}
+          {element.item.name.replace("Skill:", "")}
         </button>
       )
     })
@@ -197,8 +197,8 @@ export const classPerkFilter = {
 }
 
 export const classLvlFilter = {
-  level: (value) => {
-    return console.log(value)
+  features: (value) => {
+    return console.log("WORKING")
   },
 }
 
