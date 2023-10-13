@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux"
 
 import {
   clearCharacterDetails,
-  saveCharacterDetails,
+  // saveCharacterDetails,
 } from "../../Store/slices/characterSlice"
 import CharacterOptionsPopUp from "../CharacterOptionsPopup"
 import Perks from "../Perks"
@@ -19,7 +19,7 @@ const CharacterCreator = () => {
   const [classNameOption, setClassNameOption] = useState("")
   const [raceName, setRaceName] = useState("")
   const [characterName, setcharacterName] = useState([])
-  const characterDetails = useSelector((store) => store.character)
+  // const characterDetails = useSelector((store) => store.character)
   const dispatch = useDispatch()
 
   return (
@@ -43,6 +43,7 @@ const CharacterCreator = () => {
               className="delete-class-btn"
               onClick={() => {
                 setClassNameOption("")
+                setshowCharacterDetails({class: false})
               }}
             >
               <RiDeleteBinLine />
@@ -98,8 +99,9 @@ const CharacterCreator = () => {
               className="delete-race-btn"
               onClick={() => {
                 setRaceName("")
+                setshowCharacterDetails({race: false})
                 dispatch(clearCharacterDetails([]))
-                localStorage.removeItem("raceStats")
+                // localStorage.removeItem("raceStats")
               }}
             >
               <RiDeleteBinLine />

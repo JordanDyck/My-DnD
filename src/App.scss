@@ -177,8 +177,31 @@ body {
     }
 
     .class-perk-container {
-      border-bottom: 1px solid;
+      // border-bottom: 1px solid;
       margin-block: 6px;
+      .class-level {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 10px;
+        font-size: 17px;
+        font-weight: 600;
+        svg {
+          padding-right: 5px;
+          font-size: 20px;
+          align-self: baseline;
+        }
+      }
+
+      .class-level-perks {
+        overflow: hidden;
+        max-height: 0vh;
+        transition: max-height 0.3s ease-out;
+      }
+      .displayed {
+        max-height: 100vh;
+        transition: max-height 0.5s ease-in;
+      }
     }
 
     .save-race-btn {
@@ -372,7 +395,7 @@ input {
     }
     .hidden {
       max-height: 0vh;
-      transition: max-height 0.5s ease-in-out;
+      transition: max-height 0.5s ease-out;
     }
     .inventory-item {
       display: flex;
