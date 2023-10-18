@@ -1,36 +1,26 @@
+import {useMemo} from "react"
+import PerkFilterBlackList from "./PerkFilterBlackList.json"
+import {handleformat, classLvlFilter} from "./utilities"
 const ClassLvlDetails = ({perk}) => {
-  return (
-    <div>
-      <h4> proficency bonus: {perk.prof_bonus}</h4>
+  const filteredClassDetails = useMemo(() => {
+    return Object.entries(perk).filter((value) => {
+      if (!PerkFilterBlackList.level.includes(value[0])) {
+        return true
+      }
+      return false
+    })
+  }, [perk])
+  return filteredClassDetails.map(([key, value]) => {
+    const customizeValue = classLvlFilter?.[key]?.(value, key)
+    const valueToCheck = customizeValue === undefined ? value : customizeValue
+    const renderedValue = handleformat(valueToCheck, key)
 
-      {perk.features.length > 0 && <h4>features:</h4>}
-
-      {perk.features.map((feature) => {
-        return <p key={feature.name}>{feature.name}</p>
-      })}
-      <h4>class specifics:</h4>
-      {Object.entries(perk.class_specific).map((specific, index) => {
-        return (
-          specific[1] > 0 && (
-            <p key={"specific_" + specific + index}>
-              {specific[0].replaceAll("_", " ")}: {specific[1]}
-            </p>
-          )
-        )
-      })}
-      {perk.spellcasting && <h4>SpellCasting</h4>}
-      {perk.spellcasting &&
-        Object.entries(perk.spellcasting).map((spellcasting) => {
-          return (
-            spellcasting[1] > 0 && (
-              //spellcasting level and number
-              <p key={"spellcasting_" + spellcasting[0]}>
-                {spellcasting[0].replaceAll("_", " ")}: {spellcasting[1]}
-              </p>
-            )
-          )
-        })}
-    </div>
-  )
+    return (
+      <div className={`perk perk_${key}`} key={`perk key_${key}`}>
+        <h4>{renderedValue ? key.replaceAll("_", " ") + ":" : ""}</h4>
+        {renderedValue}
+      </div>
+    )
+  })
 }
 export default ClassLvlDetails

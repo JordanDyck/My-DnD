@@ -13,5 +13,5 @@
     "spells",
     "class"
   ],
-  "level": ["index", "url"]
+  "level": ["index", "url", "class"]
 }

@@ -186,30 +186,6 @@ body {
         margin-bottom: 10px;
         font-size: 17px;
         font-weight: 600;
-        svg {
-          padding-right: 5px;
-          font-size: 20px;
-          align-self: baseline;
-        }
-      }
-
-      .class-level-perks {
-        overflow: hidden;
-        max-height: 0vh;
-        transition: max-height 0.3s ease-out;
-      }
-      .displayed {
-        max-height: 100vh;
-        transition: max-height 0.5s ease-in;
-      }
-    }
-
-    .save-race-btn {
-      font-size: 17px;
-      width: 130px;
-      margin: 15px auto 0;
-      &:disabled {
-        display: none;
       }
     }
   }

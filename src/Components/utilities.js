@@ -198,7 +198,22 @@ export const classPerkFilter = {
 
 export const classLvlFilter = {
   features: (value) => {
-    return console.log("WORKING")
+    const features = value.map((feature) => {
+      return feature.name
+    })
+
+    return features
+  },
+
+  spellcasting: (value) => {
+    const spells = Object.entries(value).map((spell) => {
+      if (spell[1] > 0) {
+        return `${spell[0].replaceAll("_", " ")}: ${spell[1]} spell(s)`
+      } else {
+        return ""
+      }
+    })
+    return spells
   },
 }
 

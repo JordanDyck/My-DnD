@@ -27,12 +27,8 @@ const Perks = ({category, subCategory, optionalURL}) => {
     }
   }, [category, subCategory, optionalURL])
 
-  // classlvl atarts as an ARRAY of objects.
-  // racedetails start as just an object.
-  // classlvl needs to start as only objects.
-
   const filteredRaceDetails = useMemo(() => {
-    return Object.entries(raceDetails).filter((value) => {
+    return Object.entries(!optionalURL && raceDetails).filter((value) => {
       if (!PerkFilterBlackList.base.includes(value[0])) {
         return true
       }

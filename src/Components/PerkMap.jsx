@@ -2,11 +2,7 @@ import {handleformat} from "./utilities"
 
 const PerkMap = ({filteredRaceDetails, perkFilter}) => {
   return filteredRaceDetails?.map(([key, value]) => {
-    // classlvl gets turned into just an object (THIS IS WHAT WE WANT)
-    // figure out how to seperate the object into their own objects
-
     const customizeValue = perkFilter?.[key]?.(value, key)
-    // console.log(filteredRaceDetails)
     const valueToCheck = customizeValue === undefined ? value : customizeValue
     const renderedValue = handleformat(valueToCheck, key)
 

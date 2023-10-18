@@ -1,37 +1,29 @@
-// import {useMemo} from "react"
 import {useState} from "react"
-import ClassLvlDetails from "./ClassLvlDetails"
-// import PerkFilterBlackList from "./PerkFilterBlackList.json"
-// import {handleformat} from "./utilities"
-// import {classLvlFilter} from "./utilities"
-import {RxDropdownMenu} from "react-icons/rx"
-const ClassLvlMap = ({classDetails}) => {
-  // const [classStorage, setClassStorage] = useState()
-  const [activeDetails, setActiveDetails] = useState({})
-  const showDetails = (level) => {
-    setActiveDetails((prev) => ({
-      ...prev,
-      [level]: !prev[level], // <-- update value by index key
-    }))
-  }
+import Select from "react-select"
 
-  return classDetails.map((perk) => {
-    return (
-      <div className="class-perk-container" key={"level_" + perk.level}>
-        <button className="class-level" onClick={() => showDetails(perk.level)}>
-          <RxDropdownMenu /> level: {perk.level}
-        </button>
-        <div
-          className={
-            activeDetails[perk.level]
-              ? "class-level-perks displayed"
-              : "class-level-perks"
-          }
-        >
-          <ClassLvlDetails perk={perk} />
-        </div>
-      </div>
-    )
-  })
+import ClassLvlDetails from "./ClassLvlDetails"
+const ClassLvlMap = ({classDetails}) => {
+  const [currentLvl, setCurrentLvl] = useState()
+  // const [activeDetails, setActiveDetails] = useState({})
+
+  const classLvlOptions = classDetails?.map(({level}) => ({
+    value: level,
+    label: "level " + level,
+  }))
+
+  return (
+    <div className="class-lvl-details">
+      {classDetails && (
+        <Select
+          options={classLvlOptions}
+          onChange={(choice) => {
+            setCurrentLvl(choice.value)
+          }}
+          placeholder="level preview"
+        />
+      )}
+      {currentLvl && <ClassLvlDetails perk={classDetails[currentLvl - 1]} />}
+    </div>
+  )
 }
 export default ClassLvlMap
