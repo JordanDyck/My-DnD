@@ -266,6 +266,18 @@ export const damageTypes = [
   {value: "Psychic", label: "Psychic"},
 ]
 
+export const setStorage = (key, value) => {
+  try {
+    if (localStorage.getItem(key)) {
+      return ""
+    } else {
+      localStorage.setItem(key, JSON.stringify(value))
+    }
+  } catch (error) {
+    alert("Error in local storage. try again.")
+  }
+}
+
 export const armorStyles = {
   control: (base, {isDisabled, isFocused}) => ({
     ...base,

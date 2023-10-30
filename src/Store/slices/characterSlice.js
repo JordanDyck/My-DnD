@@ -3,12 +3,20 @@ import {createSlice} from "@reduxjs/toolkit"
 export const characterSlice = createSlice({
   name: "character",
   initialState: {
-    value: localStorage.getItem("raceStats")
-      ? JSON.parse(localStorage.getItem("raceStats"))
-      : [],
+    value: [],
   },
   reducers: {
-    saveCharacterDetails: (state, action) => {
+    saveClassDetails: (state, action) => {
+      const updatedValue = [...state.value, action.payload]
+      state.value = updatedValue
+      localStorage.setItem("classStats", JSON.stringify(updatedValue))
+    },
+
+    saveLvlDetails: (state, action) => {
+      state.value = action.payload
+    },
+
+    saveRaceDetails: (state, action) => {
       const updatedValue = [...state.value, action.payload]
       state.value = updatedValue
       localStorage.setItem("raceStats", JSON.stringify(updatedValue))
@@ -20,6 +28,10 @@ export const characterSlice = createSlice({
   },
 })
 
-export const {saveCharacterDetails, clearCharacterDetails} =
-  characterSlice.actions
+export const {
+  saveClassDetails,
+  saveLvlDetails,
+  saveRaceDetails,
+  clearCharacterDetails,
+} = characterSlice.actions
 export default characterSlice.reducer

@@ -1,10 +1,9 @@
-import {useState} from "react"
+import {useEffect, useState} from "react"
 import Select from "react-select"
 
 import ClassLvlDetails from "./ClassLvlDetails"
-const ClassLvlMap = ({classDetails}) => {
+const ClassLvlSelector = ({classDetails}) => {
   const [currentLvl, setCurrentLvl] = useState()
-  // const [activeDetails, setActiveDetails] = useState({})
 
   const classLvlOptions = classDetails?.map(({level}) => ({
     value: level,
@@ -26,4 +25,4 @@ const ClassLvlMap = ({classDetails}) => {
     </div>
   )
 }
-export default ClassLvlMap
+export default ClassLvlSelector

@@ -46,6 +46,9 @@ body {
   }
 }
 .character-creator {
+  display: flex;
+  flex-direction: column;
+
   margin-top: 10px;
   .name {
     width: calc(100% - 83px);
@@ -175,19 +178,13 @@ body {
         font-size: 18px;
       }
     }
+  }
 
-    .class-perk-container {
-      // border-bottom: 1px solid;
-      margin-block: 6px;
-      .class-level {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        margin-bottom: 10px;
-        font-size: 17px;
-        font-weight: 600;
-      }
-    }
+  .save-character-btn {
+    align-self: center;
+    margin-top: 15px;
+    padding: 5px;
+    font-weight: bold;
   }
 }
 

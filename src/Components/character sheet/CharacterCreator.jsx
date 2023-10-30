@@ -1,26 +1,25 @@
 import {useState} from "react"
 import {RiDeleteBinLine} from "react-icons/ri"
-import {useDispatch, useSelector} from "react-redux"
-
-import {
-  clearCharacterDetails,
-  // saveCharacterDetails,
-} from "../../Store/slices/characterSlice"
+import {setStorage} from "../utilities"
 import CharacterOptionsPopUp from "../CharacterOptionsPopup"
 import Perks from "../Perks"
 
 const CharacterCreator = () => {
   const [racePopUp, setRacePopUp] = useState(false)
   const [classPopUp, setClassPopUp] = useState(false)
+  const [storedDetails, setStoredDetails] = useState({
+    characterName: "",
+    class: "",
+    levels: "",
+    race: "",
+  })
+  const [classNameOption, setClassNameOption] = useState("")
+  const [raceName, setRaceName] = useState("")
   const [showCharacterDetails, setshowCharacterDetails] = useState({
     class: false,
     race: false,
   })
-  const [classNameOption, setClassNameOption] = useState("")
-  const [raceName, setRaceName] = useState("")
-  const [characterName, setcharacterName] = useState([])
   // const characterDetails = useSelector((store) => store.character)
-  const dispatch = useDispatch()
 
   return (
     <div className="character-creator">
@@ -30,7 +29,12 @@ const CharacterCreator = () => {
         Name:
         <input
           className="name"
-          onBlur={(e) => setcharacterName(["characterName", e.target.value])}
+          onBlur={(e) =>
+            setStoredDetails((prev) => ({
+              ...prev,
+              characterName: e.target.value,
+            }))
+          }
         />
       </label>
 
@@ -67,19 +71,17 @@ const CharacterCreator = () => {
               category={"classes"}
               subCategory={classNameOption.toLowerCase()}
               optionalURL={""}
+              setStoredDetails={setStoredDetails}
             />
             {/* displays the level info */}
             <Perks
               category={"classes"}
               subCategory={classNameOption.toLowerCase()}
               optionalURL={"/levels"}
+              setStoredDetails={setStoredDetails}
             />
             <button
               className="save-race-btn"
-              // onClick={() => {
-              //   dispatch(saveCharacterDetails(filteredRaceDetails))
-              // }}
-              // disabled={characterDetails.value.length}
               onClick={() => setshowCharacterDetails({class: false})}
             >
               save
@@ -100,7 +102,6 @@ const CharacterCreator = () => {
               onClick={() => {
                 setRaceName("")
                 setshowCharacterDetails({race: false})
-                dispatch(clearCharacterDetails([]))
                 // localStorage.removeItem("raceStats")
               }}
             >
@@ -125,13 +126,10 @@ const CharacterCreator = () => {
               category={"races"}
               subCategory={raceName.toLowerCase()}
               optionalURL={""}
+              setStoredDetails={setStoredDetails}
             />
             <button
               className="save-race-btn"
-              // onClick={() => {
-              //   dispatch(saveCharacterDetails(filteredRaceDetails))
-              // }}
-              // disabled={characterDetails.value.length}
               onClick={() => setshowCharacterDetails({race: false})}
             >
               save
@@ -153,6 +151,21 @@ const CharacterCreator = () => {
           type={{name: "races"}}
         />
       )}
+      {storedDetails.characterName &&
+        storedDetails.class &&
+        storedDetails.levels && (
+          <button
+            className="save-character-btn"
+            onClick={() =>
+              setStorage(
+                `characterDetails_${storedDetails.characterName}`,
+                storedDetails
+              )
+            }
+          >
+            Save Character
+          </button>
+        )}
     </div>
   )
 }

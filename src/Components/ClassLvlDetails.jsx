@@ -1,4 +1,5 @@
 import {useMemo} from "react"
+
 import PerkFilterBlackList from "./PerkFilterBlackList.json"
 import {handleformat, classLvlFilter} from "./utilities"
 const ClassLvlDetails = ({perk}) => {
@@ -10,8 +11,9 @@ const ClassLvlDetails = ({perk}) => {
       return false
     })
   }, [perk])
+
   return filteredClassDetails.map(([key, value]) => {
-    const customizeValue = classLvlFilter?.[key]?.(value, key)
+    const customizeValue = classLvlFilter?.[key]?.(value)
     const valueToCheck = customizeValue === undefined ? value : customizeValue
     const renderedValue = handleformat(valueToCheck, key)
 

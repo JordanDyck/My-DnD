@@ -1,17 +1,36 @@
 import axios from "axios"
 import {useEffect, useMemo, useState} from "react"
-import {useDispatch, useSelector} from "react-redux"
+
 import {classPerkFilter, racePerkFilter} from "./utilities"
 
 import PerkFilterBlackList from "./PerkFilterBlackList.json"
 import PerkMap from "./PerkMap"
-import ClassLvlMap from "./ClassLvlMap"
+import ClassLvlSelector from "./ClassLvlSelector"
 
-const Perks = ({category, subCategory, optionalURL}) => {
+const Perks = ({category, subCategory, optionalURL, setStoredDetails}) => {
   const [raceDetails, setRaceDetails] = useState([])
+  // console.log({raceDetails})
 
-  const characterDetails = useSelector((store) => store.character)
-  const dispatch = useDispatch()
+  useEffect(() => {
+    // stores the values from raceData to storedDetails in CharacterCreator component
+    if (category === "races") {
+      setStoredDetails((prev) => ({...prev, race: raceDetails}))
+    }
+
+    if (category === "classes") {
+      if (!optionalURL) {
+        setStoredDetails((prev) => ({
+          ...prev,
+          class: raceDetails,
+        }))
+      } else {
+        setStoredDetails((prev) => ({
+          ...prev,
+          levels: raceDetails,
+        }))
+      }
+    }
+  }, [category, optionalURL, raceDetails, setStoredDetails])
 
   useEffect(() => {
     if (category && subCategory) {
@@ -35,26 +54,22 @@ const Perks = ({category, subCategory, optionalURL}) => {
 
       return false
     })
-  }, [raceDetails])
+  }, [raceDetails, optionalURL])
 
   return (
     <div className="perk-wrapper">
-      {!characterDetails.value.length && (
-        <>
-          {!optionalURL && (
-            <PerkMap
-              filteredRaceDetails={filteredRaceDetails}
-              perkFilter={
-                category === "races" ? racePerkFilter : classPerkFilter
-              }
-            />
-          )}
+      <>
+        {!optionalURL && (
+          <PerkMap
+            filteredRaceDetails={filteredRaceDetails}
+            perkFilter={category === "races" ? racePerkFilter : classPerkFilter}
+          />
+        )}
 
-          {optionalURL && (
-            <ClassLvlMap classDetails={optionalURL && raceDetails} />
-          )}
-        </>
-      )}
+        {optionalURL && (
+          <ClassLvlSelector classDetails={optionalURL && raceDetails} />
+        )}
+      </>
     </div>
   )
 }
