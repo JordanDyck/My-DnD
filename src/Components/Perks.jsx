@@ -21,7 +21,7 @@ const Perks = ({category, subCategory, optionalURL, setStoredDetails}) => {
       if (!optionalURL) {
         setStoredDetails((prev) => ({
           ...prev,
-          class: raceDetails,
+          classDetails: raceDetails,
         }))
       } else {
         setStoredDetails((prev) => ({

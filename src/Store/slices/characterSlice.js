@@ -6,21 +6,10 @@ export const characterSlice = createSlice({
     value: [],
   },
   reducers: {
-    saveClassDetails: (state, action) => {
-      const updatedValue = [...state.value, action.payload]
-      state.value = updatedValue
-      localStorage.setItem("classStats", JSON.stringify(updatedValue))
+    setCurrentCharacter: (state, action) => {
+      state.push(action.payload)
     },
 
-    saveLvlDetails: (state, action) => {
-      state.value = action.payload
-    },
-
-    saveRaceDetails: (state, action) => {
-      const updatedValue = [...state.value, action.payload]
-      state.value = updatedValue
-      localStorage.setItem("raceStats", JSON.stringify(updatedValue))
-    },
     // replace array with new array (used for deleting items)
     clearCharacterDetails: (state, action) => {
       state.value = action.payload
@@ -28,10 +17,6 @@ export const characterSlice = createSlice({
   },
 })
 
-export const {
-  saveClassDetails,
-  saveLvlDetails,
-  saveRaceDetails,
-  clearCharacterDetails,
-} = characterSlice.actions
+export const {setCurrentCharacter, clearCharacterDetails} =
+  characterSlice.actions
 export default characterSlice.reducer

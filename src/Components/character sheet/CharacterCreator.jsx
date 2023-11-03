@@ -4,12 +4,12 @@ import {setStorage} from "../utilities"
 import CharacterOptionsPopUp from "../CharacterOptionsPopup"
 import Perks from "../Perks"
 
-const CharacterCreator = () => {
+const CharacterCreator = ({setShowCreator}) => {
   const [racePopUp, setRacePopUp] = useState(false)
   const [classPopUp, setClassPopUp] = useState(false)
   const [storedDetails, setStoredDetails] = useState({
     characterName: "",
-    class: "",
+    classDetails: "",
     levels: "",
     race: "",
   })
@@ -25,7 +25,7 @@ const CharacterCreator = () => {
     <div className="character-creator">
       <header className="tab-header">Create Character</header>
 
-      <label id="character-name">
+      <label className="name-label">
         Name:
         <input
           className="name"
@@ -102,7 +102,6 @@ const CharacterCreator = () => {
               onClick={() => {
                 setRaceName("")
                 setshowCharacterDetails({race: false})
-                // localStorage.removeItem("raceStats")
               }}
             >
               <RiDeleteBinLine />
@@ -152,16 +151,15 @@ const CharacterCreator = () => {
         />
       )}
       {storedDetails.characterName &&
-        storedDetails.class &&
-        storedDetails.levels && (
+        storedDetails.classDetails &&
+        storedDetails.levels &&
+        storedDetails.race && (
           <button
             className="save-character-btn"
-            onClick={() =>
-              setStorage(
-                `characterDetails_${storedDetails.characterName}`,
-                storedDetails
-              )
-            }
+            onClick={() => {
+              setStorage(`${storedDetails.characterName}`, storedDetails)
+              setShowCreator(false)
+            }}
           >
             Save Character
           </button>

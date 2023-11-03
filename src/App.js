@@ -7,16 +7,35 @@ import ProfStats from "./Components/character sheet/ProfStats"
 import Inventory from "./Components/character sheet/Inventory"
 import Gear from "./Components/Gear"
 import ItemsTab from "./Components/ItemsTab"
-
+import CharacterCreator from "./Components/character sheet/CharacterCreator"
+import CharacterSelecter from "./Components/character sheet/CharacterSelecter"
 function App() {
-  // const [showCharDetails, setShowCharDetails] = useState(false)
   const [showStats, setShowStats] = useState(false)
   const [showGear, setShowGear] = useState(false)
   const [showItems, setShowItems] = useState(false)
+  const [showCreator, setShowCreator] = useState(false)
+  const [selectedCharacter, setSelectedCharacter] = useState("")
 
   return (
     <div className="App">
-      <CharacterDetails />
+      {!showCreator && (
+        <CharacterSelecter
+          setSelectedCharacter={setSelectedCharacter}
+          setShowCreator={setShowCreator}
+        />
+      )}
+
+      {!showCreator && selectedCharacter && (
+        <CharacterDetails
+          setShowCreator={setShowCreator}
+          selectedCharacter={selectedCharacter}
+        />
+      )}
+      {showCreator && (
+        <div className="character-info-container">
+          <CharacterCreator setShowCreator={setShowCreator} />
+        </div>
+      )}
 
       <div className="category-tabs">
         <button
@@ -38,10 +57,6 @@ function App() {
       </div>
 
       {showItems && <ItemsTab />}
-
-      {/* {showCharDetails && (
-        <ClassDetails raceName={raceName} setRaceName={setRaceName} />
-      )} */}
 
       {showStats && (
         <ProfStats showStats={showStats} setShowStats={setShowStats} />

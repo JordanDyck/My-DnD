@@ -274,7 +274,7 @@ export const setStorage = (key, value) => {
       localStorage.setItem(key, JSON.stringify(value))
     }
   } catch (error) {
-    alert("Error in local storage. try again.")
+    alert("Error in local storage.")
   }
 }
 

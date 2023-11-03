@@ -17,6 +17,27 @@ body {
   );
   position: static;
 }
+
+.character-selector {
+  display: flex;
+  margin-top: 5px;
+  width: calc(100% - 71px);
+  margin-inline: auto;
+  align-items: center;
+  .selector {
+    width: 100%;
+  }
+  .create-character-btn {
+    display: flex;
+    height: 34px;
+    font-size: 30px;
+    background-color: white;
+    border: 1px solid #cccccc;
+    border-left: none;
+    border-radius: 0 30% 30% 0;
+  }
+}
+
 .character-info-container {
   margin: 10px;
   border: 17px solid transparent;
@@ -31,10 +52,6 @@ body {
 
     // styles for after character creator!!!!!
 
-    // #name {
-    //   width: calc(100% - 141px);
-    //   font-size: 15px;
-    // }
     // #lvl-label {
     //   padding-inline: 5px;
     // }
