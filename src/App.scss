@@ -42,24 +42,34 @@ body {
   margin: 10px;
   border: 17px solid transparent;
   border-image: url("./assets/border.png") 116;
+  .character-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    .detail {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 5px;
 
-  .name-container {
+      // styles for after character creator!!!!!
+
+      .level {
+        width: 25px;
+        font-size: 20px;
+        border: 2px solid;
+        text-align: center;
+        height: 23px;
+      }
+    }
+  }
+  .health-container {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-
-    padding: 5px;
-
-    // styles for after character creator!!!!!
-
-    // #lvl-label {
-    //   padding-inline: 5px;
-    // }
-    // #level {
-    //   width: 35px;
-    //   font-size: 20px;
-    //   border: 2px solid;
-    // }
+    justify-content: center;
+    h4 {
+      font-size: 20px;
+      border: 1px solid;
+      padding: 5px;
+    }
   }
 }
 .character-creator {
@@ -159,9 +169,10 @@ body {
       }
     }
     .perk_ability_bonus_options,
-    .perk_proficiency_choices {
+    .proficiency_choices {
       button {
-        margin: 2px;
+        margin: 3px;
+        padding-inline: 3px;
         // width: 50px;
       }
     }

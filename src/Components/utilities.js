@@ -73,7 +73,11 @@ export const racePerkFilter = {
 
   ability_bonus_options: (value) => {
     const options = value.from.options.map((element) => {
-      return <button key={uuid()}>{element.ability_score.name}</button>
+      return (
+        <button key={`abilityBonus_${element.ability_score.name}`}>
+          {element.ability_score.name}
+        </button>
+      )
     })
 
     return (
@@ -145,20 +149,25 @@ export const classPerkFilter = {
     })
     return prof
   },
-  proficiency_choices: (value) => {
-    const options = value[0].from.options.map((element) => {
-      return (
-        <button key={uuid()}>{element.item.name.replace("Skill:", "")}</button>
-      )
-    })
+  // proficiency_choices: (value) => {
+  //   const options = value[0].from.options.map((element) => {
+  //     return (
+  //       <button
+  //         key={`profBonus_${element.item.name}`}
+  //         onClick={() => console.log(element.item.name)}
+  //       >
+  //         {element.item.name.replace("Skill:", "")}
+  //       </button>
+  //     )
+  //   })
 
-    return (
-      <>
-        <p>choose {value[0].choose}</p>
-        {options}
-      </>
-    )
-  },
+  //   return (
+  //     <>
+  //       <p>choose {value[0].choose}</p>
+  //       {options}
+  //     </>
+  //   )
+  // },
   saving_throws: (value) => {
     const throws = value
       .map((element) => {
