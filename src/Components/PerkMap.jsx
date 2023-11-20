@@ -3,9 +3,9 @@ import {handleformat} from "./utilities"
 
 import ProficiencyBonus from "./ProficiencyBonus"
 
-const PerkMap = ({filteredRaceDetails, perkFilter}) => {
+const PerkMap = ({filteredRaceDetails, perkFilter, setNewProfDetails}) => {
   const [skillCounter, setSkillCounter] = useState({})
-
+  // console.log(skillCounter)
   return filteredRaceDetails?.map(([key, value]) => {
     const customizeValue = perkFilter?.[key]?.(value, key)
     const valueToCheck = customizeValue === undefined ? value : customizeValue
@@ -34,6 +34,7 @@ const PerkMap = ({filteredRaceDetails, perkFilter}) => {
             maxChoices={value[0].choose}
             profName={element.item.name}
             key={`profBonus_${element.item.name}`}
+            setNewProfDetails={setNewProfDetails}
           />
         )
       })

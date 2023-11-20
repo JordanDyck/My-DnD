@@ -8,29 +8,44 @@ import PerkMap from "./PerkMap"
 import ClassLvlSelector from "./ClassLvlSelector"
 
 const Perks = ({category, subCategory, optionalURL, setStoredDetails}) => {
-  const [raceDetails, setRaceDetails] = useState([])
-  // console.log({raceDetails})
+  const [characterDetails, setCharacterDetails] = useState([])
+  const [newProfDetails, setNewProfDetails] = useState([])
+
+  const filteredCharacterDetails = useMemo(() => {
+    const {proficiency_choices, ...rest} = characterDetails
+    return rest
+  }, [characterDetails])
 
   useEffect(() => {
-    // stores the values from raceData to storedDetails in CharacterCreator component
+    // stores the values from characterDetails to storedDetails in CharacterCreator component to be put into localStorage
     if (category === "races") {
-      setStoredDetails((prev) => ({...prev, race: raceDetails}))
+      setStoredDetails((prev) => ({...prev, race: characterDetails}))
     }
 
     if (category === "classes") {
       if (!optionalURL) {
         setStoredDetails((prev) => ({
           ...prev,
-          classDetails: raceDetails,
+          classDetails: {
+            ...filteredCharacterDetails,
+            proficiency_choices: newProfDetails,
+          },
         }))
       } else {
         setStoredDetails((prev) => ({
           ...prev,
-          levels: raceDetails,
+          levels: characterDetails,
         }))
       }
     }
-  }, [category, optionalURL, raceDetails, setStoredDetails])
+  }, [
+    category,
+    optionalURL,
+    characterDetails,
+    newProfDetails,
+    setStoredDetails,
+    filteredCharacterDetails,
+  ])
 
   useEffect(() => {
     if (category && subCategory) {
@@ -41,20 +56,20 @@ const Perks = ({category, subCategory, optionalURL, setStoredDetails}) => {
         .then((res) => {
           const data = res.data
 
-          setRaceDetails(data)
+          setCharacterDetails(data)
         })
     }
   }, [category, subCategory, optionalURL])
 
   const filteredRaceDetails = useMemo(() => {
-    return Object.entries(!optionalURL && raceDetails).filter((value) => {
+    return Object.entries(!optionalURL && characterDetails).filter((value) => {
       if (!PerkFilterBlackList.base.includes(value[0])) {
         return true
       }
 
       return false
     })
-  }, [raceDetails, optionalURL])
+  }, [characterDetails, optionalURL])
 
   return (
     <div className="perk-wrapper">
@@ -63,11 +78,12 @@ const Perks = ({category, subCategory, optionalURL, setStoredDetails}) => {
           <PerkMap
             filteredRaceDetails={filteredRaceDetails}
             perkFilter={category === "races" ? racePerkFilter : classPerkFilter}
+            setNewProfDetails={setNewProfDetails}
           />
         )}
 
         {optionalURL && (
-          <ClassLvlSelector classDetails={optionalURL && raceDetails} />
+          <ClassLvlSelector classDetails={optionalURL && characterDetails} />
         )}
       </>
     </div>

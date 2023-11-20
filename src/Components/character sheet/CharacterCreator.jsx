@@ -19,7 +19,6 @@ const CharacterCreator = ({setShowCreator}) => {
     class: false,
     race: false,
   })
-  // const characterDetails = useSelector((store) => store.character)
 
   return (
     <div className="character-creator">
