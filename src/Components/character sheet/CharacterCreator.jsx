@@ -1,16 +1,20 @@
 import {useState} from "react"
 import {RiDeleteBinLine} from "react-icons/ri"
-import {setStorage} from "../utilities"
+import {useDispatch} from "react-redux"
+
 import CharacterOptionsPopUp from "../CharacterOptionsPopup"
 import Perks from "../Perks"
+import {setCurrentCharacter} from "../../Store/slices/characterSlice"
 
 const CharacterCreator = ({setShowCreator}) => {
+  const dispatch = useDispatch()
   const [racePopUp, setRacePopUp] = useState(false)
   const [classPopUp, setClassPopUp] = useState(false)
   const [storedDetails, setStoredDetails] = useState({
     characterName: "",
     classDetails: "",
     levels: "",
+    health: {currentHP: 50, maxHP: 100},
     race: "",
   })
   const [classNameOption, setClassNameOption] = useState("")
@@ -46,7 +50,12 @@ const CharacterCreator = ({setShowCreator}) => {
               className="delete-class-btn"
               onClick={() => {
                 setClassNameOption("")
-                setshowCharacterDetails({class: false})
+                setStoredDetails((prev) => ({
+                  ...prev,
+                  classDetails: "",
+                  levels: "",
+                }))
+                setshowCharacterDetails((prev) => ({...prev, class: false}))
               }}
             >
               <RiDeleteBinLine />
@@ -57,7 +66,7 @@ const CharacterCreator = ({setShowCreator}) => {
           id="class-btn"
           onClick={() => {
             setClassPopUp(true)
-            setshowCharacterDetails({class: true})
+            setshowCharacterDetails((prev) => ({...prev, class: true}))
           }}
           disabled={showCharacterDetails.race || classNameOption}
         >
@@ -81,7 +90,9 @@ const CharacterCreator = ({setShowCreator}) => {
             />
             <button
               className="save-race-btn"
-              onClick={() => setshowCharacterDetails({class: false})}
+              onClick={() =>
+                setshowCharacterDetails((prev) => ({...prev, class: false}))
+              }
             >
               save
             </button>
@@ -100,7 +111,8 @@ const CharacterCreator = ({setShowCreator}) => {
               className="delete-race-btn"
               onClick={() => {
                 setRaceName("")
-                setshowCharacterDetails({race: false})
+                setStoredDetails((prev) => ({...prev, race: ""}))
+                setshowCharacterDetails((prev) => ({...prev, race: false}))
               }}
             >
               <RiDeleteBinLine />
@@ -112,7 +124,7 @@ const CharacterCreator = ({setShowCreator}) => {
           className="race-btn"
           onClick={() => {
             setRacePopUp(true)
-            setshowCharacterDetails({race: true})
+            setshowCharacterDetails((prev) => ({...prev, race: true}))
           }}
           disabled={showCharacterDetails.class || raceName}
         >
@@ -128,7 +140,9 @@ const CharacterCreator = ({setShowCreator}) => {
             />
             <button
               className="save-race-btn"
-              onClick={() => setshowCharacterDetails({race: false})}
+              onClick={() =>
+                setshowCharacterDetails((prev) => ({...prev, race: false}))
+              }
             >
               save
             </button>
@@ -152,11 +166,13 @@ const CharacterCreator = ({setShowCreator}) => {
       {storedDetails.characterName &&
         storedDetails.classDetails &&
         storedDetails.levels &&
-        storedDetails.race && (
+        storedDetails.race &&
+        !showCharacterDetails.class &&
+        !showCharacterDetails.race && (
           <button
             className="save-character-btn"
             onClick={() => {
-              setStorage(`${storedDetails.characterName}`, storedDetails)
+              dispatch(setCurrentCharacter(storedDetails))
               setShowCreator(false)
             }}
           >

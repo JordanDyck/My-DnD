@@ -149,25 +149,7 @@ export const classPerkFilter = {
     })
     return prof
   },
-  // proficiency_choices: (value) => {
-  //   const options = value[0].from.options.map((element) => {
-  //     return (
-  //       <button
-  //         key={`profBonus_${element.item.name}`}
-  //         onClick={() => console.log(element.item.name)}
-  //       >
-  //         {element.item.name.replace("Skill:", "")}
-  //       </button>
-  //     )
-  //   })
 
-  //   return (
-  //     <>
-  //       <p>choose {value[0].choose}</p>
-  //       {options}
-  //     </>
-  //   )
-  // },
   saving_throws: (value) => {
     const throws = value
       .map((element) => {
@@ -275,18 +257,6 @@ export const damageTypes = [
   {value: "Psychic", label: "Psychic"},
 ]
 
-export const setStorage = (key, value) => {
-  try {
-    if (localStorage.getItem(key)) {
-      return ""
-    } else {
-      localStorage.setItem(key, JSON.stringify(value))
-    }
-  } catch (error) {
-    alert("Error in local storage.")
-  }
-}
-
 export const armorStyles = {
   control: (base, {isDisabled, isFocused}) => ({
     ...base,
@@ -363,4 +333,12 @@ export const weaponStyles = {
     textAlign: "center",
     width: "150px",
   }),
+}
+
+export const setStorage = (key, value) => {
+  try {
+    localStorage.setItem(key, JSON.stringify(value))
+  } catch (error) {
+    alert("Error in local storage.")
+  }
 }

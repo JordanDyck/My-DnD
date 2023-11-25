@@ -1,4 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit"
+import {setStorage} from "../../Components/utilities"
 
 export const characterSlice = createSlice({
   name: "character",
@@ -7,12 +8,14 @@ export const characterSlice = createSlice({
   },
   reducers: {
     setCurrentCharacter: (state, action) => {
-      state.push(action.payload)
+      state.value = [...state.value, action.payload]
+      setStorage(action.payload.characterName, action.payload)
     },
 
     // replace array with new array (used for deleting items)
     clearCharacterDetails: (state, action) => {
       state.value = action.payload
+      localStorage.removeItem(action.payload.characterName)
     },
   },
 })

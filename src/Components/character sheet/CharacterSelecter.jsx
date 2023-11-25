@@ -2,7 +2,6 @@ import Select from "react-select"
 import {AiOutlineUserAdd} from "react-icons/ai"
 
 const CharacterSelecter = ({setSelectedCharacter, setShowCreator}) => {
-  // console.log({selectedCharacter})
   const options = Object.keys(localStorage).map((option) => {
     return {value: option, label: option}
   })

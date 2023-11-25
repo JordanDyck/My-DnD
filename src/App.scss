@@ -42,33 +42,60 @@ body {
   margin: 10px;
   border: 17px solid transparent;
   border-image: url("./assets/border.png") 116;
+
   .character-details {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    label {
+      text-decoration: underline;
+    }
     .detail {
       display: flex;
       align-items: center;
       gap: 4px;
       padding: 5px;
-
-      // styles for after character creator!!!!!
-
+      font-size: 14px;
       .level {
-        width: 25px;
-        font-size: 20px;
-        border: 2px solid;
+        width: 24px;
+        font-size: 17px;
+        border: 1px solid;
         text-align: center;
-        height: 23px;
+        height: 20px;
       }
     }
   }
   .health-container {
     display: flex;
     justify-content: center;
-    h4 {
-      font-size: 20px;
-      border: 1px solid;
-      padding: 5px;
+    flex-direction: column;
+    align-items: center;
+    border-top: 1px solid;
+    border-radius: 20%;
+    margin-top: 9px;
+    padding-top: 9px;
+    header {
+      text-decoration: underline;
+    }
+    .health {
+      display: flex;
+      align-items: center;
+      h4 {
+        font-size: 20px;
+        border: 1px solid;
+        border-radius: 3px 15px 3px 15px;
+        padding: 5px;
+        margin-inline: 8px;
+        width: 98px;
+        text-align: center;
+      }
+      button {
+        font-size: 19px;
+        font-weight: bold;
+        margin-inline: 3px;
+        padding: 3px;
+        height: 31px;
+      }
     }
   }
 }
@@ -112,6 +139,9 @@ body {
       &:disabled {
         display: none;
       }
+    }
+    .save-race-btn {
+      margin-top: 15px;
     }
   }
 
