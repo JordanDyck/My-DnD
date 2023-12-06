@@ -1,15 +1,19 @@
 import {createSlice} from "@reduxjs/toolkit"
-import {setStorage} from "../../Components/utilities"
 
 export const characterSlice = createSlice({
   name: "character",
   initialState: {
-    value: [],
+    value: null,
   },
   reducers: {
+    // set current character from local storage.
     setCurrentCharacter: (state, action) => {
-      state.value = [...state.value, action.payload]
-      setStorage(action.payload.characterName, action.payload)
+      try {
+        const data = JSON.parse(localStorage.getItem(action.payload))
+        state.value = data
+      } catch (error) {
+        console.error("failed to set character", error)
+      }
     },
 
     // replace array with new array (used for deleting items)

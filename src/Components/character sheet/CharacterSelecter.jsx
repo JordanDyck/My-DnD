@@ -1,7 +1,10 @@
 import Select from "react-select"
 import {AiOutlineUserAdd} from "react-icons/ai"
+import {setCurrentCharacter} from "../../Store/slices/characterSlice"
+import {useDispatch} from "react-redux"
 
-const CharacterSelecter = ({setSelectedCharacter, setShowCreator}) => {
+const CharacterSelecter = ({setShowCreator}) => {
+  const dispatch = useDispatch()
   const options = Object.keys(localStorage).map((option) => {
     return {value: option, label: option}
   })
@@ -11,7 +14,9 @@ const CharacterSelecter = ({setSelectedCharacter, setShowCreator}) => {
       <Select
         className="selector"
         options={options}
-        onChange={(e) => setSelectedCharacter(e.value)}
+        onChange={(e) => {
+          dispatch(setCurrentCharacter(e.value))
+        }}
         placeholder="select Character"
         styles={{
           control: (base) => ({
@@ -23,7 +28,7 @@ const CharacterSelecter = ({setSelectedCharacter, setShowCreator}) => {
             textAlign: "center",
           }),
         }}
-      ></Select>
+      />
       <button
         className="create-character-btn"
         onClick={() => setShowCreator(true)}

@@ -1,46 +1,38 @@
 // import {useState} from "react"
-
+import {useSelector} from "react-redux"
 import Health from "./Health"
 
-const CharacterDetails = ({selectedCharacter}) => {
-  const getCharacter = () => {
-    try {
-      const character = JSON.parse(localStorage.getItem(selectedCharacter))
-      return character
-    } catch (error) {
-      alert("No character found")
-    }
+const CharacterDetails = () => {
+  const character = useSelector((store) => store.character.value)
+
+  if (!character) {
+    return null
   }
-  const currentCharacter = getCharacter()
   try {
     return (
       <div className="character-info-container">
-        <header className="tab-header">{currentCharacter.characterName}</header>
+        <header className="tab-header">{character.characterName}</header>
 
         <div className="character-details">
           <div className="detail">
             <label className="class-label">Class:</label>
-            <h4>{currentCharacter.classDetails.name}</h4>
+            <h4>{character.classDetails.name}</h4>
           </div>
-          <div className="detail">
-            <label className="race-label">Race:</label>
-            <h4>{currentCharacter.race.name}</h4>
-          </div>
-          <div className="detail">
-            <label className="hit-dice">Hit Dice:</label>
-            <h4>D{currentCharacter.classDetails.hit_die}</h4>
-          </div>
+
           <div className="detail">
             <label className="lvl-label">level:</label>
-            <h4 className="level">20</h4>
+            <input className="level" defaultValue={20}></input>
           </div>
         </div>
-        <Health currentCharacter={currentCharacter.characterName} />
+        <Health
+          key={character.characterName}
+          currentCharacter={character.characterName}
+        />
       </div>
     )
   } catch (error) {
     console.error("Character data was corrupt and removed.", error)
-    localStorage.removeItem(currentCharacter.characterName)
+    localStorage.removeItem(character.characterName)
   }
 }
 export default CharacterDetails

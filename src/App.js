@@ -1,5 +1,6 @@
 import "./App.scss"
 import {useState} from "react"
+import {useSelector} from "react-redux"
 
 import CharacterDetails from "./Components/character sheet/CharacterDetails"
 import BaseStats from "./Components/character sheet/BaseStats"
@@ -14,22 +15,15 @@ function App() {
   const [showGear, setShowGear] = useState(false)
   const [showItems, setShowItems] = useState(false)
   const [showCreator, setShowCreator] = useState(false)
-  const [selectedCharacter, setSelectedCharacter] = useState("")
+
+  const character = useSelector((store) => store.character)
 
   return (
     <div className="App">
-      {!showCreator && (
-        <CharacterSelecter
-          setSelectedCharacter={setSelectedCharacter}
-          setShowCreator={setShowCreator}
-        />
-      )}
+      {!showCreator && <CharacterSelecter setShowCreator={setShowCreator} />}
 
-      {!showCreator && selectedCharacter && (
-        <CharacterDetails
-          setShowCreator={setShowCreator}
-          selectedCharacter={selectedCharacter}
-        />
+      {!showCreator && character.value && (
+        <CharacterDetails setShowCreator={setShowCreator} />
       )}
       {showCreator && (
         <div className="character-info-container">

@@ -335,7 +335,7 @@ export const weaponStyles = {
   }),
 }
 
-export const setStorage = (key, value) => {
+export const setLocalStorage = (key, value) => {
   try {
     localStorage.setItem(key, JSON.stringify(value))
   } catch (error) {

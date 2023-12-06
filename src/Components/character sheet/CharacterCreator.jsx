@@ -1,13 +1,11 @@
 import {useState} from "react"
 import {RiDeleteBinLine} from "react-icons/ri"
-import {useDispatch} from "react-redux"
 
 import CharacterOptionsPopUp from "../CharacterOptionsPopup"
 import Perks from "../Perks"
-import {setCurrentCharacter} from "../../Store/slices/characterSlice"
+import {setLocalStorage} from "../utilities"
 
 const CharacterCreator = ({setShowCreator}) => {
-  const dispatch = useDispatch()
   const [racePopUp, setRacePopUp] = useState(false)
   const [classPopUp, setClassPopUp] = useState(false)
   const [storedDetails, setStoredDetails] = useState({
@@ -24,6 +22,16 @@ const CharacterCreator = ({setShowCreator}) => {
     race: false,
   })
 
+  const checkStoredNames = (nameToCheck) => {
+    if (
+      Object.keys(localStorage).filter(
+        (storedName) => storedName === nameToCheck
+      ).length
+    ) {
+      return false
+    } else return true
+  }
+
   return (
     <div className="character-creator">
       <header className="tab-header">Create Character</header>
@@ -32,12 +40,16 @@ const CharacterCreator = ({setShowCreator}) => {
         Name:
         <input
           className="name"
-          onBlur={(e) =>
-            setStoredDetails((prev) => ({
-              ...prev,
-              characterName: e.target.value,
-            }))
-          }
+          onBlur={(e) => {
+            if (checkStoredNames(e.target.value) === true) {
+              setStoredDetails((prev) => ({
+                ...prev,
+                characterName: e.target.value,
+              }))
+            } else {
+              e.target.value = ""
+            }
+          }}
         />
       </label>
 
@@ -172,7 +184,7 @@ const CharacterCreator = ({setShowCreator}) => {
           <button
             className="save-character-btn"
             onClick={() => {
-              dispatch(setCurrentCharacter(storedDetails))
+              setLocalStorage(storedDetails.characterName, storedDetails)
               setShowCreator(false)
             }}
           >

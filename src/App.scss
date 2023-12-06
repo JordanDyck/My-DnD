@@ -52,20 +52,24 @@ body {
     }
     .detail {
       display: flex;
-      align-items: center;
+
       gap: 4px;
       padding: 5px;
-      font-size: 14px;
+      font-size: 19px;
+
       .level {
-        width: 24px;
-        font-size: 17px;
+        width: 36px;
+        font-size: 20px;
+        font-weight: bold;
         border: 1px solid;
         text-align: center;
-        height: 20px;
+        height: 17px;
+        padding-top: 3px;
+        border-radius: 10px;
       }
     }
   }
-  .health-container {
+  .health-wrapper {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -77,24 +81,35 @@ body {
     header {
       text-decoration: underline;
     }
-    .health {
+    .health-container {
       display: flex;
       align-items: center;
-      h4 {
-        font-size: 20px;
-        border: 1px solid;
-        border-radius: 3px 15px 3px 15px;
-        padding: 5px;
-        margin-inline: 8px;
-        width: 98px;
-        text-align: center;
-      }
+      margin-left: 25px;
       button {
         font-size: 19px;
         font-weight: bold;
         margin-inline: 3px;
         padding: 3px;
         height: 31px;
+      }
+      .health {
+        display: flex;
+
+        align-items: center;
+        font-size: 20px;
+        border: 1px solid;
+        border-radius: 3px 15px 3px 15px;
+        padding: 5px;
+        margin-inline: 8px;
+
+        text-align: center;
+
+        input {
+          width: 44px;
+          border-bottom: none;
+          font-size: 20px;
+          font-weight: bold;
+        }
       }
     }
   }
