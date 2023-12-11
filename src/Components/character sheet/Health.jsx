@@ -1,38 +1,53 @@
-import {useEffect, useState} from "react"
+import {useEffect} from "react"
 import useCounter from "../../hooks/useCounter"
 import {useDispatch, useSelector} from "react-redux"
-import {setCurrentCharacter} from "../../Store/slices/characterSlice"
+import {updateCharacter} from "../../Store/slices/characterSlice"
 const Health = ({currentCharacter}) => {
-  const counter = useCounter(50, 100)
+  const character = useSelector((store) => store.character.value)
   const dispatch = useDispatch()
-  const [charStorage, setCharStorage] = useState(null)
-  const characterStore = useSelector((store) => store.character.value)
+  const counter = useCounter(
+    character?.health.currentHP,
+    character?.health.maxHP
+  )
 
   // sets health from characterName from local storage
   useEffect(() => {
     try {
-      const storage = JSON.parse(localStorage.getItem(currentCharacter))
-      counter.setCurrent(storage.health.currentHP)
-      counter.setMax(storage.health.maxHP)
-      setCharStorage(storage)
+      counter.setCurrent(character.health.currentHP)
+      counter.setMax(character.health.maxHP)
     } catch (error) {
       console.error("failed to get localstorage data for health", error)
     }
+    // eslint-disable-next-line
   }, [currentCharacter])
 
-  // updates health
-  useEffect(() => {
-    if (currentCharacter?.length && charStorage) {
-      const updatedStorage = {
-        ...charStorage,
-        health: {currentHP: counter.value, maxHP: counter.max},
+  const updatedHealth = () => {
+    if (currentCharacter?.length) {
+      if (counter.value !== character?.Health?.currentHP) {
+        const updatedStorage = {
+          ...character,
+          health: {
+            currentHP: parseInt(counter.value, 10),
+            maxHP: parseInt(counter.max, 10),
+          },
+        }
+
+        dispatch(updateCharacter(updatedStorage))
       }
-      setCurrentCharacter(updatedStorage)
-      console.log(updatedStorage)
-      console.log(counter)
-      localStorage.setItem(currentCharacter, JSON.stringify(updatedStorage))
     }
-  }, [counter, charStorage, currentCharacter, dispatch])
+  }
+
+  useEffect(() => {
+    if (currentCharacter?.length) {
+      if (
+        counter.value !== character?.Health?.currentHP ||
+        counter.max !== character?.Health?.maxHP
+      ) {
+        updatedHealth()
+      }
+    }
+    // eslint-disable-next-line
+  }, [counter.value, counter.max])
 
   return (
     <div className="health-wrapper">
@@ -46,7 +61,7 @@ const Health = ({currentCharacter}) => {
           <input
             type="number"
             value={counter.max}
-            onChange={(e) => counter.setMax(e.target.value)}
+            onChange={(e) => counter.setMax(parseInt(e.target.value, 10))}
           />
         </div>
         <button onClick={() => counter.increment()}>{`>`}</button>
