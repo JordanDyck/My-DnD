@@ -11,15 +11,18 @@ const Perks = ({category, subCategory, optionalURL, setStoredDetails}) => {
   const [characterDetails, setCharacterDetails] = useState([])
   const [newProfDetails, setNewProfDetails] = useState([])
 
-  const filteredCharacterDetails = useMemo(() => {
-    const {proficiency_choices, ...rest} = characterDetails
-    return rest
-  }, [characterDetails])
-
   useEffect(() => {
     // stores the values from characterDetails to storedDetails in CharacterCreator component to be put into localStorage
     if (category === "races") {
-      setStoredDetails((prev) => ({...prev, race: characterDetails}))
+      setStoredDetails((prev) => ({
+        ...prev,
+        race: {
+          ...characterDetails,
+          ability_bonus_options: newProfDetails.ability_bonus_options,
+          starting_proficiency_options:
+            newProfDetails.starting_proficiency_options,
+        },
+      }))
     }
 
     if (category === "classes") {
@@ -27,8 +30,8 @@ const Perks = ({category, subCategory, optionalURL, setStoredDetails}) => {
         setStoredDetails((prev) => ({
           ...prev,
           classDetails: {
-            ...filteredCharacterDetails,
-            proficiency_choices: newProfDetails,
+            ...characterDetails,
+            proficiency_choices: newProfDetails.proficiency_choices,
           },
         }))
       } else {
@@ -44,7 +47,7 @@ const Perks = ({category, subCategory, optionalURL, setStoredDetails}) => {
     characterDetails,
     newProfDetails,
     setStoredDetails,
-    filteredCharacterDetails,
+    // filteredCharacterDetails,
   ])
 
   useEffect(() => {

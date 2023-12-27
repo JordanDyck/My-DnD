@@ -71,23 +71,6 @@ export const racePerkFilter = {
     return `${abilitybonus} + ${value[0].bonus}`
   },
 
-  ability_bonus_options: (value) => {
-    const options = value.from.options.map((element) => {
-      return (
-        <button key={`abilityBonus_${element.ability_score.name}`}>
-          {element.ability_score.name}
-        </button>
-      )
-    })
-
-    return (
-      <>
-        <p>choose {value.choose}</p>
-        {options}
-      </>
-    )
-  },
-
   languages: (value) => {
     const langFilter = value
       .map((element) => {
@@ -111,21 +94,7 @@ export const racePerkFilter = {
     })
     return prof.length ? prof : "none"
   },
-  starting_proficiency_options: (value) => {
-    const options = value.from.options.map((element) => {
-      return (
-        <button
-          onClick={(e) => console.log(e.target.value)}
-          key={uuid()}
-          value={element.item.name}
-        >
-          {element.item.name.replace("Skill:", "")}
-        </button>
-      )
-    })
 
-    return options
-  },
   traits: (value) => {
     const trait = value
       .map((element) => {
