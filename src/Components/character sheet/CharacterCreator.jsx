@@ -6,21 +6,23 @@ import Perks from "../Perks"
 import {setLocalStorage} from "../utilities"
 
 const CharacterCreator = ({setShowCreator}) => {
-  const [racePopUp, setRacePopUp] = useState(false)
-  const [classPopUp, setClassPopUp] = useState(false)
   const [storedDetails, setStoredDetails] = useState({
     characterName: "",
     classDetails: "",
     levels: "",
-    health: {currentHP: 50, maxHP: 100},
+    health: {currentHP: 100, maxHP: 100},
     race: "",
   })
+  const [racePopUp, setRacePopUp] = useState(false)
+  const [classPopUp, setClassPopUp] = useState(false)
   const [classNameOption, setClassNameOption] = useState("")
   const [raceName, setRaceName] = useState("")
   const [showCharacterDetails, setshowCharacterDetails] = useState({
     class: false,
     race: false,
   })
+  const [characterDetails, setCharacterDetails] = useState([])
+  const [newProfDetails, setNewProfDetails] = useState([])
 
   const checkStoredNames = (nameToCheck) => {
     if (
@@ -88,22 +90,23 @@ const CharacterCreator = ({setShowCreator}) => {
           <>
             {/* for choosing your class */}
             <Perks
+              characterDetails={characterDetails}
+              setCharacterDetails={setCharacterDetails}
+              newProfDetails={newProfDetails}
+              setNewProfDetails={setNewProfDetails}
               category={"classes"}
               subCategory={classNameOption.toLowerCase()}
               optionalURL={""}
               setStoredDetails={setStoredDetails}
             />
-            {/* displays the level info */}
-            <Perks
-              category={"classes"}
-              subCategory={classNameOption.toLowerCase()}
-              optionalURL={"/levels"}
-              setStoredDetails={setStoredDetails}
-            />
+
             <button
               className="save-race-btn"
               onClick={() =>
                 setshowCharacterDetails((prev) => ({...prev, class: false}))
+              }
+              disabled={
+                newProfDetails.proficiency_choices?.maxChoicesReached === false
               }
             >
               save
@@ -142,9 +145,14 @@ const CharacterCreator = ({setShowCreator}) => {
         >
           select race
         </button>
+        {/* for choosing your Race */}
         {raceName && showCharacterDetails.race && (
           <>
             <Perks
+              characterDetails={characterDetails}
+              setCharacterDetails={setCharacterDetails}
+              newProfDetails={newProfDetails}
+              setNewProfDetails={setNewProfDetails}
               category={"races"}
               subCategory={raceName.toLowerCase()}
               optionalURL={""}
@@ -154,6 +162,12 @@ const CharacterCreator = ({setShowCreator}) => {
               className="save-race-btn"
               onClick={() =>
                 setshowCharacterDetails((prev) => ({...prev, race: false}))
+              }
+              disabled={
+                newProfDetails.ability_bonus_options?.maxChoicesReached ===
+                  false ||
+                newProfDetails.starting_proficiency_options
+                  ?.maxChoicesReached === false
               }
             >
               save
@@ -175,6 +189,7 @@ const CharacterCreator = ({setShowCreator}) => {
           type={{name: "races"}}
         />
       )}
+      {/* if all requirements are reached, display save character btn */}
       {storedDetails.characterName &&
         storedDetails.classDetails &&
         storedDetails.levels &&

@@ -1,5 +1,5 @@
 import axios from "axios"
-import {useEffect, useMemo, useState} from "react"
+import {useEffect, useMemo} from "react"
 
 import {classPerkFilter, racePerkFilter} from "./utilities"
 
@@ -7,10 +7,15 @@ import PerkFilterBlackList from "./PerkFilterBlackList.json"
 import PerkMap from "./PerkMap"
 import ClassLvlSelector from "./ClassLvlSelector"
 
-const Perks = ({category, subCategory, optionalURL, setStoredDetails}) => {
-  const [characterDetails, setCharacterDetails] = useState([])
-  const [newProfDetails, setNewProfDetails] = useState([])
-
+const Perks = ({
+  category,
+  subCategory,
+  setStoredDetails,
+  characterDetails,
+  setCharacterDetails,
+  newProfDetails,
+  setNewProfDetails,
+}) => {
   useEffect(() => {
     // stores the values from characterDetails to storedDetails in CharacterCreator component to be put into localStorage
     if (category === "races") {
@@ -18,75 +23,68 @@ const Perks = ({category, subCategory, optionalURL, setStoredDetails}) => {
         ...prev,
         race: {
           ...characterDetails,
-          ability_bonus_options: newProfDetails.ability_bonus_options,
-          starting_proficiency_options:
-            newProfDetails.starting_proficiency_options,
+          ability_bonus_options: {
+            ...newProfDetails.ability_bonus_options,
+            maxProfs: characterDetails?.ability_bonus_options?.choose,
+          },
+          starting_proficiency_options: {
+            ...newProfDetails.starting_proficiency_options,
+            maxProfs: characterDetails?.starting_proficiency_options?.choose,
+          },
         },
       }))
     }
 
     if (category === "classes") {
-      if (!optionalURL) {
-        setStoredDetails((prev) => ({
-          ...prev,
-          classDetails: {
-            ...characterDetails,
-            proficiency_choices: newProfDetails.proficiency_choices,
-          },
-        }))
-      } else {
-        setStoredDetails((prev) => ({
-          ...prev,
-          levels: characterDetails,
-        }))
-      }
+      setStoredDetails((prev) => ({
+        ...prev,
+        classDetails: {
+          ...characterDetails,
+          proficiency_choices: newProfDetails.proficiency_choices,
+        },
+      }))
     }
-  }, [
-    category,
-    optionalURL,
-    characterDetails,
-    newProfDetails,
-    setStoredDetails,
-    // filteredCharacterDetails,
-  ])
+  }, [category, characterDetails, newProfDetails, setStoredDetails])
 
   useEffect(() => {
     if (category && subCategory) {
       axios
-        .get(
-          `https://www.dnd5eapi.co/api/${category}/${subCategory}${optionalURL}`
-        )
+        .get(`https://www.dnd5eapi.co/api/${category}/${subCategory}`)
         .then((res) => {
           const data = res.data
 
           setCharacterDetails(data)
         })
     }
-  }, [category, subCategory, optionalURL])
+  }, [category, subCategory, setCharacterDetails])
 
   const filteredRaceDetails = useMemo(() => {
-    return Object.entries(!optionalURL && characterDetails).filter((value) => {
+    return Object.entries(characterDetails).filter((value) => {
       if (!PerkFilterBlackList.base.includes(value[0])) {
         return true
       }
 
       return false
     })
-  }, [characterDetails, optionalURL])
+  }, [characterDetails])
 
   return (
     <div className="perk-wrapper">
       <>
-        {!optionalURL && (
+        {
           <PerkMap
             filteredRaceDetails={filteredRaceDetails}
             perkFilter={category === "races" ? racePerkFilter : classPerkFilter}
             setNewProfDetails={setNewProfDetails}
+            newProfDetails={newProfDetails}
           />
-        )}
+        }
 
-        {optionalURL && (
-          <ClassLvlSelector classDetails={optionalURL && characterDetails} />
+        {category === "classes" && (
+          <ClassLvlSelector
+            levelsURL={characterDetails.class_levels}
+            setStoredDetails={setStoredDetails}
+          />
         )}
       </>
     </div>

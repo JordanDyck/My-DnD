@@ -203,22 +203,19 @@ body {
       border-top: 1px solid #808080d9;
     }
     .perk_starting_proficiency_options {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-
       button {
+        margin: 4px;
         padding: 4px;
         font-size: 14px;
         font-weight: 600;
       }
     }
     .perk_ability_bonus_options,
-    .proficiency_choices {
+    .perk_proficiency_choices {
       button {
         margin: 3px;
         padding-inline: 3px;
-        // width: 50px;
+        font-weight: 600;
       }
     }
     .perk_starting_equipment_options {

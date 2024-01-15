@@ -109,6 +109,7 @@ export const classPerkFilter = {
   hit_die: (value) => {
     return "D" + value
   },
+
   proficiencies: (value) => {
     const prof = value.map((element) => {
       if (element.name.includes("Saving Throw:")) {

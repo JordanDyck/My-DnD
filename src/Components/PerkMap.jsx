@@ -3,7 +3,12 @@ import {handleformat} from "./utilities"
 
 import ProficiencyBonus from "./ProficiencyBonus"
 
-const PerkMap = ({filteredRaceDetails, perkFilter, setNewProfDetails}) => {
+const PerkMap = ({
+  filteredRaceDetails,
+  perkFilter,
+  newProfDetails,
+  setNewProfDetails,
+}) => {
   const [skillCounter, setSkillCounter] = useState({})
 
   return filteredRaceDetails?.map(([key, value]) => {
@@ -37,12 +42,13 @@ const PerkMap = ({filteredRaceDetails, perkFilter, setNewProfDetails}) => {
             maxChoices={value[0].choose}
             profName={element.item.name}
             setNewProfDetails={setNewProfDetails}
+            newProfDetails={newProfDetails}
           />
         )
       })
 
       return (
-        <div className={`perk ${key}`} key={`profBonus_${key}`}>
+        <div className={`perk perk_${key}`} key={`profBonus_${key}`}>
           <h4>proficiency choices:</h4>
           <p>choose {value[0].choose}</p>
           {options}
@@ -61,12 +67,13 @@ const PerkMap = ({filteredRaceDetails, perkFilter, setNewProfDetails}) => {
             maxChoices={value.choose}
             profName={element.ability_score.name}
             setNewProfDetails={setNewProfDetails}
+            newProfDetails={newProfDetails}
           />
         )
       })
 
       return (
-        <div className={`perk ${key}`} key={`profBonus_${key}`}>
+        <div className={`perk perk_${key}`} key={`profBonus_${key}`}>
           <h4>ability bonus options:</h4>
           <p>choose {value.choose}</p>
           {options}
@@ -84,12 +91,13 @@ const PerkMap = ({filteredRaceDetails, perkFilter, setNewProfDetails}) => {
             maxChoices={value.choose}
             profName={element.item.name}
             setNewProfDetails={setNewProfDetails}
+            newProfDetails={newProfDetails}
           />
         )
       })
 
       return (
-        <div className={`perk ${key}`} key={`profBonus_${key}`}>
+        <div className={`perk perk_${key}`} key={`profBonus_${key}`}>
           <h4>starting proficiency options:</h4>
           <p>choose {value.choose}</p>
           {options}

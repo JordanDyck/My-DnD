@@ -1,4 +1,5 @@
-import {useEffect} from "react"
+import {useCallback, useEffect} from "react"
+
 import useCounter from "../hooks/useCounter"
 const ProficiencyBonus = ({
   profName,
@@ -7,10 +8,11 @@ const ProficiencyBonus = ({
   setSkillCounter,
   maxChoices,
   setNewProfDetails,
+  newProfDetails,
 }) => {
   const count = useCounter(0, maxChoices)
-
   // updates skillCounter with profNames and new values
+
   useEffect(() => {
     setSkillCounter((prev) => ({
       ...prev,
@@ -22,37 +24,30 @@ const ProficiencyBonus = ({
   }, [count.value, profName, setSkillCounter, category])
 
   // adds up the count of all buttons to show total
-  const totalCount = () => {
+  const totalCount = useCallback(() => {
     if (skillCounter[category]) {
       return Object.values(skillCounter[category]).reduce(
         (total, current) => total + current,
         0
       )
     } else return 0
-  }
+  }, [skillCounter, category])
   // takes all skills and if their count is > 0, puts them in newProfDetails to be stored in local storage.
   useEffect(() => {
-    if (skillCounter[category]) {
+    if (skillCounter?.[category]) {
       Object.entries(skillCounter[category]).forEach((skill) => {
-        if (skill[1] > 0) {
-          setNewProfDetails((prev) => ({
-            ...prev,
-            [category]: {
-              ...prev[category],
-              [skill[0]]: skill[1],
-            },
-          }))
-        } else {
-          // if skill is 0, remove it and return the rest
-          setNewProfDetails((prev) => {
-            const valueCopy = {...prev}
-            delete valueCopy[skill[0]]
-            return valueCopy
-          })
-        }
+        const isMax = totalCount() >= maxChoices ? true : false
+        setNewProfDetails((prev) => ({
+          ...prev,
+          [category]: {
+            ...prev?.[category],
+            [skill[0]]: skill[1],
+            maxChoicesReached: isMax,
+          },
+        }))
       })
     }
-  }, [skillCounter, category, setNewProfDetails])
+  }, [skillCounter, category, setNewProfDetails, maxChoices, totalCount])
 
   return (
     <button

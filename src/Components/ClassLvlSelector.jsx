@@ -1,18 +1,32 @@
-import {useState} from "react"
+import {useState, useEffect} from "react"
 import Select from "react-select"
+import axios from "axios"
 
 import ClassLvlDetails from "./ClassLvlDetails"
-const ClassLvlSelector = ({classDetails}) => {
+const ClassLvlSelector = ({levelsURL, setStoredDetails}) => {
   const [currentLvl, setCurrentLvl] = useState()
+  const [allLevels, setAllLevels] = useState()
 
-  const classLvlOptions = classDetails?.map(({level}) => ({
+  useEffect(() => {
+    if (levelsURL) {
+      axios.get(`https://www.dnd5eapi.co${levelsURL}`).then((res) => {
+        const data = res.data
+        setAllLevels(data)
+        setStoredDetails((prev) => ({
+          ...prev,
+          levels: data,
+        }))
+      })
+    }
+  }, [levelsURL, setStoredDetails])
+  const classLvlOptions = allLevels?.map(({level}) => ({
     value: level,
     label: "level " + level,
   }))
 
   return (
     <div className="class-lvl-details">
-      {classDetails && (
+      {levelsURL && (
         <Select
           options={classLvlOptions}
           onChange={(choice) => {
@@ -21,7 +35,7 @@ const ClassLvlSelector = ({classDetails}) => {
           placeholder="level preview"
         />
       )}
-      {currentLvl && <ClassLvlDetails perk={classDetails[currentLvl - 1]} />}
+      {currentLvl && <ClassLvlDetails perk={allLevels[currentLvl - 1]} />}
     </div>
   )
 }
