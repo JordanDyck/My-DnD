@@ -1,20 +1,34 @@
 import axios from "axios"
 import {useEffect, useState} from "react"
 
-const CharacterOptionsPopUp = ({setPopUp, setOptionName, type}) => {
-  const [options, setoptions] = useState([])
-
+const CharacterOptionsPopUp = ({
+  setPopUp,
+  setOptionName,
+  type,
+  setIsCustom,
+}) => {
+  const [options, setOptions] = useState([])
   useEffect(() => {
     axios.get(`https://www.dnd5eapi.co/api/${type.name}/`).then((res) => {
       const data = res.data.results
 
-      setoptions(data)
+      setOptions(data)
     })
   }, [type])
 
   return (
     <div className="popup-container">
-      <input id="type-input" type="text" placeholder="Make your own" />
+      <button
+        id="custom-char-btn"
+        onClick={() => {
+          setTimeout(() => {
+            setPopUp((prev) => ({...prev, [type.name]: false}))
+            setIsCustom((prev) => ({...prev, custom: true}))
+          }, 300)
+        }}
+      >
+        Make Your Own
+      </button>
       {options.length ? (
         options.map((option, index) => (
           <button
@@ -24,7 +38,7 @@ const CharacterOptionsPopUp = ({setPopUp, setOptionName, type}) => {
               setTimeout(() => {
                 setOptionName(option.name)
 
-                setPopUp(false)
+                setPopUp((prev) => ({...prev, [type.name]: false}))
               }, 300)
             }}
           >

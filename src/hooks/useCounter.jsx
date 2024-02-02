@@ -13,8 +13,8 @@ const useCounter = (initialValue, initialMax) => {
   const reset = () => setValue(initialValue)
 
   return {
-    value: parseInt(value, 10),
-    max: parseInt(maxValue, 10),
+    value,
+    maxValue,
     setCurrent,
     setMax,
     increment,

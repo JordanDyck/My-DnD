@@ -119,9 +119,13 @@ body {
   flex-direction: column;
 
   margin-top: 10px;
-  .name {
-    width: calc(100% - 83px);
-    font-size: 15px;
+  .name-label {
+    height: 40px;
+    border-bottom: 2px solid #cccccc;
+    .name {
+      width: calc(100% - 83px);
+      font-size: 15px;
+    }
   }
 
   .class-container {
@@ -139,6 +143,7 @@ body {
         text-decoration: underline;
         flex-grow: 1;
       }
+
       .delete-class-btn {
         font-size: 23px;
         height: 25px;
@@ -147,7 +152,78 @@ body {
         margin-right: 10px;
       }
     }
-    #class-btn {
+    .sub-class {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: center;
+      width: 100%;
+
+      // display: flex;
+      .sub-class-feature {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        border-top: 1px solid #ababab;
+        border: 2px solid;
+        box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.6);
+        background-color: #e3e3e3;
+        padding-block: 15px;
+        margin-block: 15px;
+        width: 95%;
+        .ability-improv-toggle {
+          display: flex;
+          justify-content: flex-end;
+
+          background-color: #dbdbdb;
+          border: 2px solid;
+          border-radius: 20px;
+          width: 205px;
+          margin-bottom: 25px;
+          margin-right: 5px;
+          span {
+            font-weight: 600;
+            padding-right: 5px;
+          }
+          .toggle-switch {
+            height: 21px;
+          }
+        }
+        form {
+          width: 100%;
+          .feature-name {
+            width: 85%;
+            font-weight: 600;
+            font-size: 15px;
+          }
+
+          .feature-level {
+            width: 31px;
+            height: 25px;
+            font-size: 26px;
+            font-family: $parFont;
+            border-right: 2px solid #ababab;
+            border-bottom: 2px solid #ababab;
+
+            vertical-align: sub;
+          }
+          textarea {
+            width: 91%;
+            height: 110px;
+            font-size: 17px;
+            font-family: $parFont;
+            margin-top: 10px;
+            margin-inline: 5px;
+            max-width: 92%;
+            min-width: 180px;
+            min-height: 30px;
+            background-color: #f9f9f9;
+            padding-inline: 5px;
+          }
+        }
+      }
+    }
+    .class-btn {
       font-size: 15px;
       width: 135px;
       margin: 15px auto 0;
@@ -282,7 +358,7 @@ body {
     }
   }
 
-  #type-input {
+  #custom-char-btn {
     font-size: 20px;
     padding: 5px;
     margin: 5px;

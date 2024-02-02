@@ -4,6 +4,8 @@ import {RiDeleteBinLine} from "react-icons/ri"
 import CharacterOptionsPopUp from "../CharacterOptionsPopup"
 import Perks from "../Perks"
 import {setLocalStorage} from "../utilities"
+// import CreateCustomCharacter from "../Custom Character/CreateCustomCharacter"
+import SubClassBuilder from "../Sub Class/SubClassBuilder"
 
 const CharacterCreator = ({setShowCreator}) => {
   const [storedDetails, setStoredDetails] = useState({
@@ -13,25 +15,30 @@ const CharacterCreator = ({setShowCreator}) => {
     health: {currentHP: 100, maxHP: 100},
     race: "",
   })
-  const [racePopUp, setRacePopUp] = useState(false)
-  const [classPopUp, setClassPopUp] = useState(false)
+  const [showCharacterPopUps, setShowCharacterPopUps] = useState({
+    classes: false,
+    races: false,
+  })
   const [classNameOption, setClassNameOption] = useState("")
   const [raceName, setRaceName] = useState("")
   const [showCharacterDetails, setshowCharacterDetails] = useState({
     class: false,
+    subClass: false,
     race: false,
+    custom: false,
   })
   const [characterDetails, setCharacterDetails] = useState([])
   const [newProfDetails, setNewProfDetails] = useState([])
 
+  // check if character name is already in use
   const checkStoredNames = (nameToCheck) => {
     if (
       Object.keys(localStorage).filter(
         (storedName) => storedName === nameToCheck
       ).length
     ) {
-      return false
-    } else return true
+      return true
+    } else return false
   }
 
   return (
@@ -43,7 +50,7 @@ const CharacterCreator = ({setShowCreator}) => {
         <input
           className="name"
           onBlur={(e) => {
-            if (checkStoredNames(e.target.value) === true) {
+            if (checkStoredNames(e.target.value) === false) {
               setStoredDetails((prev) => ({
                 ...prev,
                 characterName: e.target.value,
@@ -77,12 +84,16 @@ const CharacterCreator = ({setShowCreator}) => {
           </div>
         )}
         <button
-          id="class-btn"
+          className="class-btn"
           onClick={() => {
-            setClassPopUp(true)
+            setShowCharacterPopUps((prev) => ({...prev, classes: true}))
             setshowCharacterDetails((prev) => ({...prev, class: true}))
           }}
-          disabled={showCharacterDetails.race || classNameOption}
+          disabled={
+            showCharacterDetails.race ||
+            showCharacterDetails.custom ||
+            classNameOption
+          }
         >
           select class
         </button>
@@ -113,6 +124,22 @@ const CharacterCreator = ({setShowCreator}) => {
             </button>
           </>
         )}
+        {storedDetails.classDetails && showCharacterDetails.class === false && (
+          <button
+            className="class-btn"
+            onClick={() =>
+              setshowCharacterDetails((prev) => ({...prev, subClass: true}))
+            }
+            disabled={showCharacterDetails.subClass}
+          >
+            SubClass
+          </button>
+        )}
+        {/* {showCharacterDetails.subClass && ( */}
+        <>
+          <SubClassBuilder />
+        </>
+        {/* )} */}
       </div>
 
       <div className="race-container">
@@ -138,10 +165,14 @@ const CharacterCreator = ({setShowCreator}) => {
         <button
           className="race-btn"
           onClick={() => {
-            setRacePopUp(true)
+            setShowCharacterPopUps((prev) => ({...prev, races: true}))
             setshowCharacterDetails((prev) => ({...prev, race: true}))
           }}
-          disabled={showCharacterDetails.class || raceName}
+          disabled={
+            showCharacterDetails.class ||
+            showCharacterDetails.subClass ||
+            raceName
+          }
         >
           select race
         </button>
@@ -175,18 +206,20 @@ const CharacterCreator = ({setShowCreator}) => {
           </>
         )}
       </div>
-      {classPopUp && (
+      {showCharacterPopUps.classes && !showCharacterPopUps.custom && (
         <CharacterOptionsPopUp
-          setPopUp={setClassPopUp}
+          setPopUp={setShowCharacterPopUps}
           setOptionName={setClassNameOption}
           type={{name: "classes"}}
+          setIsCustom={setshowCharacterDetails}
         />
       )}
-      {racePopUp && (
+      {showCharacterPopUps.races && (
         <CharacterOptionsPopUp
-          setPopUp={setRacePopUp}
+          setPopUp={setShowCharacterPopUps}
           setOptionName={setRaceName}
           type={{name: "races"}}
+          setIsCustom={setshowCharacterDetails}
         />
       )}
       {/* if all requirements are reached, display save character btn */}

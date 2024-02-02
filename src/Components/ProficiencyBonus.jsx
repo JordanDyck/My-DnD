@@ -8,11 +8,10 @@ const ProficiencyBonus = ({
   setSkillCounter,
   maxChoices,
   setNewProfDetails,
-  newProfDetails,
 }) => {
   const count = useCounter(0, maxChoices)
-  // updates skillCounter with profNames and new values
 
+  // updates skillCounter with profNames and new values
   useEffect(() => {
     setSkillCounter((prev) => ({
       ...prev,
