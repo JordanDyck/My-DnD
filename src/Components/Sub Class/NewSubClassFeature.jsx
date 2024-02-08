@@ -20,7 +20,6 @@ const NewSubClassFeature = ({
         ...prev,
         [`feature_${featureKey + 1}`]: data,
       }))
-    } else if (abilityImpovToggle) {
     }
   }
   return (
@@ -28,12 +27,14 @@ const NewSubClassFeature = ({
       <div className="ability-improv-toggle">
         <label>
           <span>Ability score+:</span>
+          {/* the toggle btn */}
           <Switch
             className="toggle-switch"
             onChange={() => {
               setAbilityImpovToggle((prev) => !prev)
               if (!abilityImpovToggle) {
-                // the toggle is acually set to true. don't question it.
+                // the toggle is acually set to true. Don't question it.
+                setFeatureName("Ability score improvement")
                 setSavedFormData((prev) => ({
                   ...prev,
                   [`feature_${featureKey + 1}`]: {
@@ -44,6 +45,7 @@ const NewSubClassFeature = ({
                 }))
               } else {
                 setFeatureName("")
+                inputRef.current.focus()
               }
             }}
             checked={abilityImpovToggle}

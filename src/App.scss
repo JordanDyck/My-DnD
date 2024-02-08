@@ -190,7 +190,11 @@ body {
           }
         }
         form {
-          width: 100%;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: center;
+          margin: auto;
           .feature-name {
             width: 85%;
             font-weight: 600;

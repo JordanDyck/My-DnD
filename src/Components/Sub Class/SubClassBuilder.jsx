@@ -1,32 +1,54 @@
-import {useRef, useState} from "react"
+import {useEffect, useRef, useState} from "react"
 
 import NewSubClassFeature from "./NewSubClassFeature"
 
 const SubClassBuilder = () => {
   const [newfeature, setNewFeature] = useState([])
-  const [savedFormData, setSavedFormData] = useState([])
+  const [savedFormData, setSavedFormData] = useState({})
   const inputRef = useRef()
-  console.log(savedFormData)
 
+  const currentFeature = Object.keys(savedFormData)[newfeature?.length - 1]
   // creates a NewSubClassFeature component on btn click
+
   const addFeature = () => {
-    setNewFeature(
-      newfeature.concat(
+    setNewFeature((prev) => {
+      return [
+        ...prev,
         <NewSubClassFeature
-          key={newfeature.length}
+          key={prev.length}
           inputRef={inputRef}
-          featureKey={newfeature.length}
+          featureKey={prev.length}
           setSavedFormData={setSavedFormData}
           savedFormData={savedFormData}
-        />
-      )
-    )
-    inputRef.current?.focus()
+        />,
+      ]
+    })
   }
+  console.log(savedFormData)
+  useEffect(() => {
+    // focus on feature name when a new feature is created.
+    inputRef.current?.focus()
+  }, [newfeature])
   return (
     <div className="sub-class">
       {newfeature}
-      <button onClick={addFeature}>add new feature</button>
+
+      <button
+        onClick={() => {
+          addFeature()
+          setSavedFormData((prev) => ({
+            ...prev,
+            [`feature_${newfeature.length + 1}`]: {
+              feature: "",
+              featureName: "",
+              level: "",
+            },
+          }))
+        }}
+        disabled={savedFormData[currentFeature]?.featureName.length <= 0}
+      >
+        add new feature
+      </button>
     </div>
   )
 }
