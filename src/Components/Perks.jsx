@@ -36,10 +36,11 @@ const Perks = ({
     }
 
     if (category === "classes") {
+      const {subclasses, index, ...detailsCopy} = characterDetails
       setStoredDetails((prev) => ({
         ...prev,
         classDetails: {
-          ...characterDetails,
+          ...detailsCopy,
           proficiency_choices: newProfDetails.proficiency_choices,
         },
       }))

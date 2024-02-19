@@ -9,7 +9,7 @@ const Health = ({currentCharacter}) => {
     character?.health.currentHP,
     character?.health.maxHP
   )
-
+  console.log()
   // sets health from characterName from local storage
   useEffect(() => {
     try {
@@ -28,7 +28,7 @@ const Health = ({currentCharacter}) => {
           ...character,
           health: {
             currentHP: parseInt(counter.value, 10),
-            maxHP: parseInt(counter.max, 10),
+            maxHP: parseInt(counter.maxValue, 10),
           },
         }
 
@@ -37,6 +37,7 @@ const Health = ({currentCharacter}) => {
     }
   }
 
+  // if health !== local storage health, update local storage with new health
   useEffect(() => {
     if (currentCharacter?.length) {
       if (
@@ -47,7 +48,7 @@ const Health = ({currentCharacter}) => {
       }
     }
     // eslint-disable-next-line
-  }, [counter.value, counter.max])
+  }, [counter.value, counter.maxValue])
 
   return (
     <div className="health-wrapper">
@@ -60,7 +61,7 @@ const Health = ({currentCharacter}) => {
 
           <input
             type="number"
-            value={counter.max}
+            value={counter.maxValue}
             onChange={(e) => counter.setMax(parseInt(e.target.value, 10))}
           />
         </div>

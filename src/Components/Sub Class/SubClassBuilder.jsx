@@ -1,53 +1,98 @@
-import {useEffect, useRef, useState} from "react"
+import {useState} from "react"
 
 import NewSubClassFeature from "./NewSubClassFeature"
 
-const SubClassBuilder = () => {
+const SubClassBuilder = ({setStoredDetails, setShowCharacterDetails}) => {
   const [newfeature, setNewFeature] = useState([])
-  const [savedFormData, setSavedFormData] = useState({})
-  const inputRef = useRef()
-
-  const currentFeature = Object.keys(savedFormData)[newfeature?.length - 1]
-  // creates a NewSubClassFeature component on btn click
+  const [subClassName, setSubClassName] = useState("")
+  // console.log(storedDetails)
+  const defaultFeature = {
+    key: newfeature.length,
+    disabled: false,
+    formData: {
+      feature: "",
+      featureName: "",
+      level: "",
+    },
+  }
 
   const addFeature = () => {
     setNewFeature((prev) => {
-      return [
-        ...prev,
-        <NewSubClassFeature
-          key={prev.length}
-          inputRef={inputRef}
-          featureKey={prev.length}
-          setSavedFormData={setSavedFormData}
-          savedFormData={savedFormData}
-        />,
-      ]
+      return [...prev, defaultFeature]
     })
   }
-  console.log(savedFormData)
-  useEffect(() => {
-    // focus on feature name when a new feature is created.
-    inputRef.current?.focus()
-  }, [newfeature])
+
+  const updateFormData = (value, index) => {
+    const featureCopy = [...newfeature]
+    featureCopy[index] = {
+      ...featureCopy[index],
+      formData: {...featureCopy[index].formData, ...value},
+    }
+    setNewFeature(featureCopy)
+  }
+
   return (
     <div className="sub-class">
-      {newfeature}
+      <input
+        className="subclass-name"
+        onChange={(e) => {
+          setSubClassName(e.target.value)
+        }}
+        placeholder="subclass name..."
+      />
+      {newfeature.map((feature, index) => {
+        return (
+          <NewSubClassFeature
+            key={feature.key}
+            disableComponent={feature.disabled}
+            updateFormData={(value) => updateFormData(value, index)}
+          />
+        )
+      })}
 
       <button
         onClick={() => {
           addFeature()
-          setSavedFormData((prev) => ({
-            ...prev,
-            [`feature_${newfeature.length + 1}`]: {
-              feature: "",
-              featureName: "",
-              level: "",
-            },
-          }))
+          if (newfeature.length) {
+            let updatedFeature = [...newfeature].map((feature) => {
+              return {...feature, disabled: true}
+            })
+            setNewFeature([...updatedFeature, defaultFeature])
+          }
         }}
-        disabled={savedFormData[currentFeature]?.featureName.length <= 0}
+        disabled={
+          newfeature[newfeature.length - 1]?.formData.featureName.length <= 0 ||
+          newfeature[newfeature.length - 1]?.formData.level.length <= 0
+        }
       >
         add new feature
+      </button>
+      <button
+        className="save-subclass-btn"
+        onClick={() => {
+          const mappedFormData = newfeature.map((data) => {
+            return data.formData
+          })
+          setStoredDetails((prev) => ({
+            ...prev,
+            subClass: {
+              name: subClassName,
+              features: mappedFormData,
+            },
+          }))
+          setShowCharacterDetails((prev) => ({
+            ...prev,
+            subClass: false,
+          }))
+        }}
+        disabled={
+          !subClassName ||
+          !newfeature.length ||
+          newfeature[newfeature.length - 1]?.formData.featureName.length <= 0 ||
+          newfeature[newfeature.length - 1]?.formData.level.length <= 0
+        }
+      >
+        save subClass
       </button>
     </div>
   )
