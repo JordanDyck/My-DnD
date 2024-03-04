@@ -4,7 +4,7 @@ import {RiDeleteBinLine} from "react-icons/ri"
 import CharacterOptionsPopUp from "../CharacterOptionsPopup"
 import Perks from "../Perks"
 import {setLocalStorage} from "../utilities"
-// import CreateCustomCharacter from "../Custom Character/CreateCustomCharacter"
+import CreateCustomCharacter from "../Custom Character/CreateCustomCharacter"
 import SubClassBuilder from "../Sub Class/SubClassBuilder"
 
 const CharacterCreator = ({setShowCreator}) => {
@@ -65,10 +65,7 @@ const CharacterCreator = ({setShowCreator}) => {
 
       <div className="class-container">
         {classNameOption && (
-          <div
-            className="class-name"
-            // style={{display: showCharacterDetails.subClass ? "none" : "flex"}}
-          >
+          <div className="class-name">
             <label id="class-label">Class:</label>
             <h4 className="class">{classNameOption}</h4>
             <button
@@ -93,6 +90,7 @@ const CharacterCreator = ({setShowCreator}) => {
           </div>
         )}
         <button
+          // for choosing your class. shows class popup and disables unrelated btns.
           className="class-btn"
           onClick={() => {
             setShowCharacterPopUps((prev) => ({...prev, classes: true}))
@@ -137,7 +135,8 @@ const CharacterCreator = ({setShowCreator}) => {
             </button>
           </>
         )}
-
+        {showCharacterDetails.custom && <CreateCustomCharacter />}
+        {/* for choosing subclass */}
         {storedDetails.subClass.name && (
           <div className="subclass-name-container">
             <label id="subclass-label">subclass:</label>
