@@ -3,52 +3,66 @@ import axios from "axios"
 
 import {RiDeleteBinLine} from "react-icons/ri"
 
-const ProficiencySelector = ({setDetails}) => {
+const ProficiencySelector = ({setDetails, type, url}) => {
   const [skills, setSkills] = useState([])
   const [chosenskills, setChosenSkills] = useState([])
   useEffect(() => {
-    axios.get(`https://www.dnd5eapi.co/api/skills/`).then((res) => {
+    axios.get(`https://www.dnd5eapi.co/api/${url}/`).then((res) => {
       const data = res.data.results
 
       setSkills(data)
     })
-  }, [])
+  }, [url])
 
   useEffect(() => {
-    setDetails((prev) => ({
-      ...prev,
-      skill_proficiencies: chosenskills,
-    }))
-  }, [chosenskills, setDetails])
+    if (type === "skill proficiencies") {
+      setDetails((prev) => ({
+        ...prev,
+        skill_proficiencies: chosenskills,
+      }))
+    } else if (type === "spell saves") {
+      setDetails((prev) => ({
+        ...prev,
+        spell_saves: chosenskills,
+      }))
+    } else {
+      setDetails((prev) => ({
+        ...prev,
+        saving_throws: chosenskills,
+      }))
+    }
+  }, [chosenskills, setDetails, type])
 
   return (
     <div className="skills-container">
       <div
-        className="chosen-skills"
+        className="chosen-skills-wrapper"
         style={{
           border: chosenskills.length ? "1px solid #9d9d9d" : "none",
           marginBottom: chosenskills.length ? "10px" : "0px",
         }}
       >
-        <h4> skill proficiencies:</h4>
-        {chosenskills.map((item) => {
-          return (
-            // displays current proficiencies
-            <button
-              className="chosen-skill"
-              key={`chosen_${item}`}
-              type="button"
-              onClick={() => {
-                // delete item
-                setChosenSkills((prev) => [
-                  ...prev.filter((ele) => ele !== item),
-                ])
-              }}
-            >
-              {item} <RiDeleteBinLine />
-            </button>
-          )
-        })}
+        <h4>{`${type}:`}</h4>
+        <div className="chosen-skills">
+          {chosenskills.map((item) => {
+            return (
+              // displays current proficiencies
+              <button
+                className="chosen-skill"
+                key={`chosen_${item}`}
+                type="button"
+                onClick={() => {
+                  // delete item
+                  setChosenSkills((prev) => [
+                    ...prev.filter((ele) => ele !== item),
+                  ])
+                }}
+              >
+                {item} <RiDeleteBinLine />
+              </button>
+            )
+          })}
+        </div>
       </div>
       {skills.map((skill) => {
         return (

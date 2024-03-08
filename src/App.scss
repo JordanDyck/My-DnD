@@ -157,7 +157,7 @@ body {
       display: flex;
       flex-direction: column;
       flex-wrap: nowrap;
-      gap: 15px;
+      gap: 10px;
       .hit-dice {
         width: 50px;
         border: 1px solid;
@@ -186,26 +186,15 @@ body {
       }
 
       .skills-container {
-        .chosen-skills {
+        padding-block: 10px;
+        border-top: 1px solid $fadedBorderColor;
+        border-bottom: 1px solid $fadedBorderColor;
+        .chosen-skills-wrapper {
           display: flex;
           flex-direction: column;
-
           align-items: flex-start;
           margin-bottom: 10px;
           padding: 5px;
-          svg {
-            font-size: 20px;
-            margin-left: 10px;
-          }
-          .chosen-skill {
-            display: flex;
-            align-items: center;
-            background-color: #e3e3e3;
-            font-weight: bold;
-            font-size: 14px;
-            margin: 3px;
-            padding: 3px;
-          }
         }
 
         .skill {
@@ -219,7 +208,27 @@ body {
         }
       }
     }
-
+    .chosen-skills {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    svg {
+      font-size: 20px;
+      margin-left: 10px;
+    }
+    .chosen-skill {
+      display: flex;
+      align-items: center;
+      background-color: #e3e3e3;
+      font-weight: bold;
+      font-size: 14px;
+      margin: 3px;
+      padding: 3px;
+    }
+    .items-tab-wrapper {
+      border: none;
+      margin-inline: 5px;
+    }
     .subclass-name-container {
       display: flex;
       margin-left: 3px;
@@ -749,8 +758,11 @@ input {
 .items-tab-wrapper {
   display: flex;
   flex-direction: column;
+
   border: 17px solid transparent;
   border-image: url("./assets/border.png") 116;
+  margin-inline: 10px;
+
   min-height: 288px;
   .item-info-container {
     display: flex;

@@ -1,7 +1,8 @@
 import {useState} from "react"
+import {RiDeleteBinLine} from "react-icons/ri"
 
 import SkillSelector from "./SkillSelector"
-import SavingThrowSelector from "./SavingThrowSelector"
+import ItemsTab from "../ItemsTab"
 
 const CreateOwnCharacter = () => {
   const [details, setDetails] = useState({
@@ -10,8 +11,10 @@ const CreateOwnCharacter = () => {
     proficiencies: [""],
     skill_proficiencies: [],
     saving_throws: [],
+    starting_equipment: [],
   })
   console.log(details)
+
   const onSubmit = (e) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
@@ -20,7 +23,7 @@ const CreateOwnCharacter = () => {
     setDetails(() => ({
       class_name,
       hit_dice: hit_dice.match(/^[Dd](\d+)?$/) ? hit_dice : "",
-      skill_profs: details.skill_profs,
+      skill_proficiencies: details.skill_proficiencies,
       proficiencies: [...Object.values(profs)],
     }))
   }
@@ -64,11 +67,62 @@ const CreateOwnCharacter = () => {
           </div>
         </div>
         <div className="skills">
-          <SkillSelector setDetails={setDetails} />
+          {/* proficiencies */}
+          <SkillSelector
+            setDetails={setDetails}
+            type={"skill proficiencies"}
+            url={"skills"}
+          />
         </div>
         <div className="saving-throw-container">
-          <SavingThrowSelector setDetails={setDetails} />
+          {/* saving throws */}
+          <SkillSelector
+            setDetails={setDetails}
+            type={"saving throws"}
+            url={"ability-scores"}
+          />
         </div>
+        <div className="saving-throw-container">
+          {/* spell-saving throws */}
+          <SkillSelector
+            setDetails={setDetails}
+            type={"spell saves"}
+            url={"ability-scores"}
+          />
+        </div>
+        <div className="starting-equipment-container">
+          <h4>starting equipment:</h4>
+
+          <div className="chosen-skills">
+            {details.starting_equipment.map((item) => {
+              return (
+                // displays starting gear
+                <button
+                  className="chosen-skill"
+                  key={`chosen_${item}`}
+                  type="button"
+                  onClick={() => {
+                    // delete item
+                    setDetails((prev) => ({
+                      ...prev,
+                      starting_equipment: prev.starting_equipment?.filter(
+                        (ele) => ele !== item
+                      ),
+                    }))
+                  }}
+                >
+                  {item} <RiDeleteBinLine />
+                </button>
+              )
+            })}
+          </div>
+          <ItemsTab
+            type={"starting-equipment"}
+            setDetails={setDetails}
+            details={details}
+          />
+        </div>
+
         <button type="button">Save</button>
       </form>
     </div>
