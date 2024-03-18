@@ -184,6 +184,41 @@ body {
           font-weight: bold;
         }
       }
+      .spell-section {
+        display: flex;
+        flex-direction: column;
+        .spellcaster-switch {
+          background-color: #dbdbdb;
+          border: 2px solid;
+          border-radius: 20px;
+          width: 205px;
+          height: 30px;
+          margin-bottom: 9px;
+          margin-left: calc(100% - 213px);
+          span {
+            font-weight: 600;
+            padding-right: 25px;
+            padding-left: 6px;
+          }
+          .toggle-switch {
+            height: 21px;
+          }
+        }
+        .starting-spells {
+          display: flex;
+          flex-direction: column;
+          border: 1px solid $fadedBorderColor;
+          padding: 10px;
+          margin-block: 10px;
+          label {
+            font-weight: bold;
+            margin-top: 10px;
+          }
+          input {
+            width: 30px;
+          }
+        }
+      }
 
       .skills-container {
         padding-block: 10px;
@@ -205,6 +240,11 @@ body {
           &:disabled {
             display: none;
           }
+        }
+      }
+      .starting-equipment-container {
+        .chosen-skills {
+          margin-block: 5px 8px;
         }
       }
     }
