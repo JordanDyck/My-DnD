@@ -5,6 +5,7 @@ import Switch from "react-switch"
 import SkillSelector from "./SkillSelector"
 import ItemsTab from "../ItemsTab"
 import StartingSpellSlots from "./StartingSpellSlots"
+import CustomLevels from "./CustomLevels"
 
 // .match(/^[Dd](\d+)?$/) ? hit_dice : "",
 
@@ -18,15 +19,15 @@ const CreateCustomCharacter = () => {
     saving_throws: [],
     starting_equipment: [],
     spellcasting: {},
+    levels: [{feature: "", featureName: "", level: ""}],
   })
-  console.log({details})
+
+  console.log(details)
   const onSubmit = (e) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
     const data = Object.fromEntries(formData)
     const {class_name, hit_dice, cantrips, spellslots, spells, ...profs} = data
-    console.log({data})
-
     setDetails(() => ({
       class_name,
       hit_dice: hit_dice,
@@ -34,8 +35,10 @@ const CreateCustomCharacter = () => {
       starting_equipment: details.starting_equipment,
       proficiencies: [...Object.values(profs)],
       spellcasting: {cantrips, spellslots, spells},
+      levels: details.levels,
     }))
   }
+
   return (
     <div>
       <form onChange={onSubmit} className="custom-class">
@@ -158,9 +161,10 @@ const CreateCustomCharacter = () => {
             details={details}
           />
         </div>
-
-        <button type="button">Save</button>
       </form>
+      <div className="levels-wrapper">
+        <CustomLevels setDetails={setDetails} details={details} />
+      </div>
     </div>
   )
 }

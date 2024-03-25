@@ -2,7 +2,7 @@ import Select from "react-select"
 import axios from "axios"
 import {useState, useEffect} from "react"
 import {v4 as uuid} from "uuid"
-import {useDispatch, useSelector} from "react-redux"
+import {useDispatch} from "react-redux"
 import {MdCreate, MdClose} from "react-icons/md"
 
 import equipmentFilter from "./EquipmentFilter.json"
@@ -19,9 +19,7 @@ const ItemsTab = ({type, setDetails, details}) => {
   const [currentItemData, setCurrentItemData] = useState([])
   const [showItemCreator, setShowItemCreator] = useState(false)
 
-  const inventory = useSelector((store) => store.inventory)
   const dispatch = useDispatch()
-  // console.log(inventory)
 
   // changes category object names to work with react select options.
   const categoryOptions = itemCategories.map(({index, name}) => ({

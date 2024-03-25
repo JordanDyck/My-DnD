@@ -247,6 +247,10 @@ body {
           margin-block: 5px 8px;
         }
       }
+      .levels-wrapper {
+        display: flex;
+        justify-content: center;
+      }
     }
     .chosen-skills {
       display: flex;
