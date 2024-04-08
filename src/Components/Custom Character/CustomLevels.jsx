@@ -1,53 +1,33 @@
+import {useState} from "react"
+import Level from "./Level"
+
 const CustomLevels = ({setDetails, details}) => {
-  const updateFormData = (index, e) => {
-    let data = [...details.levels]
-    data[index][e.target.name] = e.target.value
+  const [currentLevel, setCurrentLevel] = useState([1])
+  // const [levelData, setLevelData] = useState([])
 
-    setDetails((prev) => ({
+  const newLevel = () => {
+    setCurrentLevel((prev) => [
       ...prev,
-      levels: data,
-    }))
-  }
-
-  const addFeature = () => {
-    let defaultLevelData = {
-      feature: "",
-      featureName: "",
-      level: "",
-    }
-    setDetails((prev) => ({
-      ...prev,
-      levels: [...details.levels, defaultLevelData],
-    }))
+      currentLevel[currentLevel.length - 1] + 1,
+    ])
   }
 
   return (
-    <div className="Levels-container">
-      {details.levels.map((_, index) => {
+    <div className="levels-wrapper">
+      {currentLevel.map((level, i) => {
         return (
-          <div key={index} className="level">
-            <input
-              onChange={(e) => updateFormData(index, e)}
-              name="level"
-              placeholder="lvl"
-              value={details.levels.level}
-            />
-            <input
-              onChange={(e) => updateFormData(index, e)}
-              name="featureName"
-              placeholder="feature name"
-              value={details.levels.featureName}
-            />
-            <input
-              onChange={(e) => updateFormData(index, e)}
-              name="feature"
-              placeholder="description "
-              value={details.levels.feature}
-            />
+          <div key={`currentlevel_${i}`} className="level-container">
+            <Level level={level} setLevelData={setDetails} />
           </div>
         )
       })}
-      <button type="button" onClick={() => addFeature()}>
+      <button
+        type="button"
+        className="new-level-btn"
+        onClick={() => {
+          newLevel()
+        }}
+      >
         Add new level
       </button>
     </div>

@@ -19,7 +19,7 @@ const CreateCustomCharacter = () => {
     saving_throws: [],
     starting_equipment: [],
     spellcasting: {},
-    levels: [{feature: "", featureName: "", level: ""}],
+    levels: [],
   })
 
   console.log(details)
@@ -59,7 +59,7 @@ const CreateCustomCharacter = () => {
             })}
             <button
               type="button"
-              onClick={(e) =>
+              onClick={() =>
                 setDetails((prev) => ({
                   ...prev,
                   proficiencies: [...prev.proficiencies, ""],
@@ -162,7 +162,7 @@ const CreateCustomCharacter = () => {
           />
         </div>
       </form>
-      <div className="levels-wrapper">
+      <div className="custom-levels">
         <CustomLevels setDetails={setDetails} details={details} />
       </div>
     </div>
