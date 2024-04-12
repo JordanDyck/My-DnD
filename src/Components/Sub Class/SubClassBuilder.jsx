@@ -5,8 +5,8 @@ import NewSubClassFeature from "./NewSubClassFeature"
 const SubClassBuilder = ({setStoredDetails, setShowCharacterDetails}) => {
   const [newfeature, setNewFeature] = useState([])
   const [subClassName, setSubClassName] = useState("")
-  // console.log(storedDetails)
-  const defaultFeature = {
+
+  const defaultFeatureData = {
     key: newfeature.length,
     disabled: false,
     formData: {
@@ -18,7 +18,7 @@ const SubClassBuilder = ({setStoredDetails, setShowCharacterDetails}) => {
 
   const addFeature = () => {
     setNewFeature((prev) => {
-      return [...prev, defaultFeature]
+      return [...prev, defaultFeatureData]
     })
   }
 
@@ -57,7 +57,7 @@ const SubClassBuilder = ({setStoredDetails, setShowCharacterDetails}) => {
             let updatedFeature = [...newfeature].map((feature) => {
               return {...feature, disabled: true}
             })
-            setNewFeature([...updatedFeature, defaultFeature])
+            setNewFeature([...updatedFeature, defaultFeatureData])
           }
         }}
         disabled={

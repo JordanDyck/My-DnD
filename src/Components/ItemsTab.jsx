@@ -11,15 +11,13 @@ import ItemCreator from "./ItemCreator"
 import {addInventory} from "../Store/slices/inventorySlice"
 import {addGear} from "../Store/slices/gearSlice"
 
-const ItemsTab = () => {
+const ItemsTab = ({type, setDetails, details}) => {
   const [itemCategories, setItemCategories] = useState([])
   const [itemList, setItemList] = useState()
   const [currentItem, setCurrentItem] = useState()
   const [categoryURL, setCategoryURL] = useState("")
   const [currentItemData, setCurrentItemData] = useState([])
   const [showItemCreator, setShowItemCreator] = useState(false)
-
-  // const inventory = useSelector((store) => store.inventory)
 
   const dispatch = useDispatch()
 
@@ -123,9 +121,10 @@ const ItemsTab = () => {
             }
           })}
 
-          {itemList && (
+          {itemList && type === "items-tab" ? (
             <div className="add-btn-container">
               <button
+                type="button"
                 className="add-item"
                 onClick={() =>
                   filteredInfo.length
@@ -136,6 +135,7 @@ const ItemsTab = () => {
                 Equip Item
               </button>
               <button
+                type="button"
                 className="add-item"
                 onClick={() =>
                   filteredInfo.length
@@ -146,6 +146,26 @@ const ItemsTab = () => {
                 add to inventory
               </button>
             </div>
+          ) : type === "starting-equipment" && filteredInfo.length ? (
+            <button
+              type="button"
+              onClick={() =>
+                filteredInfo.length &&
+                !details.starting_equipment.includes(filteredInfo[0][1])
+                  ? setDetails((prev) => ({
+                      ...prev,
+                      starting_equipment: [
+                        ...prev.starting_equipment,
+                        filteredInfo[0][1],
+                      ],
+                    }))
+                  : ""
+              }
+            >
+              add
+            </button>
+          ) : (
+            ""
           )}
         </div>
       )
@@ -153,15 +173,18 @@ const ItemsTab = () => {
   }
 
   return (
-    <div className="items-tab-wrapper">
-      <button
-        className="create-item-btn"
-        onClick={() => {
-          setShowItemCreator(!showItemCreator)
-        }}
-      >
-        {!showItemCreator ? <MdCreate /> : <MdClose />}
-      </button>
+    <div className={"items-tab-wrapper"}>
+      {type === "items-tab" && (
+        <button
+          type="button"
+          className="create-item-btn"
+          onClick={() => {
+            setShowItemCreator(!showItemCreator)
+          }}
+        >
+          {!showItemCreator ? <MdCreate /> : <MdClose />}
+        </button>
+      )}
 
       {showItemCreator && <ItemCreator />}
       {!showItemCreator && (

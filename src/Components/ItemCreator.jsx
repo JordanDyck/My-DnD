@@ -43,6 +43,7 @@ const ItemCreator = () => {
       <div className="item-types">
         {/* <input type="radio" value="weapon" id="weapon" name="category" /> */}
         <button
+          type="button"
           className={`option ${activeButton === "weapon" && "active"}`}
           name="weapon"
           onClick={(e) => {
@@ -58,6 +59,7 @@ const ItemCreator = () => {
 
         {/* <input type="radio" value="armor" id="armor" name="category" /> */}
         <button
+          type="button"
           className={`option ${activeButton === "armor" && "active"}`}
           name="armor"
           onClick={(e) => {
@@ -73,6 +75,7 @@ const ItemCreator = () => {
 
         {/* <input type="radio" value="other" id="other" name="category" /> */}
         <button
+          type="button"
           className={`option ${activeButton === "other" && "active"}`}
           name="other"
           onClick={(e) => {

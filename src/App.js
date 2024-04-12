@@ -50,7 +50,7 @@ function App() {
         </button>
       </div>
 
-      {showItems && <ItemsTab />}
+      {showItems && <ItemsTab type={"items-tab"} />}
 
       {showStats && (
         <ProfStats showStats={showStats} setShowStats={setShowStats} />

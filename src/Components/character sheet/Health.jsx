@@ -9,7 +9,7 @@ const Health = ({currentCharacter}) => {
     character?.health.currentHP,
     character?.health.maxHP
   )
-  console.log()
+
   // sets health from characterName from local storage
   useEffect(() => {
     try {

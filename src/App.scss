@@ -3,6 +3,7 @@
 
 $dndFont: Castoro Titling, sans-sarif;
 $parFont: Baloo2, sans-sarif;
+$fadedBorderColor: #808080d9;
 
 * {
   margin: 0;
@@ -152,6 +153,235 @@ body {
       margin-right: 10px;
     }
 
+    .custom-class {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      gap: 10px;
+      .hit-dice {
+        width: 50px;
+        border: 1px solid;
+        border-radius: 10px 2px 10px 2px;
+        margin-left: 5px;
+        font-size: 18px;
+      }
+      .proficiency-container {
+        border: 1px solid $fadedBorderColor;
+        padding: 10px;
+        span {
+          font-family: $parFont;
+          font-size: 12px;
+          color: $fadedBorderColor;
+        }
+
+        button {
+          position: relative;
+          top: 6px;
+          width: 28px;
+          height: 32px;
+          margin-left: calc(100% - 228px);
+          font-size: 25px;
+          font-weight: bold;
+        }
+      }
+      .spell-section {
+        display: flex;
+        flex-direction: column;
+        .spellcaster-switch {
+          background-color: #dbdbdb;
+          border: 2px solid;
+          border-radius: 20px;
+          width: 205px;
+          height: 30px;
+          margin-bottom: 9px;
+          margin-left: calc(100% - 213px);
+          span {
+            font-weight: 600;
+            padding-right: 25px;
+            padding-left: 6px;
+          }
+          .toggle-switch {
+            height: 21px;
+          }
+        }
+        .starting-spells {
+          display: flex;
+          flex-direction: column;
+          border: 1px solid $fadedBorderColor;
+          padding: 10px;
+          margin-block: 10px;
+          label {
+            font-weight: bold;
+            margin-top: 10px;
+          }
+          input {
+            width: 30px;
+          }
+        }
+      }
+
+      .skills-container {
+        padding-block: 10px;
+        border-top: 1px solid $fadedBorderColor;
+        border-bottom: 1px solid $fadedBorderColor;
+        .chosen-skills-wrapper {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          margin-bottom: 10px;
+          padding: 5px;
+        }
+
+        .skill {
+          font-size: 15px;
+          font-weight: bold;
+          margin: 3px;
+          padding: 2px;
+          &:disabled {
+            display: none;
+          }
+        }
+      }
+      .starting-equipment-container {
+        .chosen-skills {
+          margin-block: 5px 8px;
+        }
+      }
+    }
+    .custom-levels {
+      border-block: 2px solid $fadedBorderColor;
+      padding-block: 3px 15px;
+      .tool-tip {
+        font-family: $parFont;
+        font-size: 12px;
+        color: $fadedBorderColor;
+      }
+    }
+    .levels-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .new-level-btn {
+        margin-top: 20px;
+        font-size: 15px;
+        padding: 3px;
+        font-weight: bold;
+        box-shadow: 2px 2px 1px 0px #000000;
+      }
+      .level-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: calc(100% - 10px);
+
+        .level,
+        .level-collapsed {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+          border: 1px solid;
+          margin-block: 8px;
+          background-color: rgb(255, 255, 255);
+          &:not(.level-collapsed) {
+            box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.6);
+            background-color: rgb(233 233 233 / 85%);
+            border: 2px solid;
+          }
+
+          h4 {
+            text-align: center;
+            margin-top: 7px;
+            width: 100%;
+            font-size: 20px;
+            border-bottom: 2px solid #000000;
+          }
+          .ability-improv-toggle {
+            // display: flex;
+            // justify-content: flex-end;
+
+            background-color: #dbdbdb;
+            border: 2px solid;
+            border-radius: 20px;
+            // width: 205px;
+            padding-left: 8px;
+            margin-block: 15px 4px;
+
+            span {
+              font-weight: 600;
+              padding-right: 5px;
+            }
+            .toggle-switch {
+              height: 23px;
+            }
+          }
+
+          .level-feature {
+            display: flex;
+            margin-block: 10px;
+            padding-block: 15px;
+            width: calc(100% - 16px);
+            justify-content: center;
+            flex-wrap: wrap;
+            border: 1px solid $fadedBorderColor;
+            background-color: white;
+            input {
+              font-size: 16px;
+              font-weight: bold;
+              width: calc(100% - 12px);
+            }
+            p {
+              font-weight: bold;
+            }
+            textarea {
+              padding: 3px;
+              font-family: $parFont;
+              font-size: 17px;
+              width: 91%;
+              height: 110px;
+
+              margin-top: 10px;
+              margin-inline: 7px;
+              max-width: 92%;
+              min-width: 180px;
+              min-height: 30px;
+              background-color: #f9f9f9;
+              padding-inline: 5px;
+            }
+          }
+          .new-feature-btn {
+            margin-bottom: 15px;
+            font-size: 15px;
+            padding: 3px;
+            font-weight: bold;
+            box-shadow: 2px 2px 1px 0px #000000;
+          }
+        }
+      }
+    }
+
+    .chosen-skills {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    svg {
+      font-size: 20px;
+      margin-left: 10px;
+    }
+    .chosen-skill {
+      display: flex;
+      align-items: center;
+      background-color: #e3e3e3;
+      font-weight: bold;
+      font-size: 14px;
+      margin: 3px;
+      padding: 3px;
+    }
+    .items-tab-wrapper {
+      border: none;
+      margin-inline: 5px;
+    }
     .subclass-name-container {
       display: flex;
       margin-left: 3px;
@@ -681,8 +911,11 @@ input {
 .items-tab-wrapper {
   display: flex;
   flex-direction: column;
+
   border: 17px solid transparent;
   border-image: url("./assets/border.png") 116;
+  margin-inline: 10px;
+
   min-height: 288px;
   .item-info-container {
     display: flex;
@@ -807,7 +1040,6 @@ input {
         input {
           width: 115px;
           font-size: 14px;
-          // margin-right: 8px;
         }
       }
 
