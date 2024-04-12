@@ -1,15 +1,16 @@
 import {useState} from "react"
 import Level from "./Level"
 
-const CustomLevels = ({setDetails, details}) => {
+const CustomLevels = ({setDetails}) => {
   const [currentLevel, setCurrentLevel] = useState([1])
-  // const [levelData, setLevelData] = useState([])
+  const [disableNewLevel, setDisableNewLevel] = useState(true)
 
   const newLevel = () => {
     setCurrentLevel((prev) => [
       ...prev,
       currentLevel[currentLevel.length - 1] + 1,
     ])
+    setDisableNewLevel(true)
   }
 
   return (
@@ -17,7 +18,12 @@ const CustomLevels = ({setDetails, details}) => {
       {currentLevel.map((level, i) => {
         return (
           <div key={`currentlevel_${i}`} className="level-container">
-            <Level level={level} setLevelData={setDetails} />
+            <Level
+              level={level}
+              setLevelData={setDetails}
+              currentLevel={currentLevel.length}
+              setDisableNewLevel={setDisableNewLevel}
+            />
           </div>
         )
       })}
@@ -27,6 +33,7 @@ const CustomLevels = ({setDetails, details}) => {
         onClick={() => {
           newLevel()
         }}
+        disabled={disableNewLevel === true}
       >
         Add new level
       </button>

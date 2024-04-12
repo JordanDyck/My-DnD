@@ -22,7 +22,6 @@ const CreateCustomCharacter = () => {
     levels: [],
   })
 
-  console.log(details)
   const onSubmit = (e) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
@@ -163,7 +162,10 @@ const CreateCustomCharacter = () => {
         </div>
       </form>
       <div className="custom-levels">
-        <CustomLevels setDetails={setDetails} details={details} />
+        <span className="tool-tip">
+          *Levels can be added or edited at any time after.
+        </span>
+        <CustomLevels setDetails={setDetails} />
       </div>
     </div>
   )

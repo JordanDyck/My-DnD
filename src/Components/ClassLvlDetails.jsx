@@ -16,7 +16,7 @@ const ClassLvlDetails = ({perk}) => {
     const customizeValue = classLvlFilter?.[key]?.(value)
     const valueToCheck = customizeValue === undefined ? value : customizeValue
     const renderedValue = handleformat(valueToCheck, key)
-    console.log(key, valueToCheck)
+
     return (
       <div className={`perk perk_${key}`} key={`perk key_${key}`}>
         <h4>{renderedValue ? key.replaceAll("_", " ") + ":" : ""}</h4>
