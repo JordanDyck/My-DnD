@@ -9,7 +9,7 @@ import CustomLevels from "./CustomLevels"
 
 // .match(/^[Dd](\d+)?$/) ? hit_dice : "",
 
-const CreateCustomCharacter = () => {
+const CustomClass = () => {
   const [toggleSwitch, setToggleSwitch] = useState(false)
   const [details, setDetails] = useState({
     class_name: "",
@@ -50,7 +50,7 @@ const CreateCustomCharacter = () => {
           <input name="hit_dice" className="hit-dice" maxLength={3} />
         </label>
         <div className="proficiency-container">
-          <h4>equipment proficiencies:</h4>
+          <h4 className="h4-title">equipment proficiencies:</h4>
           <span>*Ex. Heavy armor, Martial weapons, Bows.</span>
           <div className="proficiencies">
             {Object.values(details.proficiencies).map((_, index) => {
@@ -124,12 +124,12 @@ const CreateCustomCharacter = () => {
                 type={"spell saves"}
                 url={"ability-scores"}
               />
-              <StartingSpellSlots />
             </div>
           )}
+          {toggleSwitch && <StartingSpellSlots />}
         </div>
         <div className="starting-equipment-container">
-          <h4>starting equipment:</h4>
+          <h4 className="h4-title">starting equipment:</h4>
 
           <div className="chosen-skills">
             {details.starting_equipment.map((item) => {
@@ -162,12 +162,13 @@ const CreateCustomCharacter = () => {
         </div>
       </form>
       <div className="custom-levels">
+        <h4 className="h4-title">levels:</h4>
         <span className="tool-tip">
-          *Levels can be added or edited at any time after.
+          *Levels can be edited at any time after.
         </span>
         <CustomLevels setDetails={setDetails} />
       </div>
     </div>
   )
 }
-export default CreateCustomCharacter
+export default CustomClass

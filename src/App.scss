@@ -187,13 +187,16 @@ body {
       .spell-section {
         display: flex;
         flex-direction: column;
+        border-block: 2px solid $fadedBorderColor;
+        padding: 5px;
+        margin-block: 11px 5px;
         .spellcaster-switch {
           background-color: #dbdbdb;
           border: 2px solid;
           border-radius: 20px;
           width: 205px;
           height: 30px;
-          margin-bottom: 9px;
+          // margin-bottom: 9px;
           margin-left: calc(100% - 213px);
           span {
             font-weight: 600;
@@ -204,15 +207,22 @@ body {
             height: 21px;
           }
         }
+        .saving-throw-container {
+          margin-top: 6px;
+        }
         .starting-spells {
           display: flex;
           flex-direction: column;
-          border: 1px solid $fadedBorderColor;
+          border-block: 2px solid $fadedBorderColor;
           padding: 10px;
           margin-block: 10px;
           label {
             font-weight: bold;
             margin-top: 10px;
+          }
+          h4 {
+            font-size: 18px;
+            font-weight: bold;
           }
           input {
             width: 30px;
@@ -243,14 +253,20 @@ body {
         }
       }
       .starting-equipment-container {
+        border: 2px solid $fadedBorderColor;
+        padding: 5px;
+        margin-block: 11px;
         .chosen-skills {
           margin-block: 5px 8px;
         }
       }
     }
     .custom-levels {
-      border-block: 2px solid $fadedBorderColor;
+      border-block: 2px solid black;
       padding-block: 3px 15px;
+      .h4-title {
+        text-align: center;
+      }
       .tool-tip {
         font-family: $parFont;
         font-size: 12px;
@@ -645,6 +661,9 @@ input {
   text-align: center;
   background: transparent;
 }
+.h4-title {
+  text-decoration: underline;
+}
 
 .race-btn:disabled,
 .delete-race-btn:disabled {
@@ -908,19 +927,22 @@ input {
   }
 }
 
-.items-tab-wrapper {
+.items-tab-wrapper,
+.starting-equipment-selector {
   display: flex;
   flex-direction: column;
 
-  border: 17px solid transparent;
-  border-image: url("./assets/border.png") 116;
-  margin-inline: 10px;
+  &:not(.starting-equipment-selector) {
+    border: 17px solid transparent;
+    border-image: url("./assets/border.png") 116;
+    margin-inline: 10px;
 
-  min-height: 288px;
+    min-height: 288px;
+  }
   .item-info-container {
     display: flex;
     flex-direction: column;
-    min-height: 170px;
+    // min-height: 170px;
 
     .item-info {
       display: flex;
@@ -930,6 +952,7 @@ input {
       h4 {
         font-size: 17px;
         padding-right: 6px;
+        text-decoration: underline;
       }
       p {
         font-family: $parFont;

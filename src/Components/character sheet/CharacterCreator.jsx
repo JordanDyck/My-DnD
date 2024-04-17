@@ -4,7 +4,7 @@ import {RiDeleteBinLine} from "react-icons/ri"
 import CharacterOptionsPopUp from "../CharacterOptionsPopup"
 import Perks from "../Perks"
 import {setLocalStorage} from "../utilities"
-import CreateCustomCharacter from "../Custom Character/CreateCustomCharacter"
+import CustomClass from "../Custom Character/CustomClass"
 import SubClassBuilder from "../Sub Class/SubClassBuilder"
 
 const CharacterCreator = ({setShowCreator}) => {
@@ -135,7 +135,7 @@ const CharacterCreator = ({setShowCreator}) => {
             </button>
           </>
         )}
-        {showCharacterDetails.custom && <CreateCustomCharacter />}
+        {showCharacterDetails.custom && <CustomClass />}
         {/* for choosing subclass */}
         {storedDetails.subClass.name && (
           <div className="subclass-name-container">

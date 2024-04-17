@@ -1,7 +1,7 @@
 const StartingSpellSlots = () => {
   return (
     <div className="starting-spells">
-      <h4>starting spells:</h4>
+      <h4 className="h4-title">starting spells:</h4>
       <label htmlFor="cantrips">
         cantrips known:
         <input className="spell-input" type="number" name="cantrips" />

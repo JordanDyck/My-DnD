@@ -42,7 +42,7 @@ const ProficiencySelector = ({setDetails, type, url}) => {
           marginBottom: chosenskills.length ? "10px" : "0px",
         }}
       >
-        <h4>{`${type}:`}</h4>
+        <h4 className="h4-title">{`${type}:`}</h4>
         <div className="chosen-skills">
           {chosenskills.map((item) => {
             return (

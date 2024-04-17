@@ -173,7 +173,13 @@ const ItemsTab = ({type, setDetails, details}) => {
   }
 
   return (
-    <div className={"items-tab-wrapper"}>
+    <div
+      className={
+        type === "items-tab"
+          ? "items-tab-wrapper"
+          : "starting-equipment-selector"
+      }
+    >
       {type === "items-tab" && (
         <button
           type="button"
@@ -196,6 +202,7 @@ const ItemsTab = ({type, setDetails, details}) => {
             setCurrentItem(null)
             setCurrentItemData(null)
           }}
+          maxMenuHeight={200}
           styles={{
             option: (base) => ({
               ...base,
@@ -209,7 +216,7 @@ const ItemsTab = ({type, setDetails, details}) => {
           placeholder="Items"
           value={currentItem}
           options={itemOptions}
-          maxMenuHeight={270}
+          maxMenuHeight={200}
           onChange={(choice) => {
             setCurrentItem(choice)
           }}
