@@ -3,7 +3,7 @@ import axios from "axios"
 
 import {RiDeleteBinLine} from "react-icons/ri"
 
-const ProficiencySelector = ({setDetails, type, url}) => {
+const SkillSelector = ({setDetails, type, url}) => {
   const [skills, setSkills] = useState([])
   const [chosenskills, setChosenSkills] = useState([])
   useEffect(() => {
@@ -25,7 +25,7 @@ const ProficiencySelector = ({setDetails, type, url}) => {
         ...prev,
         spell_saves: chosenskills,
       }))
-    } else {
+    } else if (type === "saving throws") {
       setDetails((prev) => ({
         ...prev,
         saving_throws: chosenskills,
@@ -82,4 +82,4 @@ const ProficiencySelector = ({setDetails, type, url}) => {
     </div>
   )
 }
-export default ProficiencySelector
+export default SkillSelector

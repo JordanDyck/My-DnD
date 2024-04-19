@@ -64,7 +64,10 @@ const Level = ({level, setLevelData, currentLevel, setDisableNewLevel}) => {
               onChange={() => {
                 const AbilityScoreImprovement = {
                   [`level_${level}`]: [
-                    {featureName: "Ability score improvement"},
+                    {
+                      featureName: "Ability score improvement",
+                      feature: "Choose 2 abilities to improve",
+                    },
                   ],
                 }
                 const defaultFeature = {[`level_${level}`]: [{featureName: ""}]}

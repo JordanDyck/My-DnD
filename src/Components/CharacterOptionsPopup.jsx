@@ -23,7 +23,7 @@ const CharacterOptionsPopUp = ({
         onClick={() => {
           setTimeout(() => {
             setPopUp((prev) => ({...prev, [type.name]: false}))
-            setIsCustom((prev) => ({...prev, custom: true}))
+            setIsCustom((prev) => ({...prev, customClass: true}))
           }, 300)
         }}
       >

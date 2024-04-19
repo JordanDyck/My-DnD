@@ -9,7 +9,7 @@ import CustomLevels from "./CustomLevels"
 
 // .match(/^[Dd](\d+)?$/) ? hit_dice : "",
 
-const CustomClass = () => {
+const CustomClass = ({setStoredDetails}) => {
   const [toggleSwitch, setToggleSwitch] = useState(false)
   const [details, setDetails] = useState({
     class_name: "",
@@ -18,15 +18,16 @@ const CustomClass = () => {
     skill_proficiencies: [],
     saving_throws: [],
     starting_equipment: [],
-    spellcasting: {},
+    // spellcasting: {},
     levels: [],
   })
-
+  // console.log(details)
   const onSubmit = (e) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
     const data = Object.fromEntries(formData)
     const {class_name, hit_dice, cantrips, spellslots, spells, ...profs} = data
+    // console.log(data)
     setDetails(() => ({
       class_name,
       hit_dice: hit_dice,
@@ -34,12 +35,13 @@ const CustomClass = () => {
       starting_equipment: details.starting_equipment,
       proficiencies: [...Object.values(profs)],
       spellcasting: {cantrips, spellslots, spells},
+      spell_saves: details.spell_saves,
       levels: details.levels,
     }))
   }
 
   return (
-    <div>
+    <div className="custom-class-wrapper">
       <form onChange={onSubmit} className="custom-class">
         <label htmlFor="name">
           class:
@@ -168,6 +170,25 @@ const CustomClass = () => {
         </span>
         <CustomLevels setDetails={setDetails} />
       </div>
+      {details.class_name &&
+        details.hit_dice &&
+        details.proficiencies &&
+        details.skill_proficiencies &&
+        details.starting_equipment &&
+        details.saving_throws && (
+          <button
+            type="button"
+            className="save-custom-class-btn"
+            onClick={() =>
+              setStoredDetails((prev) => ({
+                ...prev,
+                classDetails: details,
+              }))
+            }
+          >
+            Save Class
+          </button>
+        )}
     </div>
   )
 }

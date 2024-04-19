@@ -26,11 +26,11 @@ const CharacterCreator = ({setShowCreator}) => {
     class: false,
     subClass: false,
     race: false,
-    custom: false,
+    customClass: false,
   })
   const [characterDetails, setCharacterDetails] = useState([])
   const [newProfDetails, setNewProfDetails] = useState([])
-
+  // console.log(storedDetails)
   // check if character name is already in use
   const checkStoredNames = (nameToCheck) => {
     if (
@@ -102,7 +102,7 @@ const CharacterCreator = ({setShowCreator}) => {
           }}
           disabled={
             showCharacterDetails.race ||
-            showCharacterDetails.custom ||
+            showCharacterDetails.customClass ||
             classNameOption
           }
         >
@@ -135,7 +135,9 @@ const CharacterCreator = ({setShowCreator}) => {
             </button>
           </>
         )}
-        {showCharacterDetails.custom && <CustomClass />}
+        {showCharacterDetails.customClass && (
+          <CustomClass setStoredDetails={setStoredDetails} />
+        )}
         {/* for choosing subclass */}
         {storedDetails.subClass.name && (
           <div className="subclass-name-container">
@@ -247,7 +249,7 @@ const CharacterCreator = ({setShowCreator}) => {
           </>
         )}
       </div>
-      {showCharacterPopUps.classes && !showCharacterPopUps.custom && (
+      {showCharacterPopUps.classes && !showCharacterPopUps.customClass && (
         <CharacterOptionsPopUp
           setPopUp={setShowCharacterPopUps}
           setOptionName={setClassNameOption}
