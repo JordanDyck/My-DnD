@@ -18,16 +18,13 @@ const CustomClass = ({setStoredDetails}) => {
     skill_proficiencies: [],
     saving_throws: [],
     starting_equipment: [],
-    // spellcasting: {},
     levels: [],
   })
-  // console.log(details)
   const onSubmit = (e) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
     const data = Object.fromEntries(formData)
     const {class_name, hit_dice, cantrips, spellslots, spells, ...profs} = data
-    // console.log(data)
     setDetails(() => ({
       class_name,
       hit_dice: hit_dice,
@@ -66,7 +63,9 @@ const CustomClass = ({setStoredDetails}) => {
                   proficiencies: [...prev.proficiencies, ""],
                 }))
               }
-              disabled={Object.values(details.proficiencies).includes("")}
+              disabled={
+                !details.proficiencies[details.proficiencies.length - 1]
+              }
             >
               +
             </button>

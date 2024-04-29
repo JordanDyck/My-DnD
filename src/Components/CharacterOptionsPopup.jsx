@@ -9,7 +9,7 @@ const CharacterOptionsPopUp = ({
 }) => {
   const [options, setOptions] = useState([])
   useEffect(() => {
-    axios.get(`https://www.dnd5eapi.co/api/${type.name}/`).then((res) => {
+    axios.get(`https://www.dnd5eapi.co/api/${type}/`).then((res) => {
       const data = res.data.results
 
       setOptions(data)
@@ -22,8 +22,12 @@ const CharacterOptionsPopUp = ({
         id="custom-char-btn"
         onClick={() => {
           setTimeout(() => {
-            setPopUp((prev) => ({...prev, [type.name]: false}))
-            setIsCustom((prev) => ({...prev, customClass: true}))
+            setPopUp((prev) => ({...prev, [type]: false}))
+            if (type === "classes") {
+              setIsCustom((prev) => ({...prev, customClass: true}))
+            } else if (type === "races") {
+              setIsCustom((prev) => ({...prev, customRace: true}))
+            }
           }, 300)
         }}
       >
@@ -38,7 +42,7 @@ const CharacterOptionsPopUp = ({
               setTimeout(() => {
                 setOptionName(option.name)
 
-                setPopUp((prev) => ({...prev, [type.name]: false}))
+                setPopUp((prev) => ({...prev, [type]: false}))
               }, 300)
             }}
           >

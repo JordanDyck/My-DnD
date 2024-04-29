@@ -6,6 +6,7 @@ import Perks from "../Perks"
 import {setLocalStorage} from "../utilities"
 import CustomClass from "../Custom Character/CustomClass"
 import SubClassBuilder from "../Sub Class/SubClassBuilder"
+import CustomRace from "../Custom Character/CustomRace"
 
 const CharacterCreator = ({setShowCreator}) => {
   const [storedDetails, setStoredDetails] = useState({
@@ -27,6 +28,7 @@ const CharacterCreator = ({setShowCreator}) => {
     subClass: false,
     race: false,
     customClass: false,
+    customRace: false,
   })
   const [characterDetails, setCharacterDetails] = useState([])
   const [newProfDetails, setNewProfDetails] = useState([])
@@ -214,11 +216,13 @@ const CharacterCreator = ({setShowCreator}) => {
           disabled={
             showCharacterDetails.class ||
             showCharacterDetails.subClass ||
+            showCharacterDetails.race ||
             raceName
           }
         >
           select race
         </button>
+        {showCharacterDetails.customRace && <CustomRace />}
         {/* for choosing your Race */}
         {raceName && showCharacterDetails.race && (
           <>
@@ -249,11 +253,11 @@ const CharacterCreator = ({setShowCreator}) => {
           </>
         )}
       </div>
-      {showCharacterPopUps.classes && !showCharacterPopUps.customClass && (
+      {showCharacterPopUps.classes && (
         <CharacterOptionsPopUp
           setPopUp={setShowCharacterPopUps}
           setOptionName={setClassNameOption}
-          type={{name: "classes"}}
+          type={"classes"}
           setIsCustom={setShowCharacterDetails}
         />
       )}
@@ -261,7 +265,7 @@ const CharacterCreator = ({setShowCreator}) => {
         <CharacterOptionsPopUp
           setPopUp={setShowCharacterPopUps}
           setOptionName={setRaceName}
-          type={{name: "races"}}
+          type={"races"}
           setIsCustom={setShowCharacterDetails}
         />
       )}
