@@ -75,7 +75,7 @@ const CustomClass = ({setStoredDetails}) => {
           {/* proficiencies */}
           <SkillSelector
             setDetails={setDetails}
-            type={"skill proficiencies"}
+            type={"skill_proficiencies"}
             url={"skills"}
           />
         </div>
@@ -83,7 +83,7 @@ const CustomClass = ({setStoredDetails}) => {
           {/* saving throws */}
           <SkillSelector
             setDetails={setDetails}
-            type={"saving throws"}
+            type={"saving_throws"}
             url={"ability-scores"}
           />
         </div>
@@ -122,7 +122,7 @@ const CustomClass = ({setStoredDetails}) => {
               {/* spell-saving throws */}
               <SkillSelector
                 setDetails={setDetails}
-                type={"spell saves"}
+                type={"spell_saves"}
                 url={"ability-scores"}
               />
             </div>

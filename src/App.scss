@@ -540,50 +540,57 @@ body {
       display: flex;
       flex-direction: column;
       gap: 20px;
-      .custom-race-name {
-        width: calc(100% - 109px);
-      }
-      .custom-sub-race {
-        width: calc(100% - 85px);
-      }
-      .age-size-speed {
+      form {
         display: flex;
-        justify-content: space-around;
-        align-items: flex-end;
-        .custom-age,
-        .custom-speed {
-          width: 35px;
-          border: 1px solid $fadedBorderColor;
-          font-size: 17px;
-          margin-left: 6px;
+        flex-direction: column;
+        gap: 20px;
+        .custom-race-name {
+          width: calc(100% - 109px);
         }
-        .c-size-label {
-          margin-bottom: 3px;
+        .custom-sub-race {
+          width: calc(100% - 85px);
         }
-        .custom-size {
+        .age-size-speed {
           display: flex;
-          justify-content: center;
+          justify-content: space-around;
           align-items: flex-end;
-          padding: 3px;
-          border: 1px solid $fadedBorderColor;
+          flex-wrap: nowrap;
 
-          input {
-            width: 25px;
+          .custom-age,
+          .custom-speed {
+            width: 35px;
+            border: 1px solid $fadedBorderColor;
             font-size: 17px;
-            margin-right: 5px;
+            margin-left: 6px;
+          }
+          .c-size-label {
+            margin-bottom: 3px;
+          }
+          .custom-size {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            padding: 3px;
+            border: 1px solid $fadedBorderColor;
+
+            input {
+              width: 25px;
+              font-size: 17px;
+              margin-right: 5px;
+            }
+            label {
+              padding-right: 5px;
+            }
+            span {
+              font-size: 10px;
+              margin-bottom: 14px;
+              font-weight: bold;
+            }
           }
           label {
-            padding-right: 5px;
+            // padding-inline: 7px 3px;
+            font-size: 13px;
           }
-          span {
-            font-size: 10px;
-            margin-bottom: 14px;
-            font-weight: bold;
-          }
-        }
-        label {
-          // padding-inline: 7px 3px;
-          font-size: 13px;
         }
       }
 
@@ -595,15 +602,21 @@ body {
         flex-direction: column;
         border: 2px solid $fadedBorderColor;
         padding: 5px;
+        .custom-proficiencies {
+          display: flex;
+          flex-direction: column;
+          flex-wrap: nowrap;
+        }
         input {
-          width: 150px;
+          width: 200px;
         }
         button {
           // position: relative;
-
+          position: relative;
+          bottom: 32px;
           width: 28px;
           height: 32px;
-          margin-left: calc(100% - 190px);
+          margin-left: calc(100% - 35px);
           font-size: 25px;
           font-weight: bold;
         }

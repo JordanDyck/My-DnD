@@ -7,12 +7,12 @@ const CustomRace = () => {
     age: "",
     languages: [""],
     traits: [""],
+    ability_improvement: {},
     raceName: "",
     size: "",
     speed: "",
     subRace: "",
   })
-  console.log(raceDetails)
 
   const handleFormData = (e) => {
     e.preventDefault()
@@ -23,16 +23,7 @@ const CustomRace = () => {
   }
 
   return (
-    <div
-      className="custom-race"
-      onChange={(e) => {
-        console.log(e.target.name)
-        // setRaceDetails((prev) => ({
-        //   ...prev,
-        //   [e.target?.name]: e.target.value,
-        // }))
-      }}
-    >
+    <div className="custom-race">
       <form onChange={handleFormData}>
         <label htmlFor="raceName">
           race name:
@@ -65,7 +56,7 @@ const CustomRace = () => {
       <div className="ability-bonus-container">
         <SkillSelector
           setDetails={setRaceDetails}
-          type={"skill proficiencies"}
+          type={"ability_improvement"}
           url={"ability-scores"}
         />
       </div>

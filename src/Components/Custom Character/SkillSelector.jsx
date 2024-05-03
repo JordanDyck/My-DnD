@@ -1,11 +1,13 @@
 import {useEffect, useState} from "react"
 import axios from "axios"
-
+import useCounter from "../../hooks/useCounter"
 import {RiDeleteBinLine} from "react-icons/ri"
 
 const SkillSelector = ({setDetails, type, url}) => {
   const [skills, setSkills] = useState([])
-  const [chosenskills, setChosenSkills] = useState([])
+  const [chosenskills, setChosenSkills] = useState({})
+  const counter = useCounter([], 2)
+
   useEffect(() => {
     axios.get(`https://www.dnd5eapi.co/api/${url}/`).then((res) => {
       const data = res.data.results
@@ -15,22 +17,10 @@ const SkillSelector = ({setDetails, type, url}) => {
   }, [url])
 
   useEffect(() => {
-    if (type === "skill proficiencies") {
-      setDetails((prev) => ({
-        ...prev,
-        skill_proficiencies: chosenskills,
-      }))
-    } else if (type === "spell saves") {
-      setDetails((prev) => ({
-        ...prev,
-        spell_saves: chosenskills,
-      }))
-    } else if (type === "saving throws") {
-      setDetails((prev) => ({
-        ...prev,
-        saving_throws: chosenskills,
-      }))
-    }
+    setDetails((prev) => ({
+      ...prev,
+      [type]: [chosenskills],
+    }))
   }, [chosenskills, setDetails, type])
 
   return (
@@ -44,7 +34,7 @@ const SkillSelector = ({setDetails, type, url}) => {
       >
         <h4 className="h4-title">{`${type}:`}</h4>
         <div className="chosen-skills">
-          {chosenskills.map((item) => {
+          {Object.keys(chosenskills).map((item, index) => {
             return (
               // displays current proficiencies
               <button
@@ -52,28 +42,59 @@ const SkillSelector = ({setDetails, type, url}) => {
                 key={`chosen_${item}`}
                 type="button"
                 onClick={() => {
-                  // delete item
-                  setChosenSkills((prev) => [
-                    ...prev.filter((ele) => ele !== item),
-                  ])
+                  if (type === "ability_improvement") {
+                    counter.increment(index)
+                    setChosenSkills((prev) => ({
+                      ...prev,
+                      [item]: counter.value[index] + 1,
+                    }))
+                    // delete item
+                    if (counter.value[index] >= counter.maxValue) {
+                      counter.reset(index)
+                      const skillCopy = {...chosenskills}
+                      delete skillCopy[item]
+
+                      setChosenSkills(skillCopy)
+                    }
+                  } else {
+                    const skillCopy = {...chosenskills}
+                    delete skillCopy[item]
+
+                    setChosenSkills(skillCopy)
+                  }
                 }}
               >
-                {item} <RiDeleteBinLine />
+                {`${item} `}
+                {type === "ability_improvement" ? counter.value[index] : ""}
+                <RiDeleteBinLine />
               </button>
             )
           })}
         </div>
       </div>
-      {skills.map((skill) => {
+      {/* displays all available skills  */}
+      {skills.map((skill, index) => {
         return (
           <button
             className="skill"
             key={skill.name}
             type="button"
             onClick={() => {
-              setChosenSkills((prev) => [...prev, skill.name])
+              if (type === "ability_improvement") {
+                counter.setCurrent([...counter.value, 1])
+
+                setChosenSkills((prev) => ({
+                  ...prev,
+                  [skill.name]: counter.value?.[index] || 1,
+                }))
+              } else {
+                setChosenSkills((prev) => ({
+                  ...prev,
+                  [skill.name]: 1,
+                }))
+              }
             }}
-            disabled={chosenskills.includes(skill.name)}
+            disabled={Object.keys(chosenskills).includes(skill.name)}
           >
             {skill.name}
           </button>
