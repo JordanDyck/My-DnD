@@ -1,6 +1,7 @@
 import {useState} from "react"
 import CustomProficiencies from "./CustomProficiencies"
 import SkillSelector from "./SkillSelector"
+import CustomLevels from "./CustomLevels"
 
 const CustomRace = () => {
   const [raceDetails, setRaceDetails] = useState({
@@ -13,7 +14,7 @@ const CustomRace = () => {
     speed: "",
     subRace: "",
   })
-
+  console.log(raceDetails)
   const handleFormData = (e) => {
     e.preventDefault()
     setRaceDetails((prev) => ({
@@ -53,13 +54,6 @@ const CustomRace = () => {
           </label>
         </div>
       </form>
-      <div className="ability-bonus-container">
-        <SkillSelector
-          setDetails={setRaceDetails}
-          type={"ability_improvement"}
-          url={"ability-scores"}
-        />
-      </div>
       <div className="custom-proficiencies-container">
         <h4 className="h4-title">languages:</h4>
         <CustomProficiencies
@@ -68,13 +62,15 @@ const CustomRace = () => {
           ObjKey={"languages"}
         />
       </div>
-      <div className="custom-proficiencies-container">
-        <h4 className="h4-title">traits:</h4>
-        <CustomProficiencies
-          array={raceDetails.traits}
-          updateDetails={setRaceDetails}
-          ObjKey={"traits"}
+      <div className="ability-bonus-container">
+        <SkillSelector
+          setDetails={setRaceDetails}
+          type={"ability_improvement"}
+          url={"ability-scores"}
         />
+      </div>
+      <div className="custom-traits-wrapper">
+        <CustomLevels setDetails={setRaceDetails} type={"traits"} />
       </div>
     </div>
   )

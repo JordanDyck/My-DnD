@@ -5,7 +5,13 @@ const defaultLevelData = {
   feature: "",
   featureName: "",
 }
-const Level = ({level, setLevelData, currentLevel, setDisableNewLevel}) => {
+const Level = ({
+  level,
+  type,
+  setLevelData,
+  currentLevel,
+  setDisableNewLevel,
+}) => {
   const [levelFeatures, setLevelFeatures] = useState({
     [`level_${level}`]: [defaultLevelData],
   })
@@ -28,14 +34,25 @@ const Level = ({level, setLevelData, currentLevel, setDisableNewLevel}) => {
     setLevelFeatures(() => ({
       ...levelCopy,
     }))
-
-    setLevelData((prev) => ({
-      ...prev,
-      levels: {
-        ...prev.levels,
-        [`level_${level}`]: levelFeatures[[`level_${level}`]],
-      },
-    }))
+    if (type === "levels") {
+      // for levels
+      setLevelData((prev) => ({
+        ...prev,
+        levels: {
+          ...prev.levels,
+          [`level_${level}`]: levelFeatures[[`level_${level}`]],
+        },
+      }))
+    } else {
+      // for traits
+      setLevelData((prev) => ({
+        ...prev,
+        traits: {
+          ...prev.traits,
+          ...levelFeatures[[`level_${level}`]],
+        },
+      }))
+    }
 
     if (data.featureName) {
       setDisableNewLevel(false)
@@ -44,8 +61,8 @@ const Level = ({level, setLevelData, currentLevel, setDisableNewLevel}) => {
 
   return (
     <div className={level === currentLevel ? "level" : "level-collapsed"}>
-      <h4>level {level}</h4>
-      {level === currentLevel && (
+      <h4>{type === "levels" ? `level ${level}` : "traits"}</h4>
+      {level === currentLevel && type === "levels" && (
         <div className="ability-improv-toggle">
           <label>
             <span>Ability score+</span>
@@ -146,7 +163,7 @@ const Level = ({level, setLevelData, currentLevel, setDisableNewLevel}) => {
             ].featureName === ""
           }
         >
-          new feature
+          {type === "levels" ? "new feature" : "new trait"}
         </button>
       )}
     </div>

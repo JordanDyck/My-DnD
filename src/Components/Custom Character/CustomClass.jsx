@@ -167,7 +167,7 @@ const CustomClass = ({setStoredDetails}) => {
         <span className="tool-tip">
           *Levels can be edited at any time after.
         </span>
-        <CustomLevels setDetails={setDetails} />
+        <CustomLevels setDetails={setDetails} type={"levels"} />
       </div>
       {details.class_name &&
         details.hit_dice &&
