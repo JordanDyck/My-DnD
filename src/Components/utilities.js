@@ -65,10 +65,10 @@ export const racePerkFilter = {
   ability_bonuses: (value) => {
     const abilitybonus = value
       .map((element) => {
-        return element.ability_score.name
+        return element.ability_score.name + ` ${element.bonus}`
       })
       .join(", ")
-    return `${abilitybonus} + ${value[0].bonus}`
+    return abilitybonus
   },
 
   languages: (value) => {

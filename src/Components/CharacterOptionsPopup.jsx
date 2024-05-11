@@ -4,17 +4,18 @@ import {useEffect, useState} from "react"
 const CharacterOptionsPopUp = ({
   setPopUp,
   setOptionName,
+  url,
   type,
   setIsCustom,
 }) => {
   const [options, setOptions] = useState([])
   useEffect(() => {
-    axios.get(`https://www.dnd5eapi.co/api/${type}/`).then((res) => {
+    axios.get(`https://www.dnd5eapi.co/api/${url}/`).then((res) => {
       const data = res.data.results
 
       setOptions(data)
     })
-  }, [type])
+  }, [url])
 
   return (
     <div className="popup-container">
@@ -22,10 +23,10 @@ const CharacterOptionsPopUp = ({
         id="custom-char-btn"
         onClick={() => {
           setTimeout(() => {
-            setPopUp((prev) => ({...prev, [type]: false}))
-            if (type === "classes") {
+            setPopUp((prev) => ({...prev, [url]: false}))
+            if (url === "classes") {
               setIsCustom((prev) => ({...prev, customClass: true}))
-            } else if (type === "races") {
+            } else if (url === "races") {
               setIsCustom((prev) => ({...prev, customRace: true}))
             }
           }, 300)
@@ -41,8 +42,8 @@ const CharacterOptionsPopUp = ({
             onClick={() => {
               setTimeout(() => {
                 setOptionName(option.name)
-
-                setPopUp((prev) => ({...prev, [type]: false}))
+                setIsCustom((prev) => ({...prev, [type]: true}))
+                setPopUp((prev) => ({...prev, [url]: false}))
               }, 300)
             }}
           >

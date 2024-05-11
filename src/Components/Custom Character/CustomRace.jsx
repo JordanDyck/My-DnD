@@ -3,7 +3,11 @@ import CustomProficiencies from "./CustomProficiencies"
 import SkillSelector from "./SkillSelector"
 import CustomLevels from "./CustomLevels"
 
-const CustomRace = () => {
+const CustomRace = ({
+  setStoredDetails,
+  setShowCharacterDetails,
+  setRaceName,
+}) => {
   const [raceDetails, setRaceDetails] = useState({
     age: "",
     languages: [""],
@@ -14,7 +18,7 @@ const CustomRace = () => {
     speed: "",
     subRace: "",
   })
-  console.log(raceDetails)
+
   const handleFormData = (e) => {
     e.preventDefault()
     setRaceDetails((prev) => ({
@@ -72,6 +76,24 @@ const CustomRace = () => {
       <div className="custom-traits-wrapper">
         <CustomLevels setDetails={setRaceDetails} type={"traits"} />
       </div>
+      <button
+        type="button"
+        className="save-race-btn"
+        onClick={() => {
+          setStoredDetails((prev) => ({
+            ...prev,
+            race: raceDetails,
+          }))
+          setRaceName(raceDetails.raceName)
+          setShowCharacterDetails((prev) => ({
+            ...prev,
+            race: false,
+            customRace: false,
+          }))
+        }}
+      >
+        save race
+      </button>
     </div>
   )
 }

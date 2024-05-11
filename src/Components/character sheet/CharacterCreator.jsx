@@ -13,10 +13,11 @@ const CharacterCreator = ({setShowCreator}) => {
     characterName: "",
     classDetails: "",
     subClass: {},
-    levels: "",
+    levels: [],
     health: {currentHP: 100, maxHP: 100},
-    race: "",
+    race: {},
   })
+
   const [showCharacterPopUps, setShowCharacterPopUps] = useState({
     classes: false,
     races: false,
@@ -32,7 +33,7 @@ const CharacterCreator = ({setShowCreator}) => {
   })
   const [characterDetails, setCharacterDetails] = useState([])
   const [newProfDetails, setNewProfDetails] = useState([])
-  // console.log(storedDetails)
+
   // check if character name is already in use
   const checkStoredNames = (nameToCheck) => {
     if (
@@ -71,6 +72,7 @@ const CharacterCreator = ({setShowCreator}) => {
             <label id="class-label">Class:</label>
             <h4 className="class">{classNameOption}</h4>
             <button
+              // for deleting class
               className="delete-class-btn"
               onClick={() => {
                 setClassNameOption("")
@@ -96,15 +98,17 @@ const CharacterCreator = ({setShowCreator}) => {
           className="class-btn"
           onClick={() => {
             setShowCharacterPopUps((prev) => ({...prev, classes: true}))
-            setShowCharacterDetails((prev) => ({
-              ...prev,
-              class: true,
-              subClass: false,
-            }))
+            // setShowCharacterDetails((prev) => ({
+            //   ...prev,
+            //   class: true,
+            //   subClass: false,
+            // }))
           }}
           disabled={
-            showCharacterDetails.race ||
+            // showCharacterDetails.race ||
             showCharacterDetails.customClass ||
+            showCharacterDetails.customRace ||
+            showCharacterDetails.race ||
             classNameOption
           }
         >
@@ -138,7 +142,11 @@ const CharacterCreator = ({setShowCreator}) => {
           </>
         )}
         {showCharacterDetails.customClass && (
-          <CustomClass setStoredDetails={setStoredDetails} />
+          <CustomClass
+            setStoredDetails={setStoredDetails}
+            setClassNameOption={setClassNameOption}
+            setShowCharacterDetails={setShowCharacterDetails}
+          />
         )}
         {/* for choosing subclass */}
         {storedDetails.subClass.name && (
@@ -146,6 +154,7 @@ const CharacterCreator = ({setShowCreator}) => {
             <label id="subclass-label">subclass:</label>
             <h4>{storedDetails.subClass.name}</h4>
             <button
+              // for deleting subclass
               className="delete-class-btn"
               onClick={() => {
                 setStoredDetails((prev) => ({
@@ -195,6 +204,7 @@ const CharacterCreator = ({setShowCreator}) => {
             </label>
             <h4 id="race">{raceName}</h4>
             <button
+              // for deleting race
               className="delete-race-btn"
               onClick={() => {
                 setRaceName("")
@@ -211,18 +221,25 @@ const CharacterCreator = ({setShowCreator}) => {
           className="race-btn"
           onClick={() => {
             setShowCharacterPopUps((prev) => ({...prev, races: true}))
-            setShowCharacterDetails((prev) => ({...prev, race: true}))
+            // setShowCharacterDetails((prev) => ({...prev, race: true}))
           }}
           disabled={
             showCharacterDetails.class ||
             showCharacterDetails.subClass ||
             showCharacterDetails.race ||
+            showCharacterDetails.customRace ||
             raceName
           }
         >
           select race
         </button>
-        {showCharacterDetails.customRace && <CustomRace />}
+        {showCharacterDetails.customRace && (
+          <CustomRace
+            setStoredDetails={setStoredDetails}
+            setShowCharacterDetails={setShowCharacterDetails}
+            setRaceName={setRaceName}
+          />
+        )}
         {/* for choosing your Race */}
         {raceName && showCharacterDetails.race && (
           <>
@@ -257,7 +274,8 @@ const CharacterCreator = ({setShowCreator}) => {
         <CharacterOptionsPopUp
           setPopUp={setShowCharacterPopUps}
           setOptionName={setClassNameOption}
-          type={"classes"}
+          url={"classes"}
+          type={"class"}
           setIsCustom={setShowCharacterDetails}
         />
       )}
@@ -265,7 +283,8 @@ const CharacterCreator = ({setShowCreator}) => {
         <CharacterOptionsPopUp
           setPopUp={setShowCharacterPopUps}
           setOptionName={setRaceName}
-          type={"races"}
+          url={"races"}
+          type={"race"}
           setIsCustom={setShowCharacterDetails}
         />
       )}
@@ -273,7 +292,7 @@ const CharacterCreator = ({setShowCreator}) => {
       {storedDetails.characterName &&
         storedDetails.classDetails &&
         storedDetails.levels &&
-        storedDetails.race &&
+        storedDetails.raceName &&
         storedDetails.subClass.name &&
         !showCharacterDetails.class &&
         !showCharacterDetails.subClass &&

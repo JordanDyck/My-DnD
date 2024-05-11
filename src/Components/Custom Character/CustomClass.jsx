@@ -9,7 +9,11 @@ import CustomLevels from "./CustomLevels"
 
 // .match(/^[Dd](\d+)?$/) ? hit_dice : "",
 
-const CustomClass = ({setStoredDetails}) => {
+const CustomClass = ({
+  setStoredDetails,
+  setClassNameOption,
+  setShowCharacterDetails,
+}) => {
   const [toggleSwitch, setToggleSwitch] = useState(false)
   const [details, setDetails] = useState({
     class_name: "",
@@ -178,12 +182,20 @@ const CustomClass = ({setStoredDetails}) => {
           <button
             type="button"
             className="save-custom-class-btn"
-            onClick={() =>
+            onClick={() => {
+              const {levels, ...rest} = details
               setStoredDetails((prev) => ({
                 ...prev,
-                classDetails: details,
+                classDetails: rest,
+                levels: levels,
               }))
-            }
+              setClassNameOption(details.class_name)
+              setShowCharacterDetails((prev) => ({
+                ...prev,
+                customClass: false,
+                class: false,
+              }))
+            }}
           >
             Save Class
           </button>

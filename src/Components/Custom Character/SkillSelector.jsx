@@ -6,7 +6,7 @@ import {RiDeleteBinLine} from "react-icons/ri"
 const SkillSelector = ({setDetails, type, url}) => {
   const [skills, setSkills] = useState([])
   const [chosenskills, setChosenSkills] = useState({})
-  const counter = useCounter([], 2)
+  const counter = useCounter([], 3)
 
   useEffect(() => {
     axios.get(`https://www.dnd5eapi.co/api/${url}/`).then((res) => {
@@ -33,6 +33,11 @@ const SkillSelector = ({setDetails, type, url}) => {
       >{`${type}:`}</h4>
       {Object.keys(chosenskills).length ? (
         <div className="chosen-skills-wrapper">
+          <span>
+            {type === "ability_improvement"
+              ? "*click to increase or remove ability score."
+              : "*click to remove."}
+          </span>
           <div className="chosen-skills">
             {Object.keys(chosenskills).map((item, index) => {
               return (
