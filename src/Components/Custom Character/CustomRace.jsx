@@ -70,7 +70,9 @@ const CustomRace = ({
         <SkillSelector
           setDetails={setRaceDetails}
           type={"ability_improvement"}
-          url={"ability-scores"}
+          data={"ability-scores"}
+          maxChoices={3}
+          isCustom={true}
         />
       </div>
       <div className="custom-traits-wrapper">

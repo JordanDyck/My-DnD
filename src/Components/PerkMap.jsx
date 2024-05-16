@@ -1,7 +1,6 @@
-import {useState} from "react"
 import {handleformat} from "./utilities"
 
-import ProficiencyBonus from "./ProficiencyBonus"
+import SkillSelector from "./Custom Character/SkillSelector"
 
 const PerkMap = ({
   filteredRaceDetails,
@@ -9,9 +8,7 @@ const PerkMap = ({
   newProfDetails,
   setNewProfDetails,
 }) => {
-  const [skillCounter, setSkillCounter] = useState({})
-
-  return filteredRaceDetails?.map(([key, value]) => {
+  return filteredRaceDetails?.map(([key, value], index) => {
     const customizeValue = perkFilter?.[key]?.(value, key)
     const valueToCheck = customizeValue === undefined ? value : customizeValue
     const renderedValue = handleformat(valueToCheck, key)
@@ -33,75 +30,76 @@ const PerkMap = ({
 
     if (key === "proficiency_choices") {
       const options = value[0].from.options.map((element) => {
-        return (
-          <ProficiencyBonus
-            key={`profBonus_${element.item.name}`}
-            skillCounter={skillCounter}
-            setSkillCounter={setSkillCounter}
-            category={key}
-            maxChoices={value[0].choose}
-            profName={element.item.name}
-            setNewProfDetails={setNewProfDetails}
-            newProfDetails={newProfDetails}
-          />
-        )
+        return {
+          name: element.item.name.replaceAll("Skill:", ""),
+        }
       })
-
       return (
-        <div className={`perk perk_${key}`} key={`profBonus_${key}`}>
-          <h4>proficiency choices:</h4>
-          <p>choose {value[0].choose}</p>
-          {options}
+        <SkillSelector
+          key={`skills_proficiency_choices${index}`}
+          setDetails={setNewProfDetails}
+          maxChoices={value[0].choose}
+          type={"skill_proficiencies"}
+          data={options}
+          isCustom={false}
+        />
+      )
+    }
+    if (key === "age") {
+      return (
+        <div className={`perk perk_${key}`} key={`perk_${key}`}>
+          <h4>
+            age:
+            <input name="age" />
+          </h4>
+
+          <p>{value}</p>
         </div>
       )
     }
-
+    if (key === "size_description") {
+      return (
+        <div className={`perk perk_${key}`} key={`perk_${key}`}>
+          <div className="custom-size">
+            <h4>size:</h4>
+            <span>ft</span>
+            <input type="number" name="size-ft" />
+            <span>in</span>
+            <input type="number" name="size-inch" />
+          </div>
+          <p>{value}</p>
+        </div>
+      )
+    }
     if (key === "ability_bonus_options") {
       const options = value.from.options.map((element) => {
-        return (
-          <ProficiencyBonus
-            key={`profBonus_${element.ability_score.name}`}
-            skillCounter={skillCounter}
-            category={key}
-            setSkillCounter={setSkillCounter}
-            maxChoices={value.choose}
-            profName={element.ability_score.name}
-            setNewProfDetails={setNewProfDetails}
-            newProfDetails={newProfDetails}
-          />
-        )
+        return {name: element.ability_score.name}
       })
-
       return (
-        <div className={`perk perk_${key}`} key={`profBonus_${key}`}>
-          <h4>ability bonus options:</h4>
-          <p>choose {value.choose}</p>
-          {options}
-        </div>
+        <SkillSelector
+          key={`skills_ability_bonus_choices${index}`}
+          setDetails={setNewProfDetails}
+          maxChoices={value.choose}
+          type={"ability_improvement"}
+          data={options}
+          isCustom={false}
+        />
       )
     }
     if (key === "starting_proficiency_options") {
       const options = value.from.options.map((element) => {
-        return (
-          <ProficiencyBonus
-            key={`profBonus_${element.item.name}`}
-            skillCounter={skillCounter}
-            category={key}
-            setSkillCounter={setSkillCounter}
-            maxChoices={value.choose}
-            profName={element.item.name}
-            setNewProfDetails={setNewProfDetails}
-            newProfDetails={newProfDetails}
-          />
-        )
+        return {name: element.item.name.replaceAll("Skill:", "")}
       })
 
       return (
-        <div className={`perk perk_${key}`} key={`profBonus_${key}`}>
-          <h4>starting proficiency options:</h4>
-          <p>choose {value.choose}</p>
-          {options}
-        </div>
+        <SkillSelector
+          key={`starting_proficiency_choices${index}`}
+          setDetails={setNewProfDetails}
+          maxChoices={value.choose}
+          type={"skill_proficiencies"}
+          data={options}
+          isCustom={false}
+        />
       )
     }
     return (

@@ -22,15 +22,21 @@ const Perks = ({
       setStoredDetails((prev) => ({
         ...prev,
         race: {
-          ...characterDetails,
-          ability_bonus_options: {
-            ...newProfDetails.ability_bonus_options,
-            maxProfs: characterDetails?.ability_bonus_options?.choose,
-          },
-          starting_proficiency_options: {
-            ...newProfDetails.starting_proficiency_options,
-            maxProfs: characterDetails?.starting_proficiency_options?.choose,
-          },
+          name: characterDetails.name,
+          languages: characterDetails.languages,
+          speed: characterDetails.speed,
+          starting_proficiencies: characterDetails.starting_proficiencies,
+          traits: characterDetails.traits,
+
+          // ...characterDetails,
+          // ability_bonus_options: {
+          //   ...newProfDetails.ability_bonus_options,
+          //   maxProfs: characterDetails?.ability_bonus_options?.choose,
+          // },
+          // starting_proficiency_options: {
+          //   ...newProfDetails.starting_proficiency_options,
+          //   maxProfs: characterDetails?.starting_proficiency_options?.choose,
+          // },
         },
       }))
     }

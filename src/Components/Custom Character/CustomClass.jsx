@@ -78,17 +78,21 @@ const CustomClass = ({
         <div className="skills">
           {/* proficiencies */}
           <SkillSelector
+            maxChoices={99}
+            isCustom={true}
             setDetails={setDetails}
             type={"skill_proficiencies"}
-            url={"skills"}
+            data={"skills"}
           />
         </div>
         <div className="saving-throw-container">
           {/* saving throws */}
           <SkillSelector
+            maxChoices={99}
+            isCustom={true}
             setDetails={setDetails}
             type={"saving_throws"}
-            url={"ability-scores"}
+            data={"ability-scores"}
           />
         </div>
         <div className="spell-section">
@@ -125,9 +129,11 @@ const CustomClass = ({
             <div className="saving-throw-container">
               {/* spell-saving throws */}
               <SkillSelector
+                maxChoices={99}
+                isCustom={true}
                 setDetails={setDetails}
                 type={"spell_saves"}
-                url={"ability-scores"}
+                data={"ability-scores"}
               />
             </div>
           )}

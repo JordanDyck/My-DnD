@@ -633,6 +633,7 @@ body {
       }
     }
   }
+
   .perk-wrapper {
     display: flex;
     flex-direction: column;
@@ -647,6 +648,49 @@ body {
         font-weight: 600;
       }
     }
+    .custom-size {
+      display: flex;
+      width: 145px;
+      background-color: #efefef;
+      box-shadow: 1px 1px 0px 0px rgba(117, 117, 117, 0.91);
+
+      align-items: flex-end;
+      padding: 3px;
+      border: 1px solid $fadedBorderColor;
+
+      input {
+        width: 25px;
+        font-size: 17px;
+        margin-right: 5px;
+      }
+      label {
+        padding-right: 5px;
+      }
+      span {
+        font-size: 10px;
+        margin-bottom: 14px;
+        font-weight: bold;
+      }
+      h4 {
+        padding-right: 10px;
+      }
+    }
+    .perk_age {
+      h4 {
+        display: flex;
+        align-items: flex-end;
+        border: 1px solid $fadedBorderColor;
+        width: 100px;
+        padding-bottom: 5px;
+        background-color: #efefef;
+        box-shadow: 1px 1px 0px 0px rgba(117, 117, 117, 0.91);
+      }
+      input {
+        margin-left: 10px;
+        width: 40px;
+      }
+    }
+
     .perk_ability_bonus_options,
     .perk_proficiency_choices {
       button {
@@ -699,6 +743,11 @@ body {
   padding-block: 10px;
   border-top: 1px solid $fadedBorderColor;
   border-bottom: 1px solid $fadedBorderColor;
+  .skill-choose {
+    padding-bottom: 10px;
+    font-family: $parFont;
+    font-size: 18px;
+  }
   .chosen-skills-wrapper {
     display: flex;
     flex-direction: column;

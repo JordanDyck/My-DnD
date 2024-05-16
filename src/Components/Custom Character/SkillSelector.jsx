@@ -1,20 +1,24 @@
-import {useEffect, useState} from "react"
+import {useEffect, useState, useCallback} from "react"
 import axios from "axios"
 import useCounter from "../../hooks/useCounter"
 import {RiDeleteBinLine} from "react-icons/ri"
 
-const SkillSelector = ({setDetails, type, url}) => {
+const SkillSelector = ({setDetails, type, data, isCustom, maxChoices}) => {
   const [skills, setSkills] = useState([])
   const [chosenskills, setChosenSkills] = useState({})
-  const counter = useCounter([], 3)
+  const counter = useCounter([], maxChoices)
 
   useEffect(() => {
-    axios.get(`https://www.dnd5eapi.co/api/${url}/`).then((res) => {
-      const data = res.data.results
+    if (isCustom === true) {
+      axios.get(`https://www.dnd5eapi.co/api/${data}/`).then((res) => {
+        const urlData = res.data.results
 
+        setSkills(urlData)
+      })
+    } else {
       setSkills(data)
-    })
-  }, [url])
+    }
+  }, [data, isCustom])
 
   useEffect(() => {
     setDetails((prev) => ({
@@ -23,14 +27,16 @@ const SkillSelector = ({setDetails, type, url}) => {
     }))
   }, [chosenskills, setDetails, type])
 
+  const totalCount = useCallback(() => {
+    return counter.value.reduce((total, current) => total + current, 0)
+  }, [counter])
+
   return (
     <div className="skills-container">
-      <h4
-        className="h4-title"
-        style={{
-          paddingBottom: !Object.keys(chosenskills).length ? "10px" : "0",
-        }}
-      >{`${type}:`}</h4>
+      <h4 className="h4-title">{`${type}:`}</h4>
+      <p className="skill-choose">
+        {isCustom ? `choose up to ${maxChoices}` : `choose ${maxChoices}`}
+      </p>
       {Object.keys(chosenskills).length ? (
         <div className="chosen-skills-wrapper">
           <span>
@@ -40,8 +46,8 @@ const SkillSelector = ({setDetails, type, url}) => {
           </span>
           <div className="chosen-skills">
             {Object.keys(chosenskills).map((item, index) => {
+              // displays selected proficiencies
               return (
-                // displays current proficiencies
                 <button
                   className="chosen-skill"
                   key={`chosen_${item}`}
@@ -54,7 +60,10 @@ const SkillSelector = ({setDetails, type, url}) => {
                         [item]: counter.value[index] + 1,
                       }))
                       // delete item
-                      if (counter.value[index] >= counter.maxValue) {
+                      if (
+                        counter.value[index] >= counter.maxValue ||
+                        (isCustom === false && totalCount() >= maxChoices)
+                      ) {
                         counter.reset(index)
                         const skillCopy = {...chosenskills}
                         delete skillCopy[item]
@@ -62,6 +71,7 @@ const SkillSelector = ({setDetails, type, url}) => {
                         setChosenSkills(skillCopy)
                       }
                     } else {
+                      counter.reset(index)
                       const skillCopy = {...chosenskills}
                       delete skillCopy[item]
 
@@ -85,27 +95,26 @@ const SkillSelector = ({setDetails, type, url}) => {
         ""
       )}
       {/* displays all available skills  */}
-      <div className="all-skills">
+      <div
+        className="all-skills"
+        style={{
+          display:
+            isCustom === false && totalCount() >= maxChoices ? "none" : "block",
+        }}
+      >
         {skills.map((skill, index) => {
           return (
             <button
               className="skill"
-              key={skill.name}
+              key={`allskills_${skill.name}`}
               type="button"
               onClick={() => {
-                if (type === "ability_improvement") {
-                  counter.setCurrent([...counter.value, 1])
+                counter.setCurrent([...counter.value, 1])
 
-                  setChosenSkills((prev) => ({
-                    ...prev,
-                    [skill.name]: counter.value?.[index] || 1,
-                  }))
-                } else {
-                  setChosenSkills((prev) => ({
-                    ...prev,
-                    [skill.name]: 1,
-                  }))
-                }
+                setChosenSkills((prev) => ({
+                  ...prev,
+                  [skill.name]: counter.value?.[index] || 1,
+                }))
               }}
               disabled={Object.keys(chosenskills).includes(skill.name)}
             >
