@@ -2,12 +2,7 @@ import {handleformat} from "./utilities"
 
 import SkillSelector from "./Custom Character/SkillSelector"
 
-const PerkMap = ({
-  filteredRaceDetails,
-  perkFilter,
-  newProfDetails,
-  setNewProfDetails,
-}) => {
+const PerkMap = ({filteredRaceDetails, perkFilter, setNewDetails}) => {
   return filteredRaceDetails?.map(([key, value], index) => {
     const customizeValue = perkFilter?.[key]?.(value, key)
     const valueToCheck = customizeValue === undefined ? value : customizeValue
@@ -19,8 +14,34 @@ const PerkMap = ({
         return ""
       }
     }
+
+    if (key === "hit_die") {
+      return (
+        <div className={`perk perk_${key}`} key={`perk key_${key}`}>
+          <h4 className="h4-title">
+            hit dice: <span>D{value}</span>
+          </h4>
+          <div className="perk_health">
+            <h4 className="h4-title">
+              health:
+              <input
+                type="number"
+                onChange={(e) => {
+                  setNewDetails((prev) => ({
+                    ...prev,
+                    health: {currentHP: e.target.value, maxHP: e.target.value},
+                  }))
+                }}
+              />
+            </h4>
+          </div>
+        </div>
+      )
+    }
+
     if (key === "spellcasting") {
       // this way "spellcasting" doesn't get displayed because its empty anyway.
+
       return (
         <div className={`perk perk_${key}`} key={`perk key_${key}`}>
           <b>spell save:</b> <p>{value.spellcasting_ability.name}</p>
@@ -34,12 +55,13 @@ const PerkMap = ({
           name: element.item.name.replaceAll("Skill:", ""),
         }
       })
+
       return (
         <SkillSelector
-          key={`skills_proficiency_choices${index}`}
-          setDetails={setNewProfDetails}
+          key={`class_skills_proficiency_choices${index}`}
+          setDetails={setNewDetails}
           maxChoices={value[0].choose}
-          type={"skill_proficiencies"}
+          type={"class_custom_proficiencies"}
           data={options}
           isCustom={false}
         />
@@ -50,7 +72,15 @@ const PerkMap = ({
         <div className={`perk perk_${key}`} key={`perk_${key}`}>
           <h4>
             age:
-            <input name="age" />
+            <input
+              name="age"
+              onChange={(e) => {
+                setNewDetails((prev) => ({
+                  ...prev,
+                  age: e.target.value,
+                }))
+              }}
+            />
           </h4>
 
           <p>{value}</p>
@@ -60,12 +90,23 @@ const PerkMap = ({
     if (key === "size_description") {
       return (
         <div className={`perk perk_${key}`} key={`perk_${key}`}>
-          <div className="custom-size">
-            <h4>size:</h4>
+          <div
+            className="custom-size"
+            onChange={(e) => {
+              setNewDetails((prev) => ({
+                ...prev,
+                size: {
+                  ...prev.size,
+                  [e.target.name]: e.target.value,
+                },
+              }))
+            }}
+          >
+            <h4 className="h4-title">size:</h4>
             <span>ft</span>
-            <input type="number" name="size-ft" />
+            <input type="number" name="ft" />
             <span>in</span>
-            <input type="number" name="size-inch" />
+            <input type="number" name="inch" />
           </div>
           <p>{value}</p>
         </div>
@@ -75,10 +116,11 @@ const PerkMap = ({
       const options = value.from.options.map((element) => {
         return {name: element.ability_score.name}
       })
+
       return (
         <SkillSelector
           key={`skills_ability_bonus_choices${index}`}
-          setDetails={setNewProfDetails}
+          setDetails={setNewDetails}
           maxChoices={value.choose}
           type={"ability_improvement"}
           data={options}
@@ -93,18 +135,21 @@ const PerkMap = ({
 
       return (
         <SkillSelector
-          key={`starting_proficiency_choices${index}`}
-          setDetails={setNewProfDetails}
+          key={`race_proficiency_choices${index}`}
+          setDetails={setNewDetails}
           maxChoices={value.choose}
-          type={"skill_proficiencies"}
+          type={"race_custom_proficiencies"}
           data={options}
           isCustom={false}
         />
       )
     }
+
     return (
       <div className={`perk perk_${key}`} key={`perk key_${key}`}>
-        <h4>{renderedValue ? key.replaceAll("_", " ") + ":" : ""}</h4>
+        <h4 className="h4-title">
+          {renderedValue ? key.replaceAll("_", " ") + ":" : ""}
+        </h4>
         {renderedValue}
       </div>
     )

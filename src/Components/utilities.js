@@ -106,10 +106,6 @@ export const racePerkFilter = {
 }
 
 export const classPerkFilter = {
-  hit_die: (value) => {
-    return "D" + value
-  },
-
   proficiencies: (value) => {
     const prof = value.map((element) => {
       if (element.name.includes("Saving Throw:")) {
@@ -163,7 +159,13 @@ export const classLvlFilter = {
       return feature.name
     })
 
-    return features
+    return features.length ? features : "New subclass feature"
+  },
+
+  class_specific: (value) => {
+    const {creating_spell_slots, ...rest} = value
+
+    return rest
   },
 
   spellcasting: (value) => {
@@ -199,10 +201,12 @@ export const handleformat = (itemValue, key) => {
     return itemValue.toString()
   } else if (Object.keys(itemValue)?.length) {
     const keys = Object.keys(itemValue)
+
     return keys.map((value) => (
       // this returns just the value keys
+
       <div className="item-value" key={uuid()}>
-        <h4>{value}:</h4>
+        <h4 className="h4-title">{value.replaceAll("_", " ")}:</h4>
         {handleformat(itemValue[value])}
       </div>
     ))

@@ -19,24 +19,24 @@ const SkillSelector = ({setDetails, type, data, isCustom, maxChoices}) => {
       setSkills(data)
     }
   }, [data, isCustom])
-
-  useEffect(() => {
-    setDetails((prev) => ({
-      ...prev,
-      [type]: [chosenskills],
-    }))
-  }, [chosenskills, setDetails, type])
-
   const totalCount = useCallback(() => {
     return counter.value.reduce((total, current) => total + current, 0)
   }, [counter])
 
+  const isMax = totalCount() >= maxChoices ? true : false
+  useEffect(() => {
+    if (maxChoices) {
+      setDetails((prev) => ({
+        ...prev,
+        [type]: {chosenskills, isMax},
+      }))
+    }
+  }, [chosenskills, setDetails, type, isMax, maxChoices])
+
   return (
     <div className="skills-container">
       <h4 className="h4-title">{`${type}:`}</h4>
-      <p className="skill-choose">
-        {isCustom ? `choose up to ${maxChoices}` : `choose ${maxChoices}`}
-      </p>
+      <p className="skill-choose">{!isCustom && `choose ${maxChoices}`}</p>
       {Object.keys(chosenskills).length ? (
         <div className="chosen-skills-wrapper">
           <span>

@@ -13,45 +13,46 @@ const Perks = ({
   setStoredDetails,
   characterDetails,
   setCharacterDetails,
-  newProfDetails,
-  setNewProfDetails,
+  newDetails,
+  setNewDetails,
 }) => {
   useEffect(() => {
-    // stores the values from characterDetails to storedDetails in CharacterCreator component to be put into localStorage
+    // stores the values from characterDetails to storedDetails in CharacterCreator comp to be put into localStorage
     if (category === "races") {
       setStoredDetails((prev) => ({
         ...prev,
         race: {
-          name: characterDetails.name,
-          languages: characterDetails.languages,
-          speed: characterDetails.speed,
-          starting_proficiencies: characterDetails.starting_proficiencies,
-          traits: characterDetails.traits,
-
-          // ...characterDetails,
-          // ability_bonus_options: {
-          //   ...newProfDetails.ability_bonus_options,
-          //   maxProfs: characterDetails?.ability_bonus_options?.choose,
-          // },
-          // starting_proficiency_options: {
-          //   ...newProfDetails.starting_proficiency_options,
-          //   maxProfs: characterDetails?.starting_proficiency_options?.choose,
-          // },
+          name: characterDetails?.name,
+          age: newDetails?.age,
+          languages: characterDetails?.languages,
+          speed: characterDetails?.speed,
+          size: newDetails?.size,
+          ability_bonus: characterDetails?.ability_bonuses,
+          starting_proficiencies: characterDetails?.starting_proficiencies,
+          traits: characterDetails?.traits,
+          proficiencies: {
+            skill_proficiencies: newDetails?.race_custom_proficiencies,
+            ability_improvement: newDetails?.ability_improvement,
+          },
         },
       }))
     }
 
     if (category === "classes") {
-      const {subclasses, index, ...detailsCopy} = characterDetails
       setStoredDetails((prev) => ({
         ...prev,
+        health: newDetails?.health,
         classDetails: {
-          ...detailsCopy,
-          proficiency_choices: newProfDetails.proficiency_choices,
+          name: characterDetails.name,
+          hit_die: characterDetails.hit_die,
+          skill_proficiencies: newDetails.class_custom_proficiencies,
+          base_proficiencies: characterDetails.proficiencies,
+          saving_throws: characterDetails.saving_throws,
+          starting_equipment: characterDetails.starting_equipment,
         },
       }))
     }
-  }, [category, characterDetails, newProfDetails, setStoredDetails])
+  }, [category, characterDetails, newDetails, setStoredDetails])
 
   useEffect(() => {
     if (category && subCategory) {
@@ -82,8 +83,7 @@ const Perks = ({
           <PerkMap
             filteredRaceDetails={filteredRaceDetails}
             perkFilter={category === "races" ? racePerkFilter : classPerkFilter}
-            setNewProfDetails={setNewProfDetails}
-            newProfDetails={newProfDetails}
+            setNewDetails={setNewDetails}
           />
         }
 

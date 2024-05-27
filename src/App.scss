@@ -676,19 +676,25 @@ body {
       }
     }
     .perk_age {
+      display: flex;
+      flex-direction: column;
+
+      border: 1px solid $fadedBorderColor;
+      padding-bottom: 5px;
       h4 {
-        display: flex;
-        align-items: flex-end;
-        border: 1px solid $fadedBorderColor;
-        width: 100px;
-        padding-bottom: 5px;
-        background-color: #efefef;
         box-shadow: 1px 1px 0px 0px rgba(117, 117, 117, 0.91);
+        background-color: #efefef;
+        text-decoration: underline;
+        width: 100px;
+        input {
+          margin-left: 10px;
+          width: 40px;
+        }
       }
-      input {
-        margin-left: 10px;
-        width: 40px;
-      }
+    }
+
+    .class_specific_title {
+      display: none;
     }
 
     .perk_ability_bonus_options,
@@ -716,14 +722,40 @@ body {
         text-decoration: underline;
       }
     }
+    .perk_hit_die {
+      display: flex;
+      flex-direction: column;
+
+      span {
+        text-decoration: underline;
+      }
+    }
+    .perk_health {
+      width: 165px;
+      box-shadow: 1px 1px 0px 0px rgba(117, 117, 117, 0.91);
+      background-color: #efefef;
+      border: 1px solid rgba(128, 128, 128, 0.8509803922);
+      padding-bottom: 5px;
+      input {
+        margin-left: 5px;
+        width: 70px;
+        font-size: 20px;
+      }
+    }
+
+    .class-lvl-details {
+      background-color: #dddddd;
+      box-shadow: 0px 1px 2px 2px rgba(117, 117, 117, 0.91);
+      padding: 5px;
+      h4 {
+        text-decoration: underline;
+      }
+    }
 
     .perk {
       border-bottom: 1px solid #808080d9;
       padding-block: 4px;
-      h4 {
-        font-size: 16px;
-        text-decoration: underline;
-      }
+
       p {
         font-family: $parFont;
         font-size: 18px;
@@ -833,6 +865,8 @@ body {
 input {
   height: 25px;
   border: none;
+  box-sizing: border-box;
+  padding-top: 11px;
   border-bottom: 2px solid;
   text-align: center;
   background: transparent;
