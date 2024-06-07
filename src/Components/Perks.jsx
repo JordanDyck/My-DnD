@@ -17,6 +17,15 @@ const Perks = ({
   setNewDetails,
 }) => {
   useEffect(() => {
+    const starting_equipment = characterDetails.starting_equipment?.map(
+      (element) => {
+        const quantity = element.quantity
+        if (quantity > 1) {
+          return `${element.equipment.name} (${quantity})`
+        } else return element.equipment.name
+      }
+    )
+
     // stores the values from characterDetails to storedDetails in CharacterCreator comp to be put into localStorage
     if (category === "races") {
       setStoredDetails((prev) => ({
@@ -31,7 +40,7 @@ const Perks = ({
           starting_proficiencies: characterDetails?.starting_proficiencies,
           traits: characterDetails?.traits,
           proficiencies: {
-            skill_proficiencies: newDetails?.race_custom_proficiencies,
+            skill_proficiencies: newDetails?.proficiency_bonus,
             ability_improvement: newDetails?.ability_improvement,
           },
         },
@@ -45,10 +54,13 @@ const Perks = ({
         classDetails: {
           name: characterDetails.name,
           hit_die: characterDetails.hit_die,
-          skill_proficiencies: newDetails.class_custom_proficiencies,
+          skill_proficiencies: newDetails.proficiency_bonus,
           base_proficiencies: characterDetails.proficiencies,
           saving_throws: characterDetails.saving_throws,
-          starting_equipment: characterDetails.starting_equipment,
+          starting_equipment: [
+            starting_equipment,
+            newDetails?.starting_equipment,
+          ],
         },
       }))
     }
@@ -84,6 +96,7 @@ const Perks = ({
             filteredRaceDetails={filteredRaceDetails}
             perkFilter={category === "races" ? racePerkFilter : classPerkFilter}
             setNewDetails={setNewDetails}
+            newDetails={newDetails}
           />
         }
 

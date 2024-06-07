@@ -1,5 +1,4 @@
 import {isValidElement} from "react"
-import {v4 as uuid} from "uuid"
 
 export const filter = {
   armor_class: (value) => {
@@ -133,24 +132,24 @@ export const classPerkFilter = {
     })
     return startingEquipment
   },
-  starting_equipment_options: (value) => {
-    const choice = value.map((choices) => {
-      return (
-        <div className="gear-choices" key={uuid()}>
-          <b>Choose {choices.choose}:</b>
-          <p>
-            {choices.desc
-              .replace("(a)", "")
-              .replace("(b)", "")
-              .replace("(c)", "")
-              .replace(" or ", " | OR | ")}
-          </p>
-        </div>
-      )
-    })
+  // starting_equipment_options: (value) => {
+  //   const choice = value.map((choices, index) => {
+  //     return (
+  //       <div className="gear-choices" key={`gear_choice${index}`}>
+  //         <b>Choose {choices.choose}:</b>
+  //         <p>
+  //           {choices.desc
+  //             .replace("(a)", "")
+  //             .replace("(b)", "")
+  //             .replace("(c)", "")
+  //             .replace(" or ", " | OR | ")}
+  //         </p>
+  //       </div>
+  //     )
+  //   })
 
-    return choice
-  },
+  //   return choice
+  // },
 }
 
 export const classLvlFilter = {
@@ -193,7 +192,7 @@ export const handleformat = (itemValue, key) => {
   ) {
     // returns the value
     return (
-      <p className={key} key={uuid()}>
+      <p className={key} key={`item_${itemValue}`}>
         {itemValue}
       </p>
     )
@@ -202,10 +201,10 @@ export const handleformat = (itemValue, key) => {
   } else if (Object.keys(itemValue)?.length) {
     const keys = Object.keys(itemValue)
 
-    return keys.map((value) => (
+    return keys.map((value, index) => (
       // this returns just the value keys
 
-      <div className="item-value" key={uuid()}>
+      <div className="item-value" key={`item_${key}${[index]}`}>
         <h4 className="h4-title">{value.replaceAll("_", " ")}:</h4>
         {handleformat(itemValue[value])}
       </div>

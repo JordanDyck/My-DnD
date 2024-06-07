@@ -1,18 +1,85 @@
 import {handleformat} from "./utilities"
+import {RiDeleteBinLine} from "react-icons/ri"
 
 import SkillSelector from "./Custom Character/SkillSelector"
+import ItemsTab from "./ItemsTab"
 
-const PerkMap = ({filteredRaceDetails, perkFilter, setNewDetails}) => {
+const PerkMap = ({
+  filteredRaceDetails,
+  perkFilter,
+  setNewDetails,
+  newDetails,
+}) => {
   return filteredRaceDetails?.map(([key, value], index) => {
     const customizeValue = perkFilter?.[key]?.(value, key)
     const valueToCheck = customizeValue === undefined ? value : customizeValue
     const renderedValue = handleformat(valueToCheck, key)
-
+    // console.log(newDetails)
     if (key === "starting_equipment") {
       // if starting_equipment has no value, dont display it
-      if (!value.length) {
+      if (value.length <= 0) {
         return ""
       }
+    }
+    // console.log(newDetails)
+    if (key === "starting_equipment_options") {
+      return (
+        <div className={`perk perk_${key}`} key={`perk key${key}`}>
+          {value.map((choices, index) => {
+            return (
+              <div className="gear-choices" key={`gear_choice${index}`}>
+                <b>Choose {choices.choose}:</b>
+                <p>
+                  {choices.desc
+                    .replace("(a)", "")
+                    .replace("(b)", "")
+                    .replace("(c)", "")
+                    .replace(" or ", " | OR | ")}
+                </p>
+              </div>
+            )
+          })}
+          <div className="starting-equipment-container">
+            <h4 className="h4-title">starting equipment:</h4>
+
+            <div
+              className="chosen-skills"
+              style={{
+                border: newDetails?.starting_equipment?.length
+                  ? "1px solid #9d9d9d"
+                  : "",
+              }}
+            >
+              {newDetails.starting_equipment?.map((item) => {
+                return (
+                  // displays starting gear
+                  <button
+                    className="chosen-skill"
+                    key={`chosen_${item}`}
+                    type="button"
+                    onClick={() => {
+                      // delete item
+                      setNewDetails((prev) => ({
+                        ...prev,
+                        starting_equipment: prev.starting_equipment?.filter(
+                          (ele) => ele !== item
+                        ),
+                      }))
+                    }}
+                  >
+                    {item} <RiDeleteBinLine />
+                  </button>
+                )
+              })}
+            </div>
+            <ItemsTab
+              type={"starting-equipment"}
+              setDetails={setNewDetails}
+              details={newDetails}
+            />
+          </div>
+        </div>
+      )
     }
 
     if (key === "hit_die") {
@@ -52,7 +119,7 @@ const PerkMap = ({filteredRaceDetails, perkFilter, setNewDetails}) => {
     if (key === "proficiency_choices") {
       const options = value[0].from.options.map((element) => {
         return {
-          name: element.item.name.replaceAll("Skill:", ""),
+          name: element.item.name.replaceAll("Skill: ", ""),
         }
       })
 
@@ -61,7 +128,7 @@ const PerkMap = ({filteredRaceDetails, perkFilter, setNewDetails}) => {
           key={`class_skills_proficiency_choices${index}`}
           setDetails={setNewDetails}
           maxChoices={value[0].choose}
-          type={"class_custom_proficiencies"}
+          type={"proficiency_bonus"}
           data={options}
           isCustom={false}
         />
@@ -130,7 +197,7 @@ const PerkMap = ({filteredRaceDetails, perkFilter, setNewDetails}) => {
     }
     if (key === "starting_proficiency_options") {
       const options = value.from.options.map((element) => {
-        return {name: element.item.name.replaceAll("Skill:", "")}
+        return {name: element.item.name.replaceAll("Skill: ", "")}
       })
 
       return (
@@ -138,7 +205,7 @@ const PerkMap = ({filteredRaceDetails, perkFilter, setNewDetails}) => {
           key={`race_proficiency_choices${index}`}
           setDetails={setNewDetails}
           maxChoices={value.choose}
-          type={"race_custom_proficiencies"}
+          type={"proficiency_bonus"}
           data={options}
           isCustom={false}
         />

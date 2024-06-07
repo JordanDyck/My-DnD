@@ -6,8 +6,7 @@ import SkillSelector from "./SkillSelector"
 import ItemsTab from "../ItemsTab"
 import StartingSpellSlots from "./StartingSpellSlots"
 import CustomLevels from "./CustomLevels"
-
-// .match(/^[Dd](\d+)?$/) ? hit_dice : "",
+import CustomProficiencies from "./CustomProficiencies"
 
 const CustomClass = ({
   setStoredDetails,
@@ -18,67 +17,86 @@ const CustomClass = ({
   const [details, setDetails] = useState({
     class_name: "",
     hit_dice: "",
+    health: {currentHP: "", maxHP: ""},
     proficiencies: [""],
-    skill_proficiencies: [],
-    saving_throws: [],
     starting_equipment: [],
     levels: [],
   })
+
   const onSubmit = (e) => {
     e.preventDefault()
-    const formData = new FormData(e.currentTarget)
-    const data = Object.fromEntries(formData)
-    const {class_name, hit_dice, cantrips, spellslots, spells, ...profs} = data
-    setDetails(() => ({
-      class_name,
-      hit_dice: hit_dice,
-      skill_proficiencies: details.skill_proficiencies,
-      starting_equipment: details.starting_equipment,
-      proficiencies: [...Object.values(profs)],
-      spellcasting: {cantrips, spellslots, spells},
-      spell_saves: details.spell_saves,
-      levels: details.levels,
-    }))
+    if (e.target.name !== "health" && e.target.name !== "hit_dice") {
+      setDetails((prev) => ({
+        ...prev,
+        [e.target.name]: e.target.value,
+      }))
+    }
   }
 
   return (
     <div className="custom-class-wrapper">
       <form onChange={onSubmit} className="custom-class">
-        <label htmlFor="name">
+        <label htmlFor="name" className="custom-class-name">
           class:
           <input name="class_name" />
+          <button
+            className="delete-class-btn"
+            type="button"
+            onClick={() => {
+              setDetails({})
+              setShowCharacterDetails((prev) => ({
+                ...prev,
+                customClass: false,
+              }))
+            }}
+          >
+            <RiDeleteBinLine />
+          </button>
         </label>
-        <label htmlFor="hit_dice">
-          Hit dice:
-          <input name="hit_dice" className="hit-dice" maxLength={3} />
-        </label>
-        <div className="proficiency-container">
-          <h4 className="h4-title">equipment proficiencies:</h4>
-          <span>*Ex. Heavy armor, Martial weapons, Bows.</span>
-          <div className="proficiencies">
-            {Object.values(details.proficiencies).map((_, index) => {
-              return <input key={index} name={`proficiency_${[index + 1]}`} />
-            })}
-            <button
-              type="button"
-              onClick={() =>
+        <div className="hp-container">
+          <label htmlFor="hit_dice">Hit dice:</label>
+          <span>
+            D:
+            <input
+              onChange={(e) => {
+                let dice = e.target.value > 20 ? "20" : e.target.value
                 setDetails((prev) => ({
                   ...prev,
-                  proficiencies: [...prev.proficiencies, ""],
+                  hit_dice: dice,
                 }))
-              }
-              disabled={
-                !details.proficiencies[details.proficiencies.length - 1]
-              }
-            >
-              +
-            </button>
-          </div>
+              }}
+              name="hit_dice"
+              className="hit-dice"
+              type="number"
+              value={details.hit_dice}
+            />
+          </span>
+          <label htmlFor="health">health:</label>
+          <input
+            name="health"
+            className="health"
+            type="number"
+            onChange={(e) => {
+              setDetails((prev) => ({
+                ...prev,
+                health: {currentHP: e.target.value, maxHP: e.target.value},
+              }))
+            }}
+          />
+        </div>
+        <div className="custom-proficiencies-container">
+          <h4 className="h4-title">equipment proficiencies:</h4>
+          <span>*Ex. Heavy armor, Martial weapons, Bows.</span>
+          <CustomProficiencies
+            array={details.proficiencies}
+            updateDetails={setDetails}
+            ObjKey={"proficiencies"}
+          />
         </div>
         <div className="skills">
-          {/* proficiencies */}
+          {/* skill proficiencies */}
           <SkillSelector
-            maxChoices={99}
+            maxChoices={2}
             isCustom={true}
             setDetails={setDetails}
             type={"skill_proficiencies"}
@@ -88,7 +106,7 @@ const CustomClass = ({
         <div className="saving-throw-container">
           {/* saving throws */}
           <SkillSelector
-            maxChoices={99}
+            maxChoices={2}
             isCustom={true}
             setDetails={setDetails}
             type={"saving_throws"}
@@ -129,7 +147,7 @@ const CustomClass = ({
             <div className="saving-throw-container">
               {/* spell-saving throws */}
               <SkillSelector
-                maxChoices={99}
+                maxChoices={2}
                 isCustom={true}
                 setDetails={setDetails}
                 type={"spell_saves"}
@@ -179,33 +197,27 @@ const CustomClass = ({
         </span>
         <CustomLevels setDetails={setDetails} type={"levels"} />
       </div>
-      {details.class_name &&
-        details.hit_dice &&
-        details.proficiencies &&
-        details.skill_proficiencies &&
-        details.starting_equipment &&
-        details.saving_throws && (
-          <button
-            type="button"
-            className="save-custom-class-btn"
-            onClick={() => {
-              const {levels, ...rest} = details
-              setStoredDetails((prev) => ({
-                ...prev,
-                classDetails: rest,
-                levels: levels,
-              }))
-              setClassNameOption(details.class_name)
-              setShowCharacterDetails((prev) => ({
-                ...prev,
-                customClass: false,
-                class: false,
-              }))
-            }}
-          >
-            Save Class
-          </button>
-        )}
+      <button
+        type="button"
+        className="save-custom-class-btn"
+        onClick={() => {
+          const {levels, ...rest} = details
+          setStoredDetails((prev) => ({
+            ...prev,
+            classDetails: rest,
+            levels: levels,
+          }))
+          setClassNameOption(details.class_name)
+          setShowCharacterDetails((prev) => ({
+            ...prev,
+            customClass: false,
+            class: false,
+          }))
+        }}
+        disabled={Object.values(details).includes("")}
+      >
+        Save Class
+      </button>
     </div>
   )
 }

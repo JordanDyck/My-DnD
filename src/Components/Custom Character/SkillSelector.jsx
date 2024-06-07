@@ -23,19 +23,31 @@ const SkillSelector = ({setDetails, type, data, isCustom, maxChoices}) => {
     return counter.value.reduce((total, current) => total + current, 0)
   }, [counter])
 
-  const isMax = totalCount() >= maxChoices ? true : false
+  const isMax = totalCount() >= counter.maxValue ? true : false
   useEffect(() => {
-    if (maxChoices) {
-      setDetails((prev) => ({
-        ...prev,
-        [type]: {chosenskills, isMax},
-      }))
-    }
-  }, [chosenskills, setDetails, type, isMax, maxChoices])
+    setDetails((prev) => ({
+      ...prev,
+      [type]: {...chosenskills, isMax},
+    }))
+  }, [chosenskills, setDetails, type, isMax])
 
   return (
     <div className="skills-container">
       <h4 className="h4-title">{`${type}:`}</h4>
+      {isCustom && (
+        <div className="ismax-container">
+          <label htmlFor="maxNum">Max Choices: </label>
+          <input
+            className="max-input"
+            type="number"
+            name="maxNum"
+            defaultValue={maxChoices}
+            onChange={(e) => {
+              counter.setMax(e.target.value)
+            }}
+          />
+        </div>
+      )}
       <p className="skill-choose">{!isCustom && `choose ${maxChoices}`}</p>
       {Object.keys(chosenskills).length ? (
         <div className="chosen-skills-wrapper">
@@ -62,7 +74,7 @@ const SkillSelector = ({setDetails, type, data, isCustom, maxChoices}) => {
                       // delete item
                       if (
                         counter.value[index] >= counter.maxValue ||
-                        (isCustom === false && totalCount() >= maxChoices)
+                        totalCount() >= counter.maxValue
                       ) {
                         counter.reset(index)
                         const skillCopy = {...chosenskills}
@@ -98,8 +110,7 @@ const SkillSelector = ({setDetails, type, data, isCustom, maxChoices}) => {
       <div
         className="all-skills"
         style={{
-          display:
-            isCustom === false && totalCount() >= maxChoices ? "none" : "block",
+          display: totalCount() >= counter.maxValue ? "none" : "block",
         }}
       >
         {skills.map((skill, index) => {

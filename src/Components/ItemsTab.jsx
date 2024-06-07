@@ -1,7 +1,6 @@
 import Select from "react-select"
 import axios from "axios"
 import {useState, useEffect} from "react"
-import {v4 as uuid} from "uuid"
 import {useDispatch} from "react-redux"
 import {MdCreate, MdClose} from "react-icons/md"
 
@@ -33,6 +32,15 @@ const ItemsTab = ({type, setDetails, details}) => {
     url: url,
   }))
 
+  useEffect(() => {
+    if (details) {
+      setDetails((prev) => ({
+        ...prev,
+        starting_equipment: [],
+      }))
+    }
+    // eslint-disable-next-line
+  }, [])
   // fetch equipment categories
   useEffect(() => {
     axios
@@ -100,15 +108,16 @@ const ItemsTab = ({type, setDetails, details}) => {
     return (
       !showItemCreator && (
         <div className="item-info-container ">
-          {filteredInfo.map(([key, value]) => {
+          {filteredInfo.map(([key, value], index) => {
             const customizeValue = filter?.[key]?.(value)
             const valueToCheck =
               customizeValue === undefined ? value : customizeValue
             const renderedValue = handleformat(valueToCheck, key)
+
             if (!showItemCreator) {
               return (
                 // displays the values
-                <div className={`item-info key_${key}`} key={uuid()}>
+                <div className={`item-info key_${key}`} key={`item_${key}`}>
                   <h4>
                     {key.replaceAll("_", " ")}
                     {renderedValue ? ":" : ""}
@@ -128,7 +137,9 @@ const ItemsTab = ({type, setDetails, details}) => {
                 className="add-item"
                 onClick={() =>
                   filteredInfo.length
-                    ? dispatch(addGear([...filteredInfo, ["id", uuid()]]))
+                    ? dispatch(
+                        addGear([...filteredInfo, ["id", filteredInfo[0][1]]])
+                      )
                     : ""
                 }
               >
@@ -139,7 +150,7 @@ const ItemsTab = ({type, setDetails, details}) => {
                 className="add-item"
                 onClick={() =>
                   filteredInfo.length
-                    ? dispatch(addInventory([...filteredInfo, ["id", uuid()]]))
+                    ? dispatch(addInventory([...filteredInfo, ["id"]]))
                     : ""
                 }
               >
@@ -149,18 +160,25 @@ const ItemsTab = ({type, setDetails, details}) => {
           ) : type === "starting-equipment" && filteredInfo.length ? (
             <button
               type="button"
-              onClick={() =>
-                filteredInfo.length &&
-                !details.starting_equipment.includes(filteredInfo[0][1])
-                  ? setDetails((prev) => ({
-                      ...prev,
+              onClick={() => {
+                const stateCopy = {...details, starting_equipment: []}
+                if (
+                  !details?.starting_equipment?.includes(filteredInfo[0][1])
+                ) {
+                  return (
+                    setDetails((prev) => ({
+                      ...stateCopy,
                       starting_equipment: [
-                        ...prev.starting_equipment,
+                        ...prev?.starting_equipment,
                         filteredInfo[0][1],
                       ],
-                    }))
-                  : ""
-              }
+                    })),
+                    setCurrentItemData(""),
+                    setCurrentItem(""),
+                    setCategoryURL("")
+                  )
+                }
+              }}
             >
               add
             </button>

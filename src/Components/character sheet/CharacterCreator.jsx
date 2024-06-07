@@ -133,7 +133,8 @@ const CharacterCreator = ({setShowCreator}) => {
               }}
               disabled={
                 !newDetails.health?.currentHP?.length ||
-                !newDetails.class_custom_proficiencies.isMax
+                !newDetails.proficiency_bonus?.isMax ||
+                !newDetails.starting_equipment?.length
               }
             >
               save
@@ -229,6 +230,7 @@ const CharacterCreator = ({setShowCreator}) => {
             showCharacterDetails.subClass ||
             showCharacterDetails.race ||
             showCharacterDetails.customRace ||
+            showCharacterDetails.customClass ||
             raceName
           }
         >
@@ -293,8 +295,8 @@ const CharacterCreator = ({setShowCreator}) => {
           setIsCustom={setShowCharacterDetails}
         />
       )}
-      {/* if all requirements are reached, display save character btn */}
 
+      {/* if all requirements are reached, display save character btn */}
       <button
         className="save-character-btn"
         onClick={() => {
