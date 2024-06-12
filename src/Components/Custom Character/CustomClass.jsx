@@ -7,6 +7,7 @@ import ItemsTab from "../ItemsTab"
 import StartingSpellSlots from "./StartingSpellSlots"
 import CustomLevels from "./CustomLevels"
 import CustomProficiencies from "./CustomProficiencies"
+import StatRolls from "../character sheet/StatRolls"
 
 const CustomClass = ({
   setStoredDetails,
@@ -53,6 +54,9 @@ const CustomClass = ({
             <RiDeleteBinLine />
           </button>
         </label>
+        <div className="stat-roller">
+          <StatRolls setStoredDetails={setStoredDetails} />
+        </div>
         <div className="hp-container">
           <label htmlFor="hit_dice">Hit dice:</label>
           <span>

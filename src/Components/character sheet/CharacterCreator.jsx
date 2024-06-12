@@ -7,6 +7,7 @@ import {setLocalStorage} from "../utilities"
 import CustomClass from "../Custom Character/CustomClass"
 import SubClassBuilder from "../Sub Class/SubClassBuilder"
 import CustomRace from "../Custom Character/CustomRace"
+import StatRolls from "./StatRolls"
 
 const CharacterCreator = ({setShowCreator}) => {
   const [storedDetails, setStoredDetails] = useState({
@@ -17,7 +18,7 @@ const CharacterCreator = ({setShowCreator}) => {
     health: {currentHP: 100, maxHP: 100},
     race: {},
   })
-
+  console.log(storedDetails)
   const [showCharacterPopUps, setShowCharacterPopUps] = useState({
     classes: false,
     races: false,
@@ -81,6 +82,7 @@ const CharacterCreator = ({setShowCreator}) => {
                   classDetails: "",
                   levels: "",
                   subClass: "",
+                  stats: "",
                 }))
                 setShowCharacterDetails((prev) => ({
                   ...prev,
@@ -94,6 +96,9 @@ const CharacterCreator = ({setShowCreator}) => {
               <RiDeleteBinLine />
             </button>
           </div>
+        )}
+        {showCharacterDetails.class && (
+          <StatRolls setStoredDetails={setStoredDetails} />
         )}
         <button
           // for choosing your class. shows class popup and disables unrelated btns.
