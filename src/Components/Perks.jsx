@@ -57,6 +57,10 @@ const Perks = ({
           skill_proficiencies: newDetails.proficiency_bonus,
           base_proficiencies: characterDetails.proficiencies,
           saving_throws: characterDetails.saving_throws,
+          spellcasting: {
+            spell_save:
+              characterDetails?.spellcasting?.spellcasting_ability.name,
+          },
           starting_equipment: [
             starting_equipment,
             newDetails?.starting_equipment,

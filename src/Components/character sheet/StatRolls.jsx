@@ -51,7 +51,8 @@ const StatRolls = ({setStoredDetails}) => {
               </h4>
               <input
                 type="number"
-                name={stat}
+                name={`statroll_${stat}`}
+                id={stat}
                 value={!isNaN(stats[stat].base) && stats[stat].base}
                 onFocus={(e) => e.target.select()}
                 onBlur={() =>
@@ -66,7 +67,7 @@ const StatRolls = ({setStoredDetails}) => {
                     : ""
                 }
                 className="base-stat-roll"
-                onChange={(e) => calculateBonus(e.target.name, e.target.value)}
+                onChange={(e) => calculateBonus(e.target.id, e.target.value)}
               />
             </div>
           )

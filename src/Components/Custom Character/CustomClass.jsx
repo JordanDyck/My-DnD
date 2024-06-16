@@ -18,7 +18,7 @@ const CustomClass = ({
   const [details, setDetails] = useState({
     class_name: "",
     hit_dice: "",
-    health: {currentHP: "", maxHP: ""},
+
     proficiencies: [""],
     starting_equipment: [],
     levels: [],
@@ -26,7 +26,13 @@ const CustomClass = ({
 
   const onSubmit = (e) => {
     e.preventDefault()
-    if (e.target.name !== "health" && e.target.name !== "hit_dice") {
+
+    if (
+      e.target.name !== "health" &&
+      e.target.name !== "hit_dice" &&
+      e.target.name !== "proficiency" &&
+      !e.target.name.includes("statroll_")
+    ) {
       setDetails((prev) => ({
         ...prev,
         [e.target.name]: e.target.value,
@@ -39,7 +45,7 @@ const CustomClass = ({
       <form onChange={onSubmit} className="custom-class">
         <label htmlFor="name" className="custom-class-name">
           class:
-          <input name="class_name" />
+          <input name="name" />
           <button
             className="delete-class-btn"
             type="button"
@@ -81,7 +87,7 @@ const CustomClass = ({
             className="health"
             type="number"
             onChange={(e) => {
-              setDetails((prev) => ({
+              setStoredDetails((prev) => ({
                 ...prev,
                 health: {currentHP: e.target.value, maxHP: e.target.value},
               }))
@@ -138,8 +144,14 @@ const CustomClass = ({
                   if (toggleSwitch === true) {
                     // toggleSwitch is actually false.
                     setDetails((prev) => {
-                      // deletes spellcasting & spell_saves, returns the rest.
-                      const {spellcasting, spell_saves, ...rest} = prev
+                      // deletes all spellcasting, returns the rest.
+                      const {
+                        spell_saves,
+                        cantrips,
+                        spells,
+                        spellslots,
+                        ...rest
+                      } = prev
                       return rest
                     })
                   }
@@ -166,6 +178,7 @@ const CustomClass = ({
 
           <div className="chosen-skills">
             {details.starting_equipment.map((item) => {
+              const amount = item.find((prop) => prop[0] === "amount")?.[1]
               return (
                 // displays starting gear
                 <button
@@ -182,7 +195,7 @@ const CustomClass = ({
                     }))
                   }}
                 >
-                  {item} <RiDeleteBinLine />
+                  {item[0][1]} {amount >= 2 && amount} <RiDeleteBinLine />
                 </button>
               )
             })}
@@ -205,10 +218,14 @@ const CustomClass = ({
         type="button"
         className="save-custom-class-btn"
         onClick={() => {
-          const {levels, ...rest} = details
+          const {levels, spells, spell_saves, spellslots, cantrips, ...rest} =
+            details
           setStoredDetails((prev) => ({
             ...prev,
-            classDetails: rest,
+            classDetails: {
+              spellcasting: {spells, spellslots, cantrips, spell_saves},
+              ...rest,
+            },
             levels: levels,
           }))
           setClassNameOption(details.class_name)
@@ -218,7 +235,12 @@ const CustomClass = ({
             class: false,
           }))
         }}
-        disabled={Object.values(details).includes("")}
+        disabled={
+          Object.values(details).includes("") ||
+          details.proficiencies.isMax === false ||
+          details.spell_saves?.isMax === false ||
+          details.saving_throws?.isMax === false
+        }
       >
         Save Class
       </button>

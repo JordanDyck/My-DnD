@@ -1,11 +1,11 @@
 const CustomProficiencies = ({array, updateDetails, ObjKey}) => {
   // creates a new input on btn click used for storing lists of data like languages or traits
-
   return (
     <div className={`custom-proficiencies ${ObjKey}`}>
       {array.map((_, index) => {
         return (
           <input
+            name="proficiency"
             key={`${ObjKey}_${[index]}`}
             onChange={(e) => {
               const data = [...array]

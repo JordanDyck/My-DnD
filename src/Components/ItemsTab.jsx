@@ -1,7 +1,7 @@
 import Select from "react-select"
 import axios from "axios"
 import {useState, useEffect} from "react"
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import {MdCreate, MdClose} from "react-icons/md"
 
 import equipmentFilter from "./EquipmentFilter.json"
@@ -9,6 +9,7 @@ import {filter, handleformat} from "./utilities.js"
 import ItemCreator from "./ItemCreator"
 import {addInventory} from "../Store/slices/inventorySlice"
 import {addGear} from "../Store/slices/gearSlice"
+import useCounter from "../hooks/useCounter.jsx"
 
 const ItemsTab = ({type, setDetails, details}) => {
   const [itemCategories, setItemCategories] = useState([])
@@ -17,8 +18,23 @@ const ItemsTab = ({type, setDetails, details}) => {
   const [categoryURL, setCategoryURL] = useState("")
   const [currentItemData, setCurrentItemData] = useState([])
   const [showItemCreator, setShowItemCreator] = useState(false)
-
+  const counter = useCounter(1, 9999)
   const dispatch = useDispatch()
+  const inventoryStore = useSelector((store) => store.inventory.value)
+  const gearStore = useSelector((store) => store.gear.value)
+
+  const compareId = (store, currentItem) => {
+    // check if store item id is the same as the current item
+    const findId = store.map((item) => {
+      const id = item.find((prop) => prop[0] === "id")?.[1]
+      return id
+    })
+
+    if (findId.includes(currentItem)) {
+      return true
+    }
+    return false
+  }
 
   // changes category object names to work with react select options.
   const categoryOptions = itemCategories.map(({index, name}) => ({
@@ -87,7 +103,7 @@ const ItemsTab = ({type, setDetails, details}) => {
       .concat(gearCategory)
       .concat(equipmentCategory)
 
-    // if item name hase a value, return true. else don't display it
+    // if item name has a value, return true. else don't display it
     const filteredInfo = itemInfo.filter((value) => {
       if (whitelist.includes(value[0])) {
         // if itemInfo values match the values of the json file
@@ -129,16 +145,35 @@ const ItemsTab = ({type, setDetails, details}) => {
               return ""
             }
           })}
+          {currentItem && (
+            <div className="counter-container">
+              <h4 className="h4-title">amount:</h4>
+              <label className="item-count">{counter.value}</label>
+              <button onClick={() => counter.increment()}>+</button>
+              <button
+                disabled={counter.value <= 1}
+                onClick={() => counter.decrement(1)}
+              >
+                -
+              </button>
+            </div>
+          )}
 
           {itemList && type === "items-tab" ? (
             <div className="add-btn-container">
               <button
                 type="button"
                 className="add-item"
+                disabled={
+                  compareId(gearStore, `gear_${filteredInfo[0][1]}`) === true
+                }
                 onClick={() =>
                   filteredInfo.length
                     ? dispatch(
-                        addGear([...filteredInfo, ["id", filteredInfo[0][1]]])
+                        addGear([
+                          ...filteredInfo,
+                          ["id", `gear_${filteredInfo[0][1]}`],
+                        ])
                       )
                     : ""
                 }
@@ -148,9 +183,21 @@ const ItemsTab = ({type, setDetails, details}) => {
               <button
                 type="button"
                 className="add-item"
+                disabled={
+                  compareId(
+                    inventoryStore,
+                    `inventory_${filteredInfo[0][1]}`
+                  ) === true
+                }
                 onClick={() =>
                   filteredInfo.length
-                    ? dispatch(addInventory([...filteredInfo, ["id"]]))
+                    ? dispatch(
+                        addInventory([
+                          ...filteredInfo,
+                          ["amount", counter.value],
+                          ["id", `inventory_${filteredInfo[0][1]}`],
+                        ])
+                      )
                     : ""
                 }
               >
@@ -160,6 +207,7 @@ const ItemsTab = ({type, setDetails, details}) => {
           ) : type === "starting-equipment" && filteredInfo.length ? (
             <button
               type="button"
+              className="add-btn"
               onClick={() => {
                 const stateCopy = {...details, starting_equipment: []}
                 if (
@@ -170,7 +218,7 @@ const ItemsTab = ({type, setDetails, details}) => {
                       ...stateCopy,
                       starting_equipment: [
                         ...prev?.starting_equipment,
-                        filteredInfo[0][1],
+                        [...filteredInfo, ["amount", counter.value]],
                       ],
                     })),
                     setCurrentItemData(""),

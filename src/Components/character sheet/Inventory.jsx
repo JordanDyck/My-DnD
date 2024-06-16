@@ -12,9 +12,16 @@ const Inventory = () => {
       </div>
       {inventory.value.map((item) => {
         const id = item.find((prop) => prop[0] === "id")?.[1]
+        const quantity = item.find((prop) => prop[0] === "quantity")?.[1]
 
         return (
-          <InventoryItem item={item} id={id} key={id} inventory={inventory} />
+          <InventoryItem
+            item={item}
+            id={id}
+            key={id}
+            inventory={inventory}
+            quantity={quantity}
+          />
         )
       })}
     </div>

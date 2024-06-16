@@ -1,7 +1,7 @@
 import {useState} from "react"
 
-const InventoryCounter = () => {
-  const [counter, setCount] = useState(1)
+const InventoryCounter = ({quantity}) => {
+  const [counter, setCount] = useState(quantity)
 
   return (
     <div className="counter-container">

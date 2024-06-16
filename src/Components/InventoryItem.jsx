@@ -7,8 +7,9 @@ import {filter, handleformat} from "./utilities"
 import GearItem from "./character sheet/GearItem"
 import DeleteInventoryBtn from "./DeleteInventoryBtn"
 
-const InventoryItem = ({item, id, inventory}) => {
+const InventoryItem = ({item, quantity, id, inventory}) => {
   const [activeDetails, setActiveDetails] = useState({})
+
   const showDetails = (id) => {
     setActiveDetails((prev) => ({
       ...prev,
@@ -26,7 +27,7 @@ const InventoryItem = ({item, id, inventory}) => {
           <RxDropdownMenu />
         </button>
         <h5>{item[0][1]}</h5>
-        <InventoryCounter />
+        <InventoryCounter quantity={quantity} />
         <DeleteInventoryBtn
           inventory={inventory}
           id={id}
@@ -59,6 +60,9 @@ const InventoryItem = ({item, id, inventory}) => {
             return ""
           }
           if (key === "str_minimum") {
+            return ""
+          }
+          if (key === "Quantity") {
             return ""
           }
 

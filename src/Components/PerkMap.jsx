@@ -14,14 +14,14 @@ const PerkMap = ({
     const customizeValue = perkFilter?.[key]?.(value, key)
     const valueToCheck = customizeValue === undefined ? value : customizeValue
     const renderedValue = handleformat(valueToCheck, key)
-    // console.log(newDetails)
+
     if (key === "starting_equipment") {
       // if starting_equipment has no value, dont display it
       if (value.length <= 0) {
         return ""
       }
     }
-    // console.log(newDetails)
+
     if (key === "starting_equipment_options") {
       return (
         <div className={`perk perk_${key}`} key={`perk key${key}`}>
@@ -51,6 +51,7 @@ const PerkMap = ({
               }}
             >
               {newDetails.starting_equipment?.map((item) => {
+                const amount = item.find((prop) => prop[0] === "amount")?.[1]
                 return (
                   // displays starting gear
                   <button
@@ -67,7 +68,7 @@ const PerkMap = ({
                       }))
                     }}
                   >
-                    {item} <RiDeleteBinLine />
+                    {item[0][1]} {amount >= 2 && amount} <RiDeleteBinLine />
                   </button>
                 )
               })}

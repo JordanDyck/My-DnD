@@ -783,6 +783,7 @@ body {
         input {
           margin-left: 10px;
           width: 40px;
+          font-size: 17px;
         }
       }
     }
@@ -1149,30 +1150,33 @@ input {
         font-size: 23px;
         margin-left: 25px;
       }
-      .counter-container {
-        display: flex;
-        font-size: 20px;
-        align-items: center;
-        .item-count {
-          margin-right: 10px;
-          height: 22px;
-          &::before {
-            content: "x";
-            font-size: 12px;
-            margin-right: 2px;
-          }
-        }
-        button {
-          width: 28px;
-          font-size: 28px;
-          height: 28px;
-          padding-top: 7px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-      }
     }
+  }
+}
+.counter-container {
+  display: flex;
+  font-size: 20px;
+  align-items: flex-end;
+  h4 {
+    font-size: 17px;
+  }
+  .item-count {
+    margin-inline: 35px 10px;
+    height: 22px;
+    &::before {
+      content: "x";
+      font-size: 12px;
+      margin-right: 2px;
+    }
+  }
+  button {
+    width: 28px;
+    font-size: 28px;
+    height: 28px;
+    padding-top: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -1304,6 +1308,16 @@ input {
     .key_range {
       display: flex;
       flex-direction: column;
+    }
+    .quantity-container {
+      display: flex;
+      align-items: flex-end;
+      h4 {
+        padding-right: 20px;
+      }
+    }
+    .add-btn {
+      margin-top: 10px;
     }
   }
 
