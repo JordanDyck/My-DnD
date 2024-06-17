@@ -1,7 +1,7 @@
 import axios from "axios"
 import {useEffect, useState} from "react"
 
-const ProfStats = ({showStats, setShowStats}) => {
+const ProfStats = ({setShowStats}) => {
   const [stats, setStats] = useState([])
 
   useEffect(() => {
@@ -13,7 +13,15 @@ const ProfStats = ({showStats, setShowStats}) => {
 
   return (
     <div className="stat-wrapper">
-      <button className="close-stats" onClick={() => setShowStats(!showStats)}>
+      <button
+        className="close-stats"
+        onClick={() =>
+          setShowStats((prev) => ({
+            ...prev,
+            stats: !prev.stats,
+          }))
+        }
+      >
         Close
       </button>
       {stats.length ? (

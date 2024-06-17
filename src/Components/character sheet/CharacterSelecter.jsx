@@ -31,7 +31,12 @@ const CharacterSelecter = ({setShowCreator}) => {
       />
       <button
         className="create-character-btn"
-        onClick={() => setShowCreator(true)}
+        onClick={() =>
+          setShowCreator((prev) => ({
+            ...prev,
+            creator: true,
+          }))
+        }
       >
         <AiOutlineUserAdd />
       </button>

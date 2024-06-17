@@ -11,52 +11,70 @@ import ItemsTab from "./Components/ItemsTab"
 import CharacterCreator from "./Components/character sheet/CharacterCreator"
 import CharacterSelecter from "./Components/character sheet/CharacterSelecter"
 function App() {
-  const [showStats, setShowStats] = useState(false)
-  const [showGear, setShowGear] = useState(false)
-  const [showItems, setShowItems] = useState(false)
-  const [showCreator, setShowCreator] = useState(false)
+  const [tabs, setTabs] = useState({
+    stats: false,
+    gear: false,
+    items: false,
+    creator: false,
+  })
 
   const character = useSelector((store) => store.character)
 
   return (
     <div className="App">
-      {!showCreator && <CharacterSelecter setShowCreator={setShowCreator} />}
+      {!tabs.creator && <CharacterSelecter setShowCreator={setTabs} />}
 
-      {!showCreator && character.value && (
-        <CharacterDetails setShowCreator={setShowCreator} />
+      {!tabs.creator && character.value && (
+        <CharacterDetails setShowCreator={setTabs} />
       )}
-      {showCreator && (
+      {tabs.creator && (
         <div className="character-info-container">
-          <CharacterCreator setShowCreator={setShowCreator} />
+          <CharacterCreator setShowCreator={setTabs} />
         </div>
       )}
 
       <div className="category-tabs">
         <button
           className="category-btn"
-          onClick={() => setShowStats(!showStats)}
+          onClick={() =>
+            setTabs((prev) => ({
+              ...prev,
+              stats: !prev.stats,
+            }))
+          }
         >
           stats
         </button>
 
-        <button className="category-btn" onClick={() => setShowGear(!showGear)}>
+        <button
+          className="category-btn"
+          onClick={() =>
+            setTabs((prev) => ({
+              ...prev,
+              gear: !prev.gear,
+            }))
+          }
+        >
           Gear
         </button>
         <button
           className="category-btn"
-          onClick={() => setShowItems(!showItems)}
+          onClick={() =>
+            setTabs((prev) => ({
+              ...prev,
+              items: !prev.items,
+            }))
+          }
         >
           ItemList
         </button>
       </div>
 
-      {showItems && <ItemsTab type={"items-tab"} />}
+      {tabs.items && <ItemsTab type={"items-tab"} />}
 
-      {showStats && (
-        <ProfStats showStats={showStats} setShowStats={setShowStats} />
-      )}
+      {tabs.stats && <ProfStats setShowStats={setTabs} />}
 
-      {showGear && <Gear />}
+      {tabs.gear && <Gear />}
 
       <BaseStats />
       <Inventory />

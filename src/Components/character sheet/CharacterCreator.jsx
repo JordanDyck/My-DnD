@@ -306,7 +306,10 @@ const CharacterCreator = ({setShowCreator}) => {
         className="save-character-btn"
         onClick={() => {
           setLocalStorage(storedDetails.characterName, storedDetails)
-          setShowCreator(false)
+          setShowCreator((prev) => ({
+            ...prev,
+            creator: false,
+          }))
         }}
         disabled={
           Object.values(storedDetails).includes("") ||

@@ -42,6 +42,7 @@ const SkillSelector = ({setDetails, type, data, isCustom, maxChoices}) => {
             className="max-input"
             type="number"
             name="maxNum"
+            onFocus={(e) => e.target.select()}
             defaultValue={maxChoices}
             onChange={(e) => {
               counter.setMax(e.target.value)
