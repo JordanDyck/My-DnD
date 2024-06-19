@@ -283,7 +283,7 @@ body {
           font-size: 29px;
 
           border: none;
-          // width: 29px;
+
           height: 33px;
         }
       }
@@ -1000,35 +1000,26 @@ input {
 }
 
 .base-stat-wrapper {
-  position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  grid-column-gap: 13px;
-  grid-row-gap: 30px;
-  width: 300px;
-  margin: 5px auto;
-  padding: 29px 12px 15px 0;
-
+  width: 306px;
+  padding-block: 8px;
+  margin: auto;
+  justify-items: center;
+  label {
+    border-bottom: 1px solid $fadedBorderColor;
+    width: 72px;
+    display: flex;
+    justify-content: center;
+  }
   .base-stat-container {
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
     border: 11px solid transparent;
     border-image: url("./assets/border.png") 81;
-
-    height: 65px;
-
-    .stat-name {
-      position: absolute;
-      top: -33px;
-      left: 17px;
-    }
-
-    .bonus-label {
-      position: absolute;
-      left: 5px;
-      bottom: 13px;
-      font-size: 38px;
-    }
     .base-stat {
       font-size: 22px;
       width: 100%;
@@ -1041,10 +1032,10 @@ input {
     }
     .bonus-stat {
       font-size: 29px;
-      margin: 6px 0 0 23px;
+
       border: none;
-      width: 29px;
-      height: 38px;
+
+      height: 33px;
     }
   }
 }
@@ -1052,23 +1043,13 @@ input {
   grid-template-rows: repeat(1, 1fr);
   border-bottom: 3px solid;
 
-  input {
-    position: absolute;
-    top: 5px;
-    left: 11px;
+  h4 {
     font-size: 29px;
-    width: 50px;
-    height: 50px;
-  }
-
-  #ac-label {
-    left: 27px;
+    margin-top: 5px;
   }
 
   label {
-    position: absolute;
     font-size: 12px;
-    top: -31px;
   }
 }
 .stat-wrapper {

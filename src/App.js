@@ -18,13 +18,13 @@ function App() {
     creator: false,
   })
 
-  const character = useSelector((store) => store.character)
-
+  const character = useSelector((store) => store.character.value)
+  // console.log(character)
   return (
     <div className="App">
       {!tabs.creator && <CharacterSelecter setShowCreator={setTabs} />}
 
-      {!tabs.creator && character.value && (
+      {!tabs.creator && character && (
         <CharacterDetails setShowCreator={setTabs} />
       )}
       {tabs.creator && (
@@ -43,7 +43,7 @@ function App() {
             }))
           }
         >
-          stats
+          skills
         </button>
 
         <button
@@ -76,8 +76,8 @@ function App() {
 
       {tabs.gear && <Gear />}
 
-      <BaseStats />
-      <Inventory />
+      {character && <BaseStats />}
+      {character && <Inventory />}
     </div>
   )
 }

@@ -1,47 +1,75 @@
-import {useState} from "react"
+import {useSelector, useDispatch} from "react-redux"
+
+import {updateCharacter} from "../../Store/slices/characterSlice"
 
 const BaseStats = () => {
-  const [baseStats, setBaseStat] = useState({
-    str: {base: 10, bonus: 3},
-    dex: {base: 10, bonus: 3},
-    con: {base: 10, bonus: 3},
-    int: {base: 10, bonus: 3},
-    wis: {base: 10, bonus: 3},
-    chr: {base: 10, bonus: 3},
-  })
+  const character = useSelector((store) => store.character.value)
 
+  const dispatch = useDispatch()
+  const updateStats = (baseStat, statName) => {
+    let result = Math.floor((baseStat - 10) / 2)
+    const updatedStats = {
+      ...character,
+      stats: {
+        ...character.stats,
+        [statName]: {
+          base: isNaN(parseInt(baseStat)) ? 0 : parseInt(baseStat),
+          bonus: result,
+        },
+      },
+    }
+    dispatch(updateCharacter(updatedStats))
+  }
+  console.log(character)
   return (
     <>
       <div className="passive-stats base-stat-wrapper">
         <div className="initiative base-stat-container">
-          <label id="initiative-label" htmlFor="initiative-input">
+          <label id="initiative-label" htmlFor="initiative">
             initiative
           </label>
-          <input type="number" id="initiative-input" defaultValue={1} />
+          <h4 id="initiative">
+            {character.stats.dex.bonus > 0 ? "+" : ""}
+            {character.stats.dex.bonus}
+          </h4>
         </div>
         <div className="armour-class base-stat-container">
           <label id="ac-label" htmlFor="ac-input">
             AC
           </label>
-          <input type="number" id="ac-input" defaultValue={10} />
+          <h4 id="ac-input">10</h4>
         </div>
         <div className="speed base-stat-container">
           <label id="speed-label" htmlFor="speed-input">
             wlk-speed
           </label>
-          <input type="number" id="speed-input" defaultValue={10} />
+          <h4 id="speed-input">{character.race.speed}</h4>
         </div>
       </div>
 
       <div className="base-stat-wrapper">
-        {Object.keys(baseStats).map((stat, index) => (
-          <div className="base-stat-container" key={index}>
-            <label className="stat-name">{stat}</label>
-            <label className="bonus-label">+</label>
-            <input className="bonus-stat" type="number" defaultValue={5} />
-            <input className="base-stat" type="number" defaultValue={10} />
-          </div>
-        ))}
+        {Object.keys(character.stats)?.map((statName, index) => {
+          return (
+            <div className="base-stat-container" key={`baseStat_${index}`}>
+              <label className="stat-name">{statName}</label>
+
+              <h4 className="bonus-stat">
+                {character.stats[statName].bonus > 0 ? "+" : ""}
+                {character.stats[statName].bonus}
+              </h4>
+              <input
+                onChange={(e) => {
+                  updateStats(e.target.value, e.target.name)
+                }}
+                name={statName}
+                className="base-stat"
+                onFocus={(e) => e.target.select()}
+                type="number"
+                value={character.stats[statName].base}
+              />
+            </div>
+          )
+        })}
       </div>
     </>
   )
