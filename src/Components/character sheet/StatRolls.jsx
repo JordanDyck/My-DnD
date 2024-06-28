@@ -1,13 +1,15 @@
 import {useState} from "react"
 
+import SkillCategories from "../SkillCategories.json"
+
 const StatRolls = ({setStoredDetails}) => {
   const [stats, setStats] = useState({
-    str: {base: 0, bonus: -5},
-    dex: {base: 0, bonus: -5},
+    str: {base: 0, bonus: -5, skills: SkillCategories["str"]},
+    dex: {base: 0, bonus: -5, skills: SkillCategories["dex"]},
     con: {base: 0, bonus: -5},
-    int: {base: 0, bonus: -5},
-    wis: {base: 0, bonus: -5},
-    chr: {base: 0, bonus: -5},
+    int: {base: 0, bonus: -5, skills: SkillCategories["int"]},
+    wis: {base: 0, bonus: -5, skills: SkillCategories["wis"]},
+    chr: {base: 0, bonus: -5, skills: SkillCategories["chr"]},
   })
   const [btnText, setBtnText] = useState("save rolls")
 
@@ -20,10 +22,11 @@ const StatRolls = ({setStoredDetails}) => {
       [statName]: {
         base: parseInt(baseStat),
         bonus: result,
+        skills: SkillCategories[statName],
       },
     }))
   }
-
+  console.log(stats)
   const handleSave = () => {
     setStoredDetails((prev) => ({
       ...prev,

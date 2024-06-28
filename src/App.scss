@@ -1055,16 +1055,16 @@ input {
 .stat-wrapper {
   position: absolute;
   z-index: 1;
-  top: 48%;
-  left: 38%;
-  transform: translate(-50%, -50%);
+  top: 48px;
+  left: 6px;
+
   box-shadow: 0px 0px 9px 4px rgba(0, 0, 0, 0.31);
   border: 17px solid transparent;
   border-image: url("./assets/border.png") 116;
   padding: 10px 7px;
 
   background-color: white;
-  width: 221px;
+  width: 235px;
   .stat-container {
     display: flex;
     justify-content: space-between;
@@ -1073,9 +1073,38 @@ input {
     align-items: flex-end;
     .stat-input {
       width: 30px;
-      height: 30px;
+      height: 28px;
 
+      text-align: center;
       font-size: 23px;
+    }
+    label {
+      flex: 1;
+      padding-left: 5px;
+    }
+    .proficiency-checkbox {
+      accent-color: black;
+
+      height: 10px;
+      width: 10px;
+      margin-bottom: 8px;
+      &:checked:before {
+        content: "";
+        display: block;
+        color: white;
+
+        position: relative;
+        top: -3px;
+        right: 3px;
+        background-color: #8b8b8b;
+        border: 1px solid;
+        height: 14px;
+        width: 14px;
+        border-radius: 50%;
+      }
+      &:disabled {
+        visibility: hidden;
+      }
     }
   }
   .close-stats {

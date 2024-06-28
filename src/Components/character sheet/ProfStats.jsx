@@ -1,15 +1,27 @@
-import axios from "axios"
-import {useEffect, useState} from "react"
+import {useMemo} from "react"
+import {useSelector} from "react-redux"
+
+import SkillCategories from "../SkillCategories.json"
 
 const ProfStats = ({setShowStats}) => {
-  const [stats, setStats] = useState([])
+  const character = useSelector((store) => store.character.value)
 
-  useEffect(() => {
-    axios.get(`https://www.dnd5eapi.co/api/skills/`).then((res) => {
-      const data = res.data.results
-      setStats(data)
-    })
+  const skillList = useMemo(() => {
+    return Object.keys(SkillCategories)
+      .map((key) => {
+        return SkillCategories[key]
+      })
+      .flat()
+      .sort()
   }, [])
+
+  const skillBonusSorter = (skill) => {
+    return Object.keys(SkillCategories).map((key) => {
+      if (character.stats[key].skills?.includes(skill)) {
+        return character.stats[key].bonus
+      } else return undefined
+    })
+  }
 
   return (
     <div className="stat-wrapper">
@@ -24,18 +36,28 @@ const ProfStats = ({setShowStats}) => {
       >
         Close
       </button>
-      {stats.length ? (
-        stats.map((stat, index) => (
-          <div className="stat-container" key={index}>
-            <label htmlFor={stat.name}>{stat.name}: </label>
-            <input
-              className="stat-input"
-              id={stat.name}
-              type="number"
-              defaultValue={0}
-            />
-          </div>
-        ))
+      {skillList ? (
+        skillList.map((skill, index) => {
+          const storedProfNames = Object.keys(
+            character.classDetails.skill_proficiencies
+          )
+
+          return (
+            <div className="stat-container" key={index}>
+              <input
+                type="checkbox"
+                className="proficiency-checkbox"
+                checked={storedProfNames.includes(skill)}
+                readOnly
+                disabled={!storedProfNames.includes(skill)}
+              />
+              <label htmlFor={skill}>{skill}: </label>
+              <h4 className="stat-input" id={skill}>
+                {skillBonusSorter(skill)}
+              </h4>
+            </div>
+          )
+        })
       ) : (
         <p className="loading">loading</p>
       )}

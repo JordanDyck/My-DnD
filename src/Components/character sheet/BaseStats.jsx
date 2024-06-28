@@ -1,5 +1,6 @@
 import {useSelector, useDispatch} from "react-redux"
 
+import SkillCategories from "../SkillCategories.json"
 import {updateCharacter} from "../../Store/slices/characterSlice"
 
 const BaseStats = () => {
@@ -15,12 +16,13 @@ const BaseStats = () => {
         [statName]: {
           base: isNaN(parseInt(baseStat)) ? 0 : parseInt(baseStat),
           bonus: result,
+          skills: SkillCategories[statName],
         },
       },
     }
     dispatch(updateCharacter(updatedStats))
   }
-  console.log(character)
+
   return (
     <>
       <div className="passive-stats base-stat-wrapper">
@@ -37,7 +39,7 @@ const BaseStats = () => {
           <label id="ac-label" htmlFor="ac-input">
             AC
           </label>
-          <h4 id="ac-input">10</h4>
+          <h4 id="ac-input">{10 + character.stats.dex.bonus}</h4>
         </div>
         <div className="speed base-stat-container">
           <label id="speed-label" htmlFor="speed-input">
