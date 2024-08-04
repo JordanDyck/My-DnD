@@ -26,7 +26,7 @@ const StatRolls = ({setStoredDetails}) => {
       },
     }))
   }
-  console.log(stats)
+
   const handleSave = () => {
     setStoredDetails((prev) => ({
       ...prev,

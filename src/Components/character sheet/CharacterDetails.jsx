@@ -21,7 +21,7 @@ const CharacterDetails = () => {
 
           <div className="detail">
             <label className="lvl-label">level:</label>
-            <input className="level" defaultValue={20}></input>
+            <input className="level" defaultValue={1}></input>
           </div>
         </div>
         <Health

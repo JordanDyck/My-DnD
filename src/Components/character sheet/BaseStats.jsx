@@ -39,13 +39,21 @@ const BaseStats = () => {
           <label id="ac-label" htmlFor="ac-input">
             AC
           </label>
-          <h4 id="ac-input">{10 + character.stats.dex.bonus}</h4>
+          <input
+            onFocus={(e) => e.target.select()}
+            id="ac-input"
+            defaultValue={10 + character.stats.dex.bonus}
+          ></input>
         </div>
         <div className="speed base-stat-container">
           <label id="speed-label" htmlFor="speed-input">
             wlk-speed
           </label>
-          <h4 id="speed-input">{character.race.speed}</h4>
+          <input
+            id="speed-input"
+            onFocus={(e) => e.target.select()}
+            defaultValue={character.race.speed}
+          ></input>
         </div>
       </div>
 

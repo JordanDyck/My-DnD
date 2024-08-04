@@ -1,8 +1,9 @@
-import {v4 as uuid} from "uuid"
-
-const GearItem = ({title, value}) => {
+const GearItem = ({title, value, id}) => {
   return (
-    <div className={`gear-info key_${title}`} key={uuid()}>
+    <div
+      className={`gear-info key_${title}`}
+      key={`gearInfo_${title}_at_${id}`}
+    >
       <h4>
         {title.replaceAll("_", " ")}
         {value ? ":" : ""}

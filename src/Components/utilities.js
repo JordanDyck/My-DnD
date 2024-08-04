@@ -3,7 +3,7 @@ import {isValidElement} from "react"
 export const filter = {
   armor_class: (value) => {
     if (value.max_bonus) {
-      return `${value.base} + ${value.max_bonus}`
+      return `${value.base} +  dex (max of ${value.max_bonus})`
     } else if (value.dex_bonus === true) {
       return `${value.base} + Dex`
     }

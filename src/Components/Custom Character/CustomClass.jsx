@@ -66,7 +66,7 @@ const CustomClass = ({
         <div className="hp-container">
           <label htmlFor="hit_dice">Hit dice:</label>
           <span>
-            D:
+            D
             <input
               onChange={(e) => {
                 let dice = e.target.value > 20 ? "20" : e.target.value

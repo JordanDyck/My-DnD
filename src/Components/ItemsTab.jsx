@@ -20,6 +20,7 @@ const ItemsTab = ({type, setDetails, details}) => {
   const [showItemCreator, setShowItemCreator] = useState(false)
   const counter = useCounter(1, 9999)
   const dispatch = useDispatch()
+  const character = useSelector((store) => store.character.value)
   const inventoryStore = useSelector((store) => store.inventory.value)
   const gearStore = useSelector((store) => store.gear.value)
 
@@ -62,8 +63,12 @@ const ItemsTab = ({type, setDetails, details}) => {
     axios
       .get(`https://www.dnd5eapi.co/api/equipment-categories/`)
       .then((res) => {
-        const data = res.data.results
-        setItemCategories(data)
+        try {
+          const data = res.data.results
+          setItemCategories(data)
+        } catch (error) {
+          console.log(error)
+        }
       })
   }, [])
 
@@ -72,8 +77,12 @@ const ItemsTab = ({type, setDetails, details}) => {
     axios
       .get(`https://www.dnd5eapi.co/api/equipment-categories/${categoryURL}`)
       .then((res) => {
-        const data = res.data.equipment
-        setItemList(data)
+        try {
+          const data = res.data.equipment
+          setItemList(data)
+        } catch (error) {
+          console.log(error)
+        }
       })
   }, [categoryURL])
 
@@ -83,8 +92,12 @@ const ItemsTab = ({type, setDetails, details}) => {
       axios
         .get(`https://www.dnd5eapi.co${currentItem?.url || ""}`)
         .then((res) => {
-          const data = res.data
-          setCurrentItemData(data)
+          try {
+            const data = res.data
+            setCurrentItemData(data)
+          } catch (error) {
+            console.log(error)
+          }
         })
     }
   }, [currentItem, setCurrentItem])
@@ -124,7 +137,7 @@ const ItemsTab = ({type, setDetails, details}) => {
     return (
       !showItemCreator && (
         <div className="item-info-container ">
-          {filteredInfo.map(([key, value], index) => {
+          {filteredInfo.map(([key, value]) => {
             const customizeValue = filter?.[key]?.(value)
             const valueToCheck =
               customizeValue === undefined ? value : customizeValue
@@ -194,6 +207,7 @@ const ItemsTab = ({type, setDetails, details}) => {
                     ? dispatch(
                         addInventory([
                           ...filteredInfo,
+                          ["linkedCharacter", character.characterName],
                           ["amount", counter.value],
                           ["id", `inventory_${filteredInfo[0][1]}`],
                         ])

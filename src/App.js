@@ -19,7 +19,7 @@ function App() {
   })
 
   const character = useSelector((store) => store.character.value)
-  // console.log(character)
+
   return (
     <div className="App">
       {!tabs.creator && <CharacterSelecter setShowCreator={setTabs} />}
@@ -32,43 +32,44 @@ function App() {
           <CharacterCreator setShowCreator={setTabs} />
         </div>
       )}
+      {character && (
+        <div className="category-tabs">
+          <button
+            className="category-btn"
+            onClick={() =>
+              setTabs((prev) => ({
+                ...prev,
+                stats: !prev.stats,
+              }))
+            }
+          >
+            skills
+          </button>
 
-      <div className="category-tabs">
-        <button
-          className="category-btn"
-          onClick={() =>
-            setTabs((prev) => ({
-              ...prev,
-              stats: !prev.stats,
-            }))
-          }
-        >
-          skills
-        </button>
-
-        <button
-          className="category-btn"
-          onClick={() =>
-            setTabs((prev) => ({
-              ...prev,
-              gear: !prev.gear,
-            }))
-          }
-        >
-          Gear
-        </button>
-        <button
-          className="category-btn"
-          onClick={() =>
-            setTabs((prev) => ({
-              ...prev,
-              items: !prev.items,
-            }))
-          }
-        >
-          ItemList
-        </button>
-      </div>
+          <button
+            className="category-btn"
+            onClick={() =>
+              setTabs((prev) => ({
+                ...prev,
+                gear: !prev.gear,
+              }))
+            }
+          >
+            Gear
+          </button>
+          <button
+            className="category-btn"
+            onClick={() =>
+              setTabs((prev) => ({
+                ...prev,
+                items: !prev.items,
+              }))
+            }
+          >
+            ItemList
+          </button>
+        </div>
+      )}
 
       {tabs.items && <ItemsTab type={"items-tab"} />}
 
