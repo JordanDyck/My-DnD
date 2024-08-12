@@ -6,7 +6,7 @@ import {filter, handleformat} from "./utilities"
 import GearItem from "./character sheet/GearItem"
 import DeleteInventoryBtn from "./DeleteInventoryBtn"
 
-const InventoryItem = ({item, quantity, id}) => {
+const InventoryItem = ({item, index, quantity, id}) => {
   const [activeDetails, setActiveDetails] = useState({})
 
   const showDetails = (id) => {
@@ -27,7 +27,7 @@ const InventoryItem = ({item, quantity, id}) => {
             <RxDropdownMenu />
           </button>
           <h5>{item?.[0][1]}</h5>
-          <InventoryCounter quantity={quantity} />
+          <InventoryCounter quantity={quantity} item={item} index={index} />
           <DeleteInventoryBtn
             id={id}
             setActiveDetails={setActiveDetails}
@@ -48,23 +48,17 @@ const InventoryItem = ({item, quantity, id}) => {
 
             const renderedValue = handleformat(valueToCheck, key)
 
+            const keysToHide = [
+              "id",
+              "custom",
+              "cost",
+              "str_minimum",
+              "Quantity",
+              "linkedCharacter",
+            ]
+
             // so the key does not get displayed in gear tab
-            if (key === "id") {
-              return ""
-            }
-            if (key === "custom") {
-              return ""
-            }
-            if (key === "cost") {
-              return ""
-            }
-            if (key === "str_minimum") {
-              return ""
-            }
-            if (key === "Quantity") {
-              return ""
-            }
-            if (key === "linkedCharacter") {
+            if (keysToHide.includes(key)) {
               return ""
             }
 

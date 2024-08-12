@@ -7,9 +7,10 @@ import {MdCreate, MdClose} from "react-icons/md"
 import equipmentFilter from "./EquipmentFilter.json"
 import {filter, handleformat} from "./utilities.js"
 import ItemCreator from "./ItemCreator"
-import {addInventory} from "../Store/slices/inventorySlice"
+
 import {addGear} from "../Store/slices/gearSlice"
 import useCounter from "../hooks/useCounter.jsx"
+import {updateCharacter} from "../Store/slices/characterSlice.js"
 
 const ItemsTab = ({type, setDetails, details}) => {
   const [itemCategories, setItemCategories] = useState([])
@@ -205,12 +206,18 @@ const ItemsTab = ({type, setDetails, details}) => {
                 onClick={() =>
                   filteredInfo.length
                     ? dispatch(
-                        addInventory([
-                          ...filteredInfo,
-                          ["linkedCharacter", character.characterName],
-                          ["amount", counter.value],
-                          ["id", `inventory_${filteredInfo[0][1]}`],
-                        ])
+                        updateCharacter({
+                          ...character,
+                          inventory: [
+                            ...character.inventory,
+                            [
+                              ...filteredInfo,
+                              ["linkedCharacter", character.characterName],
+                              ["amount", counter.value],
+                              ["id", `inventory_${filteredInfo[0][1]}`],
+                            ],
+                          ],
+                        })
                       )
                     : ""
                 }

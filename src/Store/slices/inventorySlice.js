@@ -1,10 +1,19 @@
 import {createSlice} from "@reduxjs/toolkit"
 import {setLocalStorage} from "../../Components/utilities"
 
+const getInitialInventory = () => {
+  try {
+    return JSON.parse(localStorage.getItem(Object.keys(localStorage)[0]))
+      .inventory
+  } catch {
+    return null
+  }
+}
+
 export const inventorySlice = createSlice({
   name: "inventory",
   initialState: {
-    value: [],
+    value: getInitialInventory(),
   },
   reducers: {
     addInventory: (state, action) => {
@@ -24,6 +33,7 @@ export const inventorySlice = createSlice({
         console.log(error)
       }
     },
+
     setInventory: (state, action) => {
       state.value = action.payload
     },

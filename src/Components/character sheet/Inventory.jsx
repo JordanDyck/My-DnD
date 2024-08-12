@@ -9,7 +9,6 @@ const Inventory = () => {
   const character = useSelector((store) => store.character.value)
 
   const dispatch = useDispatch()
-
   useEffect(() => {
     // sets inventory to sync up to localStorage when localStorage changes.
     dispatch(setInventory(character.inventory))
@@ -20,12 +19,18 @@ const Inventory = () => {
       <div className="tab-header">
         <header>Inventory</header>
       </div>
-      {inventory?.map((item) => {
+      {inventory?.map((item, index) => {
         const id = item.find((prop) => prop[0] === "id")?.[1]
         const quantity = item.find((prop) => prop[0] === "amount")?.[1]
 
         return (
-          <InventoryItem item={item} id={id} key={id} quantity={quantity} />
+          <InventoryItem
+            item={item}
+            index={index}
+            id={id}
+            key={id}
+            quantity={quantity}
+          />
         )
       })}
     </div>
