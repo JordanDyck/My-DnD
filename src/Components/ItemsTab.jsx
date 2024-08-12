@@ -12,7 +12,7 @@ import {addGear} from "../Store/slices/gearSlice"
 import useCounter from "../hooks/useCounter.jsx"
 import {updateCharacter} from "../Store/slices/characterSlice.js"
 
-const ItemsTab = ({type, setDetails, details}) => {
+const ItemsTab = ({type, setDetails, details, linkedCharacter}) => {
   const [itemCategories, setItemCategories] = useState([])
   const [itemList, setItemList] = useState()
   const [currentItem, setCurrentItem] = useState()
@@ -239,7 +239,12 @@ const ItemsTab = ({type, setDetails, details}) => {
                       ...stateCopy,
                       starting_equipment: [
                         ...prev?.starting_equipment,
-                        [...filteredInfo, ["amount", counter.value]],
+                        [
+                          ...filteredInfo,
+                          ["linkedCharacter", linkedCharacter],
+                          ["amount", counter.value],
+                          ["id", `inventory_${filteredInfo[0][1]}`],
+                        ],
                       ],
                     })),
                     setCurrentItemData(""),

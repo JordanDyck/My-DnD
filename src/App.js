@@ -32,7 +32,8 @@ function App() {
           <CharacterCreator setShowCreator={setTabs} />
         </div>
       )}
-      {character && (
+
+      {character && !tabs.creator && (
         <div className="category-tabs">
           <button
             className="category-btn"
@@ -77,8 +78,8 @@ function App() {
 
       {tabs.gear && <Gear />}
 
-      {character && <BaseStats />}
-      {character && <Inventory />}
+      {character && !tabs.creator && <BaseStats />}
+      {character && !tabs.creator && <Inventory />}
     </div>
   )
 }

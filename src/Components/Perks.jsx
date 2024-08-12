@@ -15,17 +15,9 @@ const Perks = ({
   setCharacterDetails,
   newDetails,
   setNewDetails,
+  linkedCharacter,
 }) => {
   useEffect(() => {
-    const starting_equipment = characterDetails.starting_equipment?.map(
-      (element) => {
-        const quantity = element.quantity
-        if (quantity > 1) {
-          return `${element.equipment.name} (${quantity})`
-        } else return element.equipment.name
-      }
-    )
-
     // stores the values from characterDetails to storedDetails in CharacterCreator comp to be put into localStorage
     if (category === "races") {
       setStoredDetails((prev) => ({
@@ -51,6 +43,7 @@ const Perks = ({
       setStoredDetails((prev) => ({
         ...prev,
         health: newDetails?.health,
+        inventory: newDetails?.starting_equipment,
         classDetails: {
           name: characterDetails.name,
           hit_die: characterDetails.hit_die,
@@ -61,10 +54,6 @@ const Perks = ({
             spell_save:
               characterDetails?.spellcasting?.spellcasting_ability.name,
           },
-          starting_equipment: [
-            starting_equipment,
-            newDetails?.starting_equipment,
-          ],
         },
       }))
     }
@@ -101,6 +90,7 @@ const Perks = ({
             perkFilter={category === "races" ? racePerkFilter : classPerkFilter}
             setNewDetails={setNewDetails}
             newDetails={newDetails}
+            linkedCharacter={linkedCharacter}
           />
         }
 

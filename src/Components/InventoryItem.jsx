@@ -55,6 +55,7 @@ const InventoryItem = ({item, index, quantity, id}) => {
               "str_minimum",
               "Quantity",
               "linkedCharacter",
+              "amount",
             ]
 
             // so the key does not get displayed in gear tab

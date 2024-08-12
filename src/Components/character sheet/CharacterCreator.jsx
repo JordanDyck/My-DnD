@@ -124,6 +124,7 @@ const CharacterCreator = ({setShowCreator}) => {
               setCharacterDetails={setCharacterDetails}
               newDetails={newDetails}
               setNewDetails={setNewDetails}
+              linkedCharacter={storedDetails.characterName}
               category={"classes"}
               subCategory={classNameOption.toLowerCase()}
               optionalURL={""}
@@ -152,6 +153,7 @@ const CharacterCreator = ({setShowCreator}) => {
             setStoredDetails={setStoredDetails}
             setClassNameOption={setClassNameOption}
             setShowCharacterDetails={setShowCharacterDetails}
+            linkedCharacter={storedDetails.characterName}
           />
         )}
         {/* for choosing subclass */}

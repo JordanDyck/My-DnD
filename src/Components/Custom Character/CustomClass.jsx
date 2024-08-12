@@ -13,6 +13,7 @@ const CustomClass = ({
   setStoredDetails,
   setClassNameOption,
   setShowCharacterDetails,
+  linkedCharacter,
 }) => {
   const [toggleSwitch, setToggleSwitch] = useState(false)
   const [details, setDetails] = useState({
@@ -178,6 +179,7 @@ const CustomClass = ({
 
           <div className="chosen-skills">
             {details.starting_equipment.map((item) => {
+              console.log(item)
               const amount = item.find((prop) => prop[0] === "amount")?.[1]
               return (
                 // displays starting gear
@@ -202,6 +204,7 @@ const CustomClass = ({
           </div>
           <ItemsTab
             type={"starting-equipment"}
+            linkedCharacter={linkedCharacter}
             setDetails={setDetails}
             details={details}
           />

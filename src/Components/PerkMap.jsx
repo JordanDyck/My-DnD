@@ -9,6 +9,7 @@ const PerkMap = ({
   perkFilter,
   setNewDetails,
   newDetails,
+  linkedCharacter,
 }) => {
   return filteredRaceDetails?.map(([key, value], index) => {
     const customizeValue = perkFilter?.[key]?.(value, key)
@@ -76,6 +77,7 @@ const PerkMap = ({
             <ItemsTab
               type={"starting-equipment"}
               setDetails={setNewDetails}
+              linkedCharacter={linkedCharacter}
               details={newDetails}
             />
           </div>

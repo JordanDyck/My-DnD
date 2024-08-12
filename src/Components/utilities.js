@@ -132,24 +132,6 @@ export const classPerkFilter = {
     })
     return startingEquipment
   },
-  // starting_equipment_options: (value) => {
-  //   const choice = value.map((choices, index) => {
-  //     return (
-  //       <div className="gear-choices" key={`gear_choice${index}`}>
-  //         <b>Choose {choices.choose}:</b>
-  //         <p>
-  //           {choices.desc
-  //             .replace("(a)", "")
-  //             .replace("(b)", "")
-  //             .replace("(c)", "")
-  //             .replace(" or ", " | OR | ")}
-  //         </p>
-  //       </div>
-  //     )
-  //   })
-
-  //   return choice
-  // },
 }
 
 export const classLvlFilter = {
