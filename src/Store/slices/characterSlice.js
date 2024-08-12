@@ -2,7 +2,10 @@ import {createSlice} from "@reduxjs/toolkit"
 
 const getInitialCharacter = () => {
   try {
-    return JSON.parse(localStorage.getItem(Object.keys(localStorage)[0]))
+    const lastUsedCharacter = JSON.parse(
+      localStorage.getItem("currentCharacter")
+    )
+    return JSON.parse(localStorage.getItem(lastUsedCharacter))
   } catch {
     return null
   }

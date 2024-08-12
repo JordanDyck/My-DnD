@@ -2,12 +2,16 @@ import Select from "react-select"
 import {AiOutlineUserAdd} from "react-icons/ai"
 import {setCurrentCharacter} from "../../Store/slices/characterSlice"
 import {useDispatch} from "react-redux"
+import {setLocalStorage} from "../utilities"
 
 const CharacterSelecter = ({setShowCreator}) => {
   const dispatch = useDispatch()
-  const options = Object.keys(localStorage).map((option) => {
-    return {value: option, label: option}
-  })
+
+  const options = Object.keys(localStorage)
+    .filter((prop) => prop !== "currentCharacter")
+    .map((option) => {
+      return {value: option, label: option}
+    })
 
   return (
     <div className="character-selector">
@@ -16,6 +20,7 @@ const CharacterSelecter = ({setShowCreator}) => {
         options={options}
         onChange={(e) => {
           dispatch(setCurrentCharacter(e.value))
+          setLocalStorage("currentCharacter", e.value)
         }}
         placeholder="select Character"
         styles={{

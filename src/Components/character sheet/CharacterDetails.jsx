@@ -31,8 +31,7 @@ const CharacterDetails = () => {
       </div>
     )
   } catch (error) {
-    console.error("Character data was corrupt and removed.", error)
-    localStorage.removeItem(character.characterName)
+    console.error("unable to get Character Data", error)
   }
 }
 export default CharacterDetails
