@@ -15,6 +15,7 @@ const CharacterCreator = ({setShowCreator}) => {
     classDetails: "",
     subClass: "",
     levels: [],
+    gear: [],
     inventory: [],
     health: "",
     race: "",

@@ -1,4 +1,4 @@
-import {useState} from "react"
+import {useEffect, useState} from "react"
 import {useSelector} from "react-redux"
 import {v4 as uuid} from "uuid"
 import {useDispatch} from "react-redux"
@@ -10,15 +10,22 @@ import GearItemDesc from "./character sheet/GearItemDesc"
 import GearItem from "./character sheet/GearItem"
 
 const Gear = () => {
-  const gear = useSelector((store) => store.gear)
+  const gear = useSelector((store) => store.gear.value)
+  const character = useSelector((store) => store.character.value)
   const [showDesc, setShowDesc] = useState([])
   const dispatch = useDispatch()
 
+  useEffect(() => {
+    // sets inventory to sync up to localStorage when localStorage changes.
+    dispatch(setGear(character.gear))
+  }, [character.gear, dispatch])
+
   const deleteItem = (id) => {
     //finds the id of item & removes it. setGear replaces gear array with new updated array
-    let updatedGear = gear.value.filter(
+    let updatedGear = gear.filter(
       (item) => item.find((prop) => prop[0] === "id")[1] !== id
     )
+
     dispatch(setGear(updatedGear))
   }
 
@@ -27,7 +34,7 @@ const Gear = () => {
       <div className="tab-header">
         <header>Gear</header>
       </div>
-      {gear.value.map((item) => {
+      {gear.map((item) => {
         const id = item.find((prop) => prop[0] === "id")?.[1]
         return (
           <div className="gear-item" key={uuid()}>
@@ -45,7 +52,6 @@ const Gear = () => {
                 if (key === "desc") {
                   return (
                     // displays description for items in gear tab
-
                     <GearItemDesc
                       key={uuid()}
                       id={id}
@@ -55,18 +61,15 @@ const Gear = () => {
                     />
                   )
                 }
-
+                const keysToHide = [
+                  "id",
+                  "custom",
+                  "cost",
+                  "str_minimum",
+                  "linkedCharacter",
+                ]
                 // so the key does not get displayed in gear tab
-                if (key === "id") {
-                  return ""
-                }
-                if (key === "custom") {
-                  return ""
-                }
-                if (key === "cost") {
-                  return ""
-                }
-                if (key === "str_minimum") {
+                if (keysToHide.includes(key)) {
                   return ""
                 }
 

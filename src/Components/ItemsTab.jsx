@@ -187,6 +187,7 @@ const ItemsTab = ({type, setDetails, details, linkedCharacter}) => {
                         addGear([
                           ...filteredInfo,
                           ["id", `gear_${filteredInfo[0][1]}`],
+                          ["linkedCharacter", character.characterName],
                         ])
                       )
                     : ""
