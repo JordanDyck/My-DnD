@@ -1,48 +1,45 @@
-import {useEffect, useState} from "react"
+import {useState} from "react"
 import {useSelector} from "react-redux"
-import {v4 as uuid} from "uuid"
 import {useDispatch} from "react-redux"
 import {RiDeleteBinLine} from "react-icons/ri"
 
-import {setGear} from "../Store/slices/gearSlice"
 import {filter, handleformat} from "./utilities.js"
 import GearItemDesc from "./character sheet/GearItemDesc"
 import GearItem from "./character sheet/GearItem"
+import {updateCharacter} from "../Store/slices/characterSlice.js"
 
 const Gear = () => {
-  const gear = useSelector((store) => store.gear.value)
   const character = useSelector((store) => store.character.value)
   const [showDesc, setShowDesc] = useState([])
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    // sets inventory to sync up to localStorage when localStorage changes.
-    dispatch(setGear(character.gear))
-  }, [character.gear, dispatch])
-
   const deleteItem = (id) => {
-    //finds the id of item & removes it. setGear replaces gear array with new updated array
-    let updatedGear = gear.filter(
+    //finds the item with the id & removes it.
+    let updatedGear = character?.gear?.filter(
       (item) => item.find((prop) => prop[0] === "id")[1] !== id
     )
+    const updatedCharacter = {
+      ...character,
+      gear: updatedGear,
+    }
 
-    dispatch(setGear(updatedGear))
+    dispatch(updateCharacter(updatedCharacter))
   }
-
   return (
     <div className="gear-wrapper">
       <div className="tab-header">
         <header>Gear</header>
       </div>
-      {gear.map((item) => {
+      {character?.gear?.map((item) => {
         const id = item.find((prop) => prop[0] === "id")?.[1]
+
         return (
-          <div className="gear-item" key={uuid()}>
+          <div className="gear-item" key={id}>
             <button className="delete-item-btn" onClick={() => deleteItem(id)}>
               <RiDeleteBinLine />
             </button>
             <div className="gear-item-stats">
-              {item.map(([key, value]) => {
+              {item.map(([key, value], i) => {
                 const customizeValue = filter?.[key]?.(value)
                 const valueToCheck =
                   customizeValue === undefined ? value : customizeValue
@@ -53,7 +50,7 @@ const Gear = () => {
                   return (
                     // displays description for items in gear tab
                     <GearItemDesc
-                      key={uuid()}
+                      key={`desc_${id}`}
                       id={id}
                       update={setShowDesc}
                       showDesc={showDesc.includes(id)}
@@ -67,6 +64,7 @@ const Gear = () => {
                   "cost",
                   "str_minimum",
                   "linkedCharacter",
+                  "amount",
                 ]
                 // so the key does not get displayed in gear tab
                 if (keysToHide.includes(key)) {
@@ -75,7 +73,11 @@ const Gear = () => {
 
                 return (
                   // displays the items in gear tab
-                  <GearItem key={uuid()} title={key} value={renderedValue} />
+                  <GearItem
+                    key={`item_${i}${id}`}
+                    title={key}
+                    value={renderedValue}
+                  />
                 )
               })}
             </div>

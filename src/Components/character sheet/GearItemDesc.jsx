@@ -1,8 +1,6 @@
-import {v4 as uuid} from "uuid"
-
 const GearItemDesc = ({id, update, showDesc, value}) => {
   return (
-    <div className="desc-container" key={uuid()}>
+    <div className="desc-container">
       {value.length ? (
         <button
           onClick={() =>

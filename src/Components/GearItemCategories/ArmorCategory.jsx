@@ -1,16 +1,20 @@
-import {useDispatch} from "react-redux"
-import {v4 as uuid} from "uuid"
+import {useDispatch, useSelector} from "react-redux"
+
 import {useMemo, useState} from "react"
 import Select from "react-select"
 
-import {addInventory} from "../../Store/slices/inventorySlice"
-import {addGear} from "../../Store/slices/gearSlice"
 import {armorStyles} from "../utilities"
+import {updateCharacter} from "../../Store/slices/characterSlice"
+import useCounter from "../../hooks/useCounter"
 
 const ArmorCategory = ({createdItem, setCreatedItem}) => {
   const [resetInput, setResetInput] = useState(false)
-
+  const character = useSelector((store) => store.character.value)
+  const counter = useCounter(1, 9999)
   const dispatch = useDispatch()
+  const getcurrentCharacter = JSON.parse(
+    localStorage.getItem("currentCharacter")
+  )
 
   const isValid = useMemo(() => {
     return !!(
@@ -87,13 +91,36 @@ const ArmorCategory = ({createdItem, setCreatedItem}) => {
         value={createdItem?.desc || ""}
         disabled={!createdItem.name}
       ></textarea>
+      <div className="counter-container">
+        <h4 className="h4-title">amount:</h4>
+        <label className="item-count">{counter.value}</label>
+        <button onClick={() => counter.increment()}>+</button>
+        <button
+          disabled={counter.value <= 1}
+          onClick={() => counter.decrement(1)}
+        >
+          -
+        </button>
+      </div>
 
       <div className="add-btn-container">
         <button
           className="add-item"
           disabled={!isValid}
           onClick={() => {
-            dispatch(addGear([...Object.entries(createdItem), ["id", uuid()]]))
+            dispatch(
+              updateCharacter({
+                ...character,
+                gear: [
+                  ...character.gear,
+                  [
+                    ...Object.entries(createdItem),
+                    ["id", `gear_${createdItem.name}`],
+                    ["amount", counter.value],
+                  ],
+                ],
+              })
+            )
             setCreatedItem({})
             setResetInput(!resetInput)
           }}
@@ -106,7 +133,18 @@ const ArmorCategory = ({createdItem, setCreatedItem}) => {
           disabled={!isValid}
           onClick={() => {
             dispatch(
-              addInventory([...Object.entries(createdItem), ["id", uuid()]])
+              updateCharacter({
+                ...character,
+                inventory: [
+                  ...character.inventory,
+                  [
+                    ...Object.entries(createdItem),
+                    ["linkedCharacter", getcurrentCharacter],
+                    ["amount", counter.value],
+                    ["id", `inventory_${createdItem.name}`],
+                  ],
+                ],
+              })
             )
             setCreatedItem({})
             setResetInput(!resetInput)

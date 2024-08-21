@@ -1,12 +1,15 @@
-import {useDispatch} from "react-redux"
-import {v4 as uuid} from "uuid"
+import {useDispatch, useSelector} from "react-redux"
 
-import {addInventory} from "../../Store/slices/inventorySlice"
-import {addGear} from "../../Store/slices/gearSlice"
+import {updateCharacter} from "../../Store/slices/characterSlice"
+import useCounter from "../../hooks/useCounter"
 
 const OtherCategory = ({createdItem, setCreatedItem}) => {
   const dispatch = useDispatch()
-
+  const character = useSelector((store) => store.character.value)
+  const counter = useCounter(1, 9999)
+  const getcurrentCharacter = JSON.parse(
+    localStorage.getItem("currentCharacter")
+  )
   return (
     <div className="item-creator" key={"other"}>
       <input
@@ -34,12 +37,36 @@ const OtherCategory = ({createdItem, setCreatedItem}) => {
         }}
       ></textarea>
 
+      <div className="counter-container">
+        <h4 className="h4-title">amount:</h4>
+        <label className="item-count">{counter.value}</label>
+        <button onClick={() => counter.increment()}>+</button>
+        <button
+          disabled={counter.value <= 1}
+          onClick={() => counter.decrement(1)}
+        >
+          -
+        </button>
+      </div>
+
       <div className="add-btn-container">
         <button
           className="add-item"
           disabled={!createdItem.name}
           onClick={() => {
-            dispatch(addGear([...Object.entries(createdItem), ["id", uuid()]]))
+            dispatch(
+              updateCharacter({
+                ...character,
+                gear: [
+                  ...character.gear,
+                  [
+                    ...Object.entries(createdItem),
+                    ["id", `gear_${createdItem.name}`],
+                    ["amount", counter.value],
+                  ],
+                ],
+              })
+            )
             setCreatedItem({})
           }}
         >
@@ -50,7 +77,18 @@ const OtherCategory = ({createdItem, setCreatedItem}) => {
           disabled={!createdItem.name}
           onClick={() => {
             dispatch(
-              addInventory([...Object.entries(createdItem), ["id", uuid()]])
+              updateCharacter({
+                ...character,
+                inventory: [
+                  ...character.inventory,
+                  [
+                    ...Object.entries(createdItem),
+                    ["linkedCharacter", getcurrentCharacter],
+                    ["amount", counter.value],
+                    ["id", `inventory_${createdItem.name}`],
+                  ],
+                ],
+              })
             )
             setCreatedItem({})
           }}

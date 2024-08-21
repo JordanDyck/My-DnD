@@ -7,8 +7,6 @@ import {MdCreate, MdClose} from "react-icons/md"
 import equipmentFilter from "./EquipmentFilter.json"
 import {filter, handleformat} from "./utilities.js"
 import ItemCreator from "./ItemCreator"
-
-import {addGear} from "../Store/slices/gearSlice"
 import useCounter from "../hooks/useCounter.jsx"
 import {updateCharacter} from "../Store/slices/characterSlice.js"
 
@@ -22,8 +20,6 @@ const ItemsTab = ({type, setDetails, details, linkedCharacter}) => {
   const counter = useCounter(1, 9999)
   const dispatch = useDispatch()
   const character = useSelector((store) => store.character.value)
-  const inventoryStore = useSelector((store) => store.inventory.value)
-  const gearStore = useSelector((store) => store.gear.value)
 
   const compareId = (store, currentItem) => {
     // check if store item id is the same as the current item
@@ -179,16 +175,23 @@ const ItemsTab = ({type, setDetails, details, linkedCharacter}) => {
                 type="button"
                 className="add-item"
                 disabled={
-                  compareId(gearStore, `gear_${filteredInfo[0][1]}`) === true
+                  compareId(character.gear, `gear_${filteredInfo[0][1]}`) ===
+                  true
                 }
                 onClick={() =>
                   filteredInfo.length
                     ? dispatch(
-                        addGear([
-                          ...filteredInfo,
-                          ["id", `gear_${filteredInfo[0][1]}`],
-                          ["linkedCharacter", character.characterName],
-                        ])
+                        updateCharacter({
+                          ...character,
+                          gear: [
+                            ...character.gear,
+                            [
+                              ...filteredInfo,
+                              ["id", `gear_${filteredInfo[0][1]}`],
+                              ["linkedCharacter", character.characterName],
+                            ],
+                          ],
+                        })
                       )
                     : ""
                 }
@@ -200,7 +203,7 @@ const ItemsTab = ({type, setDetails, details, linkedCharacter}) => {
                 className="add-item"
                 disabled={
                   compareId(
-                    inventoryStore,
+                    character.inventory,
                     `inventory_${filteredInfo[0][1]}`
                   ) === true
                 }
