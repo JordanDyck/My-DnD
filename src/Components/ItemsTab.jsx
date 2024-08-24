@@ -175,8 +175,8 @@ const ItemsTab = ({type, setDetails, details, linkedCharacter}) => {
                 type="button"
                 className="add-item"
                 disabled={
-                  compareId(character.gear, `gear_${filteredInfo[0][1]}`) ===
-                  true
+                  compareId(character.inventory, filteredInfo[0][1]) === true ||
+                  compareId(character.gear, filteredInfo[0][1]) === true
                 }
                 onClick={() =>
                   filteredInfo.length
@@ -187,7 +187,8 @@ const ItemsTab = ({type, setDetails, details, linkedCharacter}) => {
                             ...character.gear,
                             [
                               ...filteredInfo,
-                              ["id", `gear_${filteredInfo[0][1]}`],
+                              ["id", filteredInfo[0][1]],
+                              ["amount", counter.value],
                               ["linkedCharacter", character.characterName],
                             ],
                           ],
@@ -202,10 +203,8 @@ const ItemsTab = ({type, setDetails, details, linkedCharacter}) => {
                 type="button"
                 className="add-item"
                 disabled={
-                  compareId(
-                    character.inventory,
-                    `inventory_${filteredInfo[0][1]}`
-                  ) === true
+                  compareId(character.inventory, filteredInfo[0][1]) === true ||
+                  compareId(character.gear, filteredInfo[0][1]) === true
                 }
                 onClick={() =>
                   filteredInfo.length
@@ -218,7 +217,7 @@ const ItemsTab = ({type, setDetails, details, linkedCharacter}) => {
                               ...filteredInfo,
                               ["linkedCharacter", character.characterName],
                               ["amount", counter.value],
-                              ["id", `inventory_${filteredInfo[0][1]}`],
+                              ["id", filteredInfo[0][1]],
                             ],
                           ],
                         })
@@ -247,7 +246,7 @@ const ItemsTab = ({type, setDetails, details, linkedCharacter}) => {
                           ...filteredInfo,
                           ["linkedCharacter", linkedCharacter],
                           ["amount", counter.value],
-                          ["id", `inventory_${filteredInfo[0][1]}`],
+                          ["id", filteredInfo[0][1]],
                         ],
                       ],
                     })),

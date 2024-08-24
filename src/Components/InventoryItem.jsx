@@ -31,7 +31,24 @@ const InventoryItem = ({item, index, quantity, id}) => {
 
     dispatch(updateCharacter(updatedCharacter))
   }
-  console.log(character)
+
+  const moveToGear = (id) => {
+    // moves inventory item into gear
+
+    let filteredInventory = character?.inventory?.filter(
+      (item) => item.find((prop) => prop[0] === "id")[1] !== id
+    )
+    let getItem = character?.inventory?.filter(
+      (item) => item.find((prop) => prop[0] === "id")[1] === id
+    )
+    const newGear = [...character.gear, getItem[0]]
+    const newInventory = {
+      ...character,
+      inventory: filteredInventory,
+      gear: newGear,
+    }
+    dispatch(updateCharacter(newInventory))
+  }
   return (
     item && (
       <div className="inventory-item-container">
@@ -42,7 +59,8 @@ const InventoryItem = ({item, index, quantity, id}) => {
           >
             <RxDropdownMenu />
           </button>
-          <h5>{item?.[0][1]}</h5>
+          <h5 onClick={() => moveToGear(id)}>{item?.[0][1]}</h5>
+
           <InventoryCounter quantity={quantity} item={item} index={index} />
           <button className="delete-item-btn" onClick={() => deleteItem(id)}>
             <RiDeleteBinLine />

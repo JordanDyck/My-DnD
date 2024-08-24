@@ -10,6 +10,7 @@ const Inventory = () => {
       <div className="tab-header">
         <header>Inventory</header>
       </div>
+      {character.inventory.length ? <span>*click item to equip</span> : ""}
       {character?.inventory?.map((item, index) => {
         const id = item.find((prop) => prop[0] === "id")?.[1]
         const quantity = item.find((prop) => prop[0] === "amount")?.[1]

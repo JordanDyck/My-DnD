@@ -25,6 +25,24 @@ const Gear = () => {
 
     dispatch(updateCharacter(updatedCharacter))
   }
+  const moveToInventory = (id) => {
+    // moves gear item into inventory
+
+    let filteredGear = character?.gear?.filter(
+      (item) => item.find((prop) => prop[0] === "id")[1] !== id
+    )
+    let getItem = character?.gear?.filter(
+      (item) => item.find((prop) => prop[0] === "id")[1] === id
+    )
+    const updatedInventory = [...character.inventory, getItem[0]]
+    const newInventory = {
+      ...character,
+      inventory: updatedInventory,
+      gear: filteredGear,
+    }
+
+    dispatch(updateCharacter(newInventory))
+  }
   return (
     <div className="gear-wrapper">
       <div className="tab-header">
@@ -38,7 +56,11 @@ const Gear = () => {
             <button className="delete-item-btn" onClick={() => deleteItem(id)}>
               <RiDeleteBinLine />
             </button>
-            <div className="gear-item-stats">
+
+            <div
+              className="gear-item-stats"
+              onClick={() => moveToInventory(id)}
+            >
               {item.map(([key, value], i) => {
                 const customizeValue = filter?.[key]?.(value)
                 const valueToCheck =
@@ -58,6 +80,7 @@ const Gear = () => {
                     />
                   )
                 }
+
                 const keysToHide = [
                   "id",
                   "custom",
@@ -76,10 +99,12 @@ const Gear = () => {
                   <GearItem
                     key={`item_${i}${id}`}
                     title={key}
+                    id={id}
                     value={renderedValue}
                   />
                 )
               })}
+              <button>btn</button>
             </div>
           </div>
         )
