@@ -10,6 +10,21 @@ const OtherCategory = ({createdItem, setCreatedItem}) => {
   const getcurrentCharacter = JSON.parse(
     localStorage.getItem("currentCharacter")
   )
+
+  const compareId = (store, currentItem) => {
+    // check if store item id is the same as the current item
+
+    const findId = store.map((item) => {
+      const id = item.find((prop) => prop[0] === "id")?.[1]
+      return id
+    })
+
+    if (findId.includes(currentItem.name)) {
+      return true
+    }
+    return false
+  }
+
   return (
     <div className="item-creator" key={"other"}>
       <input
@@ -52,7 +67,11 @@ const OtherCategory = ({createdItem, setCreatedItem}) => {
       <div className="add-btn-container">
         <button
           className="add-item"
-          disabled={!createdItem.name}
+          disabled={
+            compareId(character.gear, createdItem) ||
+            compareId(character.inventory, createdItem) ||
+            !createdItem.name
+          }
           onClick={() => {
             dispatch(
               updateCharacter({
@@ -61,7 +80,7 @@ const OtherCategory = ({createdItem, setCreatedItem}) => {
                   ...character.gear,
                   [
                     ...Object.entries(createdItem),
-                    ["id", `gear_${createdItem.name}`],
+                    ["id", createdItem.name],
                     ["amount", counter.value],
                   ],
                 ],
@@ -74,7 +93,11 @@ const OtherCategory = ({createdItem, setCreatedItem}) => {
         </button>
         <button
           className="add-item"
-          disabled={!createdItem.name}
+          disabled={
+            compareId(character.gear, createdItem) ||
+            compareId(character.inventory, createdItem) ||
+            !createdItem.name
+          }
           onClick={() => {
             dispatch(
               updateCharacter({
@@ -85,7 +108,7 @@ const OtherCategory = ({createdItem, setCreatedItem}) => {
                     ...Object.entries(createdItem),
                     ["linkedCharacter", getcurrentCharacter],
                     ["amount", counter.value],
-                    ["id", `inventory_${createdItem.name}`],
+                    ["id", createdItem.name],
                   ],
                 ],
               })

@@ -101,7 +101,12 @@ const InventoryItem = ({item, index, quantity, id}) => {
                 className="inventory-detail"
                 key={`dropDownFor_${id}${index}`}
               >
-                <GearItem title={key} value={renderedValue} id={id} />
+                <GearItem
+                  title={key}
+                  value={renderedValue}
+                  id={id}
+                  type={"inventory"}
+                />
               </div>
             )
           })}

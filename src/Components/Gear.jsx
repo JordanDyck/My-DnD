@@ -25,24 +25,7 @@ const Gear = () => {
 
     dispatch(updateCharacter(updatedCharacter))
   }
-  const moveToInventory = (id) => {
-    // moves gear item into inventory
 
-    let filteredGear = character?.gear?.filter(
-      (item) => item.find((prop) => prop[0] === "id")[1] !== id
-    )
-    let getItem = character?.gear?.filter(
-      (item) => item.find((prop) => prop[0] === "id")[1] === id
-    )
-    const updatedInventory = [...character.inventory, getItem[0]]
-    const newInventory = {
-      ...character,
-      inventory: updatedInventory,
-      gear: filteredGear,
-    }
-
-    dispatch(updateCharacter(newInventory))
-  }
   return (
     <div className="gear-wrapper">
       <div className="tab-header">
@@ -57,10 +40,7 @@ const Gear = () => {
               <RiDeleteBinLine />
             </button>
 
-            <div
-              className="gear-item-stats"
-              onClick={() => moveToInventory(id)}
-            >
+            <div className="gear-item-stats">
               {item.map(([key, value], i) => {
                 const customizeValue = filter?.[key]?.(value)
                 const valueToCheck =
@@ -101,10 +81,10 @@ const Gear = () => {
                     title={key}
                     id={id}
                     value={renderedValue}
+                    type={"gear"}
                   />
                 )
               })}
-              <button>btn</button>
             </div>
           </div>
         )

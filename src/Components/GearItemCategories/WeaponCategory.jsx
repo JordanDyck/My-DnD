@@ -23,6 +23,20 @@ const WeaponCategory = ({createdItem, setCreatedItem}) => {
     )
   }, [createdItem])
 
+  const compareId = (store, currentItem) => {
+    // check if store item id is the same as the current item
+
+    const findId = store.map((item) => {
+      const id = item.find((prop) => prop[0] === "id")?.[1]
+      return id
+    })
+
+    if (findId.includes(currentItem.name)) {
+      return true
+    }
+    return false
+  }
+
   return (
     <div className="item-creator" key={"weapon"}>
       <input
@@ -146,7 +160,11 @@ const WeaponCategory = ({createdItem, setCreatedItem}) => {
         {/* add item to gear tab */}
         <button
           className="add-item"
-          disabled={!isValid}
+          disabled={
+            compareId(character.gear, createdItem) ||
+            compareId(character.inventory, createdItem) ||
+            !isValid
+          }
           onClick={() => {
             dispatch(
               updateCharacter({
@@ -156,7 +174,7 @@ const WeaponCategory = ({createdItem, setCreatedItem}) => {
                   [
                     ...Object.entries(createdItem),
                     ["amount", counter.value],
-                    ["id", `gear_${createdItem.name}`],
+                    ["id", createdItem.name],
                   ],
                 ],
               })
@@ -170,7 +188,11 @@ const WeaponCategory = ({createdItem, setCreatedItem}) => {
         {/* add item to inventory */}
         <button
           className="add-item"
-          disabled={!isValid}
+          disabled={
+            compareId(character.gear, createdItem) ||
+            compareId(character.inventory, createdItem) ||
+            !isValid
+          }
           onClick={() => {
             dispatch(
               updateCharacter({
@@ -181,7 +203,7 @@ const WeaponCategory = ({createdItem, setCreatedItem}) => {
                     ...Object.entries(createdItem),
                     ["linkedCharacter", getcurrentCharacter],
                     ["amount", counter.value],
-                    ["id", `inventory_${createdItem.name}`],
+                    ["id", createdItem.name],
                   ],
                 ],
               })
