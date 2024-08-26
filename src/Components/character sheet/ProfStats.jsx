@@ -22,6 +22,12 @@ const ProfStats = ({setShowStats}) => {
       } else return undefined
     })
   }
+  const checkProficiency = () => {
+    const profs = Object.keys(
+      character.classDetails.skill_proficiencies
+    ).concat(Object.keys(character.race.proficiencies.skill_proficiencies))
+    return profs
+  }
 
   return (
     <div className="stat-wrapper">
@@ -38,18 +44,15 @@ const ProfStats = ({setShowStats}) => {
       </button>
       {skillList ? (
         skillList.map((skill, index) => {
-          const storedProfNames = Object.keys(
-            character.classDetails.skill_proficiencies
-          )
-
+          console.log(skill)
           return (
             <div className="stat-container" key={index}>
               <input
                 type="checkbox"
                 className="proficiency-checkbox"
-                checked={storedProfNames.includes(skill)}
+                checked={checkProficiency().includes(skill)}
                 readOnly
-                disabled={!storedProfNames.includes(skill)}
+                disabled={!checkProficiency().includes(skill)}
               />
               <label htmlFor={skill}>{skill}: </label>
               <h4 className="stat-input" id={skill}>
