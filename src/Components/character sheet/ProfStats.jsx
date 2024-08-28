@@ -44,7 +44,6 @@ const ProfStats = ({setShowStats}) => {
       </button>
       {skillList ? (
         skillList.map((skill, index) => {
-          console.log(skill)
           return (
             <div className="stat-container" key={index}>
               <input

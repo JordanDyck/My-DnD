@@ -179,7 +179,6 @@ const CustomClass = ({
 
           <div className="chosen-skills">
             {details.starting_equipment.map((item) => {
-              console.log(item)
               const amount = item.find((prop) => prop[0] === "amount")?.[1]
               return (
                 // displays starting gear

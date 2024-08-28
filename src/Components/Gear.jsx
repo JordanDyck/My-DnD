@@ -29,7 +29,7 @@ const Gear = () => {
   return (
     <div className="gear-wrapper">
       <div className="tab-header">
-        <header>Gear</header>
+        <header>Equipped Gear</header>
       </div>
       {character?.gear?.map((item) => {
         const id = item.find((prop) => prop[0] === "id")?.[1]

@@ -3,6 +3,7 @@ import axios from "axios"
 import {useState, useEffect} from "react"
 import {useDispatch, useSelector} from "react-redux"
 import {MdCreate, MdClose} from "react-icons/md"
+import {TbArrowBackUp} from "react-icons/tb"
 
 import equipmentFilter from "./EquipmentFilter.json"
 import {filter, handleformat} from "./utilities.js"
@@ -10,7 +11,13 @@ import ItemCreator from "./ItemCreator"
 import useCounter from "../hooks/useCounter.jsx"
 import {updateCharacter} from "../Store/slices/characterSlice.js"
 
-const ItemsTab = ({type, setDetails, details, linkedCharacter}) => {
+const ItemsTab = ({
+  type,
+  setDetails,
+  details,
+  linkedCharacter,
+  setShowItemTab,
+}) => {
   const [itemCategories, setItemCategories] = useState([])
   const [itemList, setItemList] = useState()
   const [currentItem, setCurrentItem] = useState()
@@ -276,15 +283,29 @@ const ItemsTab = ({type, setDetails, details, linkedCharacter}) => {
       }
     >
       {type === "items-tab" && (
-        <button
-          type="button"
-          className="create-item-btn"
-          onClick={() => {
-            setShowItemCreator(!showItemCreator)
-          }}
-        >
-          {!showItemCreator ? <MdCreate /> : <MdClose />}
-        </button>
+        <div className="item-tab-btn-container">
+          <button
+            type="button"
+            className="create-item-btn"
+            onClick={() =>
+              setShowItemTab((prev) => ({
+                ...prev,
+                items: !prev.items,
+              }))
+            }
+          >
+            <MdClose />
+          </button>
+          <button
+            type="button"
+            className="create-item-btn"
+            onClick={() => {
+              setShowItemCreator(!showItemCreator)
+            }}
+          >
+            {!showItemCreator ? <MdCreate /> : <TbArrowBackUp />}
+          </button>
+        </div>
       )}
 
       {showItemCreator && <ItemCreator />}

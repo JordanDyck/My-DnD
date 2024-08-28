@@ -31,8 +31,8 @@ const BaseStats = () => {
             initiative
           </label>
           <h4 id="initiative">
-            {character.stats.dex.bonus > 0 ? "+" : ""}
-            {character.stats.dex.bonus}
+            {character?.stats.dex.bonus > 0 ? "+" : ""}
+            {character?.stats.dex.bonus}
           </h4>
         </div>
         <div className="armour-class base-stat-container">
@@ -42,7 +42,7 @@ const BaseStats = () => {
           <input
             onFocus={(e) => e.target.select()}
             id="ac-input"
-            defaultValue={10 + character.stats.dex.bonus}
+            defaultValue={10 + character?.stats.dex.bonus}
           ></input>
         </div>
         <div className="speed base-stat-container">
@@ -52,20 +52,20 @@ const BaseStats = () => {
           <input
             id="speed-input"
             onFocus={(e) => e.target.select()}
-            defaultValue={character.race.speed}
+            defaultValue={character?.race.speed}
           ></input>
         </div>
       </div>
 
       <div className="base-stat-wrapper">
-        {Object.keys(character.stats)?.map((statName, index) => {
+        {Object.keys(character?.stats)?.map((statName, index) => {
           return (
             <div className="base-stat-container" key={`baseStat_${index}`}>
               <label className="stat-name">{statName}</label>
 
               <h4 className="bonus-stat">
-                {character.stats[statName].bonus > 0 ? "+" : ""}
-                {character.stats[statName].bonus}
+                {character?.stats[statName].bonus > 0 ? "+" : ""}
+                {character?.stats[statName].bonus}
               </h4>
               <input
                 onChange={(e) => {
@@ -75,7 +75,7 @@ const BaseStats = () => {
                 className="base-stat"
                 onFocus={(e) => e.target.select()}
                 type="number"
-                value={character.stats[statName].base}
+                value={character?.stats[statName].base}
               />
             </div>
           )

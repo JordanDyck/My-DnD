@@ -1,20 +1,37 @@
 import Select from "react-select"
-import {AiOutlineUserAdd} from "react-icons/ai"
-import {setCurrentCharacter} from "../../Store/slices/characterSlice"
 import {useDispatch} from "react-redux"
-import {setLocalStorage} from "../utilities"
 
-const CharacterSelecter = ({setShowCreator}) => {
+import {AiOutlineUserAdd} from "react-icons/ai"
+import {RiDeleteBinLine} from "react-icons/ri"
+import {setCurrentCharacter} from "../../Store/slices/characterSlice"
+import {setLocalStorage} from "../utilities"
+import {useMemo} from "react"
+
+const CharacterSelecter = ({setShowCreator, deleteCharacter}) => {
   const dispatch = useDispatch()
 
-  const options = Object.keys(localStorage)
-    .filter((prop) => prop !== "currentCharacter")
-    .map((option) => {
-      return {value: option, label: option}
-    })
+  // const options = Object.keys(localStorage)
+  //   .filter((prop) => prop !== "currentCharacter")
+  //   .map((option) => {
+  //     return {value: option, label: option}
+  //   })
+  const keys = Object.keys(localStorage)
+  const options = useMemo(() => {
+    return keys
+      .filter((prop) => prop !== "currentCharacter")
+      .map((option) => {
+        return {value: option, label: option}
+      })
+  }, [keys])
 
   return (
     <div className="character-selector">
+      <button
+        className="delete-character-btn"
+        onClick={() => deleteCharacter(true)}
+      >
+        <RiDeleteBinLine />
+      </button>
       <Select
         className="selector"
         options={options}

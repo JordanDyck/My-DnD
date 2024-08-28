@@ -10,6 +10,7 @@ import Gear from "./Components/Gear"
 import ItemsTab from "./Components/ItemsTab"
 import CharacterCreator from "./Components/character sheet/CharacterCreator"
 import CharacterSelecter from "./Components/character sheet/CharacterSelecter"
+import DeletePopUp from "./Components/DeletePopUp"
 function App() {
   const [tabs, setTabs] = useState({
     stats: false,
@@ -17,12 +18,19 @@ function App() {
     items: false,
     creator: false,
   })
+  const [deleteCharacterComponent, setDeleteCharacterComponent] =
+    useState(false)
 
   const character = useSelector((store) => store.character.value)
 
   return (
     <div className="App">
-      {!tabs.creator && <CharacterSelecter setShowCreator={setTabs} />}
+      {!tabs.creator && (
+        <CharacterSelecter
+          setShowCreator={setTabs}
+          deleteCharacter={setDeleteCharacterComponent}
+        />
+      )}
 
       {!tabs.creator && character && (
         <CharacterDetails setShowCreator={setTabs} />
@@ -32,7 +40,11 @@ function App() {
           <CharacterCreator setShowCreator={setTabs} />
         </div>
       )}
-
+      {deleteCharacterComponent && (
+        <div className="delete-character-wrapper">
+          <DeletePopUp showDeleteComponent={setDeleteCharacterComponent} />
+        </div>
+      )}
       {character && !tabs.creator && (
         <div className="category-tabs">
           <button
@@ -56,7 +68,7 @@ function App() {
               }))
             }
           >
-            Gear
+            Equipped
           </button>
           <button
             className="category-btn"
@@ -72,7 +84,7 @@ function App() {
         </div>
       )}
 
-      {tabs.items && <ItemsTab type={"items-tab"} />}
+      {tabs.items && <ItemsTab type={"items-tab"} setShowItemTab={setTabs} />}
 
       {tabs.stats && <ProfStats setShowStats={setTabs} />}
 

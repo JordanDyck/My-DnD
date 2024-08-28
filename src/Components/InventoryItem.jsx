@@ -5,7 +5,6 @@ import {RiDeleteBinLine} from "react-icons/ri"
 import InventoryCounter from "./InventoryCounter"
 import {filter, handleformat} from "./utilities"
 import GearItem from "./character sheet/GearItem"
-// import DeleteInventoryBtn from "./DeleteInventoryBtn"
 import {updateCharacter} from "../Store/slices/characterSlice"
 import {useDispatch, useSelector} from "react-redux"
 

@@ -43,7 +43,7 @@ export const characterSlice = createSlice({
 
     // replace array with new array (used for deleting items)
     clearCharacterDetails: (state, action) => {
-      state.value = action.payload
+      state.value = null
       localStorage.removeItem(action.payload.characterName)
     },
   },
