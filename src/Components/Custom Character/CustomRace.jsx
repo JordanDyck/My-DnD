@@ -107,11 +107,16 @@ const CustomRace = ({
         type="button"
         className="save-race-btn"
         onClick={() => {
-          const {ft, inch, ...rest} = raceDetails
+          const {ft, inch, skill_proficiencies, ability_improvement, ...rest} =
+            raceDetails
           setStoredDetails((prev) => ({
             ...prev,
             race: {
               size: {ft, inch},
+              proficiencies: {
+                ability_improvement: ability_improvement,
+                skill_proficiencies: skill_proficiencies,
+              },
               ...rest,
             },
           }))

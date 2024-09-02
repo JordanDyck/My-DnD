@@ -51,6 +51,7 @@ const SubClassBuilder = ({setStoredDetails, setShowCharacterDetails}) => {
       })}
 
       <button
+        className="new-sub-feature-btn"
         onClick={() => {
           addFeature()
           if (newfeature.length) {

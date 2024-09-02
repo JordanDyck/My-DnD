@@ -23,6 +23,15 @@ const NewSubClassFeature = ({updateFormData, disableComponent}) => {
             {/* the toggle btn */}
             <Switch
               className="toggle-switch"
+              onColor="#4ae173"
+              onHandleColor="#6dff79"
+              handleDiameter={29}
+              uncheckedIcon={false}
+              checkedIcon={false}
+              boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
+              activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
+              width={56}
+              height={28}
               onChange={() => {
                 setAbilityImpovToggle((prev) => !prev)
                 if (!abilityImpovToggle) {

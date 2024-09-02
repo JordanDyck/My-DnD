@@ -26,9 +26,11 @@ const ClassLvlSelector = ({levelsURL, setStoredDetails}) => {
 
   return (
     <div className="class-lvl-details">
+      <h4 className="h4-title">levels:</h4>
       {levelsURL && (
         <Select
           options={classLvlOptions}
+          isSearchable={false}
           onChange={(choice) => {
             setCurrentLvl(choice.value)
           }}

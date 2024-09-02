@@ -17,9 +17,9 @@ const CustomClass = ({
 }) => {
   const [toggleSwitch, setToggleSwitch] = useState(false)
   const [details, setDetails] = useState({
-    class_name: "",
+    name: "",
     hit_dice: "",
-
+    stats: {},
     proficiencies: [""],
     starting_equipment: [],
     levels: [],
@@ -62,7 +62,7 @@ const CustomClass = ({
           </button>
         </label>
         <div className="stat-roller">
-          <StatRolls setStoredDetails={setStoredDetails} />
+          <StatRolls setStoredDetails={setDetails} />
         </div>
         <div className="hp-container">
           <label htmlFor="hit_dice">Hit dice:</label>
@@ -220,8 +220,15 @@ const CustomClass = ({
         type="button"
         className="save-custom-class-btn"
         onClick={() => {
-          const {levels, spells, spell_saves, spellslots, cantrips, ...rest} =
-            details
+          const {
+            levels,
+            spells,
+            spell_saves,
+            spellslots,
+            stats,
+            cantrips,
+            ...rest
+          } = details
           setStoredDetails((prev) => ({
             ...prev,
             classDetails: {
@@ -229,8 +236,9 @@ const CustomClass = ({
               ...rest,
             },
             levels: levels,
+            stats: stats,
           }))
-          setClassNameOption(details.class_name)
+          setClassNameOption(details.name)
           setShowCharacterDetails((prev) => ({
             ...prev,
             customClass: false,
@@ -241,7 +249,8 @@ const CustomClass = ({
           Object.values(details).includes("") ||
           details.proficiencies.isMax === false ||
           details.spell_saves?.isMax === false ||
-          details.saving_throws?.isMax === false
+          details.saving_throws?.isMax === false ||
+          !Object.keys(details.stats).length
         }
       >
         Save Class

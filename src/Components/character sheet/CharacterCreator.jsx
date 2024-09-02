@@ -16,6 +16,7 @@ const CharacterCreator = ({setShowCreator}) => {
     subClass: "",
     levels: [],
     gear: [],
+    stats: {},
     inventory: [],
     health: "",
     race: "",
@@ -142,7 +143,8 @@ const CharacterCreator = ({setShowCreator}) => {
               disabled={
                 !newDetails.health?.currentHP?.length ||
                 !newDetails.proficiency_bonus?.isMax ||
-                !newDetails.starting_equipment?.length
+                !newDetails.starting_equipment?.length ||
+                !Object.keys(storedDetails?.stats).length
               }
             >
               save

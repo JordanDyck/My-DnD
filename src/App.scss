@@ -11,14 +11,6 @@ $backgroundColor: #e5e5e5;
   padding: 0;
   font-family: $dndFont;
 }
-body {
-  background: linear-gradient(
-    68deg,
-    rgba(235, 235, 235, 1) 48%,
-    rgba(255, 255, 255, 1) 54%
-  );
-  position: static;
-}
 
 .character-selector {
   display: flex;
@@ -308,7 +300,9 @@ body {
         margin-top: 10px;
         justify-content: center;
         margin-inline: auto;
-        width: 120px;
+        font-size: 18px;
+        width: 150px;
+        height: 28px;
       }
     }
     .stat-roll-container {
@@ -472,7 +466,7 @@ body {
     .starting-equipment-container {
       border: 2px solid $fadedBorderColor;
       padding: 5px;
-      margin-block: 11px;
+      margin-block: 11px 0px;
       background-color: $backgroundColor;
       box-shadow: 0px 1px 2px 2px rgba(117, 117, 117, 0.91);
       .chosen-skills {
@@ -536,7 +530,7 @@ body {
       width: 100%;
       .subclass-name {
         font-weight: 600;
-        font-size: 17px;
+        font-size: 20px;
         margin-block: 9px 5px;
       }
       .sub-class-feature {
@@ -558,6 +552,7 @@ body {
           border: 2px solid;
           border-radius: 20px;
           width: 205px;
+          height: 28px;
           margin-bottom: 25px;
           margin-right: 5px;
           span {
@@ -611,8 +606,11 @@ body {
       button {
         padding: 3px;
       }
-      .save-subclass-btn {
+
+      .save-subclass-btn,
+      .new-sub-feature-btn {
         margin-top: 15px;
+        font-size: 17px;
       }
     }
     .class-btn {
@@ -858,7 +856,13 @@ body {
         font-weight: 600;
       }
     }
+    .perk_starting_equipment {
+      background: $backgroundColor;
+      border-inline: 1px solid $fadedBorderColor;
+    }
     .perk_starting_equipment_options {
+      background: $backgroundColor;
+      border-inline: 1px solid $fadedBorderColor;
       .gear-choices {
         margin-block: 5px;
         border-bottom: 1px solid;
@@ -878,7 +882,11 @@ body {
     .perk_hit_die {
       display: flex;
       flex-direction: column;
+      font-size: 18px;
 
+      h4 {
+        margin-block: 2px;
+      }
       span {
         text-decoration: underline;
       }
@@ -888,11 +896,11 @@ body {
       box-shadow: 1px 1px 0px 0px rgba(117, 117, 117, 0.91);
       background-color: $backgroundColor;
       border: 1px solid rgba(128, 128, 128, 0.8509803922);
-      padding-bottom: 5px;
+
       input {
         margin-left: 5px;
-        width: 70px;
-        font-size: 20px;
+        width: 75px;
+        font-size: 25px;
       }
     }
 
@@ -937,7 +945,7 @@ body {
 
   .ismax-container {
     border: 1px solid $fadedBorderColor;
-    width: 125px;
+    width: 135px;
     box-shadow: 1px 1px 0px 0px rgba(117, 117, 117, 0.91);
     background-color: #efefef;
     border: 1px solid rgba(128, 128, 128, 0.8509803922);
