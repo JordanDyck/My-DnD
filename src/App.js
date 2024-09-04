@@ -16,6 +16,7 @@ function App() {
     stats: false,
     gear: false,
     items: false,
+    spells: false,
     creator: false,
   })
   const [deleteCharacterComponent, setDeleteCharacterComponent] =
@@ -33,7 +34,7 @@ function App() {
       )}
 
       {!tabs.creator && character && (
-        <CharacterDetails setShowCreator={setTabs} />
+        <CharacterDetails showSkillsTab={setTabs} />
       )}
       {tabs.creator && (
         <div className="character-info-container">
@@ -47,18 +48,6 @@ function App() {
       )}
       {character && !tabs.creator && (
         <div className="category-tabs">
-          <button
-            className="category-btn"
-            onClick={() =>
-              setTabs((prev) => ({
-                ...prev,
-                stats: !prev.stats,
-              }))
-            }
-          >
-            skills
-          </button>
-
           <button
             className="category-btn"
             onClick={() =>
@@ -79,7 +68,18 @@ function App() {
               }))
             }
           >
-            ItemList
+            Item List
+          </button>
+          <button
+            className="category-btn"
+            onClick={() =>
+              setTabs((prev) => ({
+                ...prev,
+                spells: !prev.spells,
+              }))
+            }
+          >
+            Spell List
           </button>
         </div>
       )}

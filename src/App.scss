@@ -1036,12 +1036,18 @@ $backgroundColor: #e5e5e5;
   }
 }
 .category-tabs {
-  .category-btn {
-    font-size: 19px;
-    margin: 3px;
-    padding: 2px 2px 0;
-  }
+  display: flex;
+  justify-content: center;
 }
+.category-btn {
+  font-size: 19px;
+  margin: 3px;
+  padding: 2px 2px 0;
+}
+.skills-tab {
+  font-size: 17px;
+}
+
 .loading {
   text-align: center;
   font-size: 30px;
@@ -1146,17 +1152,21 @@ input {
     justify-content: space-between;
     border-bottom: 1px solid;
     padding-top: 2px;
+    padding-left: 4px;
     align-items: flex-end;
+    &:nth-child(odd) {
+      background-color: #e7e7e7;
+    }
     .stat-input {
       width: 30px;
       height: 28px;
-
       text-align: center;
       font-size: 23px;
     }
     label {
       flex: 1;
-      padding-left: 5px;
+      font-weight: bold;
+      padding-left: 10px;
     }
     .proficiency-checkbox {
       accent-color: black;

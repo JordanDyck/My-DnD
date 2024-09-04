@@ -16,15 +16,16 @@ const StatRolls = ({setStoredDetails}) => {
   const calculateBonus = (statName, baseStat) => {
     // calculates & updates the stat bonus based on the base stat.
     let result = Math.floor((baseStat - 10) / 2)
-
-    setStats((prev) => ({
-      ...prev,
-      [statName]: {
-        base: parseInt(baseStat),
-        bonus: result,
-        skills: SkillCategories[statName],
-      },
-    }))
+    if (baseStat.length <= 2) {
+      setStats((prev) => ({
+        ...prev,
+        [statName]: {
+          base: parseInt(baseStat),
+          bonus: result,
+          skills: SkillCategories[statName],
+        },
+      }))
+    }
   }
 
   const handleSave = () => {

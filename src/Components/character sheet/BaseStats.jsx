@@ -69,7 +69,9 @@ const BaseStats = () => {
               </h4>
               <input
                 onChange={(e) => {
-                  updateStats(e.target.value, e.target.name)
+                  if (e.target.value.length <= 2) {
+                    updateStats(e.target.value, e.target.name)
+                  }
                 }}
                 name={statName}
                 className="base-stat"

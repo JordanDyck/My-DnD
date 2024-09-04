@@ -70,11 +70,12 @@ const CustomClass = ({
             D
             <input
               onChange={(e) => {
-                let dice = e.target.value > 20 ? "20" : e.target.value
-                setDetails((prev) => ({
-                  ...prev,
-                  hit_dice: dice,
-                }))
+                if (e.target.value.length <= 2) {
+                  setDetails((prev) => ({
+                    ...prev,
+                    hit_dice: e.target.value,
+                  }))
+                }
               }}
               name="hit_dice"
               className="hit-dice"
