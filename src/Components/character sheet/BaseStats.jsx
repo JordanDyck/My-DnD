@@ -1,6 +1,6 @@
 import {useSelector, useDispatch} from "react-redux"
 
-import SkillCategories from "../SkillCategories.json"
+import SkillCategories from "../filters/SkillCategories.json"
 import {updateCharacter} from "../../Store/slices/characterSlice"
 
 const BaseStats = () => {

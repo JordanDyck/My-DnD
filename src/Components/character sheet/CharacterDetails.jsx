@@ -1,4 +1,3 @@
-// import {useState} from "react"
 import {useSelector} from "react-redux"
 import Health from "./Health"
 
@@ -28,9 +27,6 @@ const CharacterDetails = ({showSkillsTab}) => {
             >
               skills
             </button>
-
-            {/* <label className="class-label">Class:</label>
-            <h4>{character?.classDetails.name}</h4> */}
           </div>
 
           <div className="detail">

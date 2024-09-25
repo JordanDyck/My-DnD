@@ -3,7 +3,7 @@ import {useEffect, useMemo} from "react"
 
 import {classPerkFilter, racePerkFilter} from "./utilities"
 
-import PerkFilterBlackList from "./PerkFilterBlackList.json"
+import PerkFilterBlackList from "./filters/PerkFilterBlackList.json"
 import PerkMap from "./PerkMap"
 import ClassLvlSelector from "./ClassLvlSelector"
 

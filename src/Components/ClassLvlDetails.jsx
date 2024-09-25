@@ -1,6 +1,6 @@
 import {useMemo} from "react"
 
-import PerkFilterBlackList from "./PerkFilterBlackList.json"
+import PerkFilterBlackList from "./filters/PerkFilterBlackList.json"
 import {handleformat, classLvlFilter} from "./utilities"
 const ClassLvlDetails = ({perk}) => {
   const filteredClassDetails = useMemo(() => {

@@ -1,6 +1,6 @@
 import {useState} from "react"
 
-import SkillCategories from "../SkillCategories.json"
+import SkillCategories from "../filters/SkillCategories.json"
 
 const StatRolls = ({setStoredDetails}) => {
   const [stats, setStats] = useState({

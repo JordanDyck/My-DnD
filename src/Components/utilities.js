@@ -161,9 +161,32 @@ export const classLvlFilter = {
   },
 }
 
+export const spellFilter = {
+  school: (value) => {
+    return value.name
+  },
+  classes: (value) => {
+    return value.map((v) => v.name)
+  },
+  damage: (value) => {
+    return {
+      damage_type: value.damage_type.name,
+      damage_level:
+        value.damage_at_slot_level || value.damage_at_character_level,
+    }
+  },
+  dc: (value) => {
+    return {
+      dc_success: value.dc_success,
+      dc_type: value.dc_type.name,
+    }
+  },
+}
+
 // goes through api item values to sort through arrays and objects. returns the values so they can be mapped and displayed
 export const handleformat = (itemValue, key) => {
   // if element has a different div tag, display it
+
   if (isValidElement(itemValue)) {
     return itemValue
   } else if (Array.isArray(itemValue)) {
@@ -173,6 +196,7 @@ export const handleformat = (itemValue, key) => {
     typeof itemValue === "number"
   ) {
     // returns the value
+
     return (
       <p className={key} key={`item_${itemValue}`}>
         {itemValue}
@@ -183,14 +207,18 @@ export const handleformat = (itemValue, key) => {
   } else if (Object.keys(itemValue)?.length) {
     const keys = Object.keys(itemValue)
 
-    return keys.map((value, index) => (
+    return keys.map((value, index) => {
       // this returns just the value keys
-
-      <div className="item-value" key={`item_${key}${[index]}`}>
-        <h4 className="h4-title">{value.replaceAll("_", " ")}:</h4>
-        {handleformat(itemValue[value])}
-      </div>
-    ))
+      return (
+        <div
+          className={`item-value key_${keys[index]}`}
+          key={`item_${key}${[index]}`}
+        >
+          <h4 className="h4-title">{value.replaceAll("_", " ")}:</h4>
+          {handleformat(itemValue[value])}
+        </div>
+      )
+    })
   } else {
     return ""
   }

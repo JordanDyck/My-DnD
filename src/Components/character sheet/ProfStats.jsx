@@ -1,7 +1,7 @@
 import {useMemo} from "react"
 import {useSelector} from "react-redux"
 
-import SkillCategories from "../SkillCategories.json"
+import SkillCategories from "../filters/SkillCategories.json"
 
 const ProfStats = ({setShowStats}) => {
   const character = useSelector((store) => store.character.value)

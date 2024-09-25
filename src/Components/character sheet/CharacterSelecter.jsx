@@ -10,11 +10,6 @@ import {useMemo} from "react"
 const CharacterSelecter = ({setShowCreator, deleteCharacter}) => {
   const dispatch = useDispatch()
 
-  // const options = Object.keys(localStorage)
-  //   .filter((prop) => prop !== "currentCharacter")
-  //   .map((option) => {
-  //     return {value: option, label: option}
-  //   })
   const keys = Object.keys(localStorage)
   const options = useMemo(() => {
     return keys
@@ -26,12 +21,14 @@ const CharacterSelecter = ({setShowCreator, deleteCharacter}) => {
 
   return (
     <div className="character-selector">
-      <button
-        className="delete-character-btn"
-        onClick={() => deleteCharacter(true)}
-      >
-        <RiDeleteBinLine />
-      </button>
+      {options.length && (
+        <button
+          className="delete-character-btn"
+          onClick={() => deleteCharacter(true)}
+        >
+          <RiDeleteBinLine />
+        </button>
+      )}
       <Select
         className="selector"
         options={options}

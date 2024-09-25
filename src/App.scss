@@ -1535,6 +1535,136 @@ input {
     }
   }
 }
+.spells-tab-wrapper {
+  border: 17px solid transparent;
+  border-image: url("./assets/border.png") 116;
+  margin-inline: 10px;
+  box-shadow: 0px 0px 20px 0px #000000;
+  position: absolute;
+  top: 22%;
+  min-width: calc(100% - 55px);
+  min-height: 330px;
+  background: white;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  .tab-header {
+    margin-bottom: 5px;
+  }
+  .spell-search-container {
+    display: flex;
+    justify-content: center;
+
+    .spell-search {
+      border: 1px solid;
+      box-sizing: initial;
+      font-weight: bold;
+      padding-top: 0;
+    }
+    .search-btn {
+      width: 37px;
+      height: 27px;
+      font-size: 23px;
+    }
+    .close-spells-btn {
+      width: 30px;
+      height: 27px;
+      font-size: 22px;
+      margin-inline: 15px -14px;
+    }
+  }
+  .spell-category-container {
+    margin-top: 10px;
+    .spell-lvl {
+      margin-left: 5px;
+      width: 30px;
+      border: 1px solid;
+    }
+  }
+  .spell-info {
+    display: flex;
+    flex-wrap: wrap;
+    margin-block: 10px;
+    border-bottom: 1px solid $fadedBorderColor;
+    h4 {
+      margin-right: 5px;
+    }
+  }
+  .key_components {
+    p {
+      padding-left: 6px;
+      &:not(:last-child)::after {
+        content: " | ";
+      }
+    }
+  }
+  .key_desc,
+  .key_higher_level {
+    p {
+      font-family: $parFont;
+      font-size: 19px;
+    }
+  }
+  .key_classes {
+    p:not(:last-child):after {
+      content: ",";
+      padding-right: 5px;
+    }
+  }
+  .key_damage {
+    flex-direction: column;
+
+    .key_damage_type {
+      display: flex;
+      margin-block: 5px;
+    }
+    .key_damage_level {
+      display: flex;
+      flex-wrap: wrap;
+
+      .item-value {
+        display: flex;
+
+        &:not(:last-child)::after {
+          content: "|";
+          padding-inline: 6px;
+        }
+      }
+    }
+  }
+  .key_area_of_effect {
+    display: flex;
+    flex-direction: column;
+    .item-value {
+      display: flex;
+    }
+    .key_size::after {
+      content: "ft";
+      font-family: $parFont;
+    }
+  }
+  .key_heal_at_slot_level {
+    .item-value {
+      display: flex;
+      padding-inline: 6px;
+
+      p::after {
+        content: "hp";
+        font-family: $parFont;
+        font-weight: 50;
+      }
+      &:not(:last-child)::after {
+        content: ", |";
+      }
+    }
+  }
+  .key_dc {
+    flex-direction: column;
+    .item-value {
+      display: flex;
+    }
+  }
+}
 .add-btn-container {
   display: flex;
   gap: 15px;

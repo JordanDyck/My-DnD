@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux"
 import {MdCreate, MdClose} from "react-icons/md"
 import {TbArrowBackUp} from "react-icons/tb"
 
-import equipmentFilter from "./EquipmentFilter.json"
+import equipmentFilter from "./filters/EquipmentFilter.json"
 import {filter, handleformat} from "./utilities.js"
 import ItemCreator from "./ItemCreator"
 import useCounter from "../hooks/useCounter.jsx"

@@ -11,6 +11,7 @@ import ItemsTab from "./Components/ItemsTab"
 import CharacterCreator from "./Components/character sheet/CharacterCreator"
 import CharacterSelecter from "./Components/character sheet/CharacterSelecter"
 import DeletePopUp from "./Components/DeletePopUp"
+import SpellTab from "./Components/SpellTab"
 function App() {
   const [tabs, setTabs] = useState({
     stats: false,
@@ -19,6 +20,7 @@ function App() {
     spells: false,
     creator: false,
   })
+
   const [deleteCharacterComponent, setDeleteCharacterComponent] =
     useState(false)
 
@@ -85,6 +87,8 @@ function App() {
       )}
 
       {tabs.items && <ItemsTab type={"items-tab"} setShowItemTab={setTabs} />}
+
+      {tabs.spells && <SpellTab setShowSpellTab={setTabs} />}
 
       {tabs.stats && <ProfStats setShowStats={setTabs} />}
 
