@@ -5,7 +5,12 @@ import {MdClose, MdSearch} from "react-icons/md"
 import SpellInfo from "./SpellInfo"
 
 const SpellTab = ({setShowSpellTab}) => {
-  const [url, setUrl] = useState({level: 1, school: "", spell: ""})
+  const [url, setUrl] = useState({
+    level: 1,
+    school: "",
+    spell: "",
+    error: false,
+  })
   const [spellInfo, setSpellInfo] = useState({})
   const spellRef = useRef(null)
   useEffect(() => {
@@ -13,15 +18,20 @@ const SpellTab = ({setShowSpellTab}) => {
       axios
         .get(`https://www.dnd5eapi.co/api/spells/${url.spell}`)
         .then((res) => {
-          try {
-            const data = res.data
-            setSpellInfo(data)
-          } catch (error) {
-            console.log(error)
+          const data = res.data
+          setSpellInfo(data)
+          console.log(data)
+        })
+        .catch((error) => {
+          if (error.response.status !== 200) {
+            setUrl((prev) => ({
+              ...prev,
+              error: true,
+            }))
           }
         })
     }
-  }, [url])
+  }, [url.spell])
 
   return (
     <div className="spells-tab-wrapper">
@@ -36,7 +46,10 @@ const SpellTab = ({setShowSpellTab}) => {
             if (e.key === "Enter") {
               setUrl((prev) => ({
                 ...prev,
-                spell: spellRef.current.value,
+                spell: spellRef.current.value
+                  .toLowerCase()
+                  .replaceAll(" ", "-"),
+                error: false,
               }))
             }
           }}
@@ -47,7 +60,8 @@ const SpellTab = ({setShowSpellTab}) => {
           onClick={() =>
             setUrl((prev) => ({
               ...prev,
-              spell: spellRef.current.value,
+              spell: spellRef.current.value.toLowerCase().replaceAll(" ", "-"),
+              error: false,
             }))
           }
         >
@@ -74,9 +88,19 @@ const SpellTab = ({setShowSpellTab}) => {
           <input type="number" name="spell-lvl" className="spell-lvl" />
         </div>
       )}
-      <div className="spell-info-wrapper">
-        <SpellInfo spell={spellInfo} />
-      </div>
+      {url.error ? (
+        <div className="spell-info-error">
+          <p>spell cannot be found. try removing/adding spaces.</p>
+          <p>spells outside of 5e are not included</p>
+        </div>
+      ) : (
+        url.spell && (
+          <div className="spell-info-wrapper">
+            <SpellInfo spell={spellInfo} />
+            <button>add spell</button>
+          </div>
+        )
+      )}
     </div>
   )
 }

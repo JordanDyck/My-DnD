@@ -1551,6 +1551,16 @@ input {
   .tab-header {
     margin-bottom: 5px;
   }
+
+  .spell-info-error {
+    margin: 7px 11px;
+    p {
+      font-size: 25px;
+      padding-block: 10px;
+      font-family: $parFont;
+      color: $fadedBorderColor;
+    }
+  }
   .spell-search-container {
     display: flex;
     justify-content: center;
@@ -1584,8 +1594,9 @@ input {
   .spell-info {
     display: flex;
     flex-wrap: wrap;
-    margin-block: 10px;
+
     border-bottom: 1px solid $fadedBorderColor;
+    padding-block: 10px;
     h4 {
       margin-right: 5px;
     }
@@ -1605,6 +1616,11 @@ input {
       font-size: 19px;
     }
   }
+  .key_desc {
+    p {
+      padding-bottom: 10px;
+    }
+  }
   .key_classes {
     p:not(:last-child):after {
       content: ",";
@@ -1618,14 +1634,14 @@ input {
       display: flex;
       margin-block: 5px;
     }
-    .key_damage_level {
+    .key_higher_level {
       display: flex;
       flex-wrap: wrap;
 
       .item-value {
         display: flex;
 
-        &:not(:last-child)::after {
+        &::before {
           content: "|";
           padding-inline: 6px;
         }
@@ -1646,15 +1662,15 @@ input {
   .key_heal_at_slot_level {
     .item-value {
       display: flex;
-      padding-inline: 6px;
 
       p::after {
         content: "hp";
         font-family: $parFont;
         font-weight: 50;
       }
-      &:not(:last-child)::after {
-        content: ", |";
+      &::before {
+        content: "|";
+        padding-inline: 6px;
       }
     }
   }

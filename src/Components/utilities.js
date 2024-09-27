@@ -171,7 +171,7 @@ export const spellFilter = {
   damage: (value) => {
     return {
       damage_type: value.damage_type.name,
-      damage_level:
+      higher_level:
         value.damage_at_slot_level || value.damage_at_character_level,
     }
   },
