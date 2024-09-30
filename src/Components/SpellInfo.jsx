@@ -1,7 +1,6 @@
 import {handleformat, spellFilter} from "./utilities"
 
 const SpellInfo = ({spell}) => {
-  // console.log(spell)
   return Object.entries(spell)?.map(([key, value]) => {
     const customizeValue = spellFilter?.[key]?.(value)
     const valueToCheck = customizeValue === undefined ? value : customizeValue

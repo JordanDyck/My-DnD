@@ -240,6 +240,17 @@ export const damageTypes = [
   {value: "Psychic", label: "Psychic"},
 ]
 
+export const spellSchools = [
+  {value: "abjuration", label: "abjuration"},
+  {value: "conjuration", label: "conjuration"},
+  {value: "divination", label: "divination"},
+  {value: "enchantment", label: "enchantment"},
+  {value: "evocation", label: "evocation"},
+  {value: "illusion", label: "illusion"},
+  {value: "necromancy", label: "necromancy"},
+  {value: "transmutation", label: "transmutation"},
+]
+
 export const armorStyles = {
   control: (base, {isDisabled, isFocused}) => ({
     ...base,

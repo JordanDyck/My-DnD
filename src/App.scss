@@ -1566,6 +1566,7 @@ input {
     justify-content: center;
 
     .spell-search {
+      width: 170px;
       border: 1px solid;
       box-sizing: initial;
       font-weight: bold;
@@ -1584,21 +1585,39 @@ input {
     }
   }
   .spell-category-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
     margin-top: 10px;
+    .school-selector {
+      width: 220px;
+    }
+    .spell-list {
+      width: 285px;
+    }
+
     .spell-lvl {
       margin-left: 5px;
       width: 30px;
-      border: 1px solid;
+      height: 37px;
+      font-size: 25px;
+      border: 1px solid $fadedBorderColor;
+      border-radius: 9px 0px 0px 9px;
+      padding-top: 5px;
     }
   }
-  .spell-info {
-    display: flex;
-    flex-wrap: wrap;
+  .spell-info-wrapper {
+    padding-top: 10px;
+    .spell-info {
+      display: flex;
+      flex-wrap: wrap;
 
-    border-bottom: 1px solid $fadedBorderColor;
-    padding-block: 10px;
-    h4 {
-      margin-right: 5px;
+      border-bottom: 1px solid $fadedBorderColor;
+      padding-block: 10px;
+      h4 {
+        margin-right: 5px;
+      }
     }
   }
   .key_components {
