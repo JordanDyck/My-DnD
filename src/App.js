@@ -1,6 +1,7 @@
 import "./App.scss"
 import {useState} from "react"
 import {useSelector} from "react-redux"
+import {IoMdMenu} from "react-icons/io"
 
 import CharacterDetails from "./Components/character sheet/CharacterDetails"
 import BaseStats from "./Components/character sheet/BaseStats"
@@ -12,6 +13,7 @@ import CharacterCreator from "./Components/character sheet/CharacterCreator"
 import CharacterSelecter from "./Components/character sheet/CharacterSelecter"
 import DeletePopUp from "./Components/DeletePopUp"
 import SpellTab from "./Components/SpellTab"
+import CharacterInfo from "./Components/character sheet/CharacterInfo"
 function App() {
   const [tabs, setTabs] = useState({
     stats: false,
@@ -19,6 +21,7 @@ function App() {
     items: false,
     spells: false,
     creator: false,
+    info: false,
   })
 
   const [deleteCharacterComponent, setDeleteCharacterComponent] =
@@ -34,7 +37,20 @@ function App() {
           deleteCharacter={setDeleteCharacterComponent}
         />
       )}
-
+      {character && !tabs.creator && (
+        <button
+          className="show-character-info"
+          onClick={() => {
+            setTabs((prev) => ({
+              ...prev,
+              info: !prev.info,
+            }))
+          }}
+        >
+          <IoMdMenu />
+        </button>
+      )}
+      {tabs.info && <CharacterInfo />}
       {!tabs.creator && character && (
         <CharacterDetails showSkillsTab={setTabs} />
       )}
@@ -48,6 +64,7 @@ function App() {
           <DeletePopUp showDeleteComponent={setDeleteCharacterComponent} />
         </div>
       )}
+
       {character && !tabs.creator && (
         <div className="category-tabs">
           <button

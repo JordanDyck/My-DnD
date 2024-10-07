@@ -18,6 +18,7 @@ const PerkMap = ({
 
     if (key === "starting_equipment") {
       // if starting_equipment has no value, dont display it
+
       if (value.length <= 0) {
         return ""
       }
@@ -202,7 +203,6 @@ const PerkMap = ({
       const options = value.from.options.map((element) => {
         return {name: element.item.name.replaceAll("Skill: ", "")}
       })
-
       return (
         <SkillSelector
           key={`race_proficiency_choices${index}`}

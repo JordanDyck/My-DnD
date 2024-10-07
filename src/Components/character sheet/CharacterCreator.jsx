@@ -15,13 +15,14 @@ const CharacterCreator = ({setShowCreator}) => {
     classDetails: "",
     subClass: "",
     levels: [],
+    currentLevel: 1,
     gear: [],
     stats: {},
     inventory: [],
     health: "",
     race: "",
   })
-
+  console.log(storedDetails)
   const [showCharacterPopUps, setShowCharacterPopUps] = useState({
     classes: false,
     races: false,

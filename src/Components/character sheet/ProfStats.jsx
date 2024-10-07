@@ -4,7 +4,10 @@ import {useSelector} from "react-redux"
 import SkillCategories from "../filters/SkillCategories.json"
 
 const ProfStats = ({setShowStats}) => {
+  // how to get proficiency bonus: Math.ceil(character.currentLevel / 4) + 1
+
   const character = useSelector((store) => store.character.value)
+  const calcProficiencyBonus = Math.ceil(character.currentLevel / 4) + 1
 
   const skillList = useMemo(() => {
     return Object.keys(SkillCategories)
@@ -15,20 +18,28 @@ const ProfStats = ({setShowStats}) => {
       .sort()
   }, [])
 
+  const checkProficiency = () => {
+    const profs = Object.keys(
+      character?.classDetails?.skill_proficiencies
+    ).concat(
+      character?.race?.proficiencies.skill_proficiencies
+        ? Object.keys(character?.race?.proficiencies?.skill_proficiencies)
+        : character?.race?.starting_proficiencies?.map((skill) => {
+            return skill.name.replace("Skill: ", "")
+          })
+    )
+    return profs
+  }
   const skillBonusSorter = (skill) => {
     return Object.keys(SkillCategories).map((key) => {
-      if (character.stats[key].skills?.includes(skill)) {
+      if (character.stats[key]?.skills?.includes(skill)) {
+        if (checkProficiency().includes(skill)) {
+          return character.stats[key].bonus + calcProficiencyBonus
+        }
         return character.stats[key].bonus
       } else return undefined
     })
   }
-  const checkProficiency = () => {
-    const profs = Object.keys(
-      character.classDetails.skill_proficiencies
-    ).concat(Object.keys(character.race.proficiencies.skill_proficiencies))
-    return profs
-  }
-
   return (
     <div className="stat-wrapper">
       <button

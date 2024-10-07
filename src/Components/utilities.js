@@ -89,7 +89,7 @@ export const racePerkFilter = {
   },
   starting_proficiencies: (value) => {
     const prof = value.map((element) => {
-      return element.name
+      return element.name.replaceAll("Skill: ", "")
     })
     return prof.length ? prof : "none"
   },
