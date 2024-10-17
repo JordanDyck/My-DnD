@@ -22,7 +22,7 @@ const CharacterCreator = ({setShowCreator}) => {
     health: "",
     race: "",
   })
-  console.log(storedDetails)
+
   const [showCharacterPopUps, setShowCharacterPopUps] = useState({
     classes: false,
     races: false,

@@ -1,21 +1,12 @@
-import {useSelector, useDispatch} from "react-redux"
-import {updateCharacter} from "../../Store/slices/characterSlice"
+import {useSelector} from "react-redux"
+
 import Health from "./Health"
+import {useState} from "react"
+import LevelUpTab from "../LevelUpTab"
 
 const CharacterDetails = ({showSkillsTab}) => {
   const character = useSelector((store) => store.character.value)
-  const dispatch = useDispatch()
-
-  const handleLevelUp = (e) => {
-    if (!isNaN(e.target.value)) {
-      const updatedLevel = {
-        ...character,
-        currentLevel: parseInt(e.target.value),
-      }
-
-      dispatch(updateCharacter(updatedLevel))
-    }
-  }
+  const [levelUP, setLevelUP] = useState(false)
 
   if (!character) {
     return null
@@ -43,15 +34,13 @@ const CharacterDetails = ({showSkillsTab}) => {
           </div>
 
           <div className="detail">
-            <label className="lvl-label">level:</label>
-            <input
-              className="level"
-              type="number"
-              value={character.currentLevel}
-              onChange={(e) => handleLevelUp(e)}
-            ></input>
+            <h4 className="level">level: {character.currentLevel} </h4>
           </div>
+          <button className="lvl-up-btn" onClick={() => setLevelUP(true)}>
+            level up
+          </button>
         </div>
+        {levelUP && <LevelUpTab toggleLvlUp={setLevelUP} />}
         <Health
           key={character?.characterName}
           currentCharacter={character?.characterName}

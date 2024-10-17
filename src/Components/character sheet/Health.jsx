@@ -18,8 +18,9 @@ const Health = ({currentCharacter}) => {
     } catch (error) {
       console.error("failed to get localstorage data for health", error)
     }
+
     // eslint-disable-next-line
-  }, [currentCharacter])
+  }, [currentCharacter, character.health.maxHP])
 
   const updatedHealth = () => {
     if (currentCharacter?.length) {

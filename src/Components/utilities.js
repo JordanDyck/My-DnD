@@ -140,19 +140,25 @@ export const classLvlFilter = {
       return feature.name
     })
 
-    return features.length ? features : "New subclass feature"
+    return features.length ? features : "none"
   },
 
   class_specific: (value) => {
-    const {creating_spell_slots, ...rest} = value
-
-    return rest
+    return Object.entries(value).map((item) => {
+      if (item[1] > 0) {
+        return `${item[0].replaceAll("_", " ")}: ${
+          item[0].includes("die") ? "D" : ""
+        }${item[1]}`
+      } else {
+        return ""
+      }
+    })
   },
 
   spellcasting: (value) => {
     const spells = Object.entries(value).map((spell) => {
       if (spell[1] > 0) {
-        return `${spell[0].replaceAll("_", " ")}: ${spell[1]} spell(s)`
+        return `${spell[0].replaceAll("_", " ")}: ${spell[1]}`
       } else {
         return ""
       }

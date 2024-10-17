@@ -2,16 +2,17 @@ import {useMemo} from "react"
 
 import PerkFilterBlackList from "./filters/PerkFilterBlackList.json"
 import {handleformat, classLvlFilter} from "./utilities"
-const ClassLvlDetails = ({perk}) => {
-  const filteredClassDetails = useMemo(() => {
-    return Object.entries(perk).filter((value) => {
+const ClassLvlDetails = ({mainLevel}) => {
+  const filteredLevelDetails = useMemo(() => {
+    return Object.entries(mainLevel).filter((value) => {
       if (!PerkFilterBlackList.level.includes(value[0])) {
         return true
       }
       return false
     })
-  }, [perk])
-  return filteredClassDetails.map(([key, value]) => {
+  }, [mainLevel])
+
+  return filteredLevelDetails.map(([key, value]) => {
     const customizeValue = classLvlFilter?.[key]?.(value)
     const valueToCheck = customizeValue === undefined ? value : customizeValue
     const renderedValue = handleformat(valueToCheck, key)
