@@ -4,7 +4,7 @@ import Health from "./Health"
 import {useState} from "react"
 import LevelUpTab from "../LevelUpTab"
 
-const CharacterDetails = ({showSkillsTab}) => {
+const CharacterDetails = ({showSkillsTab, unfocused}) => {
   const character = useSelector((store) => store.character.value)
   const [levelUP, setLevelUP] = useState(false)
 
@@ -13,7 +13,10 @@ const CharacterDetails = ({showSkillsTab}) => {
   }
   try {
     return (
-      <div className="character-info-container">
+      <div
+        className="character-details-container"
+        style={{pointerEvents: unfocused ? "none" : "initial"}}
+      >
         <header className="tab-header">
           {character?.characterName} | {character.classDetails.name}
         </header>

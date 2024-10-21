@@ -1,5 +1,6 @@
 import {useSelector, useDispatch} from "react-redux"
 import {useState} from "react"
+import {MdClose} from "react-icons/md"
 
 import {updateCharacter} from "../Store/slices/characterSlice"
 import ClassLvlDetails from "./ClassLvlDetails"
@@ -25,10 +26,12 @@ const LevelUpTab = ({toggleLvlUp}) => {
 
   return (
     <div className="level-up-tab-container">
-      <button onClick={() => toggleLvlUp(false)}>x</button>
       <header className="tab-header">
         level: {character.currentLevel + 1}
       </header>
+      <button className="close-btn" onClick={() => toggleLvlUp(false)}>
+        <MdClose />
+      </button>
 
       <div className="new-health-container">
         <h4 className="hit-dice">
@@ -54,13 +57,14 @@ const LevelUpTab = ({toggleLvlUp}) => {
         <ClassLvlDetails mainLevel={newLevel} />
       </div>
       <button
+        className="save-btn"
         disabled={!newHealth?.length}
         onClick={() => {
           handleLevelUp()
           toggleLvlUp(false)
         }}
       >
-        save
+        Level up!
       </button>
     </div>
   )

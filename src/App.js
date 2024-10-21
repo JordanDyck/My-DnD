@@ -52,7 +52,7 @@ function App() {
       )}
       {tabs.info && <CharacterInfo />}
       {!tabs.creator && character && (
-        <CharacterDetails showSkillsTab={setTabs} />
+        <CharacterDetails showSkillsTab={setTabs} unfocused={tabs.info} />
       )}
       {tabs.creator && (
         <div className="character-info-container">
@@ -111,8 +111,8 @@ function App() {
 
       {tabs.gear && <Gear />}
 
-      {character && !tabs.creator && <BaseStats />}
-      {character && !tabs.creator && <Inventory />}
+      {character && !tabs.creator && <BaseStats unfocused={tabs.info} />}
+      {character && !tabs.creator && <Inventory unfocused={tabs.info} />}
     </div>
   )
 }

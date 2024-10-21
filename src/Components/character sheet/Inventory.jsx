@@ -2,11 +2,14 @@ import {useSelector} from "react-redux"
 
 import InventoryItem from "../InventoryItem"
 
-const Inventory = () => {
+const Inventory = ({unfocused}) => {
   const character = useSelector((store) => store.character.value)
 
   return (
-    <div className="inventory-wrapper">
+    <div
+      className="inventory-wrapper"
+      style={{pointerEvents: unfocused ? "none" : "initial"}}
+    >
       <div className="tab-header">
         <header>Inventory</header>
       </div>
