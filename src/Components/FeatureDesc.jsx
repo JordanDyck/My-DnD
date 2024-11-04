@@ -6,21 +6,23 @@ const FeatureDesc = ({url, setUrl}) => {
   const closeRef = useRef()
 
   useEffect(() => {
-    url &&
-      axios.get(`https://www.dnd5eapi.co${url}`).then((res) => {
+    if (url.name.includes("/")) {
+      axios.get(`https://www.dnd5eapi.co${url.name}`).then((res) => {
         const data = res.data
         setFeature(data)
       })
+    } else {
+      setFeature(url)
+    }
   }, [url])
 
   useEffect(() => {
     // close FeatureDesc when clicked outside.
     let clickOutside = (e) => {
-      if (!closeRef.current.contains(e.target)) {
+      if (!closeRef?.current?.contains(e.target)) {
         setUrl()
       }
     }
-
     document.addEventListener("mousedown", clickOutside)
     return () => {
       document.removeEventListener("mousedown", clickOutside)

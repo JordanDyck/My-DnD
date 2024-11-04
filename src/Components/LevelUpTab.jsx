@@ -6,8 +6,8 @@ import {updateCharacter} from "../Store/slices/characterSlice"
 import ClassLvlDetails from "./ClassLvlDetails"
 
 const LevelUpTab = ({toggleLvlUp}) => {
-  const [newHealth, setNewHealth] = useState()
   const character = useSelector((store) => store.character.value)
+  const [newHealth, setNewHealth] = useState(character.health.maxHP)
 
   const dispatch = useDispatch()
   const newLevel = character.levels[character.currentLevel]
@@ -39,26 +39,31 @@ const LevelUpTab = ({toggleLvlUp}) => {
           {` (+${character.stats.con.bonus})`}
         </h4>
 
-        <h4 className="old-health">
-          old health: {character.health.maxHP}
-          <span>HP</span>
-        </h4>
-        <label className="new-health" htmlFor="new-health">
-          New Health:
+        <h4 className="new-health" htmlFor="new-health">
+          New Health: {character.health.maxHP} +
           <input
             className="new-health-input"
             type="number"
             name="new-health"
-            onChange={(e) => setNewHealth(e.target.value)}
+            onChange={(e) => {
+              setNewHealth(character.health.maxHP + parseInt(e.target.value))
+            }}
           />
-        </label>
+          = {newHealth ? newHealth : character.health.maxHP}hp
+        </h4>
       </div>
       <div className="new-features-container">
         <ClassLvlDetails mainLevel={newLevel} />
+        <h4 className="h4-title">subclass features</h4>
+        {character.subClass.features.map((item) => {
+          if (parseInt(item.level) === character.currentLevel + 1) {
+            return <p key={`levelUp_${item.featureName}`}>{item.featureName}</p>
+          } else return ""
+        })}
       </div>
       <button
         className="save-btn"
-        disabled={!newHealth?.length}
+        disabled={!newHealth}
         onClick={() => {
           handleLevelUp()
           toggleLvlUp(false)

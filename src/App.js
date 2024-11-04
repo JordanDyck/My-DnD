@@ -51,11 +51,12 @@ function App() {
         </button>
       )}
       {tabs.info && <CharacterInfo />}
+
       {!tabs.creator && character && (
         <CharacterDetails showSkillsTab={setTabs} unfocused={tabs.info} />
       )}
       {tabs.creator && (
-        <div className="character-info-container">
+        <div className="character-creator-wrapper">
           <CharacterCreator setShowCreator={setTabs} />
         </div>
       )}

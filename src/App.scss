@@ -133,14 +133,13 @@ $backgroundColor: #e5e5e5;
     border: 17px solid transparent;
     border-image: url("./assets/border.png") 116;
     .new-health-container {
-      h4 {
-        text-decoration: underline;
-      }
       .hit-dice {
+        text-decoration: underline;
         padding-bottom: 10px;
       }
       .new-health-input {
-        width: 50px;
+        margin-inline: 5px;
+        width: 35px;
         font-size: 20px;
       }
     }
@@ -251,7 +250,7 @@ $backgroundColor: #e5e5e5;
 
 .character-info-wrapper {
   position: absolute;
-
+  z-index: 998;
   left: 5px;
   right: 5px;
   margin-inline: auto;
@@ -260,6 +259,23 @@ $backgroundColor: #e5e5e5;
   border: 17px solid transparent;
   border-image: url("./assets/border.png") 116;
   min-height: 250px;
+  .traits-container,
+  .class-abilities-container {
+    margin-block: 5px;
+    p::before {
+      content: "•";
+
+      margin-right: 3px;
+    }
+    p:nth-child(even) {
+      background-color: #e7e7e7;
+    }
+  }
+  .class-specifics {
+    padding-top: 3px;
+    background-color: #e7e7e7;
+    border: 1px solid $fadedBorderColor;
+  }
 }
 
 .feature-desc-wrapper {
@@ -289,8 +305,10 @@ $backgroundColor: #e5e5e5;
 .character-creator {
   display: flex;
   flex-direction: column;
+  border: 17px solid transparent;
+  border-image: url("./assets/border.png") 116;
 
-  margin-top: 10px;
+  margin: 10px 3px;
   .name-label {
     height: 40px;
     border-bottom: 2px solid #cccccc;
