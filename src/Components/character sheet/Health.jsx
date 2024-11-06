@@ -59,7 +59,6 @@ const Health = ({currentCharacter}) => {
         <button onClick={() => counter.decrement(1)}>{`<`}</button>
         <div className="health">
           <h4>{counter.value} /</h4>
-
           <input
             type="number"
             value={counter.maxValue}

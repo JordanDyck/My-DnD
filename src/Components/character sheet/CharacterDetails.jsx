@@ -39,8 +39,12 @@ const CharacterDetails = ({showSkillsTab, unfocused}) => {
           <div className="detail">
             <h4 className="level">level: {character.currentLevel} </h4>
           </div>
-          <button className="lvl-up-btn" onClick={() => setLevelUP(true)}>
-            level up
+          <button
+            className="lvl-up-btn"
+            onClick={() => setLevelUP(true)}
+            disabled={character?.currentLevel >= 20}
+          >
+            {character.currentLevel < 20 ? "level up" : "max level"}
           </button>
         </div>
         {levelUP && <LevelUpTab toggleLvlUp={setLevelUP} />}
