@@ -13,7 +13,7 @@ import CharacterCreator from "./Components/character sheet/CharacterCreator"
 import CharacterSelecter from "./Components/character sheet/CharacterSelecter"
 import DeletePopUp from "./Components/DeletePopUp"
 import SpellTab from "./Components/SpellTab"
-import CharacterInfo from "./Components/character sheet/CharacterInfo"
+import CharacterInfo from "./Components/character sheet/characterInfo/CharacterInfo"
 function App() {
   const [tabs, setTabs] = useState({
     stats: false,

@@ -1,10 +1,8 @@
-import {useSelector} from "react-redux"
 import {useState} from "react"
 
-import FeatureDesc from "../FeatureDesc"
+import FeatureDesc from "../../FeatureDesc"
 
-const CharacterInfo = () => {
-  const character = useSelector((store) => store.character.value)
+const CharacterFeatures = ({character}) => {
   const [url, setUrl] = useState()
   const levelList = character.levels.slice(0, character.currentLevel)
   let featureNameBlackList = ["Spellcasting: ", "Ability Score Improvement"]
@@ -43,10 +41,9 @@ const CharacterInfo = () => {
 
   return (
     <div
-      className="character-info-wrapper"
+      className="feature-wrapper"
       style={{pointerEvents: url ? "none" : "initial"}}
     >
-      <header className="tab-header">Character info</header>
       <div className="traits-container">
         <h4 className="h4-title"> Race traits:</h4>
         {/*  race traits */}
@@ -129,4 +126,4 @@ const CharacterInfo = () => {
     </div>
   )
 }
-export default CharacterInfo
+export default CharacterFeatures
