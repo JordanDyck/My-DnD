@@ -4,6 +4,9 @@ import SkillCategories from "../filters/SkillCategories.json"
 
 const StatRolls = ({setStoredDetails}) => {
   const [stats, setStats] = useState({
+    ac: 10,
+    initiative: 0,
+    speed: 30,
     str: {base: 0, bonus: -5, skills: SkillCategories["str"]},
     dex: {base: 0, bonus: -5, skills: SkillCategories["dex"]},
     con: {base: 0, bonus: -5},
@@ -12,6 +15,7 @@ const StatRolls = ({setStoredDetails}) => {
     chr: {base: 0, bonus: -5, skills: SkillCategories["chr"]},
   })
   const [btnText, setBtnText] = useState("save rolls")
+  const passiveStats = ["speed", "ac", "initiative"]
 
   const calculateBonus = (statName, baseStat) => {
     // calculates & updates the stat bonus based on the base stat.
@@ -47,33 +51,35 @@ const StatRolls = ({setStoredDetails}) => {
       <div className="stat-roll-container">
         {Object.keys(stats).map((stat) => {
           return (
-            <div className={`stat stat_${stat}`} key={`statRoll_${stat}`}>
-              <h4>{stat}</h4>
-              <h4 className="base-stat-bonus">
-                {stats[stat].bonus > 0 ? "+" : ""}
-                {stats[stat].bonus}
-              </h4>
-              <input
-                type="number"
-                name={`statroll_${stat}`}
-                id={stat}
-                value={!isNaN(stats[stat].base) && stats[stat].base}
-                onFocus={(e) => e.target.select()}
-                onBlur={() =>
-                  isNaN(stats[stat].base)
-                    ? setStats((prev) => ({
-                        ...prev,
-                        [stat]: {
-                          ...prev[stat],
-                          base: 0,
-                        },
-                      }))
-                    : ""
-                }
-                className="base-stat-roll"
-                onChange={(e) => calculateBonus(e.target.id, e.target.value)}
-              />
-            </div>
+            !passiveStats.includes(stat) && (
+              <div className={`stat stat_${stat}`} key={`statRoll_${stat}`}>
+                <h4>{stat}</h4>
+                <h4 className="base-stat-bonus">
+                  {stats[stat].bonus > 0 ? "+" : ""}
+                  {stats[stat].bonus}
+                </h4>
+                <input
+                  type="number"
+                  name={`statroll_${stat}`}
+                  id={stat}
+                  value={!isNaN(stats[stat].base) && stats[stat].base}
+                  onFocus={(e) => e.target.select()}
+                  onBlur={() =>
+                    isNaN(stats[stat].base)
+                      ? setStats((prev) => ({
+                          ...prev,
+                          [stat]: {
+                            ...prev[stat],
+                            base: 0,
+                          },
+                        }))
+                      : ""
+                  }
+                  className="base-stat-roll"
+                  onChange={(e) => calculateBonus(e.target.id, e.target.value)}
+                />
+              </div>
+            )
           )
         })}
       </div>
