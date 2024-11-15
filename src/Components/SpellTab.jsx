@@ -2,13 +2,16 @@ import axios from "axios"
 import {useEffect, useState, useRef} from "react"
 import {MdClose, MdSearch} from "react-icons/md"
 import {TbArrowBack} from "react-icons/tb"
-
 import Select from "react-select"
+import {useSelector, useDispatch} from "react-redux"
 
 import SpellInfo from "./SpellInfo"
 import {spellSchools} from "./utilities"
+import {updateCharacter} from "../Store/slices/characterSlice"
 
 const SpellTab = ({setShowSpellTab}) => {
+  const character = useSelector((store) => store.character.value)
+  const dispatch = useDispatch()
   const [url, setUrl] = useState({
     level: 0,
     school: "",
@@ -31,7 +34,10 @@ const SpellTab = ({setShowSpellTab}) => {
         .then((res) => {
           if (res.status === 200) {
             const data = res.data
-            setSpellInfo(data)
+            setSpellInfo(() => ({
+              ...data,
+              prepared: false,
+            }))
           }
         })
         .catch((error) => {
@@ -46,6 +52,7 @@ const SpellTab = ({setShowSpellTab}) => {
         })
     }
   }, [url.spell])
+
   useEffect(() => {
     if (url.level && url.school) {
       // gets list of spells from school at selected level
@@ -62,6 +69,37 @@ const SpellTab = ({setShowSpellTab}) => {
         })
     }
   }, [url.level, url.school])
+
+  const addSpell = () => {
+    if (spellInfo) {
+      const currentSpells = [...character.spells, spellInfo]
+      const updatedCharacter = {
+        ...character,
+        spells: currentSpells,
+      }
+      dispatch(updateCharacter(updatedCharacter))
+      setUrl((prev) => ({
+        ...prev,
+        spell: "",
+        level: 0,
+        error: false,
+      }))
+      setSpellInfo({})
+    }
+  }
+
+  const compareNames = (newSpell) => {
+    // checks if spell already exists in store
+    const findId = character.spells?.map((item) => {
+      return item.name
+    })
+
+    if (findId.includes(newSpell)) {
+      return true
+    }
+
+    return false
+  }
 
   return (
     <div className="spells-tab-wrapper">
@@ -196,7 +234,13 @@ const SpellTab = ({setShowSpellTab}) => {
         spellInfo.name && (
           <div className="spell-info-wrapper">
             <SpellInfo spell={spellInfo} />
-            <button>add spell</button>
+            <button
+              className="add-spell-btn"
+              disabled={compareNames(spellInfo?.name)}
+              onClick={() => addSpell()}
+            >
+              add spell
+            </button>
           </div>
         )
       )}

@@ -259,6 +259,21 @@ $backgroundColor: #e5e5e5;
   border: 17px solid transparent;
   border-image: url("./assets/border.png") 116;
   min-height: 250px;
+  .character-tabs {
+    margin-bottom: 20px;
+
+    background-color: #e7e7e7;
+    border: 10px solid $fadedBorderColor;
+    border-image: url("./assets/border.png") 116;
+    padding-block: 2px;
+    button {
+      font-size: 16px;
+      font-weight: bold;
+      margin-inline: 3px;
+      padding-inline: 3px;
+      height: 22px;
+    }
+  }
   .traits-container,
   .class-abilities-container {
     margin-block: 5px;
@@ -279,10 +294,38 @@ $backgroundColor: #e5e5e5;
     background-color: #e7e7e7;
     border: 1px solid $fadedBorderColor;
   }
+  .spell-wrapper {
+    .spell-dc {
+      background-color: #e7e7e7;
+      border: 2px solid $fadedBorderColor;
+      margin-block: 5px 10px;
+      width: 170px;
+      padding-top: 3px;
+    }
+    .spell-container {
+      .known-spells,
+      .prepared-spells {
+        h4 {
+          margin-block: 10px 5px;
+          text-decoration: underline;
+        }
+        border-bottom: 2px solid $fadedBorderColor;
+        padding-bottom: 5px;
+        button {
+          font-weight: bold;
+          font-size: 15px;
+          margin: 3px;
+          padding: 3px 3px 0;
+        }
+      }
+    }
+  }
 }
 
 .feature-desc-wrapper {
   animation: scale-animation 0.5s ease 0s 1 normal forwards;
+  display: flex;
+  flex-direction: column;
   position: absolute;
   background-color: white;
   top: 100px;
@@ -293,6 +336,18 @@ $backgroundColor: #e5e5e5;
   border: 17px solid transparent;
   border-image: url("./assets/border.png") 116;
   z-index: 998;
+  .feature-container {
+    display: flex;
+    flex-direction: column;
+    .delete-spell-btn {
+      font-size: 30px;
+      height: 35px;
+      background-color: transparent;
+      border: none;
+      margin: auto;
+      margin-right: 13px;
+    }
+  }
 
   .feature-info {
     p {
@@ -1750,97 +1805,106 @@ input {
       padding-top: 5px;
     }
   }
+  .add-spell-btn {
+    margin-top: 10px;
+    font-size: 20px;
+  }
   .spell-info-wrapper {
-    padding-top: 10px;
-    .spell-info {
-      display: flex;
-      flex-wrap: wrap;
-
-      border-bottom: 1px solid $fadedBorderColor;
-      padding-block: 10px;
-      h4 {
-        margin-right: 5px;
-      }
-    }
-  }
-  .key_components {
-    p {
-      padding-left: 6px;
-      &:not(:last-child)::after {
-        content: " | ";
-      }
-    }
-  }
-  .key_desc,
-  .key_higher_level {
-    p {
-      font-family: $parFont;
-      font-size: 19px;
-    }
-  }
-  .key_desc {
-    p {
-      padding-bottom: 10px;
-    }
-  }
-  .key_classes {
-    p:not(:last-child):after {
-      content: ",";
-      padding-right: 5px;
-    }
-  }
-  .key_damage {
-    flex-direction: column;
-
-    .key_damage_type {
-      display: flex;
-      margin-block: 5px;
-    }
-    .key_higher_level {
-      display: flex;
-      flex-wrap: wrap;
-
-      .item-value {
-        display: flex;
-
-        &::before {
-          content: "|";
-          padding-inline: 6px;
-        }
-      }
-    }
-  }
-  .key_area_of_effect {
     display: flex;
     flex-direction: column;
-    .item-value {
-      display: flex;
-    }
-    .key_size::after {
-      content: "ft";
-      font-family: $parFont;
+    padding-top: 10px;
+  }
+}
+.spell-info {
+  display: flex;
+  flex-wrap: wrap;
+
+  border-bottom: 1px solid $fadedBorderColor;
+  padding-block: 10px;
+  h4 {
+    margin-right: 5px;
+  }
+}
+.key_components {
+  p {
+    padding-left: 6px;
+    &:not(:last-child)::after {
+      content: " | ";
     }
   }
-  .key_heal_at_slot_level {
+}
+.key_desc,
+.key_higher_level {
+  p {
+    font-family: $parFont;
+    font-size: 19px;
+  }
+}
+.key_desc {
+  p {
+    padding-block: 7px;
+    &:nth-child(odd) {
+      border-block: 1px solid $fadedBorderColor;
+    }
+  }
+}
+.key_classes {
+  p:not(:last-child):after {
+    content: ",";
+    padding-right: 5px;
+  }
+}
+.key_damage {
+  flex-direction: column;
+
+  .key_damage_type {
+    display: flex;
+    margin-block: 5px;
+  }
+  .key_higher_level {
+    display: flex;
+    flex-wrap: wrap;
+
     .item-value {
       display: flex;
 
-      p::after {
-        content: "hp";
-        font-family: $parFont;
-        font-weight: 50;
-      }
       &::before {
         content: "|";
         padding-inline: 6px;
       }
     }
   }
-  .key_dc {
-    flex-direction: column;
-    .item-value {
-      display: flex;
+}
+.key_area_of_effect {
+  display: flex;
+  flex-direction: column;
+  .item-value {
+    display: flex;
+  }
+  .key_size::after {
+    content: "ft";
+    font-family: $parFont;
+  }
+}
+.key_heal_at_slot_level {
+  .item-value {
+    display: flex;
+
+    p::after {
+      content: "hp";
+      font-family: $parFont;
+      font-weight: 50;
     }
+    &::before {
+      content: "|";
+      padding-inline: 6px;
+    }
+  }
+}
+.key_dc {
+  flex-direction: column;
+  .item-value {
+    display: flex;
   }
 }
 .add-btn-container {

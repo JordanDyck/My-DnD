@@ -12,7 +12,7 @@ const StatRolls = ({setStoredDetails}) => {
     con: {base: 0, bonus: -5},
     int: {base: 0, bonus: -5, skills: SkillCategories["int"]},
     wis: {base: 0, bonus: -5, skills: SkillCategories["wis"]},
-    chr: {base: 0, bonus: -5, skills: SkillCategories["chr"]},
+    cha: {base: 0, bonus: -5, skills: SkillCategories["cha"]},
   })
   const [btnText, setBtnText] = useState("save rolls")
   const passiveStats = ["speed", "ac", "initiative"]

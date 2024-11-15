@@ -1,6 +1,7 @@
 import {useSelector} from "react-redux"
 import CharacterFeatures from "./CharacterFeatures"
 import {useState} from "react"
+import CharacterSpells from "./CharacterSpells"
 
 const CharacterInfo = () => {
   const character = useSelector((store) => store.character.value)
@@ -33,6 +34,9 @@ const CharacterInfo = () => {
         </button>
       </div>
       {tabs.features && <CharacterFeatures character={character} />}
+      <div className="spell-wrapper">
+        {tabs.spells && <CharacterSpells character={character} />}
+      </div>
     </div>
   )
 }

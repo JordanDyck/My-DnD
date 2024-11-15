@@ -5,7 +5,7 @@ const SpellInfo = ({spell}) => {
     const customizeValue = spellFilter?.[key]?.(value)
     const valueToCheck = customizeValue === undefined ? value : customizeValue
     const renderedValue = handleformat(valueToCheck, key)
-    const keysToHide = ["subclasses", "url", "index"]
+    const keysToHide = ["subclasses", "url", "index", "prepared"]
     if (keysToHide.includes(key)) {
       return ""
     }

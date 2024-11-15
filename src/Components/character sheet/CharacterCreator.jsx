@@ -17,6 +17,7 @@ const CharacterCreator = ({setShowCreator}) => {
     levels: [],
     currentLevel: 1,
     gear: [],
+    spells: [],
     stats: {},
     inventory: [],
     health: "",
