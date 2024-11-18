@@ -12,26 +12,29 @@ const CharacterSpells = ({character}) => {
     character.stats.int.bonus
 
   return (
-    <div className="spell-container">
+    <div
+      className="spell-container"
+      style={{pointerEvents: currentSpell ? "none" : "initial"}}
+    >
       <div className="spell-dc">
         <h4>spell save DC: {spellSave}</h4>
       </div>
       <div className="known-spells">
         <h4> spells known:</h4>
         {character.spells.map((spell) => {
-          if (spell.prepared === false) {
-            return (
+          return (
+            spell.level >= 1 && (
               <button
                 key={`known_${spell.name}`}
                 onClick={() => {
                   setCurrentSpell(spell)
                 }}
+                disabled={spell.prepared === true}
               >
                 {spell.name}
               </button>
             )
-          }
-          return ""
+          )
         })}
       </div>
       {currentSpell && (
@@ -43,6 +46,22 @@ const CharacterSpells = ({character}) => {
           />
         </div>
       )}
+      <div className="cantrips">
+        <h4>cantrips:</h4>
+        {character.spells.map((cantrip) => {
+          if (cantrip.level === 0) {
+            return (
+              <button
+                key={`cantrip_${cantrip.name}`}
+                onClick={() => setCurrentSpell(cantrip)}
+              >
+                {cantrip.name}
+              </button>
+            )
+          }
+          return ""
+        })}
+      </div>
       <div className="prepared-spells">
         <h4>prepared spells:</h4>
         {character.spells.map((preparedSpell) => {
@@ -57,6 +76,17 @@ const CharacterSpells = ({character}) => {
             )
           }
           return ""
+        })}
+      </div>
+      <div className="spell-slots">
+        {Object.entries(
+          character.levels[character.currentLevel - 1].spellcasting
+        ).map((spellSlot) => {
+          return (
+            <p key={spellSlot[0]}>
+              {spellSlot[0].replaceAll("_", " ")}: {spellSlot[1]}
+            </p>
+          )
         })}
       </div>
     </div>

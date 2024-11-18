@@ -304,7 +304,8 @@ $backgroundColor: #e5e5e5;
     }
     .spell-container {
       .known-spells,
-      .prepared-spells {
+      .prepared-spells,
+      .cantrips {
         h4 {
           margin-block: 10px 5px;
           text-decoration: underline;
@@ -316,6 +317,15 @@ $backgroundColor: #e5e5e5;
           font-size: 15px;
           margin: 3px;
           padding: 3px 3px 0;
+        }
+      }
+      .spell-slots {
+        border: 1px solid black;
+        background-color: #e7e7e7;
+        p {
+          font-family: $parFont;
+          font-size: 18px;
+          padding-block: 1px;
         }
       }
     }
@@ -346,6 +356,11 @@ $backgroundColor: #e5e5e5;
       border: none;
       margin: auto;
       margin-right: 13px;
+    }
+    .perpare-spell-btn {
+      font-size: 20px;
+      font-weight: bold;
+      margin-block: 15px 5px;
     }
   }
 

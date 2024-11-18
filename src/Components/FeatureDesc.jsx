@@ -85,14 +85,24 @@ const FeatureDesc = ({
         </div>
       )}
       {currentSpell && (
-        <button className="delete-spell-btn" onClick={() => deleteSpell()}>
+        <button
+          className="delete-spell-btn"
+          onClick={() => deleteSpell()}
+          style={{pointerEvents: "initial"}}
+        >
           <RiDeleteBinLine />
         </button>
       )}
       {currentSpell && <SpellInfo spell={currentSpell} />}
-      {currentSpell && (
-        <button className="perpare-spell-btn" onClick={() => prepareSpell()}>
-          prepare spell
+      {currentSpell && currentSpell.level >= 1 && (
+        <button
+          className="perpare-spell-btn"
+          onClick={() => prepareSpell()}
+          style={{pointerEvents: "initial"}}
+        >
+          {currentSpell.prepared === false
+            ? "prepare spell"
+            : "unprepare spell"}
         </button>
       )}
     </div>
