@@ -50,7 +50,6 @@ const CharacterCreator = ({setShowCreator}) => {
       return true
     } else return false
   }
-
   return (
     <div className="character-creator">
       <header className="tab-header">Create Character</header>
@@ -74,32 +73,56 @@ const CharacterCreator = ({setShowCreator}) => {
 
       <div className="class-container">
         {classNameOption && (
-          <div className="class-name">
-            <label id="class-label">Class:</label>
-            <h4 className="class">{classNameOption}</h4>
-            <button
-              // for deleting class
-              className="delete-class-btn"
-              onClick={() => {
-                setClassNameOption("")
-                setStoredDetails((prev) => ({
-                  ...prev,
-                  classDetails: "",
-                  levels: "",
-                  subClass: "",
-                  stats: "",
-                }))
-                setShowCharacterDetails((prev) => ({
-                  ...prev,
-                  class: false,
-                  subClass: false,
-                }))
-                setNewDetails({})
-                setCharacterDetails([])
-              }}
-            >
-              <RiDeleteBinLine />
-            </button>
+          <div>
+            <div className="class-name">
+              <label id="class-label">Class:</label>
+              <h4 className="class">{classNameOption}</h4>
+              <button
+                // for deleting class
+                className="delete-class-btn"
+                onClick={() => {
+                  setClassNameOption("")
+                  setStoredDetails((prev) => ({
+                    ...prev,
+                    classDetails: "",
+                    levels: "",
+                    subClass: "",
+                    stats: "",
+                  }))
+                  setShowCharacterDetails((prev) => ({
+                    ...prev,
+                    class: false,
+                    subClass: false,
+                  }))
+                  setNewDetails({})
+                  setCharacterDetails([])
+                }}
+              >
+                <RiDeleteBinLine />
+              </button>
+            </div>
+            {showCharacterDetails.class && (
+              <div className="starting-level">
+                <label htmlFor="level">
+                  starting level:
+                  <input
+                    name="level"
+                    type="number"
+                    value={newDetails.starting_level || ""}
+                    min={1}
+                    onChange={(e) =>
+                      // keeps the character level within 1-20 to prevent breaks
+                      e.target.value <= 20
+                        ? setNewDetails((prev) => ({
+                            ...prev,
+                            starting_level: parseInt(e.target.value),
+                          }))
+                        : ""
+                    }
+                  />
+                </label>
+              </div>
+            )}
           </div>
         )}
         {showCharacterDetails.class && (
@@ -122,7 +145,7 @@ const CharacterCreator = ({setShowCreator}) => {
         </button>
         {classNameOption && showCharacterDetails.class && (
           <>
-            {/* for choosing your class */}
+            {/* for choosing your class. displays all class related info & choices. */}
             <Perks
               characterDetails={characterDetails}
               setCharacterDetails={setCharacterDetails}

@@ -44,6 +44,7 @@ const Perks = ({
         ...prev,
         health: newDetails?.health,
         inventory: newDetails?.starting_equipment,
+        currentLevel: newDetails?.starting_level || 1,
         classDetails: {
           name: characterDetails.name,
           hit_die: characterDetails.hit_die,

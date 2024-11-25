@@ -539,10 +539,27 @@ $backgroundColor: #e5e5e5;
 
     .class-name {
       display: flex;
+
       margin-top: 20px;
       #class-label {
         align-self: center;
         padding-right: 5px;
+      }
+    }
+    .starting-level {
+      margin-top: 10px;
+      box-shadow: 1px 1px 0px 0px rgba(117, 117, 117, 0.91);
+      background-color: #e5e5e5;
+      width: 185px;
+      border: 1px solid rgba(128, 128, 128, 0.8509803922);
+      label {
+        font-weight: bold;
+      }
+      input {
+        margin-left: 5px;
+        width: 35px;
+        font-size: 18px;
+        font-weight: bold;
       }
     }
     .stat-roll-wrapper {
@@ -877,6 +894,8 @@ $backgroundColor: #e5e5e5;
     }
     .save-race-btn {
       margin-top: 15px;
+      font-size: 18px;
+      font-weight: bold;
     }
   }
   .custom-proficiencies-container {
@@ -1685,6 +1704,8 @@ input {
     }
     .add-btn {
       margin-top: 10px;
+      font-size: 18px;
+      font-weight: bold;
     }
   }
   .item-tab-btn-container {
