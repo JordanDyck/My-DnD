@@ -3,7 +3,8 @@ import FeatureDesc from "../../FeatureDesc"
 
 const CharacterSpells = ({character}) => {
   const [currentSpell, setCurrentSpell] = useState()
-
+  const spellCastingInfo =
+    character.levels[character.currentLevel - 1].spellcasting
   const spellSave =
     8 +
     character.stats[
@@ -20,20 +21,30 @@ const CharacterSpells = ({character}) => {
         <h4>spell save DC: {spellSave}</h4>
       </div>
       <div className="known-spells">
-        <h4> spells known:</h4>
+        <h4>
+          spells known:
+          <span>
+            {character.spells?.length}/{spellCastingInfo.spells_known}
+          </span>
+        </h4>
         {character.spells.map((spell) => {
           return (
-            spell.level >= 1 && (
-              <button
-                key={`known_${spell.name}`}
-                onClick={() => {
-                  setCurrentSpell(spell)
-                }}
-                disabled={spell.prepared === true}
-              >
-                {spell.name}
-              </button>
-            )
+            <button
+              style={{
+                // change colors based on what catagory they're in.
+                border: spell.prepared
+                  ? "2px solid #5ed583"
+                  : spell.level === 0
+                  ? "2px solid #d05555ab"
+                  : "1px solid #818181",
+              }}
+              key={`known_${spell.name}`}
+              onClick={() => {
+                setCurrentSpell(spell)
+              }}
+            >
+              {spell.name}
+            </button>
           )
         })}
       </div>
@@ -79,13 +90,14 @@ const CharacterSpells = ({character}) => {
         })}
       </div>
       <div className="spell-slots">
-        {Object.entries(
-          character.levels[character.currentLevel - 1].spellcasting
-        ).map((spellSlot) => {
+        <h4 className="h4-title">spell casting info:</h4>
+        {Object.entries(spellCastingInfo).map((spellSlot) => {
           return (
-            <p key={spellSlot[0]}>
-              {spellSlot[0].replaceAll("_", " ")}: {spellSlot[1]}
-            </p>
+            spellSlot[1] > 0 && (
+              <p key={spellSlot[0]}>
+                {spellSlot[0].replaceAll("_", " ")}: {spellSlot[1]}
+              </p>
+            )
           )
         })}
       </div>

@@ -293,6 +293,29 @@ $backgroundColor: #e5e5e5;
     padding-top: 3px;
     background-color: #e7e7e7;
     border: 1px solid $fadedBorderColor;
+    .item-value {
+      display: grid;
+      margin-block: 3px;
+      justify-content: start;
+      padding-left: 7px;
+
+      .key_spell_slot_level {
+        h4 {
+          text-decoration: underline;
+        }
+        p {
+          font-weight: bold;
+        }
+      }
+
+      .h4-title {
+        text-decoration: none;
+      }
+      p {
+        grid-column-start: 2;
+        margin-left: 3px;
+      }
+    }
   }
   .spell-wrapper {
     .spell-dc {
@@ -310,8 +333,15 @@ $backgroundColor: #e5e5e5;
           margin-block: 10px 5px;
           text-decoration: underline;
         }
-        border-bottom: 2px solid $fadedBorderColor;
         padding-bottom: 5px;
+        &:nth-child(even) {
+          border-block: 2px solid $fadedBorderColor;
+        }
+
+        span {
+          padding-left: 5px;
+        }
+
         button {
           font-weight: bold;
           font-size: 15px;
@@ -319,13 +349,25 @@ $backgroundColor: #e5e5e5;
           padding: 3px 3px 0;
         }
       }
+      .cantrips {
+        button {
+          border-color: #d05555ab;
+        }
+      }
+      .prepared-spells {
+        button {
+          border-color: #5ed583;
+        }
+      }
       .spell-slots {
-        border: 1px solid black;
+        border: 1px solid $fadedBorderColor;
         background-color: #e7e7e7;
+        box-shadow: 5px 3px 2px 0px rgba(0, 0, 0, 0.39);
         p {
-          font-family: $parFont;
+          font-family: $dndFont;
+          font-weight: bold;
           font-size: 18px;
-          padding-block: 1px;
+          padding: 1px 7px;
         }
       }
     }

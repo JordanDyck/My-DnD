@@ -29,6 +29,7 @@ const CharacterInfo = () => {
               features: false,
             }))
           }
+          disabled={!character?.classDetails?.spellcasting?.spell_save}
         >
           spells
         </button>

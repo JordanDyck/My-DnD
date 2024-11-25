@@ -1,6 +1,7 @@
 import {useState} from "react"
 
 import FeatureDesc from "../../FeatureDesc"
+import {handleformat} from "../../utilities"
 
 const CharacterFeatures = ({character}) => {
   const [url, setUrl] = useState()
@@ -63,18 +64,10 @@ const CharacterFeatures = ({character}) => {
 
       <div className="class-specifics">
         {/* class_specific features */}
-        {Object.entries(
+        {handleformat(
           character.levels[character.currentLevel - 1].class_specific
         ).map((feature) => {
-          return (
-            feature[1] > 0 && (
-              <p key={feature}>
-                {feature[0].replaceAll("_", " ")}:
-                {feature[0].includes("_die") ? " D" : " "}
-                {feature[1]}
-              </p>
-            )
-          )
+          return feature
         })}
       </div>
       <div className="subclass-abilities">
@@ -99,25 +92,7 @@ const CharacterFeatures = ({character}) => {
           } else return ""
         })}
       </div>
-      {Object.entries(character.classDetails.spellcasting).length ? (
-        <div className="spell-casting">
-          {/* spellcasting */}
-          <h4 className="h4-title">spellcasting:</h4>
-          {Object.entries(
-            character.levels[character.currentLevel - 1].spellcasting
-          ).map((spell) => {
-            return (
-              spell[1] > 0 && (
-                <p key={spell[0]}>
-                  {spell[0].replaceAll("_", " ")}: {spell[1]}
-                </p>
-              )
-            )
-          })}
-        </div>
-      ) : (
-        ""
-      )}
+
       {url && (
         <div className="feature-desc-wrapper">
           <FeatureDesc url={url} setUrl={setUrl} />
