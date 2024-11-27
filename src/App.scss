@@ -291,6 +291,7 @@ $backgroundColor: #e5e5e5;
   }
   .class-specifics {
     padding-top: 3px;
+    margin-bottom: 10px;
     background-color: #e7e7e7;
     border: 1px solid $fadedBorderColor;
     .item-value {
@@ -322,8 +323,16 @@ $backgroundColor: #e5e5e5;
       background-color: #e7e7e7;
       border: 2px solid $fadedBorderColor;
       margin-block: 5px 10px;
-      width: 170px;
+      width: 185px;
       padding-top: 3px;
+      span {
+        position: absolute;
+        top: 100px;
+        font-size: 13px;
+        margin-block: -10px 10px;
+        color: gray;
+        font-family: $parFont;
+      }
     }
     .spell-container {
       .known-spells,
@@ -380,7 +389,7 @@ $backgroundColor: #e5e5e5;
   flex-direction: column;
   position: absolute;
   background-color: white;
-  top: 100px;
+  top: 3%;
   left: 5px;
   right: 5px;
   margin-inline: auto;
@@ -388,6 +397,7 @@ $backgroundColor: #e5e5e5;
   border: 17px solid transparent;
   border-image: url("./assets/border.png") 116;
   z-index: 998;
+
   .feature-container {
     display: flex;
     flex-direction: column;
@@ -1684,7 +1694,8 @@ input {
       border: 2px solid $fadedBorderColor;
       flex-direction: column;
       overflow-y: scroll;
-      max-height: 195px;
+      max-height: 250px;
+      padding: 5px;
       p {
         padding-block: 8px;
         border-bottom: 2px solid $fadedBorderColor;

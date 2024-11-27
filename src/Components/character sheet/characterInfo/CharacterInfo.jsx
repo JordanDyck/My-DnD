@@ -11,6 +11,7 @@ const CharacterInfo = () => {
       <header className="tab-header">Character info</header>
       <div className="character-tabs">
         <button
+          style={{borderColor: tabs.features ? "#00ff00c9" : "#a7a7a7"}}
           onClick={() =>
             setTabs((prev) => ({
               ...prev,
@@ -22,6 +23,7 @@ const CharacterInfo = () => {
           features
         </button>
         <button
+          style={{borderColor: tabs.spells ? "#00ff00c9" : "#a7a7a7"}}
           onClick={() =>
             setTabs((prev) => ({
               ...prev,

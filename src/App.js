@@ -35,6 +35,7 @@ function App() {
         <CharacterSelecter
           setShowCreator={setTabs}
           deleteCharacter={setDeleteCharacterComponent}
+          charInfo={tabs.info}
         />
       )}
       {character && !tabs.creator && (

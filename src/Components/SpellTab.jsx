@@ -54,7 +54,7 @@ const SpellTab = ({setShowSpellTab}) => {
   }, [url.spell])
 
   useEffect(() => {
-    if (url.level && url.school) {
+    if (url.school) {
       // gets list of spells from school at selected level
       axios
         .get(
@@ -167,7 +167,7 @@ const SpellTab = ({setShowSpellTab}) => {
       {!url.spell.length && !url.error && (
         <div className="spell-category-container">
           <label htmlFor="spell-lvl">lvl:</label>
-          <input
+          <input // spell level
             type="number"
             name="spell-lvl"
             className="spell-lvl"
