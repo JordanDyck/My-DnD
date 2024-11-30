@@ -24,13 +24,15 @@ const CharacterSelecter = ({setShowCreator, deleteCharacter, charInfo}) => {
       className="character-selector"
       style={{pointerEvents: charInfo ? "none" : "initial"}}
     >
-      {options.length && (
+      {options.length ? (
         <button
           className="delete-character-btn"
           onClick={() => deleteCharacter(true)}
         >
           <RiDeleteBinLine />
         </button>
+      ) : (
+        ""
       )}
       <Select
         className="selector"

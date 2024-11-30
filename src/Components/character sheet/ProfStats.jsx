@@ -4,10 +4,9 @@ import {useSelector} from "react-redux"
 import SkillCategories from "../filters/SkillCategories.json"
 
 const ProfStats = ({setShowStats}) => {
-  // how to get proficiency bonus: Math.ceil(character.currentLevel / 4) + 1
-
   const character = useSelector((store) => store.character.value)
-  const calcProficiencyBonus = Math.ceil(character.currentLevel / 4) + 1
+  const calcProficiencyBonus =
+    character.levels[character.currentLevel - 1]?.prof_bonus
 
   const skillList = useMemo(() => {
     return Object.keys(SkillCategories)
@@ -19,6 +18,7 @@ const ProfStats = ({setShowStats}) => {
   }, [])
 
   const checkProficiency = () => {
+    // sorts all proficiencies into an array
     const profs = Object.keys(
       character?.classDetails?.skill_proficiencies
     ).concat(
@@ -28,8 +28,10 @@ const ProfStats = ({setShowStats}) => {
             return skill.name.replace("Skill: ", "")
           })
     )
+
     return profs
   }
+
   const skillBonusSorter = (skill) => {
     return Object.keys(SkillCategories).map((key) => {
       if (character.stats[key]?.skills?.includes(skill)) {
