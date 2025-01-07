@@ -13,14 +13,13 @@ const CustomRace = ({
   const [raceDetails, setRaceDetails] = useState({
     age: "",
     languages: [""],
-    traits: [""],
+    traits: [],
     raceName: "",
     ft: "",
     inch: "",
     speed: "",
     subRace: "",
   })
-
   const handleFormData = (e) => {
     e.preventDefault()
 

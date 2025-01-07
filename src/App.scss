@@ -454,6 +454,12 @@ $backgroundColor: #e5e5e5;
       font-weight: bold;
       box-shadow: 2px 2px 1px 0px #000000;
     }
+    .level-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
     .level-container {
       display: flex;
       flex-direction: column;
@@ -499,7 +505,8 @@ $backgroundColor: #e5e5e5;
           }
         }
 
-        .level-feature {
+        .level-feature,
+        .custom-class-specifics {
           display: flex;
           margin-block: 10px;
           padding-block: 15px;
@@ -508,6 +515,12 @@ $backgroundColor: #e5e5e5;
           flex-wrap: wrap;
           border: 1px solid $fadedBorderColor;
           background-color: white;
+          margin-inline: auto;
+          span {
+            font-family: $parFont;
+            color: $fadedBorderColor;
+            padding-inline: 5px;
+          }
           input {
             font-size: 16px;
             font-weight: bold;
@@ -531,6 +544,42 @@ $backgroundColor: #e5e5e5;
             background-color: #f9f9f9;
             padding-inline: 5px;
           }
+
+          .custom-class-spec-lvl-container {
+            width: 100%;
+            .custom-class-specifics-editor {
+              display: flex;
+              justify-content: space-around;
+              align-items: flex-end;
+
+              input {
+                width: 40px;
+              }
+              h4 {
+                width: initial;
+              }
+            }
+          }
+        }
+        .custom-class-specifics {
+          h4 {
+            border-color: $fadedBorderColor;
+          }
+          .class-spec-creator {
+            display: flex;
+            justify-content: space-around;
+            width: inherit;
+            margin-top: 10px;
+            .class-spec-name {
+              width: calc(100% - 80px);
+            }
+            .class-spec-value {
+              width: 50px;
+            }
+          }
+          .new-feature-btn {
+            margin-block: 20px 0;
+          }
         }
         .new-feature-btn {
           margin-bottom: 15px;
@@ -538,6 +587,13 @@ $backgroundColor: #e5e5e5;
           padding: 3px;
           font-weight: bold;
           box-shadow: 2px 2px 1px 0px #000000;
+        }
+      }
+      .level-collapsed {
+        .level-feature {
+          padding-block: 1px;
+          margin-block: 1px;
+          border: none;
         }
       }
     }

@@ -24,7 +24,7 @@ const CustomClass = ({
     starting_equipment: [],
     levels: [],
   })
-
+  // console.log("main", details)
   const onSubmit = (e) => {
     e.preventDefault()
 
@@ -80,7 +80,7 @@ const CustomClass = ({
               name="hit_dice"
               className="hit-dice"
               type="number"
-              value={details.hit_dice}
+              value={details?.hit_dice}
             />
           </span>
           <label htmlFor="health">health:</label>
@@ -100,7 +100,7 @@ const CustomClass = ({
           <h4 className="h4-title">equipment proficiencies:</h4>
           <span>*Ex. Heavy armor, Martial weapons, Bows.</span>
           <CustomProficiencies
-            array={details.proficiencies}
+            array={details?.proficiencies}
             updateDetails={setDetails}
             ObjKey={"proficiencies"}
           />
@@ -179,7 +179,7 @@ const CustomClass = ({
           <h4 className="h4-title">starting equipment:</h4>
 
           <div className="chosen-skills">
-            {details.starting_equipment.map((item) => {
+            {details?.starting_equipment?.map((item) => {
               const amount = item.find((prop) => prop[0] === "amount")?.[1]
               return (
                 // displays starting gear
@@ -215,7 +215,11 @@ const CustomClass = ({
         <span className="tool-tip">
           *Levels can be edited at any time after.
         </span>
-        <CustomLevels setDetails={setDetails} type={"levels"} />
+        <CustomLevels
+          setDetails={setDetails}
+          details={details}
+          type={"levels"}
+        />
       </div>
       <button
         type="button"
