@@ -14,7 +14,8 @@ const LevelEditor = ({
   details,
   setDetails,
   currentLevel,
-  setDisableNewLevel,
+  setIsSaved,
+  isSaved,
 }) => {
   const [levelFeatures, setLevelFeatures] = useState([defaultFeatures])
   const [classSpecifics, setClassSpecifics] = useState([defaultclassSpecs])
@@ -23,7 +24,6 @@ const LevelEditor = ({
   const newFeature = (setState, defaultValues) => {
     // adds new empty object for editing in mapped div.
     setState((prev) => [...prev, defaultValues])
-    setDisableNewLevel(true)
   }
 
   const saveLevel = () => {
@@ -56,6 +56,7 @@ const LevelEditor = ({
         }
       })
     }
+    setIsSaved(true)
   }
 
   const handleFeatureData = (e, index, state, setState, type) => {
@@ -67,10 +68,6 @@ const LevelEditor = ({
     levelCopy[index] = data
 
     setState(levelCopy)
-
-    if (data.featureName) {
-      setDisableNewLevel(false)
-    } else setDisableNewLevel(true)
   }
 
   return (
@@ -80,7 +77,7 @@ const LevelEditor = ({
         <div className="ability-improv-toggle">
           <label>
             <span>Ability score+</span>
-            {/* the toggle btn */}
+            {/* toggle to save time writing "Ability score improvement"*/}
             <Switch
               className="toggle-switch"
               onColor="#4ae173"
@@ -93,43 +90,18 @@ const LevelEditor = ({
               width={60}
               height={30}
               onChange={() => {
-                const AbilityScoreImprovement = {
-                  [`level_${level}`]: [
-                    {
-                      featureName: "Ability score improvement",
-                      feature: "Choose up to 2 abilities to improve",
-                    },
-                  ],
-                }
-                const defaultFeature = {[`level_${level}`]: [{featureName: ""}]}
+                const AbilityScoreImprovement = [
+                  {
+                    name: "Ability score improvement",
+                    feature: "Choose up to 2 abilities to improve",
+                  },
+                ]
 
                 setAbilityImpovToggle((prev) => !prev)
                 if (!abilityImpovToggle) {
-                  setLevelFeatures((prev) => ({
-                    ...prev,
-                    ...AbilityScoreImprovement,
-                  }))
-                  setDetails((prev) => ({
-                    ...prev,
-                    levels: {
-                      ...prev.levels,
-                      ...AbilityScoreImprovement,
-                    },
-                  }))
-                  setDisableNewLevel(false)
+                  setLevelFeatures(AbilityScoreImprovement)
                 } else {
-                  setLevelFeatures((prev) => ({
-                    ...prev,
-                    ...defaultFeature,
-                  }))
-                  setDetails((prev) => ({
-                    ...prev,
-                    levels: {
-                      ...prev.levels,
-                      ...defaultFeature,
-                    },
-                  }))
-                  setDisableNewLevel(true)
+                  setLevelFeatures([defaultFeatures])
                 }
               }}
               checked={abilityImpovToggle}
@@ -156,10 +128,10 @@ const LevelEditor = ({
             >
               {level === currentLevel ? (
                 <input
-                  // onChange={() => {}} // onChange needed to prevent errors
+                  onChange={() => {}} // onChange needed to prevent errors
                   name="name"
                   placeholder="feature name"
-                  // value={levelInfo[`level_${level}`][index]?.featureName}
+                  value={levelFeatures[index].name}
                   readOnly={abilityImpovToggle}
                 />
               ) : (
@@ -181,11 +153,7 @@ const LevelEditor = ({
             type="button"
             onClick={() => newFeature(setLevelFeatures, defaultFeatures)}
             style={{display: level !== currentLevel ? "none" : "initial"}}
-            // disabled={
-            //   levelInfo[`level_${level}`][
-            //     levelInfo[`level_${level}`].length - 1
-            //   ].featureName === ""
-            // }
+            disabled={!levelFeatures[levelFeatures.length - 1].name}
           >
             new feature
           </button>
@@ -288,11 +256,10 @@ const LevelEditor = ({
                 newFeature(setClassSpecifics, {name: "", value: ""})
               }
               style={{display: level !== currentLevel ? "none" : "initial"}}
-              // disabled={
-              //   levelInfo[`level_${level}`][
-              //     levelInfo[`level_${level}`].length - 1
-              //   ].featureName === ""
-              // }
+              disabled={
+                !classSpecifics[classSpecifics.length - 1].name ||
+                !classSpecifics[classSpecifics.length - 1].value
+              }
             >
               new feature
             </button>
@@ -302,8 +269,18 @@ const LevelEditor = ({
         </div>
       </div>
       {currentLevel === level && (
-        <button className="new-level-btn" onClick={saveLevel}>
-          save level
+        <button
+          className="new-level-btn"
+          onClick={saveLevel}
+          style={{backgroundColor: !isSaved ? "" : "#85ff85"}}
+          disabled={
+            details.levels.length < 1
+              ? !classSpecifics[classSpecifics.length - 1].name ||
+                !classSpecifics[classSpecifics.length - 1].value
+              : false
+          }
+        >
+          {!isSaved ? "Save Level" : "Saved"}
         </button>
       )}
     </div>

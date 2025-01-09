@@ -4,8 +4,7 @@ import LevelEditor from "./LevelEditor"
 
 const CustomLevels = ({setDetails, details, type}) => {
   const [currentLevel, setCurrentLevel] = useState([1]) // keeps track of what level you're writing in.
-
-  const [disableNewLevel, setDisableNewLevel] = useState(true)
+  const [isSaved, setIsSaved] = useState(false)
 
   const newLevel = () => {
     // collapses prev level for nicer display.
@@ -27,7 +26,7 @@ const CustomLevels = ({setDetails, details, type}) => {
       ],
     }))
 
-    setDisableNewLevel(true)
+    setIsSaved(false)
   }
   return (
     <div className="levels-wrapper">
@@ -39,7 +38,6 @@ const CustomLevels = ({setDetails, details, type}) => {
                 level={level}
                 setTraitData={setDetails}
                 currentLevel={currentLevel.length}
-                setDisableNewLevel={setDisableNewLevel}
               />
             ) : (
               <LevelEditor
@@ -47,7 +45,8 @@ const CustomLevels = ({setDetails, details, type}) => {
                 details={details}
                 setDetails={setDetails}
                 currentLevel={currentLevel.length}
-                setDisableNewLevel={setDisableNewLevel}
+                setIsSaved={setIsSaved}
+                isSaved={isSaved}
               />
             )}
           </div>
@@ -60,7 +59,7 @@ const CustomLevels = ({setDetails, details, type}) => {
           onClick={() => {
             newLevel()
           }}
-          // disabled={disableNewLevel === true}
+          disabled={!isSaved}
         >
           Add new level
         </button>

@@ -212,9 +212,6 @@ const CustomClass = ({
       </form>
       <div className="custom-levels">
         <h4 className="h4-title">levels:</h4>
-        <span className="tool-tip">
-          *Levels can be edited at any time after.
-        </span>
         <CustomLevels
           setDetails={setDetails}
           details={details}
