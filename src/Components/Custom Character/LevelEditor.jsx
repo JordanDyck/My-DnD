@@ -27,8 +27,6 @@ const LevelEditor = ({
   }
 
   const saveLevel = () => {
-    // issue: remakes all levels with only the current classSpecifics,
-
     const savedLevel = {
       level: currentLevel,
       features: levelFeatures,

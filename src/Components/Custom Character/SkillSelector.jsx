@@ -16,7 +16,7 @@ const SkillSelector = ({setDetails, type, data, isCustom, maxChoices}) => {
         setSkills(urlData)
       })
     } else {
-      // if choices already exist, dont fetch api and just use the existing data.
+      // if choices already exist, don't fetch api and just use the existing data.
       setSkills(data)
     }
   }, [data, isCustom])

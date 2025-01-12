@@ -1,52 +1,43 @@
 import {useState} from "react"
 import {RiDeleteBinLine} from "react-icons/ri"
-import Switch from "react-switch"
 
 import SkillSelector from "./SkillSelector"
 import ItemsTab from "../ItemsTab"
-import StartingSpellSlots from "./StartingSpellSlots"
+
 import CustomLevels from "./CustomLevels"
 import CustomProficiencies from "./CustomProficiencies"
 import StatRolls from "../character sheet/StatRolls"
 
 const CustomClass = ({
+  storedDetails,
   setStoredDetails,
   setClassNameOption,
   setShowCharacterDetails,
   linkedCharacter,
 }) => {
-  const [toggleSwitch, setToggleSwitch] = useState(false)
   const [details, setDetails] = useState({
     name: "",
     hit_dice: "",
     stats: {},
-    proficiencies: [""],
+    base_proficiencies: [""],
     starting_equipment: [],
     levels: [],
   })
-  // console.log("main", details)
-  const onSubmit = (e) => {
-    e.preventDefault()
-
-    if (
-      e.target.name !== "health" &&
-      e.target.name !== "hit_dice" &&
-      e.target.name !== "proficiency" &&
-      !e.target.name.includes("statroll_")
-    ) {
-      setDetails((prev) => ({
-        ...prev,
-        [e.target.name]: e.target.value,
-      }))
-    }
-  }
 
   return (
     <div className="custom-class-wrapper">
-      <form onChange={onSubmit} className="custom-class">
+      <div className="custom-class">
         <label htmlFor="name" className="custom-class-name">
           class:
-          <input name="name" />
+          <input
+            name="name"
+            onChange={(e) =>
+              setDetails((prev) => ({
+                ...prev,
+                name: e.target.value,
+              }))
+            }
+          />
           <button
             className="delete-class-btn"
             type="button"
@@ -61,6 +52,26 @@ const CustomClass = ({
             <RiDeleteBinLine />
           </button>
         </label>
+        <div className="starting-level">
+          <label htmlFor="level">
+            starting level:
+            <input
+              name="level"
+              type="number"
+              value={storedDetails?.currentLevel || ""}
+              min={1}
+              onChange={(e) =>
+                // keeps the character level within 1-20 to prevent breaks
+                e.target.value <= 20
+                  ? setStoredDetails((prev) => ({
+                      ...prev,
+                      currentLevel: parseInt(e.target.value),
+                    }))
+                  : ""
+              }
+            />
+          </label>
+        </div>
         <div className="stat-roller">
           <StatRolls setStoredDetails={setDetails} />
         </div>
@@ -100,9 +111,9 @@ const CustomClass = ({
           <h4 className="h4-title">equipment proficiencies:</h4>
           <span>*Ex. Heavy armor, Martial weapons, Bows.</span>
           <CustomProficiencies
-            array={details?.proficiencies}
+            array={details?.base_proficiencies}
             updateDetails={setDetails}
-            ObjKey={"proficiencies"}
+            ObjKey={"base_proficiencies"}
           />
         </div>
         <div className="skills">
@@ -126,54 +137,16 @@ const CustomClass = ({
           />
         </div>
         <div className="spell-section">
-          <div className="spellcaster-switch">
-            <label>
-              <span>spellcaster?</span>
-              <Switch
-                className="toggle-switch"
-                checked={toggleSwitch}
-                onColor="#4ae173"
-                onHandleColor="#6dff79"
-                handleDiameter={29}
-                uncheckedIcon={false}
-                checkedIcon={false}
-                boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
-                activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
-                width={60}
-                height={30}
-                onChange={() => {
-                  setToggleSwitch((prev) => !prev)
-                  if (toggleSwitch === true) {
-                    // toggleSwitch is actually false.
-                    setDetails((prev) => {
-                      // deletes all spellcasting, returns the rest.
-                      const {
-                        spell_saves,
-                        cantrips,
-                        spells,
-                        spellslots,
-                        ...rest
-                      } = prev
-                      return rest
-                    })
-                  }
-                }}
-              />
-            </label>
+          <div className="saving-throw-container">
+            {/* spell-saving throws */}
+            <SkillSelector
+              maxChoices={1}
+              isCustom={true}
+              setDetails={setDetails}
+              type={"spell_saves"}
+              data={"ability-scores"}
+            />
           </div>
-          {toggleSwitch && (
-            <div className="saving-throw-container">
-              {/* spell-saving throws */}
-              <SkillSelector
-                maxChoices={2}
-                isCustom={true}
-                setDetails={setDetails}
-                type={"spell_saves"}
-                data={"ability-scores"}
-              />
-            </div>
-          )}
-          {toggleSwitch && <StartingSpellSlots />}
         </div>
         <div className="starting-equipment-container">
           <h4 className="h4-title">starting equipment:</h4>
@@ -209,7 +182,7 @@ const CustomClass = ({
             details={details}
           />
         </div>
-      </form>
+      </div>
       <div className="custom-levels">
         <h4 className="h4-title">levels:</h4>
         <CustomLevels
@@ -249,10 +222,11 @@ const CustomClass = ({
         }}
         disabled={
           Object.values(details).includes("") ||
-          details.proficiencies.isMax === false ||
+          !details.base_proficiencies ||
           details.spell_saves?.isMax === false ||
           details.saving_throws?.isMax === false ||
-          !Object.keys(details.stats).length
+          !Object.keys(details.stats).length ||
+          !storedDetails.currentLevel
         }
       >
         Save Class

@@ -179,6 +179,7 @@ const CharacterCreator = ({setShowCreator}) => {
         {showCharacterDetails.customClass && (
           <CustomClass
             setStoredDetails={setStoredDetails}
+            storedDetails={storedDetails}
             setClassNameOption={setClassNameOption}
             setShowCharacterDetails={setShowCharacterDetails}
             linkedCharacter={storedDetails.characterName}

@@ -1,20 +1,14 @@
 import {useEffect, useState} from "react"
 
-const defaultLevelData = {
-  feature: "",
-  featureName: "",
+const defaultTraitData = {
+  name: "",
+  value: "",
 }
-const CustomTraits = ({
-  level,
-  setTraitData,
-  currentLevel,
-  setDisableNewLevel,
-}) => {
-  const [levelFeatures, setLevelFeatures] = useState([defaultLevelData])
+const CustomTraits = ({level, setTraitData, currentLevel}) => {
+  const [levelFeatures, setLevelFeatures] = useState([defaultTraitData])
 
   const newFeature = () => {
-    setLevelFeatures((prev) => [...prev, defaultLevelData])
-    setDisableNewLevel(true)
+    setLevelFeatures((prev) => [...prev, defaultTraitData])
   }
   const handleData = (e, index) => {
     e.preventDefault()
@@ -25,10 +19,6 @@ const CustomTraits = ({
 
     levelCopy[index] = data
     setLevelFeatures(() => levelCopy)
-
-    if (data.name) {
-      setDisableNewLevel(false)
-    } else setDisableNewLevel(true)
   }
   useEffect(() => {
     // moves levelFeatures into raceDetails.traits in CustomRace.jsx
@@ -73,13 +63,9 @@ const CustomTraits = ({
         type="button"
         onClick={() => newFeature()}
         style={{display: level !== currentLevel ? "none" : "initial"}}
-        // disabled={
-        //   levelFeatures[`level_${level}`][
-        //     levelFeatures[`level_${level}`].length - 1
-        //   ].featureName === ""
-        // }
+        disabled={!levelFeatures[level - 1].name}
       >
-        {"new trait"}
+        new trait
       </button>
     </div>
   )
