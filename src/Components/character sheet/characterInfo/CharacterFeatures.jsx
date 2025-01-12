@@ -18,12 +18,13 @@ const CharacterFeatures = ({character}) => {
             {
               index: feature.index,
               name: feature.name.split(" (").shift(), // (for duplicates) removes the () to only show the name
-              url: feature.url,
+              url: character.isCustom === false ? feature.url : feature.feature,
             },
           ])
         } else return ""
       })
     })
+
     return featureList.filter(
       (ele, index) =>
         index === featureList.findIndex((elem) => elem.name === ele.name)
@@ -33,7 +34,16 @@ const CharacterFeatures = ({character}) => {
   const displayLevelFeatures = () => {
     return getCurrentLevelFeatures().map((feature) => {
       return (
-        <p key={feature.index} onClick={() => setUrl({name: feature.url})}>
+        <p
+          key={feature.index}
+          onClick={() =>
+            setUrl(() =>
+              character.isCustom === false
+                ? {name: feature.url}
+                : {name: feature.name, desc: [feature.url]}
+            )
+          }
+        >
           {feature.name}
         </p>
       )
@@ -50,7 +60,16 @@ const CharacterFeatures = ({character}) => {
         {/*  race traits */}
         {character.race.traits.map((trait) => {
           return (
-            <p key={trait.index} onClick={() => setUrl({name: trait.url})}>
+            <p
+              key={character.isCustom === false ? trait.index : trait.name}
+              onClick={() =>
+                setUrl(() =>
+                  character.isCustom === false
+                    ? {name: trait.url}
+                    : {name: trait.name, desc: [trait.feature]}
+                )
+              }
+            >
               {trait.name}
             </p>
           )
@@ -64,11 +83,23 @@ const CharacterFeatures = ({character}) => {
 
       <div className="class-specifics">
         {/* class_specific features */}
-        {handleformat(
-          character.levels[character.currentLevel - 1].class_specific
-        ).map((feature) => {
-          return feature
-        })}
+        {character.classDetails.isCustom === false
+          ? handleformat(
+              character.levels[character.currentLevel - 1].class_specific
+            ).map((feature) => {
+              return feature
+            })
+          : // custom characters are written differently so they don't need handleformat
+            character.levels[character.currentLevel - 1].class_specific.map(
+              (customFeature) => {
+                return (
+                  <div className="item-value" key={customFeature.name}>
+                    <h4>{customFeature.name}</h4>
+                    <p>{customFeature.value}</p>
+                  </div>
+                )
+              }
+            )}
       </div>
       <div className="subclass-abilities">
         <h4 className="h4-title">subclass features</h4>

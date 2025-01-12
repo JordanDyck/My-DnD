@@ -35,6 +35,7 @@ const Perks = ({
             skill_proficiencies: newDetails?.proficiency_bonus,
             ability_improvement: newDetails?.ability_improvement,
           },
+          isCustom: false,
         },
       }))
     }
@@ -55,6 +56,7 @@ const Perks = ({
             spell_save:
               characterDetails?.spellcasting?.spellcasting_ability.name,
           },
+          isCustom: false,
         },
       }))
     }

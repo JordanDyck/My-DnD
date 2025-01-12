@@ -19,7 +19,9 @@ const CustomRace = ({
     inch: "",
     speed: "",
     subRace: "",
+    isCustom: true,
   })
+
   const handleFormData = (e) => {
     e.preventDefault()
 

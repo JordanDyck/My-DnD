@@ -22,6 +22,7 @@ const CustomClass = ({
     base_proficiencies: [""],
     starting_equipment: [],
     levels: [],
+    isCustom: true,
   })
 
   return (
