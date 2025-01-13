@@ -35,7 +35,7 @@ const CharacterFeatures = ({character}) => {
     return getCurrentLevelFeatures().map((feature) => {
       return (
         <p
-          key={feature.index}
+          key={feature.index || feature.name}
           onClick={() =>
             setUrl(() =>
               character.isCustom === false
@@ -61,10 +61,10 @@ const CharacterFeatures = ({character}) => {
         {character.race.traits.map((trait) => {
           return (
             <p
-              key={character.isCustom === false ? trait.index : trait.name}
+              key={trait.index || trait.name}
               onClick={() =>
                 setUrl(() =>
-                  character.isCustom === false
+                  character.race.isCustom === false
                     ? {name: trait.url}
                     : {name: trait.name, desc: [trait.feature]}
                 )

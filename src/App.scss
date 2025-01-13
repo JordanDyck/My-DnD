@@ -553,9 +553,9 @@ $backgroundColor: #e5e5e5;
             width: 100%;
             .custom-class-specifics-editor {
               display: flex;
-              justify-content: space-around;
+              justify-content: space-between;
               align-items: flex-end;
-
+              padding-inline: 8px;
               input {
                 width: 40px;
               }
@@ -844,25 +844,7 @@ $backgroundColor: #e5e5e5;
         padding-block: 15px;
         margin-block: 15px;
         width: 95%;
-        .ability-improv-toggle {
-          display: flex;
-          justify-content: flex-end;
 
-          background-color: #dbdbdb;
-          border: 2px solid;
-          border-radius: 20px;
-          width: 205px;
-          height: 28px;
-          margin-bottom: 25px;
-          margin-right: 5px;
-          span {
-            font-weight: 600;
-            padding-right: 5px;
-          }
-          .toggle-switch {
-            height: 21px;
-          }
-        }
         form {
           display: flex;
           flex-direction: row;

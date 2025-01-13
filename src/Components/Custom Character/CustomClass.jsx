@@ -203,6 +203,7 @@ const CustomClass = ({
             spellslots,
             stats,
             cantrips,
+            starting_equipment,
             ...rest
           } = details
           setStoredDetails((prev) => ({
@@ -212,6 +213,7 @@ const CustomClass = ({
               ...rest,
             },
             levels: levels,
+            inventory: starting_equipment,
             stats: stats,
           }))
           setClassNameOption(details.name)
