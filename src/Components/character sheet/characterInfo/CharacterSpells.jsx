@@ -18,6 +18,15 @@ const CharacterSpells = ({character}) => {
     (spell) => spell.level === 0
   )
 
+  const handleSpellSlotData = () => {
+    if (character.classDetails.isCustom) {
+      return spellCastingInfo.reduce((obj, item) => {
+        obj[item.name] = item.value
+        return obj
+      }, {})
+    } else return spellCastingInfo
+  }
+
   return (
     <div
       className="spell-container"
@@ -25,18 +34,11 @@ const CharacterSpells = ({character}) => {
     >
       <div className="spell-dc">
         <span>*Your Spell Save + Int Bonus</span>
-        <h4>spellcasting DC: {spellSave}</h4>
         <h4>spell save: {character.classDetails.spellcasting.spell_save}</h4>
+        <h4>spellcasting DC: {spellSave}</h4>
       </div>
       <div className="known-spells">
-        <h4>
-          spells known:
-          {spellCastingInfo?.spells_known && (
-            <span>
-              {spellCountFilter.length}/{spellCastingInfo.spells_known}
-            </span>
-          )}
-        </h4>
+        <h4>spells: {spellCountFilter.length}</h4>
         {character.spells.length ? (
           character.spells.map((spell) => {
             return (
@@ -75,10 +77,7 @@ const CharacterSpells = ({character}) => {
       )}
 
       <div className="cantrips">
-        <h4>
-          cantrips: {cantripCountFilter.length}/
-          {spellCastingInfo.cantrips_known}
-        </h4>
+        <h4>cantrips: {cantripCountFilter?.length}</h4>
         {character.spells.map((cantrip) => {
           if (cantrip.level === 0) {
             return (
@@ -114,14 +113,18 @@ const CharacterSpells = ({character}) => {
       ) : (
         ""
       )}
-      <div className="spell-slots">
+      <div className="spell-slot-container">
         <h4 className="h4-title">spell casting info:</h4>
-        {Object.entries(spellCastingInfo).map((spellSlot) => {
+        {Object.entries(handleSpellSlotData())?.map((spellSlot) => {
           return (
             spellSlot[1] > 0 && (
-              <p key={spellSlot[0]}>
-                {spellSlot[0].replaceAll("_", " ")}: {spellSlot[1]}
-              </p>
+              <div
+                className="spell-slot"
+                key={`spellSlot_name_${spellSlot[0]}`}
+              >
+                <h4>{spellSlot[0].replaceAll("_", " ")}:</h4>
+                <p>{spellSlot[1]}</p>
+              </div>
             )
           )
         })}

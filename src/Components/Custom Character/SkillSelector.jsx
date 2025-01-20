@@ -26,10 +26,21 @@ const SkillSelector = ({setDetails, type, data, isCustom, maxChoices}) => {
 
   const isMax = totalCount() >= counter.maxValue ? true : false
   useEffect(() => {
-    setDetails((prev) => ({
-      ...prev,
-      [type]: {...chosenskills, isMax},
-    }))
+    setDetails((prev) => {
+      if (type === "spell_save" && isCustom === true) {
+        return {
+          ...prev,
+          spellcasting: {
+            [type]: Object.keys(chosenskills)[0],
+          },
+        }
+      } else {
+        return {
+          ...prev,
+          [type]: {...chosenskills, isMax},
+        }
+      }
+    })
   }, [chosenskills, setDetails, type, isMax])
 
   return (

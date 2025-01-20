@@ -13,7 +13,7 @@ const CustomLevels = ({setDetails, details, type}) => {
       currentLevel[currentLevel.length - 1] + 1,
     ])
 
-    // sets the new level with prev level class_specifics
+    // sets the new level with prev level class_specifics & spellcasting
     setDetails((prev) => ({
       ...prev,
       levels: [
@@ -22,6 +22,9 @@ const CustomLevels = ({setDetails, details, type}) => {
           level: currentLevel.length + 1,
           features: [{}],
           class_specific: prev.levels[currentLevel.length - 1].class_specific,
+          spellcasting: details.spellcasting.spell_save?.length
+            ? prev.levels[currentLevel.length - 1].spellcasting
+            : {},
         },
       ],
     }))

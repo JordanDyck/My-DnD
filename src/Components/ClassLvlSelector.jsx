@@ -11,10 +11,16 @@ const ClassLvlSelector = ({levelsURL, setStoredDetails}) => {
     if (levelsURL) {
       axios.get(`https://www.dnd5eapi.co${levelsURL}`).then((res) => {
         const data = res.data
-        setAllLevels(data)
+
+        const dataCopy = data.filter((lvl) => {
+          delete lvl.updated_at
+          return lvl
+        })
+
+        setAllLevels(dataCopy)
         setStoredDetails((prev) => ({
           ...prev,
-          levels: data,
+          levels: dataCopy,
         }))
       })
     }

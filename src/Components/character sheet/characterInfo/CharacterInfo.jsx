@@ -6,6 +6,7 @@ import CharacterSpells from "./CharacterSpells"
 const CharacterInfo = () => {
   const character = useSelector((store) => store.character.value)
   const [tabs, setTabs] = useState({features: false, spells: false})
+
   return (
     <div className="character-info-wrapper">
       <header className="tab-header">Character info</header>
@@ -31,7 +32,10 @@ const CharacterInfo = () => {
               features: false,
             }))
           }
-          disabled={!character?.classDetails?.spellcasting?.spell_save}
+          disabled={
+            !character?.classDetails?.spellcasting?.spell_save ||
+            !Object.keys(character.classDetails.spellcasting.spell_save)[0]
+          }
         >
           spells
         </button>

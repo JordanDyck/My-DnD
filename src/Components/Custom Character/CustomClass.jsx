@@ -21,6 +21,7 @@ const CustomClass = ({
     stats: {},
     base_proficiencies: [""],
     starting_equipment: [],
+
     levels: [],
     isCustom: true,
   })
@@ -144,7 +145,7 @@ const CustomClass = ({
               maxChoices={1}
               isCustom={true}
               setDetails={setDetails}
-              type={"spell_saves"}
+              type={"spell_save"}
               data={"ability-scores"}
             />
           </div>
@@ -199,7 +200,7 @@ const CustomClass = ({
           const {
             levels,
             spells,
-            spell_saves,
+            spell_save,
             spellslots,
             stats,
             cantrips,
@@ -209,7 +210,7 @@ const CustomClass = ({
           setStoredDetails((prev) => ({
             ...prev,
             classDetails: {
-              spellcasting: {spells, spellslots, cantrips, spell_saves},
+              spellcasting: {spells, spellslots, cantrips, spell_save},
               ...rest,
             },
             levels: levels,
@@ -226,7 +227,7 @@ const CustomClass = ({
         disabled={
           Object.values(details).includes("") ||
           !details.base_proficiencies ||
-          details.spell_saves?.isMax === false ||
+          details.spell_save?.isMax === false ||
           details.saving_throws?.isMax === false ||
           !Object.keys(details.stats).length ||
           !storedDetails.currentLevel

@@ -68,8 +68,8 @@ const Perks = ({
         .get(`https://www.dnd5eapi.co/api/${category}/${subCategory}`)
         .then((res) => {
           const data = res.data
-
-          setCharacterDetails(data)
+          const {updated_at, ...rest} = data
+          setCharacterDetails(rest)
         })
     }
   }, [category, subCategory, setCharacterDetails])

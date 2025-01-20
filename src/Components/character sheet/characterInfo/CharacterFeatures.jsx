@@ -18,7 +18,10 @@ const CharacterFeatures = ({character}) => {
             {
               index: feature.index,
               name: feature.name.split(" (").shift(), // (for duplicates) removes the () to only show the name
-              url: character.isCustom === false ? feature.url : feature.feature,
+              url:
+                character.classDetails.isCustom === false
+                  ? feature.url
+                  : feature.feature,
             },
           ])
         } else return ""
@@ -38,7 +41,7 @@ const CharacterFeatures = ({character}) => {
           key={feature.index || feature.name}
           onClick={() =>
             setUrl(() =>
-              character.isCustom === false
+              character.classDetails.isCustom === false
                 ? {name: feature.url}
                 : {name: feature.name, desc: [feature.url]}
             )

@@ -9,6 +9,19 @@ const defaultclassSpecs = {
   name: "",
   value: "",
 }
+const defaultSpellSlots = [
+  {name: "spells_known", value: 0},
+  {name: "cantrips_known", value: 0},
+  {name: "spell_slots_level_1", value: 0},
+  {name: "spell_slots_level_2", value: 0},
+  {name: "spell_slots_level_3", value: 0},
+  {name: "spell_slots_level_4", value: 0},
+  {name: "spell_slots_level_5", value: 0},
+  {name: "spell_slots_level_6", value: 0},
+  {name: "spell_slots_level_7", value: 0},
+  {name: "spell_slots_level_8", value: 0},
+  {name: "spell_slots_level_9", value: 0},
+]
 const LevelEditor = ({
   level,
   details,
@@ -20,7 +33,17 @@ const LevelEditor = ({
   const [levelFeatures, setLevelFeatures] = useState([defaultFeatures])
   const [classSpecifics, setClassSpecifics] = useState([defaultclassSpecs])
   const [abilityImpovToggle, setAbilityImpovToggle] = useState(false)
+  const [spellSlots, setSpellSlots] = useState(defaultSpellSlots)
 
+  const handleSpellSlots = (value, index) => {
+    setSpellSlots((prev) => {
+      let slotCopy = [...prev]
+
+      slotCopy[index].value = parseInt(value)
+
+      return slotCopy
+    })
+  }
   const newFeature = (setState, defaultValues) => {
     // adds new empty object for editing in mapped div.
     setState((prev) => [...prev, defaultValues])
@@ -30,6 +53,13 @@ const LevelEditor = ({
     const savedLevel = {
       level: currentLevel,
       features: levelFeatures,
+      spellcasting: spellSlots.map((slot, i) => {
+        return {
+          name: slot.name,
+          value: slot.value,
+        }
+      }),
+
       class_specific:
         details?.levels?.length > 1
           ? details?.levels?.[0]?.class_specific.map((trait, index) => {
@@ -54,6 +84,7 @@ const LevelEditor = ({
         }
       })
     }
+
     setIsSaved(true)
   }
 
@@ -90,7 +121,7 @@ const LevelEditor = ({
               onChange={() => {
                 const AbilityScoreImprovement = [
                   {
-                    name: "Ability score improvement",
+                    name: "Ability Score Improvement",
                     feature: "Choose up to 2 abilities to improve",
                   },
                 ]
@@ -162,6 +193,7 @@ const LevelEditor = ({
         >
           <h4>class specific features:</h4>
           {currentLevel === 1 ? (
+            // at first level, create the class specific features. after that, only the values can be edited.
             <div>
               <span>
                 *The class features that level up with you. ex: Rage count, Ki
@@ -199,8 +231,8 @@ const LevelEditor = ({
             </div>
           ) : (
             <div className="custom-class-spec-lvl-container">
-              {details.levels.map((level, index) => {
-                // display set class_specific features
+              {details.levels.map((level) => {
+                // displays pre-made class_specific features from lvl 1
 
                 return level.class_specific.map((feature, i) => {
                   if (level.level === currentLevel) {
@@ -213,6 +245,7 @@ const LevelEditor = ({
                         <input
                           key={`class_specific_value_${i}`}
                           name="value"
+                          onFocus={(e) => e.target.select()}
                           defaultValue={feature.value}
                           onChange={(e) => {
                             // for editing the class_specific values of current level.
@@ -220,6 +253,7 @@ const LevelEditor = ({
                               let copy = [...prev]
 
                               if (!copy[i]) {
+                                // if new object is empty, create object with prev class_specific values.
                                 copy[i] = {
                                   name: details.levels[currentLevel - 2]
                                     .class_specific[i].name,
@@ -263,6 +297,27 @@ const LevelEditor = ({
             </button>
           ) : (
             ""
+          )}
+          {details.spellcasting?.spell_save?.length && (
+            <div className="custom-spell-slots-container">
+              <h4>spell slots</h4>
+              {spellSlots.map((slot, index) => {
+                return (
+                  <div className="spell-slot" key={slot.name}>
+                    <h4>{slot.name.replaceAll("_", " ")}</h4>
+                    <input
+                      onFocus={(e) => e.target.select()}
+                      type="number"
+                      defaultValue={
+                        details?.levels[currentLevel - 2]?.spellcasting[index]
+                          ?.value || 0
+                      }
+                      onChange={(e) => handleSpellSlots(e.target.value, index)}
+                    />
+                  </div>
+                )
+              })}
+            </div>
           )}
         </div>
       </div>
