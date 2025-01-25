@@ -17,11 +17,10 @@ const CustomClass = ({
 }) => {
   const [details, setDetails] = useState({
     name: "",
-    hit_dice: "",
+    hit_die: "",
     stats: {},
     base_proficiencies: [""],
     starting_equipment: [],
-
     levels: [],
     isCustom: true,
   })
@@ -78,7 +77,7 @@ const CustomClass = ({
           <StatRolls setStoredDetails={setDetails} />
         </div>
         <div className="hp-container">
-          <label htmlFor="hit_dice">Hit dice:</label>
+          <label htmlFor="hit_die">Hit dice:</label>
           <span>
             D
             <input
@@ -86,14 +85,14 @@ const CustomClass = ({
                 if (e.target.value.length <= 2) {
                   setDetails((prev) => ({
                     ...prev,
-                    hit_dice: e.target.value,
+                    hit_die: e.target.value,
                   }))
                 }
               }}
-              name="hit_dice"
+              name="hit_die"
               className="hit-dice"
               type="number"
-              value={details?.hit_dice}
+              value={details?.hit_die}
             />
           </span>
           <label htmlFor="health">health:</label>
@@ -197,20 +196,12 @@ const CustomClass = ({
         type="button"
         className="save-custom-class-btn"
         onClick={() => {
-          const {
-            levels,
-            spells,
-            spell_save,
-            spellslots,
-            stats,
-            cantrips,
-            starting_equipment,
-            ...rest
-          } = details
+          const {levels, spell_save, stats, starting_equipment, ...rest} =
+            details
           setStoredDetails((prev) => ({
             ...prev,
             classDetails: {
-              spellcasting: {spells, spellslots, cantrips, spell_save},
+              spellcasting: {spell_save},
               ...rest,
             },
             levels: levels,

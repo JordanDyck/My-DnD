@@ -19,6 +19,7 @@ const CharacterSpells = ({character}) => {
   )
 
   const handleSpellSlotData = () => {
+    // turns custom character's spellCastingInfo into one Object so its the same as a normal character's spellCastingInfo.
     if (character.classDetails.isCustom) {
       return spellCastingInfo.reduce((obj, item) => {
         obj[item.name] = item.value

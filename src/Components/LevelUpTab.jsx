@@ -11,6 +11,7 @@ const LevelUpTab = ({toggleLvlUp}) => {
 
   const dispatch = useDispatch()
   const newLevel = character.levels[character.currentLevel]
+
   const handleLevelUp = () => {
     const updatedLevel = {
       ...character,
@@ -24,6 +25,37 @@ const LevelUpTab = ({toggleLvlUp}) => {
     dispatch(updateCharacter(updatedLevel))
   }
 
+  const displayCustomLvlData = () => {
+    return Object.entries(character.levels[character.currentLevel]).map(
+      (category) => {
+        const categoryData =
+          category[0] !== "level" &&
+          category[1].map((item, index) => {
+            return (
+              item.value !== 0 && (
+                <p key={`${item.name}_${index}`}>
+                  {item.name.replaceAll("_", " ")}
+                  {category[0] !== "features" ? ":" : ""} {item.value}
+                </p>
+              )
+            )
+          })
+
+        return (
+          category[0] !== "level" && (
+            <div
+              className={`perk perk_${category[0]}`}
+              key={`next-lvl_${category[0]}`}
+            >
+              <h4>{category[0]}:</h4>
+              {categoryData}
+            </div>
+          )
+        )
+      }
+    )
+  }
+
   return (
     <div className="level-up-tab-container">
       <header className="tab-header">
@@ -35,8 +67,8 @@ const LevelUpTab = ({toggleLvlUp}) => {
 
       <div className="new-health-container">
         <h4 className="hit-dice">
-          hit dice: D{character.classDetails.hit_die} + CON
-          {` (+${character.stats.con.bonus})`}
+          hit dice(D{character.classDetails.hit_die}) + CON
+          {`(${character.stats.con.bonus})`}
         </h4>
 
         <h4 className="new-health" htmlFor="new-health">
@@ -53,7 +85,12 @@ const LevelUpTab = ({toggleLvlUp}) => {
         </h4>
       </div>
       <div className="new-features-container">
-        <ClassLvlDetails mainLevel={newLevel} />
+        {character.classDetails.isCustom ? (
+          displayCustomLvlData()
+        ) : (
+          <ClassLvlDetails mainLevel={newLevel} />
+        )}
+
         <h4 className="h4-title">subclass features</h4>
         {character.subClass.features.map((item) => {
           if (parseInt(item.level) === character.currentLevel + 1) {

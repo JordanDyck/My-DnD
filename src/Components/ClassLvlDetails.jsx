@@ -3,6 +3,8 @@ import {useMemo} from "react"
 import PerkFilterBlackList from "./filters/PerkFilterBlackList.json"
 import {handleformat, classLvlFilter} from "./utilities"
 const ClassLvlDetails = ({mainLevel}) => {
+  //used for previewing a level. Ex: the level list in class creator, or seeing the next level in LevelUpTab.
+
   const filteredLevelDetails = useMemo(() => {
     return Object.entries(mainLevel).filter((value) => {
       if (!PerkFilterBlackList.level.includes(value[0])) {

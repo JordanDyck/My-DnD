@@ -53,7 +53,7 @@ const LevelEditor = ({
     const savedLevel = {
       level: currentLevel,
       features: levelFeatures,
-      spellcasting: spellSlots.map((slot, i) => {
+      spellcasting: spellSlots.map((slot) => {
         return {
           name: slot.name,
           value: slot.value,
@@ -62,7 +62,7 @@ const LevelEditor = ({
 
       class_specific:
         details?.levels?.length > 1
-          ? details?.levels?.[0]?.class_specific.map((trait, index) => {
+          ? details?.levels?.[0]?.class_specific.map((_, index) => {
               return {
                 name: details?.levels?.[0]?.class_specific?.[index]?.name,
                 value:
