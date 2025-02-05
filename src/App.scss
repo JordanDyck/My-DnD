@@ -274,6 +274,101 @@ $backgroundColor: #e5e5e5;
       height: 22px;
     }
   }
+
+  .overview-container {
+    .char-name {
+      margin-block: 10px;
+    }
+    header {
+      font-weight: bold;
+      border-bottom: 2px solid $fadedBorderColor;
+    }
+    .class-name {
+      margin-top: 10px;
+    }
+    .class-details {
+      background-color: #ebebeb;
+      border: 2px solid #bcbcbc;
+      padding-inline: 7px;
+      border-radius: 2%;
+    }
+    .hit-dice {
+      text-decoration: underline;
+      padding-block: 10px;
+    }
+
+    .overview {
+      border: 1px solid $fadedBorderColor;
+      background-color: #e5e5e5;
+      box-shadow: 0px 1px 2px 1px rgba(117, 117, 117, 0.91);
+      margin-block: 10px;
+      .base-proficiencies,
+      .saving-throws,
+      .skill-profs,
+      .ability-improvements {
+        display: flex;
+        flex-wrap: wrap;
+        padding-block: 5px;
+
+        p {
+          font-weight: bold;
+          padding: 3px 3px 0;
+          margin: 3px;
+          border: 1px solid $fadedBorderColor;
+          background-color: #fbfbfb;
+          box-shadow: 2px 2px 2px 0px rgba(117, 117, 117, 0.91);
+          // &::before {
+          //   content: "•";
+          //   margin-right: 3px;
+          // }
+        }
+      }
+      .base-proficiencies {
+        p {
+          padding: 3px;
+          font-family: $parFont;
+          font-weight: normal;
+          font-size: 18px;
+        }
+      }
+    }
+    .race-details {
+      margin-block: 20px;
+      .race-name {
+        float: left;
+        padding-right: 5px;
+      }
+      .base-details-container {
+        display: flex;
+        justify-content: space-between;
+
+        .base-detail {
+          display: flex;
+        }
+        h4 {
+          float: left;
+          padding-right: 5px;
+        }
+        span:not(.line-brake) {
+          position: relative;
+          bottom: 5px;
+          font-size: 10px;
+          margin-bottom: 14px;
+        }
+      }
+      .languages {
+        p {
+          font-family: $parFont;
+          font-size: 20px;
+          &::before {
+            content: "•";
+            margin-right: 3px;
+          }
+        }
+      }
+    }
+  }
+
   .traits-container,
   .class-abilities-container {
     margin-block: 5px;
@@ -318,76 +413,75 @@ $backgroundColor: #e5e5e5;
       }
     }
   }
-  .spell-wrapper {
-    .spell-dc {
-      background-color: #e7e7e7;
-      border: 2px solid $fadedBorderColor;
-      margin-block: 5px 10px;
-      width: 185px;
-      padding-top: 3px;
-      span {
-        position: absolute;
-        top: 100px;
-        font-size: 13px;
-        margin-block: -10px 10px;
-        color: gray;
-        font-family: $parFont;
+
+  .spell-dc {
+    background-color: #e7e7e7;
+    border: 2px solid $fadedBorderColor;
+    margin-block: 5px 10px;
+    width: 185px;
+    padding-top: 3px;
+    span {
+      position: absolute;
+      top: 100px;
+      font-size: 13px;
+      margin-block: -10px 10px;
+      color: gray;
+      font-family: $parFont;
+    }
+  }
+  .spell-container {
+    .known-spells,
+    .prepared-spells,
+    .cantrips {
+      h4 {
+        margin-block: 10px 5px;
+        text-decoration: underline;
+      }
+      padding-bottom: 5px;
+      &:nth-child(even) {
+        border-block: 2px solid $fadedBorderColor;
+      }
+
+      button {
+        font-weight: bold;
+        font-size: 15px;
+        margin: 3px;
+        padding: 3px 3px 0;
       }
     }
-    .spell-container {
-      .known-spells,
-      .prepared-spells,
-      .cantrips {
+    .cantrips {
+      button {
+        border-color: #d05555ab;
+      }
+    }
+    .prepared-spells {
+      button {
+        border-color: #5ed583;
+      }
+    }
+    .spell-slot-container {
+      border: 1px solid $fadedBorderColor;
+      background-color: #e7e7e7;
+      box-shadow: 5px 3px 2px 0px rgba(0, 0, 0, 0.39);
+      .h4-title {
+        font-size: 20px;
+        border-bottom: 1px solid;
+      }
+      .spell-slot {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid $fadedBorderColor;
+        padding: 4px 30px 4px 7px;
         h4 {
-          margin-block: 10px 5px;
+          font-size: 18px;
           text-decoration: underline;
         }
-        padding-bottom: 5px;
-        &:nth-child(even) {
-          border-block: 2px solid $fadedBorderColor;
-        }
-
-        button {
+        p {
+          font-family: $dndFont;
           font-weight: bold;
-          font-size: 15px;
-          margin: 3px;
-          padding: 3px 3px 0;
-        }
-      }
-      .cantrips {
-        button {
-          border-color: #d05555ab;
-        }
-      }
-      .prepared-spells {
-        button {
-          border-color: #5ed583;
-        }
-      }
-      .spell-slot-container {
-        border: 1px solid $fadedBorderColor;
-        background-color: #e7e7e7;
-        box-shadow: 5px 3px 2px 0px rgba(0, 0, 0, 0.39);
-        .h4-title {
-          font-size: 20px;
-          border-bottom: 1px solid;
-        }
-        .spell-slot {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          border-bottom: 1px solid $fadedBorderColor;
-          padding: 4px 30px 4px 7px;
-          h4 {
-            font-size: 18px;
-            text-decoration: underline;
-          }
-          p {
-            font-family: $dndFont;
-            font-weight: bold;
-            font-size: 18px;
-            text-decoration: underline;
-          }
+          font-size: 18px;
+          text-decoration: underline;
         }
       }
     }
@@ -909,7 +1003,7 @@ $backgroundColor: #e5e5e5;
               font-family: $parFont;
               border-right: 2px solid #ababab;
               border-bottom: 2px solid #ababab;
-
+              padding-top: 0;
               vertical-align: sub;
             }
             textarea {
@@ -1238,6 +1332,13 @@ $backgroundColor: #e5e5e5;
       margin-top: 20px;
       h4 {
         text-decoration: underline;
+      }
+      .prof_bonus_title {
+        float: left;
+        padding-right: 5px;
+      }
+      .prof_bonus {
+        font-weight: bold;
       }
     }
 

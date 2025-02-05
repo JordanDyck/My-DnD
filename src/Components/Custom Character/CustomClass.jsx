@@ -19,7 +19,7 @@ const CustomClass = ({
     name: "",
     hit_die: "",
     stats: {},
-    base_proficiencies: [""],
+    base_proficiencies: [{name: ""}],
     starting_equipment: [],
     levels: [],
     isCustom: true,
@@ -217,7 +217,8 @@ const CustomClass = ({
         }}
         disabled={
           Object.values(details).includes("") ||
-          !details.base_proficiencies ||
+          !details.base_proficiencies[details.base_proficiencies.length - 1]
+            .name.length ||
           details.spell_save?.isMax === false ||
           details.saving_throws?.isMax === false ||
           !Object.keys(details.stats).length ||

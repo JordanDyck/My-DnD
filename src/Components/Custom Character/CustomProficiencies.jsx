@@ -1,5 +1,6 @@
 const CustomProficiencies = ({array, updateDetails, ObjKey}) => {
   // creates a new input on btn click used for storing lists of data like languages or traits
+
   return (
     <div className={`custom-proficiencies ${ObjKey}`}>
       {array.map((_, index) => {
@@ -9,8 +10,7 @@ const CustomProficiencies = ({array, updateDetails, ObjKey}) => {
             key={`${ObjKey}_${[index]}`}
             onChange={(e) => {
               const data = [...array]
-              data[index] = e.target.value
-
+              data[index] = {name: e.target.value}
               updateDetails((prev) => ({
                 ...prev,
                 [ObjKey]: data,
@@ -23,7 +23,7 @@ const CustomProficiencies = ({array, updateDetails, ObjKey}) => {
         onClick={() => {
           updateDetails((prev) => ({
             ...prev,
-            [ObjKey]: [...prev[ObjKey], ""],
+            [ObjKey]: [...prev[ObjKey], {name: ""}],
           }))
         }}
         disabled={!array[array.length - 1]}

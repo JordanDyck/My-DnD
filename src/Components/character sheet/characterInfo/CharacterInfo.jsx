@@ -2,10 +2,14 @@ import {useSelector} from "react-redux"
 import CharacterFeatures from "./CharacterFeatures"
 import {useState} from "react"
 import CharacterSpells from "./CharacterSpells"
+import CharacterOverview from "./CharacterOverview"
 
 const CharacterInfo = () => {
   const character = useSelector((store) => store.character.value)
   const [tabs, setTabs] = useState({features: false, spells: false})
+  const areAllTabsFalse = () => {
+    return !tabs.features && !tabs.spells
+  }
 
   return (
     <div className="character-info-wrapper">
@@ -40,10 +44,10 @@ const CharacterInfo = () => {
           spells
         </button>
       </div>
+      {areAllTabsFalse() && <CharacterOverview character={character} />}
       {tabs.features && <CharacterFeatures character={character} />}
-      <div className="spell-wrapper">
-        {tabs.spells && <CharacterSpells character={character} />}
-      </div>
+
+      {tabs.spells && <CharacterSpells character={character} />}
     </div>
   )
 }

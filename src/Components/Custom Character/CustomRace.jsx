@@ -12,9 +12,10 @@ const CustomRace = ({
 }) => {
   const [raceDetails, setRaceDetails] = useState({
     age: "",
-    languages: [""],
+    languages: [{name: ""}],
+    starting_proficiencies: [{name: ""}],
     traits: [],
-    raceName: "",
+    name: "",
     ft: "",
     inch: "",
     speed: "",
@@ -34,9 +35,9 @@ const CustomRace = ({
   return (
     <div className="custom-race">
       <form onChange={handleFormData}>
-        <label htmlFor="raceName">
+        <label htmlFor="name">
           race name:
-          <input className="custom-race-name" name="raceName" />
+          <input className="custom-race-name" name="name" />
           <button
             className="delete-race-btn"
             type="button"
@@ -83,6 +84,15 @@ const CustomRace = ({
           ObjKey={"languages"}
         />
       </div>
+      <div className="custom-proficiencies-container">
+        <h4 className="h4-title">equipment proficiencies:</h4>
+        <span>*Ex. Heavy armor, Martial weapons, Bows.</span>
+        <CustomProficiencies
+          array={raceDetails?.starting_proficiencies}
+          updateDetails={setRaceDetails}
+          ObjKey={"starting_proficiencies"}
+        />
+      </div>
       <div className="ability-bonus-container">
         <SkillSelector
           setDetails={setRaceDetails}
@@ -121,7 +131,7 @@ const CustomRace = ({
               ...rest,
             },
           }))
-          setRaceName(raceDetails.raceName)
+          setRaceName(raceDetails.name)
           setShowCharacterDetails((prev) => ({
             ...prev,
             customRace: false,
@@ -129,7 +139,8 @@ const CustomRace = ({
         }}
         disabled={
           Object.values(raceDetails).includes("") ||
-          raceDetails.languages.includes("") ||
+          !raceDetails.languages[raceDetails.languages.length - 1].name
+            .length ||
           raceDetails.skill_proficiencies?.isMax === false ||
           raceDetails.ability_improvement?.isMax === false
         }
