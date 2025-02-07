@@ -43,12 +43,7 @@ const ClassLvlSelector = ({levelsURL, setStoredDetails}) => {
           placeholder="level preview"
         />
       )}
-      {currentLvl && (
-        <ClassLvlDetails
-          mainLevel={allLevels[currentLvl - 1]}
-          compare={false}
-        />
-      )}
+      {currentLvl && <ClassLvlDetails mainLevel={allLevels[currentLvl - 1]} />}
     </div>
   )
 }

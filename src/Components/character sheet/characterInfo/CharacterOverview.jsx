@@ -1,4 +1,10 @@
+import {useState} from "react"
+import Select from "react-select"
+import ClassLvlDetails from "../../ClassLvlDetails"
+
 const CharacterOverview = ({character}) => {
+  const [level, setLevel] = useState()
+
   const checkIsCustom = character.classDetails.isCustom
   const classDetails = character.classDetails
   const raceDetails = character.race
@@ -13,6 +19,11 @@ const CharacterOverview = ({character}) => {
       ...raceDetails.proficiencies.skill_proficiencies,
     },
   ]
+
+  const levelOptions = character.levels?.map(({level}) => ({
+    value: level,
+    label: "level " + level,
+  }))
 
   const abilityImprovements = () => {
     const abilityscore = raceDetails.ability_bonus?.map((ability) => {
@@ -50,6 +61,12 @@ const CharacterOverview = ({character}) => {
       <h4 className="class-name">class: {character.classDetails.name}</h4>
       <h4 className="class-name">subClass: {character.subClass.name}</h4>
       <h4 className="hit-dice">hit dice: D{classDetails.hit_die}</h4>
+      {classDetails.spellcasting.spell_save && (
+        <div className="spell-save">
+          <h4>spell save: </h4>
+          <p className="spell-save">{classDetails.spellcasting.spell_save}</p>
+        </div>
+      )}
       <div className="class-details">
         <h4 className="h4-title">proficiencies:</h4>
         {/* display class details */}
@@ -112,11 +129,6 @@ const CharacterOverview = ({character}) => {
             })}
           </div>
         </div>
-        {classDetails.spellcasting.spell_save && (
-          <div className="overview">
-            <h4>spell save: {classDetails.spellcasting.spell_save}</h4>
-          </div>
-        )}
       </div>
 
       <div className="race-details">
@@ -157,6 +169,25 @@ const CharacterOverview = ({character}) => {
             return <p key={lang.name}>{lang.name}</p>
           })}
         </div>
+      </div>
+      <div className="class-lvl-details">
+        <h4 className="h4-title">levels:</h4>
+
+        <Select
+          options={levelOptions}
+          isSearchable={false}
+          placeholder="level preview"
+          onChange={(choice) => {
+            setLevel(choice.value)
+          }}
+        />
+
+        {level && (
+          <ClassLvlDetails
+            mainLevel={character.levels[level - 1]}
+            character={character}
+          />
+        )}
       </div>
     </div>
   )

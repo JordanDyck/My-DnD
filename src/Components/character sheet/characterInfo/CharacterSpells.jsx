@@ -40,32 +40,28 @@ const CharacterSpells = ({character}) => {
       </div>
       <div className="known-spells">
         <h4>spells: {spellCountFilter.length}</h4>
-        {character.spells.length ? (
-          character.spells.map((spell) => {
-            return (
-              spell.level !== 0 && (
-                <button
-                  style={{
-                    // change colors based on what catagory they're in.
-                    border: spell.prepared
-                      ? "2px solid #5ed583"
-                      : spell.level === 0
-                      ? "2px solid #d05555ab"
-                      : "1px solid #818181",
-                  }}
-                  key={`known_${spell.name}`}
-                  onClick={() => {
-                    setCurrentSpell(spell)
-                  }}
-                >
-                  {spell.name}
-                </button>
-              )
+        {character.spells.map((spell) => {
+          return (
+            spell.level !== 0 && (
+              <button
+                style={{
+                  // change colors based on what catagory they're in.
+                  border: spell.prepared
+                    ? "2px solid #5ed583"
+                    : spell.level === 0
+                    ? "2px solid #d05555ab"
+                    : "1px solid #818181",
+                }}
+                key={`known_${spell.name}`}
+                onClick={() => {
+                  setCurrentSpell(spell)
+                }}
+              >
+                {spell.name}
+              </button>
             )
-          })
-        ) : (
-          <p>none</p>
-        )}
+          )
+        })}
       </div>
       {currentSpell && (
         <div className="feature-desc-wrapper spell-desc">

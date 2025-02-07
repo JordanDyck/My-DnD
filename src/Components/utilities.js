@@ -157,11 +157,7 @@ export const classLvlFilter = {
 
   spellcasting: (value) => {
     const spells = Object.entries(value).map((spell) => {
-      if (spell[1] > 0) {
-        return `${spell[0].replaceAll("_", " ")}: ${spell[1]}`
-      } else {
-        return ""
-      }
+      return `${spell[0].replaceAll("_", " ")}: ${spell[1]}`
     })
     return spells
   },

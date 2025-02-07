@@ -10,7 +10,7 @@ const LevelUpTab = ({toggleLvlUp}) => {
   const [newHealth, setNewHealth] = useState(character.health.maxHP)
 
   const dispatch = useDispatch()
-  const newLevel = character.levels[character.currentLevel]
+  const newLevel = character.levels[character.currentLevel] // currentlevel is + 1 because of index
 
   const handleLevelUp = () => {
     const updatedLevel = {
@@ -23,37 +23,6 @@ const LevelUpTab = ({toggleLvlUp}) => {
     }
 
     dispatch(updateCharacter(updatedLevel))
-  }
-
-  const displayCustomLvlData = () => {
-    return Object.entries(character.levels[character.currentLevel]).map(
-      (category) => {
-        const categoryData =
-          category[0] !== "level" &&
-          category[1].map((item, index) => {
-            return (
-              item.value !== 0 && (
-                <p key={`${item.name}_${index}`}>
-                  {item.name.replaceAll("_", " ")}
-                  {category[0] !== "features" ? ":" : ""} {item.value}
-                </p>
-              )
-            )
-          })
-
-        return (
-          category[0] !== "level" && (
-            <div
-              className={`perk perk_${category[0]}`}
-              key={`next-lvl_${category[0]}`}
-            >
-              <h4>{category[0]}:</h4>
-              {categoryData}
-            </div>
-          )
-        )
-      }
-    )
   }
 
   return (
@@ -85,11 +54,7 @@ const LevelUpTab = ({toggleLvlUp}) => {
         </h4>
       </div>
       <div className="new-features-container">
-        {character.classDetails.isCustom ? (
-          displayCustomLvlData()
-        ) : (
-          <ClassLvlDetails mainLevel={newLevel} />
-        )}
+        <ClassLvlDetails mainLevel={newLevel} character={character} />
 
         <h4 className="h4-title">subclass features</h4>
         {character.subClass.features.map((item) => {

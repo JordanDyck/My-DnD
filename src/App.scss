@@ -290,11 +290,19 @@ $backgroundColor: #e5e5e5;
       background-color: #ebebeb;
       border: 2px solid #bcbcbc;
       padding-inline: 7px;
+      margin-top: 10px;
       border-radius: 2%;
     }
     .hit-dice {
       text-decoration: underline;
       padding-block: 10px;
+    }
+    .spell-save {
+      h4 {
+        float: left;
+        text-decoration: underline;
+        padding-right: 5px;
+      }
     }
 
     .overview {
@@ -317,10 +325,6 @@ $backgroundColor: #e5e5e5;
           border: 1px solid $fadedBorderColor;
           background-color: #fbfbfb;
           box-shadow: 2px 2px 2px 0px rgba(117, 117, 117, 0.91);
-          // &::before {
-          //   content: "•";
-          //   margin-right: 3px;
-          // }
         }
       }
       .base-proficiencies {
@@ -365,6 +369,31 @@ $backgroundColor: #e5e5e5;
             margin-right: 3px;
           }
         }
+      }
+    }
+    .class-lvl-details {
+      background-color: $backgroundColor;
+      box-shadow: 0px 1px 2px 2px rgba(117, 117, 117, 0.91);
+      padding: 5px;
+      margin-top: 20px;
+      .perk {
+        border-bottom: 1px solid rgba(128, 128, 128, 0.8509803922);
+        padding-block: 4px;
+      }
+      .perk_prof_bonus {
+        display: flex;
+        align-items: center;
+      }
+      p {
+        font-family: $parFont;
+        font-size: 21px;
+      }
+      h4 {
+        text-decoration: underline;
+      }
+      .prof_bonus_title {
+        float: left;
+        padding-right: 5px;
       }
     }
   }
@@ -1265,10 +1294,6 @@ $backgroundColor: #e5e5e5;
       }
     }
 
-    .class_specific_title {
-      display: none;
-    }
-
     .perk_ability_bonus_options,
     .perk_proficiency_choices {
       button {
@@ -1330,6 +1355,10 @@ $backgroundColor: #e5e5e5;
       box-shadow: 0px 1px 2px 2px rgba(117, 117, 117, 0.91);
       padding: 5px;
       margin-top: 20px;
+      .perk_prof_bonus {
+        display: flex;
+        align-items: center;
+      }
       h4 {
         text-decoration: underline;
       }
@@ -1348,7 +1377,7 @@ $backgroundColor: #e5e5e5;
 
       p {
         font-family: $parFont;
-        font-size: 18px;
+        font-size: 21px;
       }
     }
     .skills-container {
