@@ -276,12 +276,13 @@ $backgroundColor: #e5e5e5;
   }
 
   .overview-container {
-    .char-name {
-      margin-block: 10px;
-    }
     header {
       font-weight: bold;
       border-bottom: 2px solid $fadedBorderColor;
+      text-decoration: underline;
+    }
+    .char-name {
+      margin-block: 10px;
     }
     .class-name {
       margin-top: 10px;
@@ -293,15 +294,18 @@ $backgroundColor: #e5e5e5;
       margin-top: 10px;
       border-radius: 2%;
     }
-    .hit-dice {
-      text-decoration: underline;
-      padding-block: 10px;
-    }
-    .spell-save {
+    .base-detail {
+      display: flex;
+      padding-block: 5px;
+      align-items: center;
+
       h4 {
-        float: left;
         text-decoration: underline;
-        padding-right: 5px;
+        margin-right: 5px;
+      }
+      p {
+        font-size: 18px;
+        font-weight: bold;
       }
     }
 
@@ -338,6 +342,9 @@ $backgroundColor: #e5e5e5;
     }
     .race-details {
       margin-block: 20px;
+      header {
+        margin-bottom: 10px;
+      }
       .race-name {
         float: left;
         padding-right: 5px;
@@ -345,8 +352,12 @@ $backgroundColor: #e5e5e5;
       .base-details-container {
         display: flex;
         justify-content: space-between;
+        border: 1px solid $fadedBorderColor;
+        background-color: #ebebeb;
+        padding: 2px 13px;
+        margin-block: 10px;
 
-        .base-detail {
+        .race-detail {
           display: flex;
         }
         h4 {
@@ -361,6 +372,9 @@ $backgroundColor: #e5e5e5;
         }
       }
       .languages {
+        border: 1px solid $fadedBorderColor;
+        background-color: #ebebeb;
+        padding-left: 5px;
         p {
           font-family: $parFont;
           font-size: 20px;

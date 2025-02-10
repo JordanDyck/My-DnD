@@ -58,13 +58,22 @@ const CharacterOverview = ({character}) => {
     <div className="overview-container">
       <h4 className="char-name">Name: {character.characterName}</h4>
       <header>class details:</header>
-      <h4 className="class-name">class: {character.classDetails.name}</h4>
-      <h4 className="class-name">subClass: {character.subClass.name}</h4>
-      <h4 className="hit-dice">hit dice: D{classDetails.hit_die}</h4>
+      <div className="base-detail">
+        <h4>class: </h4>
+        <p>{character.classDetails.name}</p>
+      </div>
+      <div className="base-detail">
+        <h4>subClass:</h4>
+        <p>{character.subClass.name}</p>
+      </div>
+      <div className="base-detail">
+        <h4>hit dice:</h4>
+        <p>D{classDetails.hit_die}</p>
+      </div>
       {classDetails.spellcasting.spell_save && (
-        <div className="spell-save">
+        <div className="base-detail">
           <h4>spell save: </h4>
-          <p className="spell-save">{classDetails.spellcasting.spell_save}</p>
+          <p>{classDetails.spellcasting.spell_save}</p>
         </div>
       )}
       <div className="class-details">
@@ -141,12 +150,12 @@ const CharacterOverview = ({character}) => {
         )}
         {raceDetails.subRace && <p>{raceDetails.subRace}</p>}
         <div className="base-details-container">
-          <div className="base-detail">
+          <div className="race-detail">
             <h4 className="h4-title">age: </h4>
             <p>{raceDetails.age}</p>
           </div>
           <span className="line-brake">||</span>
-          <div className="base-detail">
+          <div className="race-detail">
             <h4 className="h4-title">size:</h4>
             <p>
               {raceDetails.size.ft}
@@ -155,7 +164,7 @@ const CharacterOverview = ({character}) => {
             </p>
           </div>
           <span className="line-brake">||</span>
-          <div className="base-detail">
+          <div className="race-detail">
             <h4 className="h4-title">speed:</h4>
             <p>
               {raceDetails.speed}
