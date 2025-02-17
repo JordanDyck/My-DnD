@@ -19,7 +19,6 @@ const CustomRace = ({
     ft: "",
     inch: "",
     speed: "",
-    subRace: "",
     isCustom: true,
   })
 
@@ -51,10 +50,6 @@ const CustomRace = ({
           >
             <RiDeleteBinLine />
           </button>
-        </label>
-        <label htmlFor="subRace">
-          SubRace:
-          <input className="custom-sub-race" name="subRace" />
         </label>
 
         <div className="age-size-speed">
@@ -98,7 +93,7 @@ const CustomRace = ({
           setDetails={setRaceDetails}
           type={"ability_improvement"}
           data={"ability-scores"}
-          maxChoices={3}
+          maxChoices={2}
           isCustom={true}
         />
       </div>
@@ -107,7 +102,7 @@ const CustomRace = ({
           setDetails={setRaceDetails}
           type={"skill_proficiencies"}
           data={"skills"}
-          maxChoices={3}
+          maxChoices={2}
           isCustom={true}
         />
       </div>

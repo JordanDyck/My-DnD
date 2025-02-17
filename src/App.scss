@@ -990,7 +990,7 @@ $backgroundColor: #e5e5e5;
     }
     .subclass-name-container {
       display: flex;
-      margin-left: 3px;
+      margin-left: 8px;
       #subclass-label {
         border-bottom: 2px solid;
         border-left: 2px solid;
@@ -1076,8 +1076,9 @@ $backgroundColor: #e5e5e5;
       }
     }
     .class-btn {
-      font-size: 15px;
-      width: 135px;
+      font-size: 16px;
+      font-weight: bold;
+      width: 155px;
       margin: 15px auto 0;
       &:disabled {
         display: none;
@@ -1095,18 +1096,23 @@ $backgroundColor: #e5e5e5;
     box-shadow: 1px 1px 0px 0px rgba(117, 117, 117, 0.91);
     background-color: $backgroundColor;
     border: 2px solid rgba(128, 128, 128, 0.8509803922);
-    padding: 5px;
+    padding: 10px 5px;
+    margin-block: 15px;
     .custom-proficiencies {
       display: flex;
-      flex-direction: column;
-      flex-wrap: nowrap;
+      align-items: flex-end;
+      justify-content: space-between;
     }
-    input {
-      width: 125px;
-      text-align: start;
-      padding-left: 5px;
-      font-size: 17px;
-      font-family: $parFont;
+    .prof-group {
+      display: flex;
+      flex-direction: column;
+      input {
+        width: 125px;
+        text-align: start;
+        padding-left: 5px;
+        font-size: 17px;
+        font-family: $parFont;
+      }
     }
     span {
       font-family: $parFont;
@@ -1114,11 +1120,9 @@ $backgroundColor: #e5e5e5;
       color: $fadedBorderColor;
     }
     button {
-      position: relative;
-      bottom: 32px;
-      width: 28px;
+      width: 32px;
       height: 32px;
-      margin-left: calc(100% - 35px);
+
       font-size: 25px;
       font-weight: bold;
     }
@@ -1127,14 +1131,32 @@ $backgroundColor: #e5e5e5;
   .race-container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 15px;
 
-    .race-btn {
-      margin: auto;
-      width: 155px;
+    margin-top: 15px;
+    .subrace-name-container {
+      display: flex;
+      margin-left: 8px;
+      label {
+        border-bottom: 2px solid;
+        border-left: 2px solid;
+        padding-left: 3px;
+        padding-right: 5px;
+      }
+      h4 {
+        flex-grow: 1;
+      }
     }
 
+    .race-btn,
+    .sub-race-btn {
+      margin: 15px auto 0;
+      width: 155px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .sub-race-btn:disabled {
+      display: none;
+    }
     .race-name {
       display: flex;
 
@@ -1160,10 +1182,31 @@ $backgroundColor: #e5e5e5;
       margin-right: 10px;
     }
 
+    .sub-race-container {
+      display: flex;
+      flex-direction: column;
+      .name-container {
+        display: flex;
+        align-items: flex-end;
+        margin-bottom: 15px;
+        h4 {
+          margin-right: 5px;
+        }
+      }
+      .save-subrace-btn {
+        font-weight: bold;
+        font-size: 20px;
+        margin-block: 20px 10px;
+      }
+    }
+
     .custom-race {
       display: flex;
       flex-direction: column;
       gap: 20px;
+      .custom-proficiencies-container {
+        margin-block: 0;
+      }
       form {
         display: flex;
         flex-direction: column;
@@ -1411,7 +1454,7 @@ $backgroundColor: #e5e5e5;
 }
 
 .skills-container {
-  padding-block: 10px;
+  padding-block: 10px 15px;
   border-top: 1px solid $fadedBorderColor;
 
   .ismax-container {

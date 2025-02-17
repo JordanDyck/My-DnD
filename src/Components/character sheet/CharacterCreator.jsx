@@ -8,6 +8,7 @@ import CustomClass from "../Custom Character/CustomClass"
 import SubClassBuilder from "../Sub Class/SubClassBuilder"
 import CustomRace from "../Custom Character/CustomRace"
 import StatRolls from "./StatRolls"
+import SubRace from "../Sub Class/SubRace"
 
 const CharacterCreator = ({setShowCreator}) => {
   const [storedDetails, setStoredDetails] = useState({
@@ -22,8 +23,9 @@ const CharacterCreator = ({setShowCreator}) => {
     inventory: [],
     health: "",
     race: "",
+    subRace: {},
   })
-
+  console.log(storedDetails)
   const [showCharacterPopUps, setShowCharacterPopUps] = useState({
     classes: false,
     races: false,
@@ -34,11 +36,12 @@ const CharacterCreator = ({setShowCreator}) => {
     class: false,
     subClass: false,
     race: false,
+    subRace: false,
     customClass: false,
     customRace: false,
   })
-  const [characterDetails, setCharacterDetails] = useState([])
-  const [newDetails, setNewDetails] = useState({})
+  const [characterDetails, setCharacterDetails] = useState([]) // stores pre-made data from api
+  const [newDetails, setNewDetails] = useState({}) // stores custom made data
 
   // check if character name is already in use
   const checkStoredNames = (nameToCheck) => {
@@ -50,6 +53,19 @@ const CharacterCreator = ({setShowCreator}) => {
       return true
     } else return false
   }
+
+  const areTabsFalse = (currentTab) => {
+    if (showCharacterDetails[currentTab] === true) {
+      return true
+    } else {
+      return Object.entries(showCharacterDetails).every(
+        (item) => item[1] === false
+      )
+    }
+  }
+
+  // console.log(areTabsFalse())
+
   return (
     <div className="character-creator">
       <header className="tab-header">Create Character</header>
@@ -72,7 +88,7 @@ const CharacterCreator = ({setShowCreator}) => {
       </label>
 
       <div className="class-container">
-        {classNameOption && (
+        {classNameOption && areTabsFalse("class") && (
           <div>
             <div className="class-name">
               <label id="class-label">Class:</label>
@@ -108,7 +124,8 @@ const CharacterCreator = ({setShowCreator}) => {
                   <input
                     name="level"
                     type="number"
-                    value={newDetails.starting_level || ""}
+                    onFocus={(e) => e.target.select()}
+                    value={newDetails.starting_level || 1}
                     min={1}
                     onChange={(e) =>
                       // keeps the character level within 1-20 to prevent breaks
@@ -138,6 +155,7 @@ const CharacterCreator = ({setShowCreator}) => {
             showCharacterDetails.customClass ||
             showCharacterDetails.customRace ||
             showCharacterDetails.race ||
+            showCharacterDetails.subRace ||
             classNameOption
           }
         >
@@ -185,8 +203,8 @@ const CharacterCreator = ({setShowCreator}) => {
             linkedCharacter={storedDetails.characterName}
           />
         )}
-        {/* for choosing subclass */}
-        {storedDetails.subClass.name && (
+
+        {storedDetails.subClass.name && areTabsFalse("subClass") && (
           <div className="subclass-name-container">
             <label id="subclass-label">subclass:</label>
             <h4>{storedDetails.subClass.name}</h4>
@@ -210,7 +228,7 @@ const CharacterCreator = ({setShowCreator}) => {
             </button>
           </div>
         )}
-
+        {/* for choosing subclass */}
         {storedDetails.classDetails && showCharacterDetails.class === false && (
           <button
             className="class-btn"
@@ -218,7 +236,13 @@ const CharacterCreator = ({setShowCreator}) => {
               setShowCharacterDetails((prev) => ({...prev, subClass: true}))
             }
             disabled={
-              showCharacterDetails.subClass || storedDetails.subClass.name
+              showCharacterDetails.class ||
+              showCharacterDetails.subClass ||
+              showCharacterDetails.race ||
+              showCharacterDetails.subRace ||
+              showCharacterDetails.customRace ||
+              showCharacterDetails.customClass ||
+              storedDetails.subClass.name
             }
           >
             SubClass
@@ -235,7 +259,7 @@ const CharacterCreator = ({setShowCreator}) => {
       </div>
 
       <div className="race-container">
-        {raceName && (
+        {raceName && areTabsFalse("race") && (
           <div className="race-name">
             <label id="race-label" htmlFor="race">
               Race:
@@ -266,6 +290,7 @@ const CharacterCreator = ({setShowCreator}) => {
             showCharacterDetails.class ||
             showCharacterDetails.subClass ||
             showCharacterDetails.race ||
+            showCharacterDetails.subRace ||
             showCharacterDetails.customRace ||
             showCharacterDetails.customClass ||
             raceName
@@ -273,6 +298,49 @@ const CharacterCreator = ({setShowCreator}) => {
         >
           select race
         </button>
+        {storedDetails?.subRace?.name && areTabsFalse("subRace") && (
+          <div className="subrace-name-container">
+            <label htmlFor="subrace">subRace:</label>
+            <h4 className="subrace-name">{storedDetails?.subRace?.name}</h4>
+            <button
+              // for deleting race
+              className="delete-race-btn"
+              onClick={() => {
+                setStoredDetails((prev) => ({...prev, subRace: {}}))
+                setShowCharacterDetails((prev) => ({...prev, subRace: false}))
+              }}
+            >
+              <RiDeleteBinLine />
+            </button>
+          </div>
+        )}
+        {storedDetails.race && !showCharacterDetails.race && (
+          <button
+            className="sub-race-btn"
+            onClick={() =>
+              setShowCharacterDetails((prev) => ({...prev, subRace: true}))
+            }
+            disabled={
+              showCharacterDetails.class ||
+              showCharacterDetails.subClass ||
+              showCharacterDetails.race ||
+              showCharacterDetails.subRace ||
+              showCharacterDetails.customRace ||
+              showCharacterDetails.customClass ||
+              storedDetails.subRace?.name
+            }
+          >
+            Subrace
+          </button>
+        )}
+
+        {showCharacterDetails.subRace && (
+          <SubRace
+            setStoredDetails={setStoredDetails}
+            setShowCharacterDetails={setShowCharacterDetails}
+          />
+        )}
+
         {showCharacterDetails.customRace && (
           <CustomRace
             setStoredDetails={setStoredDetails}

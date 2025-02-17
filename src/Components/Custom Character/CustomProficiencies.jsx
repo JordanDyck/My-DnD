@@ -3,22 +3,24 @@ const CustomProficiencies = ({array, updateDetails, ObjKey}) => {
 
   return (
     <div className={`custom-proficiencies ${ObjKey}`}>
-      {array.map((_, index) => {
-        return (
-          <input
-            name="proficiency"
-            key={`${ObjKey}_${[index]}`}
-            onChange={(e) => {
-              const data = [...array]
-              data[index] = {name: e.target.value}
-              updateDetails((prev) => ({
-                ...prev,
-                [ObjKey]: data,
-              }))
-            }}
-          />
-        )
-      })}
+      <div className="prof-group">
+        {array.map((_, index) => {
+          return (
+            <input
+              name="proficiency"
+              key={`${ObjKey}_${[index]}`}
+              onChange={(e) => {
+                const data = [...array]
+                data[index] = {name: e.target.value}
+                updateDetails((prev) => ({
+                  ...prev,
+                  [ObjKey]: data,
+                }))
+              }}
+            />
+          )
+        })}
+      </div>
       <button
         onClick={() => {
           updateDetails((prev) => ({
