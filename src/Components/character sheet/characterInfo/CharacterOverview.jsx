@@ -8,48 +8,99 @@ const CharacterOverview = ({character}) => {
   const checkIsCustom = character.classDetails.isCustom
   const classDetails = character.classDetails
   const raceDetails = character.race
+  const subRaceDetails = character.subRace
 
-  const gearProficiencies = [
-    ...classDetails.base_proficiencies,
-    ...raceDetails.starting_proficiencies,
-  ]
-  const skillProficiencies = [
-    {
-      ...classDetails.skill_proficiencies,
-      ...raceDetails.proficiencies.skill_proficiencies,
-    },
-  ]
+  const gearProficiencies = () => {
+    //sorts through all proficiencies that don't include skills & puts them into an array.
+    const gearProfs = [
+      ...classDetails.base_proficiencies
+        .map((gear) => gear.name)
+        .filter((item) => !item.includes("Saving Throw:")),
+      ...subRaceDetails.base_proficiencies?.map((gear) => gear.name),
+      ...(raceDetails.starting_proficiencies
+        .map((gear) => gear.name)
+        .filter((item) => !item?.includes("Skill: ")) || ""),
+
+      ...(!!raceDetails.proficiencies.skill_proficiencies
+        ? Object.keys(raceDetails.proficiencies?.skill_proficiencies).filter(
+            (gear) => !gear.includes("Skill: ") && !gear.includes("isMax")
+          )
+        : ""),
+    ]
+
+    return gearProfs
+  }
+
+  const skillProficiencies = () => {
+    const startingSkills = raceDetails.starting_proficiencies
+      .map((item) => item.name)
+      .filter((skill) => skill.includes("Skill: "))
+
+    const proficiencySkills = !!raceDetails.proficiencies.skill_proficiencies
+      ? Object.keys(raceDetails.proficiencies?.skill_proficiencies)
+          ?.map((item) => item)
+          .filter((skill) => skill.includes("Skill: "))
+      : ""
+
+    const skills = [
+      ...Object.keys(classDetails.skill_proficiencies),
+      ...Object.keys(subRaceDetails.skill_proficiencies),
+      ...proficiencySkills,
+      ...(startingSkills || ""),
+    ]
+
+    return skills.filter((item) => item !== "isMax")
+  }
+
+  const languages = [...raceDetails.languages, ...subRaceDetails.languages]
 
   const levelOptions = character.levels?.map(({level}) => ({
     value: level,
     label: "level " + level,
   }))
 
-  const abilityImprovements = () => {
-    const abilityscore = raceDetails.ability_bonus?.map((ability) => {
-      return [ability.ability_score.name, ability.bonus]
-    })
+  const totalAbilityScore = (abilityScore) => {
+    const total = Object.entries(
+      abilityScore.reduce((acc, obj) => {
+        // removes the duplecates while adding the value ([{DEX: 1}, {DEX: 1}] = [{DEX: 2}])
+        if (acc[obj.name]) {
+          acc[obj.name].value += obj.value
+        } else {
+          acc[obj.name] = {...obj}
+        }
 
-    // 3 checks: 1: if they both exist. 2: if only ability_bonus exists. 3: if only ability_improvement exists
-    if (
-      raceDetails.proficiencies?.ability_improvement &&
-      raceDetails.ability_bonus
-    ) {
-      const combine = [
-        ...Object.entries(raceDetails.proficiencies?.ability_improvement),
-      ].concat(abilityscore)
-      return combine
-    } else if (
-      !raceDetails.proficiencies?.ability_improvement &&
-      raceDetails.ability_bonus
-    ) {
-      return abilityscore
-    } else if (
-      raceDetails.proficiencies?.ability_improvement &&
-      !raceDetails.ability_bonus
-    ) {
-      return Object.entries(raceDetails.proficiencies?.ability_improvement)
-    }
+        return acc
+      }, {})
+    )
+    return total.map((item) => item[1])
+  }
+
+  const abilityImprovements = () => {
+    const abilityBonus =
+      !!raceDetails.ability_bonus &&
+      raceDetails.ability_bonus.map((ability) => {
+        return {name: ability.ability_score.name, value: ability.bonus}
+      })
+    const abilityImprovement =
+      !!raceDetails.proficiencies.ability_improvement &&
+      Object.entries(raceDetails.proficiencies.ability_improvement).map(
+        (score) => {
+          return {name: score[0], value: score[1]}
+        }
+      )
+
+    const subRaceAbilities =
+      !!subRaceDetails.ability_improvement &&
+      Object.entries(subRaceDetails.ability_improvement).map((score) => {
+        return {name: score[0], value: score[1]}
+      })
+    const abilityScores = [
+      ...(abilityBonus || ""),
+      ...(subRaceAbilities || ""),
+      ...(abilityImprovement || ""),
+    ] // groups all objects together
+
+    return totalAbilityScore(abilityScores)
   }
 
   // const proficiencyBonus = Math.ceil(character.currentLevel / 4) + 1 // starting at 2 and goes up every 4 levels
@@ -82,23 +133,20 @@ const CharacterOverview = ({character}) => {
         <div className="overview">
           <h4 className="h4-title">gear:</h4>
           <div className="base-proficiencies">
-            {gearProficiencies.map((prof, index) => {
-              return !prof.name.includes("Saving Throw:") &&
-                prof.name?.length ? (
-                <p key={`${prof.name}_${index}`}>{prof.name}</p>
-              ) : (
-                ""
-              )
+            {gearProficiencies().map((prof, index) => {
+              return !!prof && <p key={`${prof}_${index}`}>{prof}</p>
             })}
           </div>
         </div>
         <div className="overview">
           <h4 className="h4-title">skills</h4>
           <div className="skill-profs">
-            {Object.entries(skillProficiencies[0]).map((skill) => {
+            {skillProficiencies().map((skill) => {
               return (
-                skill[0] !== "isMax" && (
-                  <p key={`p_skill_${skill[0]}`}>{skill[0]}</p>
+                skill !== "isMax" && (
+                  <p key={`p_skill_${skill}`}>
+                    {skill.replaceAll("Skill: ", "")}
+                  </p>
                 )
               )
             })}
@@ -110,9 +158,9 @@ const CharacterOverview = ({character}) => {
           <div className="ability-improvements">
             {abilityImprovements().map((ability) => {
               return (
-                ability[0] !== "isMax" && (
-                  <p key={`p_ability_${ability[0]}`}>
-                    {ability[0]} + {ability[1]}
+                ability.name !== "isMax" && (
+                  <p key={`p_ability_${ability.name}`}>
+                    {ability.name} + {ability.value}
                   </p>
                 )
               )
@@ -174,8 +222,8 @@ const CharacterOverview = ({character}) => {
         </div>
         <div className="languages">
           <h4 className="h4-title">languages:</h4>
-          {raceDetails.languages.map((lang) => {
-            return <p key={lang.name}>{lang.name}</p>
+          {languages.map((lang) => {
+            return lang && <p key={lang.name}>{lang.name}</p>
           })}
         </div>
       </div>

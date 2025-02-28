@@ -201,7 +201,7 @@ const PerkMap = ({
     }
     if (key === "starting_proficiency_options") {
       const options = value.from.options.map((element) => {
-        return {name: element.item.name.replaceAll("Skill: ", "")}
+        return {name: element.item.name}
       })
       return (
         <SkillSelector

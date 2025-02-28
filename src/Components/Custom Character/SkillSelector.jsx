@@ -104,7 +104,7 @@ const SkillSelector = ({setDetails, type, data, isCustom, maxChoices}) => {
                     }
                   }}
                 >
-                  {item}
+                  {item.replaceAll("Skill: ", "")}
                   {type === "ability_improvement"
                     ? `: ${counter.value[index]}`
                     : ""}
@@ -137,12 +137,15 @@ const SkillSelector = ({setDetails, type, data, isCustom, maxChoices}) => {
 
                 setChosenSkills((prev) => ({
                   ...prev,
-                  [skill.name]: counter.value?.[index] || 1,
+                  [!skill.name.includes("Skill: ") &&
+                  type === "skill_proficiencies"
+                    ? `Skill: ${skill.name}`
+                    : skill.name]: counter.value?.[index] || 1,
                 }))
               }}
               disabled={Object.keys(chosenskills).includes(skill.name)}
             >
-              {skill.name}
+              {skill.name.replace("Skill: ", "")}
             </button>
           )
         })}

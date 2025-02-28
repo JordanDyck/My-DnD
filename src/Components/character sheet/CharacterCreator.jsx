@@ -25,7 +25,7 @@ const CharacterCreator = ({setShowCreator}) => {
     race: "",
     subRace: {},
   })
-  console.log(storedDetails)
+
   const [showCharacterPopUps, setShowCharacterPopUps] = useState({
     classes: false,
     races: false,
@@ -63,8 +63,6 @@ const CharacterCreator = ({setShowCreator}) => {
       )
     }
   }
-
-  // console.log(areTabsFalse())
 
   return (
     <div className="character-creator">
@@ -186,7 +184,6 @@ const CharacterCreator = ({setShowCreator}) => {
               disabled={
                 !newDetails.health?.currentHP?.length ||
                 !newDetails.proficiency_bonus?.isMax ||
-                !newDetails.starting_equipment?.length ||
                 !Object.keys(storedDetails?.stats).length
               }
             >

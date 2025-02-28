@@ -8,8 +8,8 @@ const SubRace = ({setStoredDetails, setShowCharacterDetails}) => {
     name: "",
     ability_improvement: {},
     skill_proficiencies: {},
-    base_proficiencies: [""],
-    languages: [""],
+    base_proficiencies: [],
+    languages: [],
     traits: [{}],
   })
 
@@ -45,7 +45,11 @@ const SubRace = ({setStoredDetails, setShowCharacterDetails}) => {
       <div className="custom-proficiencies-container">
         <h4 className="h4-title">languages:</h4>
         <CustomProficiencies
-          array={subRaceDetails?.languages}
+          array={
+            subRaceDetails.languages.length
+              ? subRaceDetails.languages
+              : [{name: ""}]
+          }
           updateDetails={setSubRaceDetails}
           ObjKey={"languages"}
         />
@@ -53,7 +57,11 @@ const SubRace = ({setStoredDetails, setShowCharacterDetails}) => {
       <div className="custom-proficiencies-container">
         <h4 className="h4-title">equipment proficiencies:</h4>
         <CustomProficiencies
-          array={subRaceDetails?.base_proficiencies}
+          array={
+            subRaceDetails.languages.length
+              ? subRaceDetails.languages
+              : [{name: ""}]
+          }
           updateDetails={setSubRaceDetails}
           ObjKey={"base_proficiencies"}
         />

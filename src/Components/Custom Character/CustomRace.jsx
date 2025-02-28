@@ -12,8 +12,8 @@ const CustomRace = ({
 }) => {
   const [raceDetails, setRaceDetails] = useState({
     age: "",
-    languages: [{name: ""}],
-    starting_proficiencies: [{name: ""}],
+    languages: [],
+    starting_proficiencies: [],
     traits: [],
     name: "",
     ft: "",
@@ -74,7 +74,9 @@ const CustomRace = ({
       <div className="custom-proficiencies-container">
         <h4 className="h4-title">languages:</h4>
         <CustomProficiencies
-          array={raceDetails.languages}
+          array={
+            raceDetails.languages.length ? raceDetails.languages : [{name: ""}]
+          }
           updateDetails={setRaceDetails}
           ObjKey={"languages"}
         />
@@ -83,7 +85,11 @@ const CustomRace = ({
         <h4 className="h4-title">equipment proficiencies:</h4>
         <span>*Ex. Heavy armor, Martial weapons, Bows.</span>
         <CustomProficiencies
-          array={raceDetails?.starting_proficiencies}
+          array={
+            raceDetails.starting_proficiencies.length
+              ? raceDetails.starting_proficiencies
+              : [{name: ""}]
+          }
           updateDetails={setRaceDetails}
           ObjKey={"starting_proficiencies"}
         />
