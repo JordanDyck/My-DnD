@@ -222,7 +222,8 @@ const CustomClass = ({
           details.spell_save?.isMax === false ||
           details.saving_throws?.isMax === false ||
           !Object.keys(details.stats).length ||
-          !storedDetails.currentLevel
+          !storedDetails.currentLevel ||
+          storedDetails.currentLevel > details.levels.length
         }
       >
         Save Class

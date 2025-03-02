@@ -36,6 +36,26 @@ const CharacterFeatures = ({character}) => {
         index === featureList.findIndex((elem) => elem.name === ele.name)
     )
   }
+  const getRaceTraits = () => {
+    const traits = [...character.race.traits, ...character.subRace.traits]
+
+    return traits.map((trait) => {
+      return (
+        <p
+          key={trait.index || trait.name}
+          onClick={() =>
+            setUrl(() =>
+              character.race.isCustom === false
+                ? {name: trait.url}
+                : {name: trait.name, desc: [trait.feature]}
+            )
+          }
+        >
+          {trait.name}
+        </p>
+      )
+    })
+  }
 
   const displayLevelFeatures = () => {
     return getCurrentLevelFeatures().map((feature) => {
@@ -64,22 +84,7 @@ const CharacterFeatures = ({character}) => {
       <div className="traits-container">
         <h4 className="h4-title"> Race traits:</h4>
         {/*  race traits */}
-        {character.race.traits.map((trait) => {
-          return (
-            <p
-              key={trait.index || trait.name}
-              onClick={() =>
-                setUrl(() =>
-                  character.race.isCustom === false
-                    ? {name: trait.url}
-                    : {name: trait.name, desc: [trait.feature]}
-                )
-              }
-            >
-              {trait.name}
-            </p>
-          )
-        })}
+        {getRaceTraits()}
       </div>
       <div className="class-abilities-container">
         {/* class features */}

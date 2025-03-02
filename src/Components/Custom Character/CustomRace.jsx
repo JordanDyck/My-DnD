@@ -140,10 +140,11 @@ const CustomRace = ({
         }}
         disabled={
           Object.values(raceDetails).includes("") ||
-          !raceDetails.languages[raceDetails.languages.length - 1].name
+          !raceDetails.languages[raceDetails.languages.length - 1]?.name
             .length ||
           raceDetails.skill_proficiencies?.isMax === false ||
-          raceDetails.ability_improvement?.isMax === false
+          raceDetails.ability_improvement?.isMax === false ||
+          !raceDetails.traits[raceDetails.traits.length - 1].name
         }
       >
         save race

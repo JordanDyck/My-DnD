@@ -24,7 +24,7 @@ const CustomTraits = ({level, setTraitData, currentLevel}) => {
     // moves levelFeatures into raceDetails.traits in CustomRace.jsx
     setTraitData((prev) => ({
       ...prev,
-      traits: levelFeatures,
+      traits: !!levelFeatures[0].name ? levelFeatures : [],
     }))
   }, [levelFeatures, setTraitData])
 
@@ -39,12 +39,7 @@ const CustomTraits = ({level, setTraitData, currentLevel}) => {
             onChange={(e) => handleData(e, index)}
           >
             {level === currentLevel ? (
-              <input
-                // onChange={() => {}} // onChange needed to prevent errors
-                name="name"
-                placeholder="feature name"
-                // value={levelFeatures[`level_${level}`][index]?.featureName}
-              />
+              <input name="name" placeholder="feature name" />
             ) : (
               <p>{levelFeatures[index]?.featureName}</p>
             )}
@@ -52,7 +47,7 @@ const CustomTraits = ({level, setTraitData, currentLevel}) => {
             <textarea
               name="feature"
               placeholder="description..."
-              style={{display: level !== currentLevel ? "none" : "initial"}}
+              // style={{display: level !== currentLevel ? "none" : "initial"}}
             />
           </form>
         )
@@ -62,8 +57,8 @@ const CustomTraits = ({level, setTraitData, currentLevel}) => {
         className="new-feature-btn"
         type="button"
         onClick={() => newFeature()}
-        style={{display: level !== currentLevel ? "none" : "initial"}}
-        disabled={!levelFeatures[level - 1].name}
+        // style={{display: level !== currentLevel ? "none" : "initial"}}
+        disabled={!levelFeatures[levelFeatures.length - 1]?.name}
       >
         new trait
       </button>
