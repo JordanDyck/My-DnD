@@ -34,8 +34,9 @@ const SpellTab = ({setShowSpellTab}) => {
         .then((res) => {
           if (res.status === 200) {
             const data = res.data
+            const {updated_at, ...rest} = data
             setSpellInfo(() => ({
-              ...data,
+              ...rest,
               prepared: false,
             }))
           }
