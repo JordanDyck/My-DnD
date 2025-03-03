@@ -16,7 +16,6 @@ const FeatureDesc = ({
   const [feature, setFeature] = useState()
   const closeRef = useRef()
   const dispatch = useDispatch()
-
   useEffect(() => {
     if (url) {
       if (url?.name.includes("/")) {
@@ -77,7 +76,9 @@ const FeatureDesc = ({
     <div className="feature-container" ref={closeRef}>
       {feature && (
         <div className="feature-info">
-          <header className="tab-header">{feature.name}</header>
+          <header className="tab-header">
+            {feature.name.split(" (").shift()}
+          </header>
           <h4 className="h4-title">description:</h4>
           {feature.desc.map((desc, index) => (
             <p key={`${feature.name}_${index}`}>{desc}</p>

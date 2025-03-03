@@ -5,8 +5,14 @@ import {handleformat} from "../../utilities"
 
 const CharacterFeatures = ({character}) => {
   const [url, setUrl] = useState()
+
   const levelList = character.levels.slice(0, character.currentLevel)
+
   let featureNameBlackList = ["Spellcasting: ", "Ability Score Improvement"]
+
+  const noDesc =
+    "You regret not putting in a description and have to look it up. You waste everyone's time."
+
   const getCurrentLevelFeatures = () => {
     // pulls all features up to current level & stores them in an array.
     let featureList = []
@@ -43,13 +49,20 @@ const CharacterFeatures = ({character}) => {
       return (
         <p
           key={trait.index || trait.name}
-          onClick={() =>
-            setUrl(() =>
-              character.race.isCustom === false
-                ? {name: trait.url}
-                : {name: trait.name, desc: [trait.feature]}
-            )
-          }
+          onClick={() => {
+            setUrl(() => {
+              if (trait.url) {
+                return {
+                  name: trait.url,
+                }
+              } else if (trait.name) {
+                return {
+                  name: trait.name,
+                  desc: [trait.feature || noDesc],
+                }
+              }
+            })
+          }}
         >
           {trait.name}
         </p>
@@ -66,7 +79,7 @@ const CharacterFeatures = ({character}) => {
             setUrl(() =>
               character.classDetails.isCustom === false
                 ? {name: feature.url}
-                : {name: feature.name, desc: [feature.url]}
+                : {name: feature.name, desc: [feature.url || noDesc]}
             )
           }
         >
@@ -104,8 +117,10 @@ const CharacterFeatures = ({character}) => {
               <p
                 key={item.featureName}
                 onClick={() => {
-                  item.feature?.length &&
-                    setUrl({name: item.featureName, desc: [item.feature]})
+                  setUrl({
+                    name: item.featureName,
+                    desc: [item.feature || noDesc],
+                  })
                 }}
               >
                 {item.featureName}

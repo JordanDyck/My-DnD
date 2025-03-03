@@ -413,10 +413,12 @@ $backgroundColor: #e5e5e5;
   }
 
   .traits-container,
-  .class-abilities-container {
+  .class-abilities-container,
+  .subclass-abilities {
     margin-block: 5px;
     p {
       margin-block: 3px;
+      padding-top: 4px;
     }
     p::before {
       content: "•";
