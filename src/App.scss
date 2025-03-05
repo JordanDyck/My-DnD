@@ -1581,6 +1581,11 @@ input {
   text-align: center;
   background: transparent;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 .h4-title {
   text-decoration: underline;
 }
