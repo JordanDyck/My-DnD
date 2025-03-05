@@ -10,6 +10,8 @@ const CharacterOverview = ({character}) => {
   const raceDetails = character.race
   const subRaceDetails = character.subRace
 
+  const proficiencyBonus = Math.ceil(character.currentLevel / 4) + 1 // starting at 2 and goes up every 4 levels
+
   const gearProficiencies = () => {
     //sorts through all proficiencies that don't include skills & puts them into an array.
     const gearProfs = [
@@ -128,6 +130,10 @@ const CharacterOverview = ({character}) => {
       <div className="class-details">
         <h4 className="h4-title">proficiencies:</h4>
         {/* display class details */}
+        <h4 className="proficiency-bonus">
+          proficiency bonus: {proficiencyBonus > 0 ? "+" : ""}
+          {proficiencyBonus}
+        </h4>
         <div className="overview">
           <h4 className="h4-title">gear:</h4>
           <div className="base-proficiencies">
