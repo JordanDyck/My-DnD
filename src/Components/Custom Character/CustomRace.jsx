@@ -144,7 +144,7 @@ const CustomRace = ({
             .length ||
           raceDetails.skill_proficiencies?.isMax === false ||
           raceDetails.ability_improvement?.isMax === false ||
-          !raceDetails.traits[raceDetails.traits.length - 1].name
+          !raceDetails.traits.length
         }
       >
         save race
