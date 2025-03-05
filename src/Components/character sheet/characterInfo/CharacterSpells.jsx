@@ -3,16 +3,23 @@ import FeatureDesc from "../../FeatureDesc"
 
 const CharacterSpells = ({character}) => {
   const [currentSpell, setCurrentSpell] = useState()
+
   const spellCastingInfo =
     character.levels[character.currentLevel - 1].spellcasting
 
+  const proficiencyBonus = Math.ceil(character.currentLevel / 4) + 1 // starting at 2 and goes up every 4 levels
+
   const spellSave =
     8 +
+    proficiencyBonus +
     character.stats[
       character.classDetails.spellcasting.spell_save.toLowerCase()
-    ].bonus +
-    character.stats.int.bonus
+    ].bonus
 
+  const spellAttackBonus =
+    character.stats[
+      character.classDetails.spellcasting.spell_save.toLowerCase()
+    ].bonus + proficiencyBonus
   const spellCountFilter = character.spells.filter((spell) => spell.level !== 0)
   const cantripCountFilter = character.spells.filter(
     (spell) => spell.level === 0
@@ -34,9 +41,14 @@ const CharacterSpells = ({character}) => {
       style={{pointerEvents: currentSpell ? "none" : "initial"}}
     >
       <div className="spell-dc">
-        <span>*Your Spell Save + Int Bonus</span>
-        <h4>spell save: {character.classDetails.spellcasting.spell_save}</h4>
-        <h4>spellcasting DC: {spellSave}</h4>
+        <h4>
+          spellcasting ability: {character.classDetails.spellcasting.spell_save}
+        </h4>
+        <h4>spell save dc: {spellSave}</h4>
+        <h4>
+          spell ATK bonus: {spellAttackBonus > 0 ? "+" : ""}
+          {spellAttackBonus}
+        </h4>
       </div>
       <div className="known-spells">
         <h4>spells: {spellCountFilter.length}</h4>

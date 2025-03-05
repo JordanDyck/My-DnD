@@ -103,8 +103,6 @@ const CharacterOverview = ({character}) => {
     return totalAbilityScore(abilityScores)
   }
 
-  // const proficiencyBonus = Math.ceil(character.currentLevel / 4) + 1 // starting at 2 and goes up every 4 levels
-
   return (
     <div className="overview-container">
       <h4 className="char-name">Name: {character.characterName}</h4>
