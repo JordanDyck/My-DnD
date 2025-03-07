@@ -34,6 +34,7 @@ const CharacterOverview = ({character}) => {
   }
 
   const skillProficiencies = () => {
+    //sorts through all proficiencies that are skills & puts them into an array.
     const startingSkills = raceDetails.starting_proficiencies
       .map((item) => item.name)
       .filter((skill) => skill.includes("Skill: "))
@@ -62,9 +63,10 @@ const CharacterOverview = ({character}) => {
   }))
 
   const totalAbilityScore = (abilityScore) => {
+    // sorts through all ability score improvements
     const total = Object.entries(
       abilityScore.reduce((acc, obj) => {
-        // removes the duplecates while adding the value ([{DEX: 1}, {DEX: 1}] = [{DEX: 2}])
+        // removes the duplicates while adding the value ([{DEX: 1}, {DEX: 1}] = [{DEX: 2}])
         if (acc[obj.name]) {
           acc[obj.name].value += obj.value
         } else {
