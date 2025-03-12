@@ -101,6 +101,7 @@ const CustomRace = ({
           data={"ability-scores"}
           maxChoices={2}
           isCustom={true}
+          isEditing={false}
         />
       </div>
       <div className="proficiency-bonus-container">
@@ -110,6 +111,7 @@ const CustomRace = ({
           data={"skills"}
           maxChoices={2}
           isCustom={true}
+          isEditing={false}
         />
       </div>
       <div className="custom-traits-wrapper">

@@ -254,7 +254,7 @@ $backgroundColor: #e5e5e5;
   left: 5px;
   right: 5px;
   margin-inline: auto;
-
+  padding-bottom: 45px;
   background-color: white;
   border: 17px solid transparent;
   border-image: url("./assets/border.png") 116;
@@ -586,7 +586,7 @@ $backgroundColor: #e5e5e5;
   border: 17px solid transparent;
   border-image: url("./assets/border.png") 116;
 
-  margin: 10px 3px;
+  margin: 10px 3px 45px 3px;
   .name-label {
     height: 40px;
     border-bottom: 2px solid #cccccc;
@@ -1297,6 +1297,10 @@ $backgroundColor: #e5e5e5;
           color: $fadedBorderColor;
         }
       }
+      .save-race-btn {
+        font-size: 18px;
+        font-weight: bold;
+      }
     }
   }
 
@@ -1733,6 +1737,7 @@ input::-webkit-inner-spin-button {
   border: 17px solid transparent;
   border-image: url("./assets/border.png") 116;
   min-height: 250px;
+  margin: 0 10px 25px;
   span {
     font-size: 13px;
     margin-block: -10px 10px;

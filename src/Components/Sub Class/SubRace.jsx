@@ -31,6 +31,7 @@ const SubRace = ({setStoredDetails, setShowCharacterDetails}) => {
           data={"ability-scores"}
           maxChoices={1}
           isCustom={true}
+          isEditing={false}
         />
       </div>
       <div className="extra-proficiencies">
@@ -40,6 +41,7 @@ const SubRace = ({setStoredDetails, setShowCharacterDetails}) => {
           data={"skills"}
           maxChoices={1}
           isCustom={true}
+          isEditing={false}
         />
       </div>
       <div className="custom-proficiencies-container">

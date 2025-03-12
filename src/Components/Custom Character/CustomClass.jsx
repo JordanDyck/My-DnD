@@ -125,6 +125,7 @@ const CustomClass = ({
             setDetails={setDetails}
             type={"skill_proficiencies"}
             data={"skills"}
+            isEditing={false}
           />
         </div>
         <div className="saving-throw-container">
@@ -135,6 +136,7 @@ const CustomClass = ({
             setDetails={setDetails}
             type={"saving_throws"}
             data={"ability-scores"}
+            isEditing={false}
           />
         </div>
         <div className="spell-section">
@@ -146,6 +148,7 @@ const CustomClass = ({
               setDetails={setDetails}
               type={"spell_save"}
               data={"ability-scores"}
+              isEditing={false}
             />
           </div>
         </div>

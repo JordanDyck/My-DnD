@@ -144,6 +144,7 @@ const PerkMap = ({
           <h4>
             age:
             <input
+              type="number"
               name="age"
               onChange={(e) => {
                 setNewDetails((prev) => ({

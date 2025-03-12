@@ -3,11 +3,17 @@ import axios from "axios"
 import useCounter from "../../hooks/useCounter"
 import {RiDeleteBinLine} from "react-icons/ri"
 
-const SkillSelector = ({setDetails, type, data, isCustom, maxChoices}) => {
+const SkillSelector = ({
+  setDetails,
+  type,
+  data,
+  isCustom,
+  maxChoices,
+  isEditing,
+}) => {
   const [skills, setSkills] = useState([])
   const [chosenskills, setChosenSkills] = useState({})
   const counter = useCounter([], maxChoices)
-
   useEffect(() => {
     if (isCustom === true) {
       axios.get(`https://www.dnd5eapi.co/api/${data}/`).then((res) => {
@@ -143,7 +149,11 @@ const SkillSelector = ({setDetails, type, data, isCustom, maxChoices}) => {
                     : skill.name]: counter.value?.[index] || 1,
                 }))
               }}
-              disabled={Object.keys(chosenskills).includes(skill.name)}
+              disabled={
+                type === "skill_proficiencies" && isCustom
+                  ? Object.keys(chosenskills).includes("Skill: " + skill.name)
+                  : Object.keys(chosenskills).includes(skill.name)
+              }
             >
               {skill.name.replace("Skill: ", "")}
             </button>
