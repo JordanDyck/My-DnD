@@ -1,11 +1,9 @@
 import {useState} from "react"
 import Select from "react-select"
 import ClassLvlDetails from "../../ClassLvlDetails"
-import AddNewSkills from "./AddNewSkills"
 
 const CharacterOverview = ({character}) => {
   const [level, setLevel] = useState()
-  // const [editor, setEditor] = useState({skills: false, gear: false})
 
   const checkIsCustom = character.classDetails.isCustom
   const classDetails = character.classDetails
@@ -140,17 +138,7 @@ const CharacterOverview = ({character}) => {
         </h4>
         <div className="overview">
           <h4 className="h4-title">gear:</h4>
-          {/* <button
-            onClick={() =>
-              setEditor((prev) => ({
-                ...prev,
-                skills: false,
-                gear: !prev.gear,
-              }))
-            }
-          >
-            edit
-          </button> */}
+
           <div className="base-proficiencies">
             {gearProficiencies().map((prof, index) => {
               return !!prof && <p key={`${prof}_${index}`}>{prof}</p>
@@ -159,17 +147,7 @@ const CharacterOverview = ({character}) => {
         </div>
         <div className="overview">
           <h4 className="h4-title">skills</h4>
-          {/* <button
-            onClick={() =>
-              setEditor((prev) => ({
-                ...prev,
-                skills: !prev.skills,
-                gear: false,
-              }))
-            }
-          >
-            edit
-          </button> */}
+
           <div className="skill-profs">
             {skillProficiencies().map((skill) => {
               return (
@@ -181,13 +159,6 @@ const CharacterOverview = ({character}) => {
               )
             })}
           </div>
-          {/* {editor.skills && (
-            <AddNewSkills
-              updateEditor={setEditor}
-              obj={"skills"}
-              character={character}
-            />
-          )} */}
         </div>
 
         <div className="overview">

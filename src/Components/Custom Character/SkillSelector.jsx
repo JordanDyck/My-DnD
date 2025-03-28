@@ -51,8 +51,8 @@ const SkillSelector = ({
 
   return (
     <div className="skills-container">
-      <h4 className="h4-title">{`${type}:`}</h4>
-      {isCustom && (
+      {!isEditing && <h4 className="h4-title">{type}</h4>}
+      {isCustom && !isEditing && (
         <div className="ismax-container">
           <label htmlFor="maxNum">Max Choices: </label>
           <input

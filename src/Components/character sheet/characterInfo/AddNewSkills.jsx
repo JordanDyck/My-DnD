@@ -22,14 +22,15 @@ const AddNewSkills = ({updateEditor, obj, character}) => {
     }
 
     dispatch(updateCharacter(updateSkills))
-    updateEditor(() => ({
+    updateEditor({
       skills: false,
       gear: false,
-    }))
+    })
   }
 
   return (
     <div className="skill-editor">
+      <span>*new skills are added to your class</span>
       <SkillSelector
         maxChoices={99}
         isCustom={true}
@@ -38,7 +39,9 @@ const AddNewSkills = ({updateEditor, obj, character}) => {
         data={obj}
         isEditing={true}
       />
-      <button onClick={() => saveNewSkills()}>save</button>
+      <button className="save-skills" onClick={() => saveNewSkills()}>
+        save
+      </button>
     </div>
   )
 }

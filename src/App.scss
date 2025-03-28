@@ -414,7 +414,62 @@ $backgroundColor: #e5e5e5;
       }
     }
   }
+  .editor-container {
+    span {
+      font-family: Baloo2, sans-sarif;
+      font-size: 12px;
+      color: rgba(128, 128, 128, 0.8509803922);
+    }
 
+    .editor {
+      .skill-profs {
+        display: flex;
+        flex-wrap: wrap;
+        padding-block: 5px;
+        margin: 10px;
+        background-color: #e5e5e5;
+        box-shadow: 0px 1px 2px 1px rgba(117, 117, 117, 0.91);
+
+        p {
+          font-weight: bold;
+          padding: 3px 3px 0;
+          margin: 3px;
+          border: 1px solid $fadedBorderColor;
+          background-color: #fbfbfb;
+          box-shadow: 2px 2px 2px 0px rgba(117, 117, 117, 0.91);
+        }
+      }
+    }
+    .add-skills {
+      display: flex;
+      flex-direction: column;
+      margin-top: 10px;
+      .add-skills-btn,
+      .save-skills {
+        font-size: 18px;
+        font-weight: bold;
+        margin-inline: 10px;
+      }
+    }
+    .skill-editor,
+    .gear-editor,
+    .subrace-editor {
+      display: flex;
+      flex-direction: column;
+      background-color: #ebebeb;
+      border: 2px solid #bcbcbc;
+      border-radius: 2%;
+      margin-bottom: 5px;
+      .skills-container {
+        padding-block: 0;
+        border: none;
+        margin-inline: 10px;
+      }
+      .save-skills {
+        margin-top: 10px;
+      }
+    }
+  }
   .traits-container,
   .class-abilities-container,
   .subclass-abilities {

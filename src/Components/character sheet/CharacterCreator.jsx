@@ -26,57 +26,6 @@ const CharacterCreator = ({setShowCreator}) => {
     subRace: {},
   })
 
-  // const mergeData = () => {
-  //   const mergedProficiencies = {
-  //     proficiencies: {
-  //       skill_proficiencies: {
-  //         ...storedDetails.classDetails.skill_proficiencies,
-  //         ...storedDetails.subRace.skill_proficiencies,
-  //         ...storedDetails.race.proficiencies?.skill_proficiencies,
-  //       },
-  //       gear_proficiencies: {
-  //         ...storedDetails.classDetails.base_proficiencies,
-  //         ...storedDetails.subRace.base_proficiencies,
-  //         ...storedDetails.race.starting_proficiencies,
-  //       },
-  //       ability_improvement: {
-  //         ...storedDetails.subRace.ability_improvement,
-  //         ...storedDetails.race.ability_bonus,
-  //         ...storedDetails.race.proficiencies?.ability_improvement,
-  //       },
-  //     },
-  //   }
-
-  //   return console.log(mergedProficiencies)
-
-  // const updatedDetails = {
-  //   ...prev,
-  //   health: newDetails?.health,
-  //   inventory: newDetails?.starting_equipment,
-  //   currentLevel: newDetails?.starting_level || 1,
-  //   proficiencies: {
-  //     ...prev.proficiencies,
-  //     skill_proficiencies: {
-  //       ...prev.proficiencies.skill_proficiencies,
-  //       ...newDetails?.proficiency_bonus,
-  //     },
-  //     gear_proficiencies: {
-  //       ...prev.proficiencies.gear_proficiencies,
-  //       ...characterDetails?.proficiencies,
-  //     },
-  //   },
-  //   classDetails: {
-  //     name: characterDetails.name,
-  //     hit_die: characterDetails.hit_die,
-  //     saving_throws: characterDetails.saving_throws,
-  //     spellcasting: {
-  //       spell_save: characterDetails?.spellcasting?.spellcasting_ability.name,
-  //     },
-  //     isCustom: false,
-  //   },
-  // }
-  // }
-
   const [showCharacterPopUps, setShowCharacterPopUps] = useState({
     classes: false,
     races: false,
@@ -453,7 +402,6 @@ const CharacterCreator = ({setShowCreator}) => {
       <button
         className="save-character-btn"
         onClick={() => {
-          // mergeData()
           setLocalStorage(storedDetails.characterName, storedDetails)
           setShowCreator((prev) => ({
             ...prev,

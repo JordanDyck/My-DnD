@@ -3,12 +3,17 @@ import CharacterFeatures from "./CharacterFeatures"
 import {useState} from "react"
 import CharacterSpells from "./CharacterSpells"
 import CharacterOverview from "./CharacterOverview"
+import EditCharacter from "./EditCharacter"
 
 const CharacterInfo = () => {
   const character = useSelector((store) => store.character.value)
-  const [tabs, setTabs] = useState({features: false, spells: false})
+  const [tabs, setTabs] = useState({
+    features: false,
+    spells: false,
+    editor: false,
+  })
   const areAllTabsFalse = () => {
-    return !tabs.features && !tabs.spells
+    return !tabs.features && !tabs.spells && !tabs.editor
   }
 
   return (
@@ -22,6 +27,7 @@ const CharacterInfo = () => {
               ...prev,
               features: !prev.features,
               spells: false,
+              editor: false,
             }))
           }
         >
@@ -34,6 +40,7 @@ const CharacterInfo = () => {
               ...prev,
               spells: !prev.spells,
               features: false,
+              editor: false,
             }))
           }
           disabled={
@@ -43,10 +50,23 @@ const CharacterInfo = () => {
         >
           spells
         </button>
+        <button
+          style={{borderColor: tabs.editor ? "#00ff00c9" : "#a7a7a7"}}
+          onClick={() =>
+            setTabs((prev) => ({
+              ...prev,
+              editor: !prev.editor,
+              features: false,
+              spells: false,
+            }))
+          }
+        >
+          editor
+        </button>
       </div>
       {areAllTabsFalse() && <CharacterOverview character={character} />}
       {tabs.features && <CharacterFeatures character={character} />}
-
+      {tabs.editor && <EditCharacter character={character} />}
       {tabs.spells && <CharacterSpells character={character} />}
     </div>
   )
