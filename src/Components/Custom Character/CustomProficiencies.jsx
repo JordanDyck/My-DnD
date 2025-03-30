@@ -1,4 +1,4 @@
-const CustomProficiencies = ({array, updateDetails, ObjKey}) => {
+const CustomProficiencies = ({array, updateDetails, ObjKey, isEditing}) => {
   // creates a new input on btn click used for storing lists of data like languages or traits
 
   return (
@@ -21,17 +21,19 @@ const CustomProficiencies = ({array, updateDetails, ObjKey}) => {
           )
         })}
       </div>
-      <button
-        onClick={() => {
-          updateDetails((prev) => ({
-            ...prev,
-            [ObjKey]: [...prev[ObjKey], {name: ""}],
-          }))
-        }}
-        disabled={!array[array.length - 1]}
-      >
-        +
-      </button>
+      {isEditing === false && (
+        <button
+          onClick={() => {
+            updateDetails((prev) => ({
+              ...prev,
+              [ObjKey]: [...prev[ObjKey], {name: ""}],
+            }))
+          }}
+          disabled={!array[array.length - 1]}
+        >
+          +
+        </button>
+      )}
     </div>
   )
 }

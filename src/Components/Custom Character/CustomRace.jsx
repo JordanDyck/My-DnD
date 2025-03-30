@@ -79,6 +79,7 @@ const CustomRace = ({
           }
           updateDetails={setRaceDetails}
           ObjKey={"languages"}
+          isEditing={false}
         />
       </div>
       <div className="custom-proficiencies-container">
@@ -92,6 +93,7 @@ const CustomRace = ({
           }
           updateDetails={setRaceDetails}
           ObjKey={"starting_proficiencies"}
+          isEditing={false}
         />
       </div>
       <div className="ability-bonus-container">

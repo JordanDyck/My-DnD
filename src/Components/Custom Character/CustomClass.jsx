@@ -115,6 +115,7 @@ const CustomClass = ({
             array={details?.base_proficiencies}
             updateDetails={setDetails}
             ObjKey={"base_proficiencies"}
+            isEditing={false}
           />
         </div>
         <div className="skills">

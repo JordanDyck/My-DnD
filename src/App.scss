@@ -440,20 +440,27 @@ $backgroundColor: #e5e5e5;
         }
       }
     }
-    .add-skills {
+    .add-skills,
+    .add-gear-profs {
       display: flex;
       flex-direction: column;
-      margin-top: 10px;
+      margin: 10px;
+
+      .custom-proficiencies {
+        display: flex;
+        justify-content: center;
+      }
+
       .add-skills-btn,
-      .save-skills {
+      .save-skills,
+      .add-gear {
         font-size: 18px;
         font-weight: bold;
-        margin-inline: 10px;
       }
     }
+
     .skill-editor,
-    .gear-editor,
-    .subrace-editor {
+    .gear-editor {
       display: flex;
       flex-direction: column;
       background-color: #ebebeb;

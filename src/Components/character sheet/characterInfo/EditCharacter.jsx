@@ -86,6 +86,28 @@ const EditCharacter = ({character}) => {
             })}
           </div>
         </div>
+        <div className="add-gear-profs">
+          <button
+            className="add-gear"
+            style={{display: editor.gear ? "none" : "initial"}}
+            onClick={() =>
+              setEditor((prev) => ({
+                ...prev,
+                skills: false,
+                gear: !prev.gear,
+              }))
+            }
+          >
+            add gear proficiencies
+          </button>
+          {editor.gear && (
+            <AddNewSkills
+              updateEditor={setEditor}
+              obj={"gear"}
+              character={character}
+            />
+          )}
+        </div>
         <div className="skill-editor">
           <h4 className="h4-title">class skills:</h4>
           <div className="skill-profs">
@@ -104,54 +126,58 @@ const EditCharacter = ({character}) => {
               )
             })}
           </div>
-        </div>
-        {raceDetails.proficiencies?.length ? (
-          <h4 className="h4-title">race skills:</h4>
-        ) : (
-          ""
-        )}
-        {raceDetails.proficiencies.length ? (
-          <div className="skill-profs">
-            {Object.keys(raceDetails.proficiencies?.skill_proficiencies)?.map(
-              (skill, i) => {
-                return (
-                  skill !== "isMax" && (
-                    <p
-                      key={skill}
-                      onClick={() => {
-                        removeSkill("race", "proficiencies", i)
-                      }}
-                    >
-                      {skill.replaceAll("Skill: ", "")}
-                    </p>
+
+          {raceDetails.proficiencies?.skill_proficiencies ? (
+            <div className="race-editor">
+              <h4 className="h4-title">race skills:</h4>
+
+              <div className="skill-profs">
+                {Object.keys(
+                  raceDetails.proficiencies?.skill_proficiencies
+                )?.map((skill, i) => {
+                  return (
+                    skill !== "isMax" && (
+                      <p
+                        key={skill}
+                        onClick={() => {
+                          removeSkill("race", "proficiencies", i)
+                        }}
+                      >
+                        {skill.replaceAll("Skill: ", "")}
+                      </p>
+                    )
                   )
-                )
-              }
-            )}
-          </div>
-        ) : (
-          ""
-        )}
-        <div className="subrace-editor">
-          <h4 className="h4-title">subrace skills:</h4>
-          <div className="skill-profs">
-            {Object.keys(character.subRace.skill_proficiencies)?.map(
-              (skill, i) => {
-                return (
-                  skill !== "isMax" && (
-                    <p
-                      key={skill}
-                      onClick={() => {
-                        removeSkill("subRace", "skill_proficiencies", i)
-                      }}
-                    >
-                      {skill.replaceAll("Skill: ", "")}
-                    </p>
-                  )
-                )
-              }
-            )}
-          </div>
+                })}
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
+          {Object.keys(character.subRace?.skill_proficiencies).length > 1 ? (
+            <div className="subrace-editor">
+              <h4 className="h4-title">subrace skills:</h4>
+              <div className="skill-profs">
+                {Object.keys(character.subRace.skill_proficiencies)?.map(
+                  (skill, i) => {
+                    return (
+                      skill !== "isMax" && (
+                        <p
+                          key={skill}
+                          onClick={() => {
+                            removeSkill("subRace", "skill_proficiencies", i)
+                          }}
+                        >
+                          {skill.replaceAll("Skill: ", "")}
+                        </p>
+                      )
+                    )
+                  }
+                )}
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </div>
       <div className="add-skills">

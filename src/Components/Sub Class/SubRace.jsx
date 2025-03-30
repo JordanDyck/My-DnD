@@ -54,6 +54,7 @@ const SubRace = ({setStoredDetails, setShowCharacterDetails}) => {
           }
           updateDetails={setSubRaceDetails}
           ObjKey={"languages"}
+          isEditing={false}
         />
       </div>
       <div className="custom-proficiencies-container">
@@ -66,6 +67,7 @@ const SubRace = ({setStoredDetails, setShowCharacterDetails}) => {
           }
           updateDetails={setSubRaceDetails}
           ObjKey={"base_proficiencies"}
+          isEditing={false}
         />
       </div>
       <div className="sub-traits">
