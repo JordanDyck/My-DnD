@@ -1,5 +1,6 @@
 import {useState} from "react"
 import {RiDeleteBinLine} from "react-icons/ri"
+import {TbArrowBack} from "react-icons/tb"
 
 import CharacterOptionsPopUp from "../CharacterOptionsPopup"
 import Perks from "../Perks"
@@ -9,6 +10,7 @@ import SubClassBuilder from "../Sub Class/SubClassBuilder"
 import CustomRace from "../Custom Character/CustomRace"
 import StatRolls from "./StatRolls"
 import SubRace from "../Sub Class/SubRace"
+import ImportCharacter from "../ImportCharacter"
 
 const CharacterCreator = ({setShowCreator}) => {
   const [storedDetails, setStoredDetails] = useState({
@@ -39,6 +41,7 @@ const CharacterCreator = ({setShowCreator}) => {
     subRace: false,
     customClass: false,
     customRace: false,
+    import: false,
   })
   const [characterDetails, setCharacterDetails] = useState([]) // stores pre-made data from api
   const [newDetails, setNewDetails] = useState({}) // stores custom made data
@@ -67,23 +70,36 @@ const CharacterCreator = ({setShowCreator}) => {
   return (
     <div className="character-creator">
       <header className="tab-header">Create Character</header>
-
-      <label className="name-label">
-        Name:
-        <input
-          className="name"
-          onChange={(e) => {
-            if (checkStoredNames(e.target.value) === false) {
-              setStoredDetails((prev) => ({
+      {!showCharacterDetails.import && (
+        <div className="name-container">
+          <label className="name-label">
+            Name:
+            <input
+              className="name"
+              onChange={(e) => {
+                if (checkStoredNames(e.target.value) === false) {
+                  setStoredDetails((prev) => ({
+                    ...prev,
+                    characterName: e.target.value,
+                  }))
+                } else {
+                  e.target.value = ""
+                }
+              }}
+            />
+          </label>
+          <button
+            onClick={() => {
+              setShowCreator((prev) => ({
                 ...prev,
-                characterName: e.target.value,
+                creator: false,
               }))
-            } else {
-              e.target.value = ""
-            }
-          }}
-        />
-      </label>
+            }}
+          >
+            <TbArrowBack />
+          </button>
+        </div>
+      )}
 
       <div className="class-container">
         {classNameOption && areTabsFalse("class") && (
@@ -154,6 +170,7 @@ const CharacterCreator = ({setShowCreator}) => {
             showCharacterDetails.customRace ||
             showCharacterDetails.race ||
             showCharacterDetails.subRace ||
+            showCharacterDetails.import ||
             classNameOption
           }
         >
@@ -290,6 +307,7 @@ const CharacterCreator = ({setShowCreator}) => {
             showCharacterDetails.subRace ||
             showCharacterDetails.customRace ||
             showCharacterDetails.customClass ||
+            showCharacterDetails.import ||
             raceName
           }
         >
@@ -379,6 +397,28 @@ const CharacterCreator = ({setShowCreator}) => {
           </>
         )}
       </div>
+      {!Object.values(showCharacterDetails).includes(true) &&
+      !storedDetails.classDetails?.name?.length &&
+      !storedDetails.race?.name?.length ? (
+        <div className="import-btn">
+          <button
+            onClick={() => {
+              setShowCharacterDetails((prev) => ({...prev, import: true}))
+            }}
+          >
+            import character
+          </button>
+        </div>
+      ) : (
+        ""
+      )}
+
+      {showCharacterDetails.import && (
+        <ImportCharacter
+          setCharacterDetails={setShowCharacterDetails}
+          setShowCreator={setShowCreator}
+        />
+      )}
       {showCharacterPopUps.classes && (
         <CharacterOptionsPopUp
           setPopUp={setShowCharacterPopUps}

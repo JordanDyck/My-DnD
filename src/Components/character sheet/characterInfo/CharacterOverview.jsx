@@ -4,6 +4,7 @@ import ClassLvlDetails from "../../ClassLvlDetails"
 
 const CharacterOverview = ({character}) => {
   const [level, setLevel] = useState()
+  const [exportText, setExportText] = useState("export")
 
   const checkIsCustom = character.classDetails.isCustom
   const classDetails = character.classDetails
@@ -110,6 +111,19 @@ const CharacterOverview = ({character}) => {
   return (
     <div className="overview-container">
       <h4 className="char-name">Name: {character.characterName}</h4>
+      <div className="export-container">
+        <span>*copy your character data to your clipboard</span>
+        <button
+          onClick={(e) => {
+            // copies characters JSON data from localstorage to clipboard
+            navigator.clipboard.writeText(JSON.stringify(character))
+            e.target.style.backgroundColor = "#93ff93"
+            setExportText("copied")
+          }}
+        >
+          {exportText}
+        </button>
+      </div>
       <header>class details:</header>
       <div className="base-detail">
         <h4>class: </h4>
