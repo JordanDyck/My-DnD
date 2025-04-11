@@ -33,7 +33,7 @@ const CustomRace = ({
 
   return (
     <div className="custom-race">
-      <form onChange={handleFormData}>
+      <form className="custom-race-form" onChange={handleFormData}>
         <label htmlFor="name">
           race name:
           <input className="custom-race-name" name="name" />

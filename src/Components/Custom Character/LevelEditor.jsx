@@ -88,7 +88,7 @@ const LevelEditor = ({
     setIsSaved(true)
   }
 
-  const handleFeatureData = (e, index, state, setState, type) => {
+  const handleFeatureData = (e, index, state, setState) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
     const data = Object.fromEntries(formData)
@@ -146,13 +146,7 @@ const LevelEditor = ({
               className="level-feature"
               key={`feature_${index + 1}`}
               onChange={(e) =>
-                handleFeatureData(
-                  e,
-                  index,
-                  levelFeatures,
-                  setLevelFeatures,
-                  "features"
-                )
+                handleFeatureData(e, index, levelFeatures, setLevelFeatures)
               }
             >
               {level === currentLevel ? (
@@ -210,8 +204,7 @@ const LevelEditor = ({
                         e,
                         index,
                         classSpecifics,
-                        setClassSpecifics,
-                        "class_specific"
+                        setClassSpecifics
                       )
                     }
                   >
@@ -324,7 +317,7 @@ const LevelEditor = ({
       {currentLevel === level && (
         <button
           className="new-level-btn"
-          onClick={saveLevel}
+          onClick={() => saveLevel}
           style={{backgroundColor: !isSaved ? "" : "#85ff85"}}
           disabled={
             details.levels.length < 1

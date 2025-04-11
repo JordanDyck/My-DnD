@@ -37,11 +37,7 @@ const CustomLevels = ({setDetails, details, type}) => {
         return (
           <div key={`currentlevel_${i}`} className="level-container">
             {type === "traits" ? (
-              <CustomTraits
-                level={level}
-                setTraitData={setDetails}
-                currentLevel={currentLevel.length}
-              />
+              <CustomTraits setTraitData={setDetails} isEditing={false} />
             ) : (
               <LevelEditor
                 level={level}

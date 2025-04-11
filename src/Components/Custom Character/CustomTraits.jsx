@@ -4,7 +4,7 @@ const defaultTraitData = {
   name: "",
   value: "",
 }
-const CustomTraits = ({level, setTraitData, currentLevel}) => {
+const CustomTraits = ({setTraitData, isEditing}) => {
   const [levelFeatures, setLevelFeatures] = useState([defaultTraitData])
 
   const newFeature = () => {
@@ -29,8 +29,8 @@ const CustomTraits = ({level, setTraitData, currentLevel}) => {
   }, [levelFeatures, setTraitData])
 
   return (
-    <div className={level === currentLevel ? "level" : "level-collapsed"}>
-      <h4>{"traits"}</h4>
+    <div className="level">
+      {!isEditing && <h4>traits</h4>}
       {levelFeatures.map((_, index) => {
         return (
           <form
@@ -38,30 +38,28 @@ const CustomTraits = ({level, setTraitData, currentLevel}) => {
             key={`feature_${index + 1}`}
             onChange={(e) => handleData(e, index)}
           >
-            {level === currentLevel ? (
-              <input name="name" placeholder="feature name" />
+            {index === levelFeatures.length - 1 ? ( // after making a trait, it'll collapse into just the name
+              <>
+                <input name="name" placeholder="feature name" />
+                <textarea name="feature" placeholder="description..." />
+              </>
             ) : (
-              <p>{levelFeatures[index]?.featureName}</p>
+              <p>{levelFeatures[index]?.name}</p>
             )}
-
-            <textarea
-              name="feature"
-              placeholder="description..."
-              // style={{display: level !== currentLevel ? "none" : "initial"}}
-            />
           </form>
         )
       })}
-
-      <button
-        className="new-feature-btn"
-        type="button"
-        onClick={() => newFeature()}
-        // style={{display: level !== currentLevel ? "none" : "initial"}}
-        disabled={!levelFeatures[levelFeatures.length - 1]?.name}
-      >
-        new trait
-      </button>
+      {!isEditing && (
+        <button
+          className="new-feature-btn"
+          type="button"
+          onClick={() => newFeature()}
+          // style={{display: level !== currentLevel ? "none" : "initial"}}
+          disabled={!levelFeatures[levelFeatures.length - 1]?.name}
+        >
+          new trait
+        </button>
+      )}
     </div>
   )
 }

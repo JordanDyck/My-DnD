@@ -4,7 +4,12 @@ import AddNewSkills from "./AddNewSkills"
 import {useState} from "react"
 
 const EditCharacter = ({character}) => {
-  const [editor, setEditor] = useState({skills: false, gear: false})
+  const [editor, setEditor] = useState({
+    skills: false,
+    gear: false,
+    traits: false,
+  })
+
   const dispatch = useDispatch()
   const classDetails = character.classDetails
   const raceDetails = character.race
@@ -58,6 +63,19 @@ const EditCharacter = ({character}) => {
         }
         return dispatch(updateCharacter(updateRaceSkills))
 
+      case "traits":
+        const newTraits = character[obj][locationName].filter(
+          (_, i) => i !== index
+        )
+        const updateTraits = {
+          ...character,
+          [obj]: {
+            ...character[obj],
+            [locationName]: [...newTraits],
+          },
+        }
+        return dispatch(updateCharacter(updateTraits))
+
       default:
         return null
     }
@@ -87,19 +105,21 @@ const EditCharacter = ({character}) => {
           </div>
         </div>
         <div className="add-gear-profs">
-          <button
-            className="add-gear"
-            style={{display: editor.gear ? "none" : "initial"}}
-            onClick={() =>
-              setEditor((prev) => ({
-                ...prev,
-                skills: false,
-                gear: !prev.gear,
-              }))
-            }
-          >
-            add gear proficiencies
-          </button>
+          {!editor.traits && (
+            <button
+              className="add-gear"
+              onClick={() =>
+                setEditor((prev) => ({
+                  ...prev,
+                  skills: false,
+                  gear: !prev.gear,
+                  traits: false,
+                }))
+              }
+            >
+              add gear proficiencies
+            </button>
+          )}
           {editor.gear && (
             <AddNewSkills
               updateEditor={setEditor}
@@ -179,29 +199,72 @@ const EditCharacter = ({character}) => {
             ""
           )}
         </div>
-      </div>
-      <div className="add-skills">
-        <button
-          className="add-skills-btn"
-          style={{display: editor.skills ? "none" : "initial"}}
-          onClick={() =>
-            setEditor((prev) => ({
-              ...prev,
-              skills: !prev.skills,
-              gear: false,
-            }))
-          }
-        >
-          add new skills
-        </button>
+        <div className="add-skills">
+          {!editor.traits && (
+            <button
+              className="add-skills-btn"
+              onClick={() =>
+                setEditor((prev) => ({
+                  ...prev,
+                  skills: !prev.skills,
+                  gear: false,
+                  traits: false,
+                }))
+              }
+            >
+              add new skills
+            </button>
+          )}
 
-        {editor.skills && (
-          <AddNewSkills
-            updateEditor={setEditor}
-            obj={"skills"}
-            character={character}
-          />
-        )}
+          {editor.skills && (
+            <AddNewSkills
+              updateEditor={setEditor}
+              obj={"skills"}
+              character={character}
+            />
+          )}
+        </div>
+        <div className="traits">
+          <h4 className="h4-title">traits:</h4>
+          <div className="skill-profs">
+            {character.race.traits.map((trait, i) => {
+              return (
+                <p
+                  onClick={() => {
+                    removeSkill("race", "traits", i)
+                  }}
+                  key={trait.name}
+                >
+                  {trait.name}
+                </p>
+              )
+            })}
+          </div>
+        </div>
+        <div className="add-traits">
+          {!editor.traits && (
+            <button
+              className="add-traits-btn"
+              onClick={() =>
+                setEditor((prev) => ({
+                  ...prev,
+                  skills: false,
+                  gear: false,
+                  traits: true,
+                }))
+              }
+            >
+              add new traits
+            </button>
+          )}
+          {editor.traits && (
+            <AddNewSkills
+              updateEditor={setEditor}
+              obj={"traits"}
+              character={character}
+            />
+          )}
+        </div>
       </div>
     </div>
   )
