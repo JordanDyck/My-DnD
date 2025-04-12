@@ -10,7 +10,7 @@ const Health = ({currentCharacter}) => {
     character?.health.maxHP
   )
 
-  // sets health from characterName from local storage
+  // sets health from local storage
   useEffect(() => {
     try {
       counter.setCurrent(character.health.currentHP)
@@ -22,17 +22,29 @@ const Health = ({currentCharacter}) => {
     // eslint-disable-next-line
   }, [currentCharacter, character.health.maxHP])
 
+  const handleTempHealth = (tempHealth) => {
+    const updateTempHealth = {
+      ...character,
+      health: {
+        ...character.health,
+        temp: tempHealth || 0,
+      },
+    }
+    return dispatch(updateCharacter(updateTempHealth))
+  }
+
   const updatedHealth = () => {
     if (currentCharacter?.length) {
       if (counter.value !== character?.Health?.currentHP) {
         const updatedStorage = {
           ...character,
           health: {
+            ...character.health,
             currentHP: parseInt(counter.value, 10),
             maxHP: parseInt(counter.maxValue, 10),
           },
         }
-
+        console.log(updatedStorage.health)
         dispatch(updateCharacter(updatedStorage))
       }
     }
@@ -54,6 +66,16 @@ const Health = ({currentCharacter}) => {
   return (
     <div className="health-wrapper">
       <header>Health</header>
+
+      <div className="temp-health">
+        <input
+          type="number"
+          value={character?.health.temp || 0}
+          onChange={(e) => handleTempHealth(parseInt(e.target.value))}
+          onFocus={(e) => e.target.select()}
+        />
+      </div>
+
       <div className="health-container">
         <button onClick={() => counter.decrement(5)}>{`<<`}</button>
         <button onClick={() => counter.decrement(1)}>{`<`}</button>
@@ -65,7 +87,10 @@ const Health = ({currentCharacter}) => {
             onChange={(e) => counter.setMax(parseInt(e.target.value, 10))}
           />
         </div>
-        <button onClick={() => counter.increment()}>{`>`}</button>
+        <button onClick={() => counter.increment(0, 1)}>{`>`}</button>
+        <button onClick={() => counter.increment(0, 5)}>{`>>`}</button>
+      </div>
+      <div className="to-max-health">
         <button onClick={() => counter.toMax()}>max</button>
       </div>
     </div>

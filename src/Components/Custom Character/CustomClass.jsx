@@ -103,7 +103,11 @@ const CustomClass = ({
             onChange={(e) => {
               setStoredDetails((prev) => ({
                 ...prev,
-                health: {currentHP: e.target.value, maxHP: e.target.value},
+                health: {
+                  currentHP: e.target.value,
+                  maxHP: e.target.value,
+                  temp: 0,
+                },
               }))
             }}
           />

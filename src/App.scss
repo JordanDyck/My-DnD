@@ -201,16 +201,43 @@ $backgroundColor: #e5e5e5;
     header {
       text-decoration: underline;
     }
-    .health-container {
+
+    .temp-health {
       display: flex;
+      justify-content: center;
       align-items: center;
-      margin-left: 25px;
+      border: 2px solid;
+      width: 70px;
+      height: 38px;
+      margin-bottom: 5px;
+      input {
+        width: 67px;
+        font-size: 20px;
+        border: none;
+      }
+    }
+
+    .to-max-health {
       button {
         font-size: 19px;
         font-weight: bold;
-        margin-inline: 3px;
+        margin-top: 7px;
         padding: 3px;
         height: 31px;
+      }
+    }
+
+    .health-container {
+      display: flex;
+      align-items: center;
+
+      button {
+        font-size: 27px;
+        font-weight: bold;
+        margin-inline: 5px;
+        padding: 1px;
+        height: 35px;
+        width: 35px;
       }
       .health {
         display: flex;
@@ -1425,10 +1452,10 @@ $backgroundColor: #e5e5e5;
           color: $fadedBorderColor;
         }
       }
-      .save-race-btn {
-        font-size: 18px;
-        font-weight: bold;
-      }
+    }
+    .save-race-btn {
+      font-size: 18px;
+      font-weight: bold;
     }
   }
 

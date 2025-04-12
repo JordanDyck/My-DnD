@@ -166,7 +166,7 @@ const ItemsTab = ({
             <div className="counter-container">
               <h4 className="h4-title">amount:</h4>
               <label className="item-count">{counter.value}</label>
-              <button onClick={() => counter.increment()}>+</button>
+              <button onClick={() => counter.increment(0, 1)}>+</button>
               <button
                 disabled={counter.value <= 1}
                 onClick={() => counter.decrement(1)}

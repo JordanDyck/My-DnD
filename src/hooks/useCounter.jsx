@@ -6,7 +6,7 @@ const useCounter = (initialValue, initialMax) => {
 
   const setCurrent = (amount) => setValue(amount)
   const setMax = (amount) => setMaxValue(amount)
-  const increment = (index) => {
+  const increment = (index, amount) => {
     if (typeof index === "number" && Array.isArray(value)) {
       const valueCopy = [...value]
 
@@ -15,7 +15,10 @@ const useCounter = (initialValue, initialMax) => {
         setValue(valueCopy)
       }
     } else {
-      value < maxValue && setValue((c) => c + 1)
+      value < maxValue &&
+        setValue((c) => {
+          return c + amount > maxValue ? (c = maxValue) : c + amount
+        })
     }
   }
   const decrement = (amount) => value > 0 && setValue((c) => c - amount)
