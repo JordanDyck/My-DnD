@@ -15,7 +15,7 @@ const SubRace = ({setStoredDetails, setShowCharacterDetails}) => {
 
   return (
     <div className="sub-race-container">
-      <div className="name-container">
+      <div className="sub-name-container">
         <h4 className="h4-title">subrace:</h4>
         <input
           onChange={(e) =>

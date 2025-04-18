@@ -1,8 +1,9 @@
-import {useEffect} from "react"
+import {useEffect, useState} from "react"
 import useCounter from "../../hooks/useCounter"
 import {useDispatch, useSelector} from "react-redux"
 import {updateCharacter} from "../../Store/slices/characterSlice"
 const Health = ({currentCharacter}) => {
+  const [toggleNewMax, setToggleNewMax] = useState(false)
   const character = useSelector((store) => store.character.value)
   const dispatch = useDispatch()
   const counter = useCounter(
@@ -44,7 +45,7 @@ const Health = ({currentCharacter}) => {
             maxHP: parseInt(counter.maxValue, 10),
           },
         }
-        console.log(updatedStorage.health)
+
         dispatch(updateCharacter(updatedStorage))
       }
     }
@@ -65,8 +66,7 @@ const Health = ({currentCharacter}) => {
 
   return (
     <div className="health-wrapper">
-      <header>Health</header>
-
+      <h4>temp hp</h4>
       <div className="temp-health">
         <input
           type="number"
@@ -75,23 +75,54 @@ const Health = ({currentCharacter}) => {
           onFocus={(e) => e.target.select()}
         />
       </div>
+      <h4>Health</h4>
 
       <div className="health-container">
-        <button onClick={() => counter.decrement(5)}>{`<<`}</button>
-        <button onClick={() => counter.decrement(1)}>{`<`}</button>
+        {/* decrement buttons */}
+        <button
+          style={{backgroundColor: "#ffa6a6"}}
+          onClick={() => counter.decrement(5)}
+        >{`<<`}</button>
+        <button
+          style={{backgroundColor: "#ffa6a6"}}
+          onClick={() => counter.decrement(1)}
+        >{`<`}</button>
+
         <div className="health">
-          <h4>{counter.value} /</h4>
-          <input
-            type="number"
-            value={counter.maxValue}
-            onChange={(e) => counter.setMax(parseInt(e.target.value, 10))}
-          />
+          {/* health display */}
+          {toggleNewMax ? (
+            <input
+              type="number"
+              defaultValue={counter.maxValue}
+              onChange={(e) => {
+                counter.setMax(parseInt(e.target.value, 10))
+              }}
+            />
+          ) : (
+            <h4>
+              {counter.value}/{counter.maxValue}
+            </h4>
+          )}
         </div>
-        <button onClick={() => counter.increment(0, 1)}>{`>`}</button>
-        <button onClick={() => counter.increment(0, 5)}>{`>>`}</button>
+
+        {/* increment buttons */}
+        <button
+          style={{backgroundColor: "#a7ffa7"}}
+          onClick={() => counter.increment(0, 1)}
+        >{`>`}</button>
+        <button
+          style={{backgroundColor: "#a7ffa7"}}
+          onClick={() => counter.increment(0, 5)}
+        >{`>>`}</button>
       </div>
+
       <div className="to-max-health">
-        <button onClick={() => counter.toMax()}>max</button>
+        {!toggleNewMax && <button onClick={() => counter.toMax()}>max</button>}
+        <button
+          onClick={() => setToggleNewMax((toggleNewMax) => !toggleNewMax)}
+        >
+          {toggleNewMax ? "save" : "set max"}
+        </button>
       </div>
     </div>
   )
