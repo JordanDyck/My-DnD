@@ -317,7 +317,7 @@ const LevelEditor = ({
       {currentLevel === level && (
         <button
           className="new-level-btn"
-          onClick={() => saveLevel}
+          onClick={() => saveLevel()}
           style={{backgroundColor: !isSaved ? "" : "#85ff85"}}
           disabled={
             details.levels.length < 1

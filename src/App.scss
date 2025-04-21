@@ -1886,15 +1886,14 @@ input::-webkit-inner-spin-button {
   position: absolute;
   z-index: 1;
   top: 48px;
-  left: 6px;
+  left: 16px;
 
   box-shadow: 0px 0px 9px 4px rgba(0, 0, 0, 0.31);
   border: 17px solid transparent;
   border-image: url("./assets/border.png") 116;
   padding: 10px 7px;
-
   background-color: white;
-  width: 235px;
+  width: 280px;
   .stat-container {
     display: flex;
     justify-content: space-between;
@@ -1905,6 +1904,7 @@ input::-webkit-inner-spin-button {
     &:nth-child(odd) {
       background-color: #e7e7e7;
     }
+
     .stat-input {
       width: 30px;
       height: 28px;
@@ -1921,7 +1921,7 @@ input::-webkit-inner-spin-button {
 
       height: 10px;
       width: 10px;
-      margin-bottom: 8px;
+      margin-bottom: 7px;
       &:checked:before {
         content: "";
         display: block;
@@ -1938,6 +1938,26 @@ input::-webkit-inner-spin-button {
       }
       &:disabled {
         visibility: hidden;
+      }
+    }
+  }
+  .saving-throws {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 5px;
+    margin-block: 10px;
+    .stat-container {
+      justify-content: space-around;
+      border: 1px solid $fadedBorderColor;
+      padding-right: 5px;
+
+      width: 74px;
+      input {
+        margin-right: 3px;
+        &:disabled {
+          display: none;
+        }
       }
     }
   }

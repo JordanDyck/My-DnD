@@ -1,5 +1,6 @@
 {
   "str": ["Athletics"],
+  "con": [],
   "dex": ["Acrobatics", "Sleight of Hand", "Stealth"],
   "int": ["Arcana", "History", "Investigation", "Nature", "Religion"],
   "wis": ["Animal Handling", "Insight", "Medicine", "Perception", "Survival"],

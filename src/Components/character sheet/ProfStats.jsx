@@ -16,6 +16,27 @@ const ProfStats = ({setShowStats}) => {
       .sort()
   }, [])
 
+  const lowerCaseArray = (obj) => {
+    //  turns all object keys into lower case.
+    const isCustom = character.classDetails.isCustom
+    if (isCustom) {
+      return Object.keys(obj).map((string) => string.toLowerCase())
+    } else {
+      return obj.map((ooh) => ooh.index)
+    }
+  }
+
+  const calcSavingThowBonus = (skill) => {
+    const stats = character.stats[skill].bonus
+    const saveSkills = lowerCaseArray(
+      character.classDetails?.saving_throws
+    ).includes(skill)
+    // check if saving throw bonus exists, returns the bonus, else returns the base stat bonus
+    if (saveSkills) {
+      return stats + calcProficiencyBonus
+    } else return stats
+  }
+
   const skillProficiencies = () => {
     //sorts through all proficiencies that are skills & puts them into an array.
     const classDetails = character.classDetails
@@ -65,6 +86,33 @@ const ProfStats = ({setShowStats}) => {
       >
         Close
       </button>
+      <div className="saving-throws">
+        {Object.keys(SkillCategories).map((save) => {
+          return (
+            <div key={`save_${save}`} className="stat-container">
+              <input
+                type="checkbox"
+                className="proficiency-checkbox"
+                readOnly
+                checked={lowerCaseArray(
+                  character.classDetails?.saving_throws
+                ).includes(save)}
+                disabled={
+                  !lowerCaseArray(
+                    character.classDetails?.saving_throws
+                  ).includes(save)
+                }
+              />
+              <h4>{save}</h4>
+              <h4>
+                {calcSavingThowBonus(save) > 0
+                  ? `+${calcSavingThowBonus(save)}`
+                  : calcSavingThowBonus(save)}
+              </h4>
+            </div>
+          )
+        })}
+      </div>
       {skillList ? (
         skillList.map((skill, index) => {
           return (

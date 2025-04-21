@@ -214,11 +214,9 @@ const CharacterOverview = ({character}) => {
         {/* display race details */}
         <header>race details:</header>
         <h4 className="h4-title race-name">name: </h4>
-        <p>{raceDetails.name}</p>
-        {raceDetails.subRace && (
-          <h4 className="h4-title race-name">subrace: </h4>
-        )}
-        {raceDetails.subRace && <p>{raceDetails.subRace}</p>}
+        <p>
+          {raceDetails.name} | {character.subRace?.name}
+        </p>
         <div className="base-details-container">
           <div className="race-detail">
             <h4 className="h4-title">age: </h4>
