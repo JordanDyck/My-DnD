@@ -5,6 +5,7 @@ import {updateCharacter} from "../../../Store/slices/characterSlice"
 import AddNewSkills from "./AddNewSkills"
 
 const EditCharacter = ({character}) => {
+  const [exportText, setExportText] = useState("export")
   const [editor, setEditor] = useState({
     skills: false,
     gear: false,
@@ -84,6 +85,20 @@ const EditCharacter = ({character}) => {
 
   return (
     <div className="editor-container">
+      <div className="export-container">
+        <span>*copy your character data to your clipboard</span>
+        <button
+          onClick={(e) => {
+            // copies characters JSON data from localstorage to clipboard
+            navigator.clipboard.writeText(JSON.stringify(character))
+            e.target.style.backgroundColor = "#93ff93"
+            setExportText("copied")
+          }}
+        >
+          {exportText}
+        </button>
+      </div>
+
       <span>*click on proficiencies to remove them</span>
       <div className="editor">
         <div className="gear-editor">

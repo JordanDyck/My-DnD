@@ -309,35 +309,13 @@ $backgroundColor: #e5e5e5;
   }
 
   .overview-container {
-    header {
-      font-weight: bold;
-      border-bottom: 2px solid $fadedBorderColor;
-      text-decoration: underline;
-    }
     .char-name {
       margin-block: 10px;
     }
     .class-name {
       margin-top: 10px;
     }
-    .export-container {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 10px;
-      padding-block: 5px 10px;
-      border-block: 1px solid $fadedBorderColor;
-      span {
-        font-size: 14px;
-        font-family: $parFont;
-        color: $fadedBorderColor;
-      }
-      button {
-        font-size: 18px;
-        font-weight: bold;
-        margin-top: 7px;
-        width: 95px;
-      }
-    }
+
     .class-details {
       background-color: #ebebeb;
       border: 2px solid #bcbcbc;
@@ -396,9 +374,7 @@ $backgroundColor: #e5e5e5;
     }
     .race-details {
       margin-block: 20px;
-      header {
-        margin-bottom: 10px;
-      }
+
       .race-name {
         float: left;
         padding-right: 5px;
@@ -466,6 +442,25 @@ $backgroundColor: #e5e5e5;
     }
   }
   .editor-container {
+    .export-container {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 10px;
+      padding-block: 5px 10px;
+      border-block: 1px solid $fadedBorderColor;
+      span {
+        font-size: 14px;
+        font-family: $parFont;
+        color: $fadedBorderColor;
+      }
+      button {
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 7px;
+        width: 95px;
+      }
+    }
+
     span {
       font-family: Baloo2, sans-sarif;
       font-size: 12px;
