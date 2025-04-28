@@ -1,7 +1,8 @@
 import {useDispatch} from "react-redux"
+import {useState} from "react"
+
 import {updateCharacter} from "../../../Store/slices/characterSlice"
 import AddNewSkills from "./AddNewSkills"
-import {useState} from "react"
 
 const EditCharacter = ({character}) => {
   const [editor, setEditor] = useState({

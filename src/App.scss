@@ -292,8 +292,9 @@ $backgroundColor: #e5e5e5;
   border-image: url("./assets/border.png") 116;
   min-height: 250px;
   .character-tabs {
+    display: flex;
+    justify-content: center;
     margin-bottom: 20px;
-
     background-color: #e7e7e7;
     border: 10px solid $fadedBorderColor;
     border-image: url("./assets/border.png") 116;
@@ -301,8 +302,8 @@ $backgroundColor: #e5e5e5;
     button {
       font-size: 16px;
       font-weight: bold;
-      margin-inline: 3px;
-      padding-inline: 3px;
+      margin-inline: auto;
+      padding-inline: 2px;
       height: 22px;
     }
   }
@@ -680,6 +681,81 @@ $backgroundColor: #e5e5e5;
           font-size: 18px;
           text-decoration: underline;
         }
+      }
+    }
+  }
+  .notes-container {
+    .displayed-notes {
+      .title-container {
+        display: flex;
+        align-items: center;
+        button {
+          width: 32px;
+          height: 29px;
+          font-size: 23px;
+          margin-left: 5px;
+        }
+      }
+      .note {
+        display: flex;
+        flex-direction: column;
+        padding-block: 10px;
+
+        h4 {
+          flex: 1;
+        }
+        p {
+          border: 2px solid $fadedBorderColor;
+          border-left: none;
+          border-top: none;
+          border-radius: 6px 0;
+          font-family: $parFont;
+          font-size: 17px;
+          padding-inline: 3px;
+        }
+        &.visible {
+          p {
+            display: block;
+          }
+        }
+        &.hidden {
+          border-bottom: 1px solid;
+          p {
+            display: none;
+          }
+        }
+      }
+    }
+    .add-note-btn {
+      margin-block: 20px 7px;
+      font-weight: bold;
+      font-size: 15px;
+      padding: 3px;
+    }
+
+    .note-maker {
+      display: flex;
+      flex-direction: column;
+      border: 2px solid;
+      padding: 15px 8px;
+      background-color: rgb(236 236 236 / 85%);
+      input {
+        font-weight: bold;
+        font-size: 18px;
+      }
+      textarea {
+        max-width: calc(100% - 10px);
+        height: 200px;
+        margin: 15px 5px;
+        font-family: $parFont;
+        font-size: 18px;
+      }
+      button {
+        font-size: 18px;
+        font-weight: bold;
+        background-color: #ffffff;
+        border-radius: 3px;
+        border: 2px solid gray;
       }
     }
   }

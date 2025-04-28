@@ -4,6 +4,7 @@ import {useState} from "react"
 import CharacterSpells from "./CharacterSpells"
 import CharacterOverview from "./CharacterOverview"
 import EditCharacter from "./EditCharacter"
+import Notes from "./Notes"
 
 const CharacterInfo = () => {
   const character = useSelector((store) => store.character.value)
@@ -11,9 +12,10 @@ const CharacterInfo = () => {
     features: false,
     spells: false,
     editor: false,
+    notes: false,
   })
   const areAllTabsFalse = () => {
-    return !tabs.features && !tabs.spells && !tabs.editor
+    return !tabs.features && !tabs.spells && !tabs.editor && !tabs.notes
   }
 
   return (
@@ -28,6 +30,7 @@ const CharacterInfo = () => {
               features: !prev.features,
               spells: false,
               editor: false,
+              notes: false,
             }))
           }
         >
@@ -41,6 +44,7 @@ const CharacterInfo = () => {
               spells: !prev.spells,
               features: false,
               editor: false,
+              notes: false,
             }))
           }
           disabled={
@@ -58,16 +62,32 @@ const CharacterInfo = () => {
               editor: !prev.editor,
               features: false,
               spells: false,
+              notes: false,
             }))
           }
         >
           editor
+        </button>
+        <button
+          style={{borderColor: tabs.notes ? "#00ff00c9" : "#a7a7a7"}}
+          onClick={() =>
+            setTabs((prev) => ({
+              ...prev,
+              notes: !prev.notes,
+              editor: false,
+              features: false,
+              spells: false,
+            }))
+          }
+        >
+          notes
         </button>
       </div>
       {areAllTabsFalse() && <CharacterOverview character={character} />}
       {tabs.features && <CharacterFeatures character={character} />}
       {tabs.editor && <EditCharacter character={character} />}
       {tabs.spells && <CharacterSpells character={character} />}
+      {tabs.notes && <Notes character={character} />}
     </div>
   )
 }
