@@ -24,14 +24,14 @@ const BaseStats = ({unfocused}) => {
   }
 
   const updatePassiveStats = (statName, newStat) => {
-    const updatedAC = {
+    const updatedPassives = {
       ...character,
       stats: {
         ...character.stats,
-        [statName]: isNaN(parseInt(newStat)) ? 0 : parseInt(newStat),
+        [statName]: newStat,
       },
     }
-    dispatch(updateCharacter(updatedAC))
+    dispatch(updateCharacter(updatedPassives))
   }
 
   return (

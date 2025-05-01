@@ -141,7 +141,7 @@ const SpellTab = ({setShowSpellTab}) => {
             setUrl((prev) => ({
               ...prev,
               spell: "",
-              level: 0,
+
               error: false,
             }))
             setSpellInfo({})
@@ -172,7 +172,7 @@ const SpellTab = ({setShowSpellTab}) => {
             type="number"
             name="spell-lvl"
             className="spell-lvl"
-            defaultValue={0}
+            defaultValue={url?.level || 0}
             onFocus={(e) => e.target.select()}
             onChange={(e) => {
               setUrl((prev) => ({
