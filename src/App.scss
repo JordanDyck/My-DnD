@@ -1431,6 +1431,11 @@ $backgroundColor: #e5e5e5;
         h4 {
           margin-right: 5px;
         }
+        input {
+          font-weight: bold;
+          font-size: 17px;
+          width: calc(100% - 90px);
+        }
       }
       .save-subrace-btn {
         font-weight: bold;
@@ -2046,9 +2051,50 @@ input::-webkit-inner-spin-button {
   border-image: url("./assets/border.png") 116;
   min-height: 250px;
   margin: 0 10px 25px;
+
+  .currency-container {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid $fadedBorderColor;
+    margin-bottom: 15px;
+    .coin-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: stretch;
+      width: 100%;
+      .tab-header {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+      .coin-container {
+        display: flex;
+        justify-content: center;
+        padding-inline: 5px;
+        h4 {
+          font-size: 13px;
+
+          overflow: scroll;
+        }
+        &:not(.pp) {
+          border-right: 1px solid;
+        }
+      }
+      input {
+        border: 2px solid $fadedBorderColor;
+        width: 45px;
+        padding-top: 3px;
+        margin: auto;
+        &:disabled {
+          visibility: hidden;
+        }
+      }
+    }
+  }
+
   span {
     font-size: 13px;
-    margin-block: -10px 10px;
+
     color: gray;
     font-family: $parFont;
   }
