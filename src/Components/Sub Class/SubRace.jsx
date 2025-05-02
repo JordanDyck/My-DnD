@@ -61,7 +61,7 @@ const SubRace = ({setStoredDetails, setShowCharacterDetails}) => {
         <h4 className="h4-title">equipment proficiencies:</h4>
         <CustomProficiencies
           array={
-            subRaceDetails.languages.length
+            subRaceDetails.base_proficiencies.length
               ? subRaceDetails.base_proficiencies
               : [{name: ""}]
           }
