@@ -62,7 +62,7 @@ const SubRace = ({setStoredDetails, setShowCharacterDetails}) => {
         <CustomProficiencies
           array={
             subRaceDetails.languages.length
-              ? subRaceDetails.languages
+              ? subRaceDetails.base_proficiencies
               : [{name: ""}]
           }
           updateDetails={setSubRaceDetails}

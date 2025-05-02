@@ -29,7 +29,7 @@ const CustomProficiencies = ({array, updateDetails, ObjKey, isEditing}) => {
               [ObjKey]: [...prev[ObjKey], {name: ""}],
             }))
           }}
-          disabled={!array[array.length - 1]}
+          disabled={!array[array.length - 1].name}
         >
           +
         </button>
