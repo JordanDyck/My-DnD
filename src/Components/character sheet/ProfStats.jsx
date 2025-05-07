@@ -1,3 +1,4 @@
+import "../../styles/Stats.scss"
 import {useMemo} from "react"
 import {useSelector} from "react-redux"
 

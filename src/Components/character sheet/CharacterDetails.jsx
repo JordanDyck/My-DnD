@@ -1,5 +1,6 @@
 import {useSelector} from "react-redux"
 
+import "../../styles/CharacterDetails.scss"
 import Health from "./Health"
 import {useState} from "react"
 import LevelUpTab from "../LevelUpTab"

@@ -2,6 +2,7 @@ import {useState, useEffect} from "react"
 import Select from "react-select"
 import axios from "axios"
 
+import ".././styles/CharacterSelector.scss"
 import ClassLvlDetails from "./ClassLvlDetails"
 const ClassLvlSelector = ({levelsURL, setStoredDetails}) => {
   const [currentLvl, setCurrentLvl] = useState()

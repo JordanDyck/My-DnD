@@ -1,3 +1,4 @@
+import "../../styles/CharacterCreator.scss"
 import {useState} from "react"
 import {RiDeleteBinLine} from "react-icons/ri"
 import {TbArrowBack} from "react-icons/tb"

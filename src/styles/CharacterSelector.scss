@@ -1,0 +1,77 @@
+$dndBorder: url("../assets/border.png");
+
+.character-selector {
+  display: flex;
+
+  margin-top: 5px;
+  width: calc(100% - 71px);
+  margin-inline: auto;
+  align-items: center;
+  .selector {
+    width: 100%;
+  }
+  .create-character-btn {
+    display: flex;
+    height: 34px;
+    font-size: 30px;
+    background-color: white;
+    border: 1px solid #cccccc;
+    border-left: none;
+    border-radius: 0 30% 30% 0;
+  }
+  .delete-character-btn {
+    display: flex;
+    height: 34px;
+    font-size: 30px;
+    color: #c73737;
+    background-color: white;
+    border: 1px solid #952525;
+    border-right: none;
+    border-radius: 30% 0 0 30%;
+  }
+}
+
+.delete-character-wrapper {
+  position: fixed;
+  width: 87%;
+
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border: 17px solid transparent;
+  border-image: $dndBorder 116;
+  box-shadow: 1px 1px 14px 0px #000000;
+  .delete-Character-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    header {
+      font-weight: bold;
+      text-decoration: underline;
+      font-size: 20px;
+    }
+    p {
+      text-align: center;
+    }
+    span {
+      font-weight: bold;
+      text-decoration: underline;
+      color: #9d0e0e;
+    }
+    .confirmation-btns {
+      button {
+        margin-inline: 12px;
+        width: 50px;
+        font-weight: bold;
+      }
+      .yes {
+        color: #9d0e0e;
+      }
+      .no {
+        color: green;
+      }
+    }
+  }
+}

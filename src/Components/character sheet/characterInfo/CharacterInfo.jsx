@@ -1,4 +1,6 @@
+import "../../../styles/CharacterInfo.scss"
 import {useSelector} from "react-redux"
+
 import CharacterFeatures from "./CharacterFeatures"
 import {useState} from "react"
 import CharacterSpells from "./CharacterSpells"

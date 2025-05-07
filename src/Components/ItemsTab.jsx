@@ -1,3 +1,4 @@
+import "../styles/ItemsTab.scss"
 import Select from "react-select"
 import axios from "axios"
 import {useState, useEffect} from "react"

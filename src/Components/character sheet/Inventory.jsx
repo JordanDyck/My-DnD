@@ -1,3 +1,4 @@
+import "../../styles/Inventory.scss"
 import {useSelector, useDispatch} from "react-redux"
 
 import InventoryItem from "../InventoryItem"

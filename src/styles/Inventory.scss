@@ -1,0 +1,107 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2&display=swap");
+
+$parFont: Baloo2, sans-sarif;
+$fadedBorderColor: #808080d9;
+
+$dndBorder: url("../assets/border.png");
+.inventory-wrapper {
+  display: flex;
+  flex-direction: column;
+  border: 17px solid transparent;
+  border-image: $dndBorder 116;
+  min-height: 250px;
+  margin: 0 10px 25px;
+  .tab-header {
+    margin-bottom: 8px;
+  }
+  .currency-container {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid $fadedBorderColor;
+    margin-bottom: 9px;
+    padding-bottom: 8px;
+    .coin-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: stretch;
+      width: 100%;
+      &:not(:last-child) {
+        border-right: 2px solid $fadedBorderColor;
+      }
+      .tab-header {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+      .coin-container {
+        display: flex;
+        justify-content: center;
+        padding-inline: 5px;
+        max-width: 50px;
+        margin: auto;
+        h4 {
+          font-size: 13px;
+          overflow: auto;
+        }
+      }
+      input {
+        border: 2px solid $fadedBorderColor;
+        max-width: 50px;
+        padding-top: 3px;
+        margin: auto;
+      }
+    }
+  }
+
+  span {
+    font-size: 13px;
+
+    color: gray;
+    font-family: $parFont;
+  }
+  .inventory-item-container {
+    border-bottom: 2px solid #ababab;
+
+    .inventory-detail-container {
+      overflow: hidden;
+      max-height: 100vh;
+      transition: max-height 0.5s ease-in;
+      .inventory-detail {
+        margin-block: 5px;
+      }
+    }
+    .hidden {
+      max-height: 0vh;
+      transition: max-height 0.5s ease-out;
+    }
+    .inventory-item {
+      display: flex;
+      justify-content: space-between;
+      word-wrap: break-word;
+      padding-block: 6px;
+      align-items: center;
+
+      .inventory-details-btn {
+        position: relative;
+        font-size: 20px;
+        width: 30px;
+        height: 25px;
+        margin-right: 5px;
+      }
+
+      h5 {
+        max-width: 152px;
+        flex-grow: 1;
+        border-left: 1px solid;
+        padding-left: 5px;
+      }
+      .delete-item-btn {
+        font-size: 23px;
+        margin-left: 25px;
+        height: 20px;
+        border: none;
+        background-color: transparent;
+      }
+    }
+  }
+}

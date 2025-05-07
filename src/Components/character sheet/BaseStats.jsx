@@ -1,3 +1,4 @@
+import "../../styles/BaseStats.scss"
 import {useSelector, useDispatch} from "react-redux"
 
 import SkillCategories from "../filters/SkillCategories.json"
@@ -62,6 +63,7 @@ const BaseStats = ({unfocused}) => {
             AC
           </label>
           <input
+            type="number"
             onFocus={(e) => e.target.select()}
             onChange={(e) =>
               e.target.value.length <= 2 &&
@@ -77,6 +79,7 @@ const BaseStats = ({unfocused}) => {
           </label>
           <input
             id="speed-input"
+            type="number"
             onFocus={(e) => e.target.select()}
             onChange={(e) => updatePassiveStats("speed", e.target.value)}
             value={character?.stats?.speed}

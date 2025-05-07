@@ -1,0 +1,67 @@
+$fadedBorderColor: #808080d9;
+
+$dndBorder: url("../assets/border.png");
+
+.base-stat-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  width: 306px;
+  padding-block: 8px;
+  margin: auto;
+  justify-items: center;
+  label {
+    border-bottom: 1px solid $fadedBorderColor;
+    width: 72px;
+    display: flex;
+    justify-content: center;
+  }
+  .base-stat-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+    border: 11px solid transparent;
+    border-image: $dndBorder 81;
+    .base-stat {
+      font-size: 22px;
+      width: 100%;
+      background: transparent;
+
+      border-top: 2px solid;
+      border-bottom: none;
+
+      border-radius: 20px;
+    }
+    .bonus-stat {
+      font-size: 29px;
+
+      border: none;
+
+      height: 33px;
+    }
+  }
+}
+.passive-stats {
+  grid-template-rows: repeat(1, 1fr);
+  border-bottom: 3px solid;
+
+  input,
+  h4 {
+    font-size: 29px;
+    font-weight: bold;
+    margin-top: 5px;
+    border: none;
+    width: 72px;
+    height: 45px;
+    padding-top: 0;
+  }
+  h4 {
+    text-align: center;
+    padding-top: 3px;
+  }
+
+  label {
+    font-size: 12px;
+  }
+}

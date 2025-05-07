@@ -1,0 +1,64 @@
+$dndBorder: url("../assets/border.png");
+.gear-wrapper {
+  border: 17px solid transparent;
+  border-image: $dndBorder 116;
+  min-height: 300px;
+
+  .key_range {
+    flex-direction: column;
+    flex-wrap: nowrap;
+
+    .item-value {
+      display: flex;
+      flex-direction: row;
+      margin-left: 10px;
+      h4 {
+        padding: 0;
+        font-size: 15px;
+        font-weight: 600;
+      }
+      p {
+        padding-right: 5px;
+      }
+    }
+  }
+  .gear-item {
+    position: relative;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 5px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ababab;
+    font-size: 15px;
+
+    .gear-item-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .key_name {
+      width: 275px;
+      .name {
+        word-break: break-all;
+      }
+    }
+    .desc-container {
+      word-wrap: break-word;
+    }
+    .gear-info {
+      display: flex;
+
+      h4 {
+        padding-right: 5px;
+      }
+    }
+
+    .delete-item-btn {
+      height: 20px;
+      font-size: 27px;
+      border: none;
+      background-color: transparent;
+    }
+  }
+}

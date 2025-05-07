@@ -1,3 +1,4 @@
+import "../styles/Spells.scss"
 import axios from "axios"
 import {useEffect, useState, useRef} from "react"
 import {MdClose, MdSearch} from "react-icons/md"

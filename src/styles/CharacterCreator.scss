@@ -1,0 +1,965 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2&display=swap");
+
+$parFont: Baloo2, sans-sarif;
+$fadedBorderColor: #808080d9;
+$backgroundColor: #e5e5e5;
+$dndBorder: url("../assets/border.png");
+
+.character-creator {
+  display: flex;
+  flex-direction: column;
+  border: 17px solid transparent;
+  border-image: $dndBorder 116;
+
+  margin: 10px 3px 45px 3px;
+  .name-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    border-bottom: 2px solid #cccccc;
+    padding-bottom: 10px;
+    .name-label {
+      .name {
+        width: calc(100% - 60px);
+        font-size: 15px;
+      }
+    }
+    button {
+      font-size: 23px;
+      height: 28px;
+      width: 28px;
+    }
+  }
+  .levels-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .new-level-btn {
+      margin-top: 20px;
+      font-size: 18px;
+      padding: 3px 9px;
+      font-weight: bold;
+      box-shadow: 2px 2px 1px 0px #000000;
+    }
+    .level-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    .level-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: calc(100% - 10px);
+
+      .level,
+      .level-collapsed {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        border: 1px solid;
+        margin-block: 8px;
+        background-color: rgb(255, 255, 255);
+        &:not(.level-collapsed) {
+          box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.6);
+          background-color: rgb(221 221 221);
+          border: 2px solid;
+        }
+
+        h4 {
+          text-align: center;
+          margin-top: 7px;
+          width: 100%;
+          font-size: 20px;
+          border-bottom: 2px solid #000000;
+        }
+        .ability-improv-toggle {
+          background-color: #dbdbdb;
+          border: 2px solid;
+          border-radius: 20px;
+
+          padding-left: 8px;
+          margin-block: 15px 4px;
+
+          span {
+            font-weight: 600;
+            padding-right: 5px;
+          }
+          .toggle-switch {
+            height: 23px;
+          }
+        }
+
+        .new-level-btn {
+          margin-block: 10px 20px;
+        }
+
+        .level-feature,
+        .custom-class-specifics {
+          display: flex;
+          margin-block: 10px;
+          padding-block: 15px;
+          width: calc(100% - 16px);
+          justify-content: center;
+          flex-wrap: wrap;
+          border: 1px solid $fadedBorderColor;
+          background-color: white;
+          margin-inline: auto;
+          span {
+            font-family: $parFont;
+            color: $fadedBorderColor;
+            padding-inline: 5px;
+          }
+          input {
+            font-size: 16px;
+            font-weight: bold;
+            width: calc(100% - 12px);
+          }
+          p {
+            font-weight: bold;
+          }
+          textarea {
+            padding: 3px;
+            font-family: $parFont;
+            font-size: 17px;
+            width: 91%;
+            height: 110px;
+
+            margin-top: 10px;
+            margin-inline: 7px;
+            max-width: 92%;
+            min-width: 180px;
+            min-height: 30px;
+            background-color: #f9f9f9;
+            padding-inline: 5px;
+          }
+
+          .custom-class-spec-lvl-container {
+            width: 100%;
+            .custom-class-specifics-editor {
+              display: flex;
+              justify-content: space-between;
+              align-items: flex-end;
+              padding-inline: 8px;
+              input {
+                width: 40px;
+              }
+              h4 {
+                width: initial;
+              }
+            }
+          }
+        }
+        .custom-class-specifics {
+          h4 {
+            border-color: $fadedBorderColor;
+          }
+          .class-spec-creator {
+            display: flex;
+            justify-content: space-around;
+            width: inherit;
+            margin-top: 10px;
+
+            .class-spec-name {
+              width: calc(100% - 80px);
+            }
+            .class-spec-value {
+              width: 50px;
+            }
+          }
+          .new-feature-btn {
+            margin-block: 20px 0;
+          }
+          .custom-spell-slots-container {
+            display: flex;
+            flex-direction: column;
+            margin-top: 50px;
+            margin-inline: 5px;
+            width: inherit;
+            padding: 2px 5px 8px;
+            border: 1px solid $fadedBorderColor;
+            background-color: rgb(221 221 221);
+            box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.6);
+            .spell-slot {
+              display: flex;
+              justify-content: space-between;
+              align-items: flex-end;
+              h4 {
+                font-size: 18px;
+                width: 200px;
+              }
+              input {
+                width: 30px;
+                margin-right: 8px;
+              }
+            }
+            &::before {
+              content: "";
+              position: relative;
+              bottom: 25px;
+
+              border-top: 2px solid $fadedBorderColor;
+            }
+          }
+        }
+        .new-feature-btn {
+          margin-bottom: 15px;
+          font-size: 15px;
+          padding: 3px;
+          font-weight: bold;
+          box-shadow: 2px 2px 1px 0px #000000;
+        }
+      }
+      .level-collapsed {
+        .level-feature {
+          padding-block: 1px;
+          margin-block: 1px;
+          border: none;
+        }
+      }
+    }
+  }
+
+  .class-container {
+    display: flex;
+    flex-direction: column;
+
+    .class-name {
+      display: flex;
+
+      margin-top: 20px;
+      #class-label {
+        align-self: center;
+        padding-right: 5px;
+      }
+    }
+    .starting-level {
+      margin-top: 10px;
+      box-shadow: 1px 1px 0px 0px rgba(117, 117, 117, 0.91);
+      background-color: #e5e5e5;
+      width: 185px;
+      border: 1px solid rgba(128, 128, 128, 0.8509803922);
+      label {
+        font-weight: bold;
+      }
+      input {
+        margin-left: 5px;
+        width: 35px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+    }
+    .stat-roll-wrapper {
+      border-block: 1px solid $fadedBorderColor;
+      margin-top: 9px;
+      padding-block: 9px;
+      .roll-save-btn {
+        display: flex;
+        margin-top: 10px;
+        justify-content: center;
+        margin-inline: auto;
+        font-size: 18px;
+        width: 150px;
+        height: 28px;
+      }
+    }
+    .stat-roll-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      width: 306px;
+      padding-block: 8px;
+      margin: auto;
+      justify-items: center;
+      .stat {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 80px;
+        border: 11px solid transparent;
+        border-image: $dndBorder 81;
+        .base-stat-roll {
+          font-size: 22px;
+          width: 100%;
+          background: transparent;
+
+          border-top: 2px solid;
+          border-bottom: none;
+
+          border-radius: 20px;
+        }
+        .base-stat-bonus {
+          font-size: 29px;
+
+          border: none;
+
+          height: 33px;
+        }
+      }
+    }
+    .class {
+      text-decoration: underline;
+      flex-grow: 1;
+    }
+    .delete-class-btn {
+      font-size: 23px;
+      height: 25px;
+      border: none;
+      background: none;
+      margin-right: 10px;
+    }
+
+    .custom-class-wrapper {
+      display: flex;
+      flex-direction: column;
+      margin-top: 12px;
+      .save-custom-class-btn {
+        margin-top: 15px;
+        font-size: 17px;
+        font-weight: bold;
+      }
+      .custom-class {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: 10px;
+        .custom-class-name {
+          padding-block: 7px;
+          border: 1px solid $fadedBorderColor;
+          background-color: $backgroundColor;
+          box-shadow: 0px 1px 2px 1px rgba(117, 117, 117, 0.91);
+          input {
+            font-weight: bold;
+            font-size: 18px;
+            width: calc(100% - 94px);
+          }
+        }
+        .hp-container {
+          display: flex;
+          justify-content: center;
+          border: 1px solid $fadedBorderColor;
+          background-color: $backgroundColor;
+          box-shadow: 0px 1px 2px 1px rgba(117, 117, 117, 0.91);
+          padding-block: 9px 4px;
+          margin-block: 10px;
+          label {
+            font-weight: bold;
+            text-decoration: underline;
+            padding-inline: 9px 7px;
+          }
+          .hit-dice,
+          .health {
+            border-bottom: 2px solid;
+            border-radius: 10px 2px 10px 2px;
+            font-weight: bold;
+            font-size: 18px;
+            padding-top: 7px;
+            margin-top: -4px;
+            margin-right: 5px;
+          }
+          span {
+            font-weight: bold;
+            font-size: 18px;
+            color: #000000b5;
+          }
+          .health {
+            width: 40px;
+          }
+          .hit-dice {
+            width: 50px;
+            margin-left: -20px;
+            padding-left: 12px;
+          }
+        }
+
+        .spell-section {
+          display: flex;
+          flex-direction: column;
+          border-block: 2px solid $fadedBorderColor;
+          padding: 5px;
+          margin-block: 11px 5px;
+
+          .saving-throw-container {
+            margin-top: 6px;
+          }
+        }
+      }
+    }
+    .starting-equipment-container {
+      border: 2px solid $fadedBorderColor;
+      padding: 5px;
+      margin-block: 11px 0px;
+      background-color: $backgroundColor;
+      box-shadow: 0px 1px 2px 2px rgba(117, 117, 117, 0.91);
+      .chosen-skills {
+        margin-block: 5px 8px;
+      }
+    }
+    .custom-levels {
+      border-block: 2px solid $fadedBorderColor;
+      padding-block: 3px 15px;
+      .h4-title {
+        font-size: 18px;
+      }
+    }
+
+    .chosen-skills {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    svg {
+      margin-left: 7px;
+      scale: 1.1;
+    }
+    .chosen-skill {
+      display: flex;
+      align-items: center;
+      background-color: #e3e3e3;
+      font-weight: bold;
+      font-size: 14px;
+      margin: 3px;
+      padding: 3px;
+    }
+    .items-tab-wrapper {
+      border: none;
+      margin-inline: 5px;
+    }
+    .subclass-name-container {
+      display: flex;
+      margin-left: 8px;
+      #subclass-label {
+        border-bottom: 2px solid;
+        border-left: 2px solid;
+        padding-left: 3px;
+        padding-right: 5px;
+      }
+      h4 {
+        flex-grow: 1;
+      }
+    }
+    .sub-class {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: center;
+
+      width: 100%;
+      .subclass-name {
+        font-weight: 600;
+        font-size: 20px;
+        margin-block: 9px 5px;
+      }
+      .sub-class-feature {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+        border: 2px solid;
+        box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.6);
+        background-color: #e3e3e3;
+        padding-block: 15px;
+        margin-block: 15px;
+        width: 95%;
+
+        form {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: center;
+          margin: auto;
+          fieldset {
+            border: none;
+            .feature-name {
+              width: 254px;
+              font-weight: 600;
+              font-size: 15px;
+            }
+
+            .feature-level {
+              width: 31px;
+
+              font-size: 26px;
+              font-family: $parFont;
+              border-right: 2px solid #ababab;
+              border-bottom: 2px solid #ababab;
+              padding-top: 0;
+              vertical-align: sub;
+            }
+            textarea {
+              width: 91%;
+              height: 110px;
+              font-size: 17px;
+              font-family: $parFont;
+              margin-top: 10px;
+              margin-inline: 7px;
+              max-width: 92%;
+              min-width: 180px;
+              min-height: 30px;
+              background-color: #f9f9f9;
+              padding-inline: 5px;
+            }
+          }
+        }
+      }
+      button {
+        padding: 3px;
+      }
+
+      .save-subclass-btn,
+      .new-sub-feature-btn {
+        margin-top: 15px;
+        font-size: 17px;
+      }
+    }
+    .class-btn {
+      font-size: 16px;
+      font-weight: bold;
+      width: 155px;
+      margin: 15px auto 0;
+      &:disabled {
+        display: none;
+      }
+    }
+    .save-race-btn {
+      margin-top: 15px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+  .custom-proficiencies-container {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 1px 1px 0px 0px rgba(117, 117, 117, 0.91);
+    background-color: $backgroundColor;
+    border: 2px solid rgba(128, 128, 128, 0.8509803922);
+    padding: 10px 5px;
+    margin-block: 15px;
+    .custom-proficiencies {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+    .prof-group {
+      display: flex;
+      flex-direction: column;
+      input {
+        width: 125px;
+        text-align: start;
+        padding-left: 5px;
+        font-size: 17px;
+        font-family: $parFont;
+      }
+    }
+    span {
+      font-family: $parFont;
+      font-size: 12px;
+      color: $fadedBorderColor;
+    }
+    button {
+      width: 32px;
+      height: 32px;
+
+      font-size: 25px;
+      font-weight: bold;
+    }
+  }
+
+  .race-container {
+    display: flex;
+    flex-direction: column;
+
+    .subrace-name-container {
+      display: flex;
+      margin-left: 8px;
+      label {
+        border-bottom: 2px solid;
+        border-left: 2px solid;
+        padding-left: 3px;
+        padding-right: 5px;
+      }
+      h4 {
+        flex-grow: 1;
+      }
+    }
+
+    .race-btn,
+    .sub-race-btn {
+      margin: 15px auto 0;
+      width: 155px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .sub-race-btn:disabled {
+      display: none;
+    }
+    .race-name {
+      display: flex;
+      margin-top: 14px;
+      #race-label {
+        align-self: flex-end;
+      }
+      #race {
+        margin: 0 4px;
+        padding: 5px 7px 0 5px;
+        font-size: 15px;
+        flex-grow: 1;
+        text-decoration: underline;
+        &:empty {
+          border: none;
+        }
+      }
+    }
+    .delete-race-btn {
+      font-size: 23px;
+      height: 25px;
+      border: none;
+      background: none;
+      margin-right: 10px;
+    }
+
+    .sub-race-container {
+      display: flex;
+      flex-direction: column;
+      .sub-name-container {
+        display: flex;
+        align-items: flex-end;
+        margin-block: 15px;
+        border: 1px solid $fadedBorderColor;
+        background-color: #e5e5e5;
+        padding-block: 10px;
+        box-shadow: 1px 1px 2px 1px rgba(117, 117, 117, 0.91);
+        h4 {
+          margin-right: 5px;
+        }
+        input {
+          font-weight: bold;
+          font-size: 17px;
+          width: calc(100% - 90px);
+        }
+      }
+      .save-subrace-btn {
+        font-weight: bold;
+        font-size: 20px;
+        margin-block: 20px 10px;
+      }
+    }
+
+    .custom-race {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      .custom-proficiencies-container {
+        margin-block: 0;
+      }
+      .custom-race-form {
+        display: flex;
+        flex-direction: column;
+        padding-top: 8px;
+        gap: 8px;
+        box-shadow: 1px 1px 1px 0px rgba(117, 117, 117, 0.91);
+        background-color: #efefef;
+        border: 2px solid rgba(128, 128, 128, 0.8509803922);
+        .custom-race-name {
+          width: calc(100% - 160px);
+          margin-right: 30px;
+          font-weight: bold;
+          font-size: 17px;
+        }
+        .delete-race-btn {
+          margin-right: 0;
+        }
+
+        .custom-sub-race {
+          width: calc(100% - 136px);
+          font-weight: bold;
+          font-size: 17px;
+        }
+        .age-size-speed {
+          display: flex;
+          justify-content: space-around;
+          align-items: flex-end;
+          flex-wrap: nowrap;
+
+          border-top: 2px solid rgba(128, 128, 128, 0.8509803922);
+          padding-block: 7px 3px;
+          .custom-age,
+          .custom-speed {
+            width: 35px;
+
+            font-size: 17px;
+            margin-left: 6px;
+          }
+          .c-size-label {
+            margin-bottom: 3px;
+          }
+          .custom-size {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            padding: 3px;
+            border: 1px solid $fadedBorderColor;
+
+            input {
+              width: 25px;
+              font-size: 17px;
+              margin-right: 5px;
+            }
+            label {
+              padding-right: 5px;
+            }
+            span {
+              font-size: 10px;
+              margin-bottom: 14px;
+              font-weight: bold;
+            }
+          }
+          label {
+            font-size: 13px;
+          }
+        }
+      }
+
+      .custom-traits-wrapper {
+        border-block: 2px solid black;
+        padding-block: 3px 15px;
+        .h4-title {
+          text-align: center;
+        }
+        .tool-tip {
+          font-family: $parFont;
+          font-size: 12px;
+          color: $fadedBorderColor;
+        }
+      }
+    }
+    .save-race-btn {
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+
+  .perk-wrapper {
+    display: flex;
+    flex-direction: column;
+    .perk_speed {
+      border-top: 1px solid #808080d9;
+    }
+    .perk_starting_proficiency_options {
+      button {
+        margin: 4px;
+        padding: 4px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+    }
+    .custom-size {
+      display: flex;
+      width: 145px;
+      background-color: #efefef;
+      box-shadow: 1px 1px 0px 0px rgba(117, 117, 117, 0.91);
+
+      align-items: flex-end;
+      padding: 3px;
+      border: 1px solid $fadedBorderColor;
+
+      input {
+        width: 25px;
+        font-size: 17px;
+        margin-right: 5px;
+      }
+      label {
+        padding-right: 5px;
+      }
+      span {
+        font-size: 10px;
+        margin-bottom: 14px;
+        font-weight: bold;
+      }
+      h4 {
+        padding-right: 10px;
+      }
+    }
+    .perk_age {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 5px;
+      h4 {
+        border: 1px solid $fadedBorderColor;
+        box-shadow: 1px 1px 0px 0px rgba(117, 117, 117, 0.91);
+        background-color: #efefef;
+        text-decoration: underline;
+        width: 100px;
+        input {
+          margin-left: 10px;
+          width: 40px;
+          font-size: 17px;
+        }
+      }
+    }
+
+    .perk_ability_bonus_options,
+    .perk_proficiency_choices {
+      button {
+        margin: 3px;
+        padding-inline: 3px;
+        font-weight: 600;
+      }
+    }
+    .perk_starting_equipment {
+      background: $backgroundColor;
+      border-inline: 1px solid $fadedBorderColor;
+    }
+    .perk_starting_equipment_options {
+      background: $backgroundColor;
+      border-inline: 1px solid $fadedBorderColor;
+      .gear-choices {
+        margin-block: 5px;
+        border-bottom: 1px solid;
+        b {
+          font-size: 15px;
+        }
+        p {
+          margin-bottom: 10px;
+        }
+      }
+    }
+    .perk_spellcasting {
+      b {
+        text-decoration: underline;
+      }
+    }
+    .perk_hit_die {
+      display: flex;
+      flex-direction: column;
+      font-size: 18px;
+
+      h4 {
+        margin-block: 2px;
+      }
+      span {
+        text-decoration: underline;
+      }
+    }
+    .perk_health {
+      width: 165px;
+      box-shadow: 1px 1px 0px 0px rgba(117, 117, 117, 0.91);
+      background-color: $backgroundColor;
+      border: 1px solid rgba(128, 128, 128, 0.8509803922);
+
+      input {
+        margin-left: 5px;
+        width: 75px;
+        font-size: 25px;
+      }
+    }
+
+    .class-lvl-details {
+      background-color: $backgroundColor;
+      box-shadow: 0px 1px 2px 2px rgba(117, 117, 117, 0.91);
+      padding: 5px;
+      margin-top: 20px;
+      .perk_prof_bonus {
+        display: flex;
+        align-items: center;
+      }
+      h4 {
+        text-decoration: underline;
+      }
+      .prof_bonus_title {
+        float: left;
+        padding-right: 5px;
+      }
+      .prof_bonus {
+        font-weight: bold;
+      }
+    }
+
+    .perk {
+      border-bottom: 1px solid #808080d9;
+      padding-block: 4px;
+
+      p {
+        font-family: $parFont;
+        font-size: 21px;
+      }
+    }
+    .skills-container {
+      border: none;
+    }
+  }
+
+  .import-btn {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid $fadedBorderColor;
+    margin-top: 10px;
+    button {
+      font-size: 16px;
+      font-weight: bold;
+      width: 200px;
+      margin: 10px auto 0;
+    }
+  }
+  .import-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    span {
+      font-weight: bold;
+      font-family: $parFont;
+      color: #aa0505;
+      padding: 5px;
+    }
+    .import-header {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      align-items: center;
+      header {
+        font-weight: bold;
+        margin: auto;
+      }
+      button {
+        font-size: 23px;
+        height: 28px;
+        width: 28px;
+      }
+    }
+    .import-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .import-area {
+        font-family: $parFont;
+        margin-block: 15px;
+        min-width: 314px;
+        max-width: 360px;
+        min-height: 350px;
+      }
+      button {
+        font-weight: bold;
+        font-size: 18px;
+        width: 314px;
+      }
+    }
+  }
+
+  .save-character-btn {
+    align-self: center;
+    margin-top: 15px;
+    padding: 5px;
+    font-weight: bold;
+    &:disabled {
+      display: none;
+    }
+  }
+}
+.race-btn:disabled,
+.delete-race-btn:disabled {
+  display: none;
+}
