@@ -1,9 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Baloo+2&display=swap");
-
-$parFont: Baloo2, sans-sarif;
-$fadedBorderColor: #808080d9;
-
-$dndBorder: url("../assets/border.png");
+@import "Utilities";
 .spells-tab-wrapper {
   border: 17px solid transparent;
   border-image: $dndBorder 116;

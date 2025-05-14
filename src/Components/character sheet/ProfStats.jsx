@@ -4,7 +4,7 @@ import {useSelector} from "react-redux"
 
 import SkillCategories from "../filters/SkillCategories.json"
 
-const ProfStats = ({setShowStats}) => {
+const ProfStats = ({setShowSkillsTab, showSkillsTab}) => {
   const character = useSelector((store) => store.character.value)
   const calcProficiencyBonus = Math.ceil(character.currentLevel / 4) + 1
 
@@ -74,16 +74,16 @@ const ProfStats = ({setShowStats}) => {
       } else return undefined
     })
   }
+
   return (
-    <div className="stat-wrapper">
+    <div
+      className={showSkillsTab ? "stat-wrapper visible" : "stat-wrapper hidden"}
+    >
       <button
         className="close-stats"
-        onClick={() =>
-          setShowStats((prev) => ({
-            ...prev,
-            stats: !prev.stats,
-          }))
-        }
+        onClick={() => {
+          setShowSkillsTab((prev) => ({...prev, stats: false}))
+        }}
       >
         Close
       </button>

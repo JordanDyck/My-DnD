@@ -66,9 +66,9 @@ const FeatureDesc = ({
         currentSpell && setcurrentSpell()
       }
     }
-    document.addEventListener("mousedown", clickOutside)
+    document.addEventListener("mouseup", clickOutside)
     return () => {
-      document.removeEventListener("mousedown", clickOutside)
+      document.removeEventListener("mouseup", clickOutside)
     }
   }, [closeRef, setUrl, setcurrentSpell])
 

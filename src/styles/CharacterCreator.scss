@@ -1,27 +1,26 @@
-@import url("https://fonts.googleapis.com/css2?family=Baloo+2&display=swap");
-
-$parFont: Baloo2, sans-sarif;
-$fadedBorderColor: #808080d9;
-$backgroundColor: #e5e5e5;
-$dndBorder: url("../assets/border.png");
+@import "Utilities";
 
 .character-creator {
   display: flex;
   flex-direction: column;
   border: 17px solid transparent;
   border-image: $dndBorder 116;
-
-  margin: 10px 3px 45px 3px;
+  max-width: 650px;
+  margin-inline: auto;
+  margin-block: 5px 45px;
   .name-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
     align-items: center;
     border-bottom: 2px solid #cccccc;
     padding-bottom: 10px;
     .name-label {
+      width: 100%;
+      max-width: 500px;
       .name {
         width: calc(100% - 60px);
+        min-width: 50px;
         font-size: 15px;
       }
     }
@@ -473,6 +472,8 @@ $dndBorder: url("../assets/border.png");
           margin: auto;
           fieldset {
             border: none;
+            display: flex;
+            flex-direction: column;
             .feature-name {
               width: 254px;
               font-weight: 600;
@@ -696,25 +697,29 @@ $dndBorder: url("../assets/border.png");
           .c-size-label {
             margin-bottom: 3px;
           }
-          .custom-size {
+          .size-container {
             display: flex;
-            justify-content: center;
             align-items: flex-end;
-            padding: 3px;
-            border: 1px solid $fadedBorderColor;
+            .custom-size {
+              display: flex;
+              justify-content: center;
+              align-items: flex-end;
+              padding: 3px;
+              border: 1px solid $fadedBorderColor;
 
-            input {
-              width: 25px;
-              font-size: 17px;
-              margin-right: 5px;
-            }
-            label {
-              padding-right: 5px;
-            }
-            span {
-              font-size: 10px;
-              margin-bottom: 14px;
-              font-weight: bold;
+              input {
+                width: 25px;
+                font-size: 17px;
+                margin-right: 5px;
+              }
+              label {
+                padding-right: 5px;
+              }
+              span {
+                font-size: 10px;
+                margin-bottom: 14px;
+                font-weight: bold;
+              }
             }
           }
           label {

@@ -1,11 +1,9 @@
 import "./styles/Global.scss"
 import {useState} from "react"
 import {useSelector} from "react-redux"
-import {IoMdMenu} from "react-icons/io"
 
 import CharacterDetails from "./Components/character sheet/CharacterDetails"
 import BaseStats from "./Components/character sheet/BaseStats"
-import ProfStats from "./Components/character sheet/ProfStats"
 import Inventory from "./Components/character sheet/Inventory"
 import Gear from "./Components/Gear"
 import ItemsTab from "./Components/ItemsTab"
@@ -13,10 +11,9 @@ import CharacterCreator from "./Components/character sheet/CharacterCreator"
 import CharacterSelecter from "./Components/character sheet/CharacterSelecter"
 import DeletePopUp from "./Components/DeletePopUp"
 import SpellTab from "./Components/SpellTab"
-import CharacterInfo from "./Components/character sheet/characterInfo/CharacterInfo"
+
 function App() {
   const [tabs, setTabs] = useState({
-    stats: false,
     gear: false,
     items: false,
     spells: false,
@@ -38,24 +35,8 @@ function App() {
           charInfo={tabs.info}
         />
       )}
-      {character && !tabs.creator && (
-        <button
-          className="show-character-info"
-          onClick={() => {
-            setTabs((prev) => ({
-              ...prev,
-              info: !prev.info,
-            }))
-          }}
-        >
-          <IoMdMenu />
-        </button>
-      )}
-      {tabs.info && <CharacterInfo />}
 
-      {!tabs.creator && character && (
-        <CharacterDetails showSkillsTab={setTabs} unfocused={tabs.info} />
-      )}
+      {!tabs.creator && character && <CharacterDetails />}
       {tabs.creator && (
         <div className="character-creator-wrapper">
           <CharacterCreator setShowCreator={setTabs} />
@@ -109,12 +90,10 @@ function App() {
 
       {tabs.spells && <SpellTab setShowSpellTab={setTabs} />}
 
-      {tabs.stats && <ProfStats setShowStats={setTabs} />}
-
       {tabs.gear && <Gear />}
 
-      {character && !tabs.creator && <BaseStats unfocused={tabs.info} />}
-      {character && !tabs.creator && <Inventory unfocused={tabs.info} />}
+      {character && !tabs.creator && <BaseStats />}
+      {character && !tabs.creator && <Inventory />}
     </div>
   )
 }

@@ -8,7 +8,7 @@ import CharacterOverview from "./CharacterOverview"
 import EditCharacter from "./EditCharacter"
 import Notes from "./Notes"
 
-const CharacterInfo = () => {
+const CharacterInfo = ({showInfo}) => {
   const character = useSelector((store) => store.character.value)
   const [tabs, setTabs] = useState({
     features: false,
@@ -21,7 +21,13 @@ const CharacterInfo = () => {
   }
 
   return (
-    <div className="character-info-wrapper">
+    <div
+      className={
+        showInfo
+          ? "character-info-wrapper visible"
+          : "character-info-wrapper hidden"
+      }
+    >
       <header className="tab-header">Character info</header>
       <div className="character-tabs">
         <button

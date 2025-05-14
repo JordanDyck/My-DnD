@@ -57,13 +57,15 @@ const CustomRace = ({
             age:
             <input className="custom-age" type="number" name="age" />
           </label>
-          <label className="c-size-label" htmlFor="size">
-            size:
-          </label>
-          <div className="custom-size">
-            <span>ft</span>
-            <input type="number" name="ft" />,<span>in</span>
-            <input type="number" name="inch" />
+          <div className="size-container">
+            <label className="c-size-label" htmlFor="size">
+              size:
+            </label>
+            <div className="custom-size">
+              <span>ft</span>
+              <input type="number" name="ft" />,<span>in</span>
+              <input type="number" name="inch" />
+            </div>
           </div>
           <label htmlFor="speed">
             speed:

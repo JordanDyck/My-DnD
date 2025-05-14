@@ -1,16 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Baloo+2&display=swap");
-
-$parFont: Baloo2, sans-sarif;
-$fadedBorderColor: #808080d9;
-
-$dndBorder: url("../assets/border.png");
+@import "Utilities";
 .inventory-wrapper {
   display: flex;
   flex-direction: column;
   border: 17px solid transparent;
   border-image: $dndBorder 116;
-  min-height: 250px;
+  min-height: 190px;
   margin: 0 10px 25px;
+  @media (min-width: $desktop) {
+    width: 38%;
+    margin-inline: auto;
+  }
   .tab-header {
     margin-bottom: 8px;
   }

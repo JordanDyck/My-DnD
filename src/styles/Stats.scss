@@ -1,18 +1,29 @@
-$fadedBorderColor: #808080d9;
-$dndBorder: url("../assets/border.png");
-
+@import "Utilities";
 .stat-wrapper {
   position: absolute;
-  z-index: 1;
-  top: 48px;
-  left: 16px;
 
-  box-shadow: 0px 0px 9px 4px rgba(0, 0, 0, 0.31);
+  top: 53px;
+  @media (max-width: $desktop) {
+    box-shadow: 0px 0px 9px 4px rgba(0, 0, 0, 0.31);
+    left: 16px;
+  }
+  left: 145px;
   border: 17px solid transparent;
   border-image: $dndBorder 116;
   padding: 10px 7px;
   background-color: white;
   width: 280px;
+
+  &.visible {
+    display: block;
+  }
+  &.hidden {
+    // in desktop mode, stats are always displayed
+    @media (min-width: $desktop) {
+      display: block;
+    }
+    display: none;
+  }
   .stat-container {
     display: flex;
     justify-content: space-between;
@@ -81,7 +92,11 @@ $dndBorder: url("../assets/border.png");
     }
   }
   .close-stats {
-    font-size: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    @media (min-width: $desktop) {
+      display: none;
+    }
   }
   .loading {
     color: black;

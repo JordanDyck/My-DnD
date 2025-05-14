@@ -7,7 +7,7 @@ import {setCurrentCharacter} from "../../Store/slices/characterSlice"
 import {setLocalStorage} from "../utilities"
 import {useMemo} from "react"
 
-const CharacterSelecter = ({setShowCreator, deleteCharacter, charInfo}) => {
+const CharacterSelecter = ({setShowCreator, deleteCharacter}) => {
   const dispatch = useDispatch()
 
   const keys = Object.keys(localStorage)
@@ -20,10 +20,7 @@ const CharacterSelecter = ({setShowCreator, deleteCharacter, charInfo}) => {
   }, [keys])
 
   return (
-    <div
-      className="character-selector"
-      style={{pointerEvents: charInfo ? "none" : "initial"}}
-    >
+    <div className="character-selector">
       {options.length ? (
         <button
           className="delete-character-btn"

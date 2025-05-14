@@ -1,6 +1,4 @@
-$fadedBorderColor: #808080d9;
-
-$dndBorder: url("../assets/border.png");
+@import "Utilities";
 
 .base-stat-wrapper {
   display: grid;
@@ -10,6 +8,12 @@ $dndBorder: url("../assets/border.png");
   padding-block: 8px;
   margin: auto;
   justify-items: center;
+  @media (min-width: $desktop) {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    justify-content: center;
+    gap: 5px;
+  }
   label {
     border-bottom: 1px solid $fadedBorderColor;
     width: 72px;
@@ -45,6 +49,10 @@ $dndBorder: url("../assets/border.png");
 .passive-stats {
   grid-template-rows: repeat(1, 1fr);
   border-bottom: 3px solid;
+  @media (min-width: $desktop) {
+    display: flex;
+    width: 635px;
+  }
 
   input,
   h4 {

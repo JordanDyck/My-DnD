@@ -4,7 +4,7 @@ import {useSelector, useDispatch} from "react-redux"
 import SkillCategories from "../filters/SkillCategories.json"
 import {updateCharacter} from "../../Store/slices/characterSlice"
 
-const BaseStats = ({unfocused}) => {
+const BaseStats = () => {
   const character = useSelector((store) => store.character.value)
   const passivStats = ["speed", "ac", "initiative"]
   const dispatch = useDispatch()
@@ -37,10 +37,7 @@ const BaseStats = ({unfocused}) => {
 
   return (
     <>
-      <div
-        className="passive-stats base-stat-wrapper"
-        style={{pointerEvents: unfocused ? "none" : "initial"}}
-      >
+      <div className="passive-stats base-stat-wrapper">
         <div className={"initiative, base-stat-container"}>
           <label id="initiative-label" htmlFor="initiative">
             initiative
@@ -87,10 +84,7 @@ const BaseStats = ({unfocused}) => {
         </div>
       </div>
 
-      <div
-        className="base-stat-wrapper"
-        style={{pointerEvents: unfocused ? "none" : "initial"}}
-      >
+      <div className="base-stat-wrapper">
         {Object.keys(character?.stats)?.map((statName, index) => {
           return (
             !passivStats.includes(statName) && (

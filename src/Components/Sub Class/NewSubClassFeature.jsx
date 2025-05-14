@@ -16,22 +16,24 @@ const NewSubClassFeature = ({updateFormData, disableComponent}) => {
     <div className="sub-class-feature">
       <form onChange={onSubmit}>
         <fieldset disabled={disableComponent}>
-          <input
-            className="feature-level"
-            type="number"
-            name="level"
-            placeholder="lvl"
-          />
+          <div className="feature-name-container">
+            <input
+              className="feature-level"
+              type="number"
+              name="level"
+              placeholder="lvl"
+            />
 
-          <input
-            className="feature-name"
-            name="featureName"
-            placeholder="Feature name"
-            onChange={(e) => {
-              setFeatureName(e.target.value)
-            }}
-            value={featureName}
-          />
+            <input
+              className="feature-name"
+              name="featureName"
+              placeholder="Feature name"
+              onChange={(e) => {
+                setFeatureName(e.target.value)
+              }}
+              value={featureName}
+            />
+          </div>
           {!disableComponent && (
             <textarea name="feature" placeholder="Description..."></textarea>
           )}

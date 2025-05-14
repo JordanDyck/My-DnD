@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from "react-redux"
 
 import InventoryItem from "../InventoryItem"
 import {updateCharacter} from "../../Store/slices/characterSlice"
-const Inventory = ({unfocused}) => {
+const Inventory = () => {
   const character = useSelector((store) => store.character.value)
 
   const dispatch = useDispatch()
@@ -24,10 +24,7 @@ const Inventory = ({unfocused}) => {
   }
 
   return (
-    <div
-      className="inventory-wrapper"
-      style={{pointerEvents: unfocused ? "none" : "initial"}}
-    >
+    <div className="inventory-wrapper">
       <div className="tab-header">
         <header>Inventory</header>
       </div>
