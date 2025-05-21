@@ -83,7 +83,12 @@ const ItemsTab = ({
       .get(`https://www.dnd5eapi.co/api/equipment-categories/${categoryURL}`)
       .then((res) => {
         try {
-          const data = res.data.equipment
+          const data = res.data.equipment?.toSorted((a, b) => {
+            let itemA = a.name.toUpperCase()
+            let itemB = b.name.toUpperCase()
+            return itemA < itemB ? -1 : itemA > itemB ? 1 : 0
+          })
+
           setItemList(data)
         } catch (error) {
           console.log(error)

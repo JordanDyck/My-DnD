@@ -19,7 +19,6 @@ const SpellTab = ({setShowSpellTab}) => {
     spell: "",
     error: false,
   })
-  console.log(url)
   const [spellInfo, setSpellInfo] = useState({})
   const [spellList, setSpellList] = useState([])
   const spellOptions = spellList.map((spell) => {

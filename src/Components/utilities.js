@@ -313,13 +313,15 @@ export const weaponStyles = {
     margin: "0",
     backgroundColor: state.isSelected ? "lightgrey" : "white",
     color: "black",
-    borderBlock: "0.2px solid grey",
+    borderBlock: "1px solid grey",
   }),
 
   menuList: (base) => ({
+    overflow: "auto",
     ...base,
     padding: "0",
     height: "220px",
+    width: "160px",
   }),
 
   menu: (base) => ({
