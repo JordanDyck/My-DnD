@@ -37,10 +37,6 @@ const Gear = () => {
 
         return (
           <div className="gear-item" key={id}>
-            <button className="delete-item-btn" onClick={() => deleteItem(id)}>
-              <RiDeleteBinLine />
-            </button>
-
             <div className="gear-item-stats">
               {item.map(([key, value], i) => {
                 const customizeValue = filter?.[key]?.(value)
@@ -87,6 +83,9 @@ const Gear = () => {
                 )
               })}
             </div>
+            <button className="delete-item-btn" onClick={() => deleteItem(id)}>
+              <RiDeleteBinLine />
+            </button>
           </div>
         )
       })}

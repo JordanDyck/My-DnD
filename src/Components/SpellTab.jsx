@@ -19,6 +19,7 @@ const SpellTab = ({setShowSpellTab}) => {
     spell: "",
     error: false,
   })
+  console.log(url)
   const [spellInfo, setSpellInfo] = useState({})
   const [spellList, setSpellList] = useState([])
   const spellOptions = spellList.map((spell) => {
@@ -119,6 +120,7 @@ const SpellTab = ({setShowSpellTab}) => {
                 spell: spellRef.current.value
                   .toLowerCase()
                   .replaceAll(" ", "-"),
+                error: false,
               }))
             }
           }}
@@ -130,6 +132,7 @@ const SpellTab = ({setShowSpellTab}) => {
             setUrl((prev) => ({
               ...prev,
               spell: spellRef.current.value.toLowerCase().replaceAll(" ", "-"),
+              error: false,
             }))
           }
         >
