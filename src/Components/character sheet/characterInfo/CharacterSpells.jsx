@@ -25,7 +25,7 @@ const CharacterSpells = ({character}) => {
     (spell) => spell.level === 0
   )
 
-  const handleSpellSlotData = () => {
+  const handleCustomSpellSlotData = () => {
     // turns custom character's spellCastingInfo into one Object so its the same as a normal character's spellCastingInfo.
     if (character.classDetails.isCustom) {
       return spellCastingInfo.reduce((obj, item) => {
@@ -124,7 +124,7 @@ const CharacterSpells = ({character}) => {
       )}
       <div className="spell-slot-container">
         <h4 className="h4-title">spell casting info:</h4>
-        {Object.entries(handleSpellSlotData())?.map((spellSlot) => {
+        {Object.entries(handleCustomSpellSlotData())?.map((spellSlot) => {
           return (
             spellSlot[1] > 0 && (
               <div

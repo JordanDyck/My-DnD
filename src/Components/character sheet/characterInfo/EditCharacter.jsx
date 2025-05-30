@@ -145,7 +145,7 @@ const EditCharacter = ({character}) => {
           )}
         </div>
         <div className="skill-editor">
-          <h4 className="h4-title">class skills:</h4>
+          <h4 className="h4-title">skill proficiencies:</h4>
           <div className="skill-profs">
             {Object.keys(classDetails.skill_proficiencies).map((skill, i) => {
               return (

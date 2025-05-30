@@ -20,6 +20,13 @@ const LevelUpTab = ({toggleLvlUp}) => {
         ...character.health,
         maxHP: parseInt(newHealth),
       },
+      // classDetails: {
+      //   ...character.classDetails,
+      //   spellcasting: {
+      //     ...character.classDetails.spellcasting,
+
+      //   }
+      // }
     }
 
     dispatch(updateCharacter(updatedLevel))

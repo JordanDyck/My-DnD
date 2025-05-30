@@ -5,19 +5,50 @@ import {RxDropdownMenu} from "react-icons/rx"
 
 import {updateCharacter} from "../../../Store/slices/characterSlice"
 
-const defaultNoteData = {title: "", note: ""}
+const defaultNoteData = {title: "", desc: ""}
 
 const Notes = ({character}) => {
-  const [toggleTextArea, setToggleTextArea] = useState(false)
+  const [toggleTextArea, setToggleTextArea] = useState({
+    create: false, // create new note
+    edit: false, // edit current note
+    view: false, // view current note
+  })
+
   const [displayNote, setDisplayNote] = useState() // note title
   const [note, setNote] = useState(defaultNoteData)
   const dispatch = useDispatch()
 
-  const showActiveNote = (id) => {
-    if (id !== displayNote) {
-      setDisplayNote(id)
-    } else {
-      setDisplayNote()
+  const showActiveNote = (id, key) => {
+    switch (key) {
+      case "desc":
+        setDisplayNote(id)
+
+        setToggleTextArea((prev) => ({
+          ...prev,
+          view: !prev.view,
+          edit: false,
+        }))
+        if (toggleTextArea.view) {
+          setDisplayNote()
+        }
+        break
+      case "edit":
+        setDisplayNote(id)
+
+        setToggleTextArea((prev) => ({
+          ...prev,
+          view: false,
+          edit: !prev.edit,
+        }))
+
+        if (toggleTextArea.edit) {
+          setDisplayNote()
+        }
+        break
+
+      default:
+        setDisplayNote()
+        break
     }
   }
 
@@ -46,7 +77,25 @@ const Notes = ({character}) => {
     }
     dispatch(updateCharacter(updateNotes))
     setNote(defaultNoteData)
-    setToggleTextArea(false)
+    setToggleTextArea((prev) => ({
+      ...prev,
+      create: !prev.create,
+    }))
+  }
+
+  const editNote = (newValue, currentNote) => {
+    const notes = [...character.notes]
+
+    const newNotes = notes.map((note) => {
+      if (currentNote.title === note.title) {
+        return {title: note.title, desc: newValue}
+      } else return note
+    })
+    const updatedNotes = {
+      ...character,
+      notes: newNotes,
+    }
+    dispatch(updateCharacter(updatedNotes))
   }
 
   const removeNote = (note) => {
@@ -79,11 +128,11 @@ const Notes = ({character}) => {
             >
               <div className="title-container">
                 <h4>{note.title}:</h4>
-                {/* button to show/hide note text */}
-                {note.note.length ? (
+                {/* show/hide note desc */}
+                {note.desc.length ? (
                   <button
-                    onClick={(e) => {
-                      showActiveNote(note.title)
+                    onClick={() => {
+                      showActiveNote(note.title, "desc")
                     }}
                   >
                     <RxDropdownMenu />
@@ -92,12 +141,26 @@ const Notes = ({character}) => {
                   ""
                 )}
 
+                {/* edit note */}
+                <button onClick={() => showActiveNote(note.title, "edit")}>
+                  X
+                </button>
+
+                {/* delete note */}
                 <button onClick={() => removeNote(note)}>
                   <RiDeleteBinLine />
                 </button>
               </div>
 
-              <p>{note.note}</p>
+              {toggleTextArea.view && note.title === displayNote && (
+                <p>{note.desc}</p>
+              )}
+              {toggleTextArea.edit && displayNote === note.title && (
+                <textarea
+                  defaultValue={note.desc}
+                  onChange={(e) => editNote(e.target.value, note, index)}
+                ></textarea>
+              )}
             </div>
           )
         })}
@@ -105,14 +168,18 @@ const Notes = ({character}) => {
       <button
         className="add-note-btn"
         onClick={() => {
-          setToggleTextArea((prev) => !prev)
+          setToggleTextArea((prev) => ({
+            ...prev,
+            create: !prev.create,
+          }))
+
           setNote(defaultNoteData)
         }}
       >
-        {toggleTextArea ? "cancel" : "add new note"}
+        {toggleTextArea.create ? "cancel" : "add new note"}
       </button>
 
-      {toggleTextArea && (
+      {toggleTextArea.create && (
         // create new note
         <form className="note-maker" onChange={(e) => handleData(e)}>
           <input
@@ -120,7 +187,7 @@ const Notes = ({character}) => {
             placeholder="title..."
             onKeyDown={(e) => handleKeyDown(e)}
           />
-          <textarea name="note"></textarea>
+          <textarea name="desc"></textarea>
           <button
             type="button"
             disabled={!note.title || checkNoteNames(note.title)}
