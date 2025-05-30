@@ -63,18 +63,24 @@ const ProfStats = ({setShowSkillsTab, showSkillsTab}) => {
 
     return skills.map((skill) => skill.replaceAll("Skill: ", ""))
   }
-
   const skillBonusSorter = (skill) => {
     return Object.keys(SkillCategories).map((key) => {
       if (character.stats[key]?.skills?.includes(skill)) {
         if (skillProficiencies().includes(skill)) {
           return character.stats[key].bonus + calcProficiencyBonus
         }
+
         return character.stats[key].bonus
       } else return undefined
     })
   }
 
+  const calcPassivePerception = () => {
+    const skill = skillBonusSorter("Perception").filter(
+      (skill) => skill !== undefined
+    )
+    return 10 + skill[0]
+  }
   return (
     <div
       className={showSkillsTab ? "stat-wrapper visible" : "stat-wrapper hidden"}
@@ -135,6 +141,10 @@ const ProfStats = ({setShowSkillsTab, showSkillsTab}) => {
       ) : (
         <p className="loading">loading</p>
       )}
+      <div className="passive-perception">
+        <label>Passive Perception:</label>
+        <h4>{calcPassivePerception()}</h4>
+      </div>
     </div>
   )
 }

@@ -101,4 +101,24 @@
   .loading {
     color: black;
   }
+
+  .passive-perception {
+    display: flex;
+    justify-content: space-between;
+    border: 2px solid $fadedBorderColor;
+    margin-top: 10px;
+    align-items: center;
+    box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.4);
+    background-color: #c6ffc9;
+    label {
+      font-weight: bold;
+      padding-left: 10px;
+    }
+    h4 {
+      width: 30px;
+      height: 28px;
+      text-align: center;
+      font-size: 23px;
+    }
+  }
 }
