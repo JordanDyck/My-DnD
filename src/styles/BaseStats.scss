@@ -27,10 +27,11 @@
     width: 80px;
     border: 11px solid transparent;
     border-image: $dndBorder 81;
+    background-color: $sectionBGColor;
+
     .base-stat {
       font-size: 22px;
       width: 100%;
-      background: transparent;
 
       border-top: 2px solid;
       border-bottom: none;

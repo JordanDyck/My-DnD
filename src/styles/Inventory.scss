@@ -6,6 +6,8 @@
   border-image: $dndBorder 116;
   min-height: 190px;
   margin: 0 10px 25px;
+  background-color: $sectionBGColor;
+
   @media (min-width: $desktop) {
     width: 38%;
     margin-inline: auto;

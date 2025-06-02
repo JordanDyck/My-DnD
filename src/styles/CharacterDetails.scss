@@ -7,6 +7,8 @@
     margin: auto;
   }
   .character-details-container {
+    background-color: $sectionBGColor;
+
     margin: 10px;
     height: 310px;
     border: 17px solid transparent;
@@ -58,7 +60,7 @@
       margin-inline: auto;
       min-height: 250px;
       max-width: 380px;
-      background-color: white;
+      background-color: $sectionBGColor;
       border: 17px solid transparent;
       border-image: $dndBorder 116;
       .new-health-container {
@@ -139,6 +141,7 @@
         width: 70px;
         height: 38px;
         margin-bottom: 5px;
+        background-color: $backgroundColor;
         input {
           width: 67px;
           font-size: 28px;
@@ -179,6 +182,7 @@
           padding: 5px;
           margin-inline: 8px;
           text-align: center;
+          background-color: $backgroundColor;
 
           h4 {
             height: 23px;

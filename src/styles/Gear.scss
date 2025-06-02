@@ -3,7 +3,7 @@
 .gear-wrapper {
   border: 17px solid transparent;
   border-image: $dndBorder 116;
-  background-color: white;
+  background-color: $sectionBGColor;
   min-height: 300px;
   max-height: 400px;
   overflow: auto;
@@ -41,9 +41,10 @@
     justify-content: space-between;
     gap: 5px;
     margin-bottom: 10px;
-    border-bottom: 2px solid #ababab;
+    padding: 10px;
+    border: 2px solid #ababab;
     font-size: 15px;
-
+    background-color: $backgroundColor;
     .gear-item-stats {
       display: flex;
       flex-direction: column;

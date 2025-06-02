@@ -5,7 +5,10 @@
   padding: 0;
   font-family: $dndFont;
 }
-
+html,
+body {
+  background-color: #fff0c4;
+}
 .skills-container {
   padding-block: 10px 15px;
   border-top: 1px solid $fadedBorderColor;
@@ -14,7 +17,7 @@
     border: 1px solid $fadedBorderColor;
     width: 135px;
     box-shadow: 1px 1px 0px 0px rgba(117, 117, 117, 0.91);
-    background-color: #efefef;
+    background-color: $importantBGColor;
     border: 1px solid rgba(128, 128, 128, 0.8509803922);
     label {
       font-family: $parFont;
@@ -71,6 +74,10 @@
   }
 }
 
+button {
+  background-color: $buttonColor;
+}
+
 .popup-container {
   position: absolute;
   display: flex;
@@ -111,7 +118,9 @@
   justify-content: center;
 }
 .category-btn {
+  background-color: #ffc558c4;
   font-size: 19px;
+  font-weight: bold;
   margin: 3px;
   padding: 2px 2px 0;
 }

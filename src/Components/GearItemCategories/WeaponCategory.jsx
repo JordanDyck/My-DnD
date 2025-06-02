@@ -141,7 +141,7 @@ const WeaponCategory = ({createdItem, setCreatedItem}) => {
         }}
         name="desc"
         className="item-desc"
-        placeholder="Description"
+        placeholder="Description (optional)"
         value={createdItem?.desc || ""}
         disabled={!createdItem?.damage?.damage_type?.name}
       />

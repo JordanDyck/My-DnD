@@ -2,6 +2,7 @@ import {useState} from "react"
 import {useDispatch} from "react-redux"
 import {RiDeleteBinLine} from "react-icons/ri"
 import {RxDropdownMenu} from "react-icons/rx"
+import {CiEdit} from "react-icons/ci"
 
 import {updateCharacter} from "../../../Store/slices/characterSlice"
 
@@ -143,7 +144,7 @@ const Notes = ({character}) => {
 
                 {/* edit note */}
                 <button onClick={() => showActiveNote(note.title, "edit")}>
-                  X
+                  <CiEdit />
                 </button>
 
                 {/* delete note */}

@@ -3,7 +3,7 @@
 .starting-equipment-selector {
   display: flex;
   flex-direction: column;
-
+  background-color: $sectionBGColor;
   &:not(.starting-equipment-selector) {
     border: 17px solid transparent;
     border-image: $dndBorder 116;
@@ -21,7 +21,7 @@
       min-width: 0px;
     }
     min-height: 330px;
-    background: white;
+
     z-index: 2;
   }
   .item-info-container {
@@ -54,6 +54,7 @@
     }
     .key_desc {
       border: 2px solid $fadedBorderColor;
+      background-color: $backgroundColor;
       flex-direction: column;
       overflow-y: scroll;
       max-height: 250px;
@@ -85,7 +86,7 @@
     display: flex;
     flex-direction: row-reverse;
     .create-item-btn {
-      background-color: lightgrey;
+      background-color: $importantBGColor;
       width: 30px;
       height: 30px;
       font-size: 25px;
@@ -143,10 +144,12 @@
       flex-direction: column;
       align-items: center;
       height: 100%;
-
+      background-color: $backgroundColor;
+      margin-inline: auto;
       input {
         font-size: 17px;
         margin-bottom: 10px;
+
         &:disabled {
           color: #d9d9d9;
         }
@@ -188,7 +191,7 @@
     margin-top: 38px;
     justify-content: center;
     .add-item {
-      background-color: lightgrey;
+      background-color: $importantBGColor;
       font-size: 15px;
       padding: 3px;
       border-radius: 10px;

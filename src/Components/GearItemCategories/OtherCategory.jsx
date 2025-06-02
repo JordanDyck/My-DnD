@@ -41,7 +41,7 @@ const OtherCategory = ({createdItem, setCreatedItem}) => {
       <textarea
         name="desc"
         className="item-desc"
-        placeholder="Description"
+        placeholder="Description (optional)"
         value={createdItem?.desc || ""}
         disabled={!createdItem.name}
         onChange={(e) => {

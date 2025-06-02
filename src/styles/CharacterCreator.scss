@@ -8,6 +8,7 @@
   max-width: 650px;
   margin-inline: auto;
   margin-block: 5px 45px;
+  background-color: $sectionBGColor;
   .name-container {
     display: flex;
     justify-content: center;
@@ -34,7 +35,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    // background-color: $backgroundColor;
     .new-level-btn {
       margin-top: 20px;
       font-size: 18px;
@@ -43,12 +44,16 @@
       box-shadow: 2px 2px 1px 0px #000000;
     }
     .level-wrapper {
+      background-color: $backgroundColor;
+
       display: flex;
       flex-direction: column;
       align-items: center;
       width: 100%;
     }
     .level-container {
+      // background-color: $backgroundColor;
+
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -62,10 +67,14 @@
         width: 100%;
         border: 1px solid;
         margin-block: 8px;
-        background-color: rgb(255, 255, 255);
+        // background-color: rgb(255, 255, 255);
+        background-color: $backgroundColor;
+
         &:not(.level-collapsed) {
           box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.6);
-          background-color: rgb(221 221 221);
+          // background-color: rgb(221 221 221);
+          background-color: $backgroundColor;
+
           border: 2px solid;
         }
 
@@ -106,7 +115,8 @@
           justify-content: center;
           flex-wrap: wrap;
           border: 1px solid $fadedBorderColor;
-          background-color: white;
+          background-color: $importantBGColor;
+
           margin-inline: auto;
           span {
             font-family: $parFont;
@@ -117,6 +127,7 @@
             font-size: 16px;
             font-weight: bold;
             width: calc(100% - 12px);
+            background-color: $backgroundColor;
           }
           p {
             font-weight: bold;
@@ -149,6 +160,7 @@
               }
               h4 {
                 width: initial;
+                background-color: $backgroundColor;
               }
             }
           }
@@ -239,7 +251,7 @@
     .starting-level {
       margin-top: 10px;
       box-shadow: 1px 1px 0px 0px rgba(117, 117, 117, 0.91);
-      background-color: #e5e5e5;
+      background-color: $backgroundColor;
       width: 185px;
       border: 1px solid rgba(128, 128, 128, 0.8509803922);
       label {
@@ -261,6 +273,7 @@
         margin-top: 10px;
         justify-content: center;
         margin-inline: auto;
+        background-color: $importantBGColor;
         font-size: 18px;
         width: 150px;
         height: 28px;
@@ -281,10 +294,11 @@
         width: 80px;
         border: 11px solid transparent;
         border-image: $dndBorder 81;
+        background-color: $backgroundColor;
         .base-stat-roll {
           font-size: 22px;
           width: 100%;
-          background: transparent;
+          background-color: $importantBGColor;
 
           border-top: 2px solid;
           border-bottom: none;
@@ -662,7 +676,7 @@
         padding-top: 8px;
         gap: 8px;
         box-shadow: 1px 1px 1px 0px rgba(117, 117, 117, 0.91);
-        background-color: #efefef;
+        background-color: $backgroundColor;
         border: 2px solid rgba(128, 128, 128, 0.8509803922);
         .custom-race-name {
           width: calc(100% - 160px);
@@ -706,6 +720,7 @@
               align-items: flex-end;
               padding: 3px;
               border: 1px solid $fadedBorderColor;
+              // background-color: $importantBGColor;
 
               input {
                 width: 25px;
@@ -766,7 +781,7 @@
       width: 145px;
       background-color: #efefef;
       box-shadow: 1px 1px 0px 0px rgba(117, 117, 117, 0.91);
-
+      background-color: $importantBGColor;
       align-items: flex-end;
       padding: 3px;
       border: 1px solid $fadedBorderColor;
@@ -795,7 +810,7 @@
       h4 {
         border: 1px solid $fadedBorderColor;
         box-shadow: 1px 1px 0px 0px rgba(117, 117, 117, 0.91);
-        background-color: #efefef;
+        background-color: $importantBGColor;
         text-decoration: underline;
         width: 100px;
         input {
