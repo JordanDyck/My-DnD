@@ -31,10 +31,12 @@
         gap: 4px;
         padding: 5px;
         font-size: 19px;
-
-        .level {
-          text-decoration: underline;
-        }
+      }
+      .level {
+        text-decoration: underline;
+        grid-row-start: 1;
+        grid-column-start: 2;
+        font-size: 19px;
       }
       .lvl-up-btn {
         font-size: 16px;
@@ -43,6 +45,7 @@
       }
       .skills-tab {
         font-size: 17px;
+        grid-row-start: 2;
         @media (min-width: $desktop) {
           display: none;
         }

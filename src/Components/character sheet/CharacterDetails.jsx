@@ -19,10 +19,7 @@ const CharacterDetails = () => {
   try {
     return (
       <div className="character-wrapper">
-        <ProfStats
-          setShowSkillsTab={setShowInfo}
-          showSkillsTab={showInfo.stats}
-        />
+        <ProfStats setShowSkillsTab={setShowInfo} showSkillsTab={showInfo.stats} />
         <button
           className="show-character-info-btn"
           onClick={() => {
@@ -40,38 +37,30 @@ const CharacterDetails = () => {
           </header>
 
           <div className="character-details">
-            <div>
-              <button
-                className="category-btn skills-tab"
-                onClick={() =>
-                  setShowInfo((prev) => ({
-                    ...prev,
-                    stats: true,
-                  }))
-                }
-              >
-                skills
-              </button>
-            </div>
+            <button
+              className="category-btn skills-tab"
+              onClick={() =>
+                setShowInfo((prev) => ({
+                  ...prev,
+                  stats: true,
+                }))
+              }
+            >
+              skills
+            </button>
 
-            <div className="detail">
-              <h4 className="level">level: {character.currentLevel} </h4>
-            </div>
+            <h4 className="level">level: {character.currentLevel} </h4>
+
             <button
               className="lvl-up-btn"
               onClick={() => setLevelUP(true)}
               disabled={!character.levels[character.currentLevel]}
             >
-              {character.levels[character.currentLevel]
-                ? "level up"
-                : "max level"}
+              {character.levels[character.currentLevel] ? "level up" : "max level"}
             </button>
           </div>
           {levelUP && <LevelUpTab toggleLvlUp={setLevelUP} />}
-          <Health
-            key={character?.characterName}
-            currentCharacter={character?.characterName}
-          />
+          <Health key={character?.characterName} currentCharacter={character?.characterName} />
         </div>
         {<CharacterInfo showInfo={showInfo.info} />}
       </div>
