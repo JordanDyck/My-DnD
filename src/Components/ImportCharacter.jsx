@@ -8,11 +8,7 @@ const ImportCharacter = ({setCharacterDetails, setShowCreator}) => {
 
   // check if character name is already in use
   const checkStoredNames = (nameToCheck) => {
-    if (
-      Object.keys(localStorage).filter(
-        (storedName) => storedName === nameToCheck
-      ).length
-    ) {
+    if (Object.keys(localStorage).filter((storedName) => storedName === nameToCheck).length) {
       return true
     } else return false
   }
@@ -43,8 +39,7 @@ const ImportCharacter = ({setCharacterDetails, setShowCreator}) => {
     ]
     if (
       checkStoredNames(importData?.characterName) === true ||
-      objNamesToCheck.every((key) => Object.keys(importData).includes(key)) ===
-        false
+      objNamesToCheck.every((key) => Object.keys(importData).includes(key)) === false
       // check if JSON data has all the correct key names so you cant just put whatever you want in there.
     ) {
       setError(true)

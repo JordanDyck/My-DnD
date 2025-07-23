@@ -431,7 +431,7 @@
     .chosen-skill {
       display: flex;
       align-items: center;
-      background-color: #e3e3e3;
+      background-color: $importantBGColor;
       font-weight: bold;
       font-size: 14px;
       margin: 3px;
@@ -473,7 +473,7 @@
 
         border: 2px solid;
         box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.6);
-        background-color: #e3e3e3;
+        background-color: $backgroundColor;
         padding-block: 15px;
         margin-block: 15px;
         width: 95%;
@@ -644,7 +644,7 @@
         align-items: flex-end;
         margin-block: 15px;
         border: 1px solid $fadedBorderColor;
-        background-color: #e5e5e5;
+        background-color: $importantBGColor;
         padding-block: 10px;
         box-shadow: 1px 1px 2px 1px rgba(117, 117, 117, 0.91);
         h4 {
@@ -720,7 +720,6 @@
               align-items: flex-end;
               padding: 3px;
               border: 1px solid $fadedBorderColor;
-              // background-color: $importantBGColor;
 
               input {
                 width: 25px;

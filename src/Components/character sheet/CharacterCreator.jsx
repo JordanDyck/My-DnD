@@ -26,7 +26,7 @@ const CharacterCreator = ({setShowCreator}) => {
     inventory: [],
     health: "",
     race: "",
-    subRace: {},
+    subRace: "",
     notes: [],
     currency: {cp: 0, sp: 0, ep: 0, gp: 0, pp: 0},
   })
@@ -51,11 +51,7 @@ const CharacterCreator = ({setShowCreator}) => {
 
   // check if character name is already in use
   const checkStoredNames = (nameToCheck) => {
-    if (
-      Object.keys(localStorage).filter(
-        (storedName) => storedName === nameToCheck
-      ).length
-    ) {
+    if (Object.keys(localStorage).filter((storedName) => storedName === nameToCheck).length) {
       return true
     } else return false
   }
@@ -64,9 +60,7 @@ const CharacterCreator = ({setShowCreator}) => {
     if (showCharacterDetails[currentTab] === true) {
       return true
     } else {
-      return Object.entries(showCharacterDetails).every(
-        (item) => item[1] === false
-      )
+      return Object.entries(showCharacterDetails).every((item) => item[1] === false)
     }
   }
 
@@ -159,9 +153,7 @@ const CharacterCreator = ({setShowCreator}) => {
             )}
           </div>
         )}
-        {showCharacterDetails.class && (
-          <StatRolls setStoredDetails={setStoredDetails} />
-        )}
+        {showCharacterDetails.class && <StatRolls setStoredDetails={setStoredDetails} />}
         <button
           // for choosing your class. shows class popup and disables unrelated btns.
           className="class-btn"
@@ -249,9 +241,7 @@ const CharacterCreator = ({setShowCreator}) => {
         {storedDetails.classDetails && showCharacterDetails.class === false && (
           <button
             className="class-btn"
-            onClick={() =>
-              setShowCharacterDetails((prev) => ({...prev, subClass: true}))
-            }
+            onClick={() => setShowCharacterDetails((prev) => ({...prev, subClass: true}))}
             disabled={
               showCharacterDetails.class ||
               showCharacterDetails.subClass ||
@@ -335,9 +325,7 @@ const CharacterCreator = ({setShowCreator}) => {
         {storedDetails.race && !showCharacterDetails.race && (
           <button
             className="sub-race-btn"
-            onClick={() =>
-              setShowCharacterDetails((prev) => ({...prev, subRace: true}))
-            }
+            onClick={() => setShowCharacterDetails((prev) => ({...prev, subRace: true}))}
             disabled={
               showCharacterDetails.class ||
               showCharacterDetails.subClass ||
