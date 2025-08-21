@@ -1,0 +1,457 @@
+{
+  "characterName": "john doe",
+  "classDetails": {
+    "name": "Barbarian",
+    "hit_die": 12,
+    "skill_proficiencies": {"Animal Handling": 1, "Nature": 1, "isMax": true},
+    "base_proficiencies": [
+      {"index": "light-armor", "name": "Light Armor", "url": "/api/2014/proficiencies/light-armor"},
+      {
+        "index": "medium-armor",
+        "name": "Medium Armor",
+        "url": "/api/2014/proficiencies/medium-armor"
+      },
+      {"index": "shields", "name": "Shields", "url": "/api/2014/proficiencies/shields"},
+      {
+        "index": "simple-weapons",
+        "name": "Simple Weapons",
+        "url": "/api/2014/proficiencies/simple-weapons"
+      },
+      {
+        "index": "martial-weapons",
+        "name": "Martial Weapons",
+        "url": "/api/2014/proficiencies/martial-weapons"
+      },
+      {
+        "index": "saving-throw-str",
+        "name": "Saving Throw: STR",
+        "url": "/api/2014/proficiencies/saving-throw-str"
+      },
+      {
+        "index": "saving-throw-con",
+        "name": "Saving Throw: CON",
+        "url": "/api/2014/proficiencies/saving-throw-con"
+      }
+    ],
+    "saving_throws": [
+      {"index": "str", "name": "STR", "url": "/api/2014/ability-scores/str"},
+      {"index": "con", "name": "CON", "url": "/api/2014/ability-scores/con"}
+    ],
+    "spellcasting": {},
+    "isCustom": false
+  },
+  "subClass": {
+    "name": "echo knight",
+    "features": [{"feature": "", "featureName": "summon echo", "level": "2"}]
+  },
+  "levels": [
+    {
+      "level": 1,
+      "ability_score_bonuses": 0,
+      "prof_bonus": 2,
+      "features": [
+        {"index": "rage", "name": "Rage", "url": "/api/2014/features/rage"},
+        {
+          "index": "barbarian-unarmored-defense",
+          "name": "Unarmored Defense",
+          "url": "/api/2014/features/barbarian-unarmored-defense"
+        }
+      ],
+      "class_specific": {"rage_count": 2, "rage_damage_bonus": 2, "brutal_critical_dice": 0},
+      "index": "barbarian-1",
+      "class": {"index": "barbarian", "name": "Barbarian", "url": "/api/2014/classes/barbarian"},
+      "url": "/api/2014/classes/barbarian/levels/1"
+    },
+    {
+      "level": 2,
+      "ability_score_bonuses": 0,
+      "prof_bonus": 2,
+      "features": [
+        {
+          "index": "reckless-attack",
+          "name": "Reckless Attack",
+          "url": "/api/2014/features/reckless-attack"
+        },
+        {"index": "danger-sense", "name": "Danger Sense", "url": "/api/2014/features/danger-sense"}
+      ],
+      "class_specific": {"rage_count": 2, "rage_damage_bonus": 2, "brutal_critical_dice": 0},
+      "index": "barbarian-2",
+      "class": {"index": "barbarian", "name": "Barbarian", "url": "/api/2014/classes/barbarian"},
+      "url": "/api/2014/classes/barbarian/levels/2"
+    },
+    {
+      "level": 3,
+      "ability_score_bonuses": 0,
+      "prof_bonus": 2,
+      "features": [
+        {"index": "primal-path", "name": "Primal Path", "url": "/api/2014/features/primal-path"}
+      ],
+      "class_specific": {"rage_count": 3, "rage_damage_bonus": 2, "brutal_critical_dice": 0},
+      "index": "barbarian-3",
+      "class": {"index": "barbarian", "name": "Barbarian", "url": "/api/2014/classes/barbarian"},
+      "url": "/api/2014/classes/barbarian/levels/3"
+    },
+    {
+      "level": 4,
+      "ability_score_bonuses": 1,
+      "prof_bonus": 2,
+      "features": [
+        {
+          "index": "barbarian-ability-score-improvement-1",
+          "name": "Ability Score Improvement",
+          "url": "/api/2014/features/barbarian-ability-score-improvement-1"
+        }
+      ],
+      "class_specific": {"rage_count": 3, "rage_damage_bonus": 2, "brutal_critical_dice": 0},
+      "index": "barbarian-4",
+      "class": {"index": "barbarian", "name": "Barbarian", "url": "/api/2014/classes/barbarian"},
+      "url": "/api/2014/classes/barbarian/levels/4"
+    },
+    {
+      "level": 5,
+      "ability_score_bonuses": 1,
+      "prof_bonus": 3,
+      "features": [
+        {
+          "index": "barbarian-extra-attack",
+          "name": "Extra Attack",
+          "url": "/api/2014/features/barbarian-extra-attack"
+        },
+        {
+          "index": "fast-movement",
+          "name": "Fast Movement",
+          "url": "/api/2014/features/fast-movement"
+        }
+      ],
+      "class_specific": {"rage_count": 3, "rage_damage_bonus": 2, "brutal_critical_dice": 0},
+      "index": "barbarian-5",
+      "class": {"index": "barbarian", "name": "Barbarian", "url": "/api/2014/classes/barbarian"},
+      "url": "/api/2014/classes/barbarian/levels/5"
+    },
+    {
+      "level": 6,
+      "ability_score_bonuses": 1,
+      "prof_bonus": 3,
+      "features": [
+        {
+          "index": "primal-path-improvement-1",
+          "name": "Path feature",
+          "url": "/api/2014/features/primal-path-improvement-1"
+        }
+      ],
+      "class_specific": {"rage_count": 4, "rage_damage_bonus": 2, "brutal_critical_dice": 0},
+      "index": "barbarian-6",
+      "class": {"index": "barbarian", "name": "Barbarian", "url": "/api/2014/classes/barbarian"},
+      "url": "/api/2014/classes/barbarian/levels/6"
+    },
+    {
+      "level": 7,
+      "ability_score_bonuses": 1,
+      "prof_bonus": 3,
+      "features": [
+        {
+          "index": "feral-instinct",
+          "name": "Feral Instinct",
+          "url": "/api/2014/features/feral-instinct"
+        }
+      ],
+      "class_specific": {"rage_count": 4, "rage_damage_bonus": 2, "brutal_critical_dice": 0},
+      "index": "barbarian-7",
+      "class": {"index": "barbarian", "name": "Barbarian", "url": "/api/2014/classes/barbarian"},
+      "url": "/api/2014/classes/barbarian/levels/7"
+    },
+    {
+      "level": 8,
+      "ability_score_bonuses": 2,
+      "prof_bonus": 3,
+      "features": [
+        {
+          "index": "barbarian-ability-score-improvement-2",
+          "name": "Ability Score Improvement",
+          "url": "/api/2014/features/barbarian-ability-score-improvement-2"
+        }
+      ],
+      "class_specific": {"rage_count": 4, "rage_damage_bonus": 2, "brutal_critical_dice": 0},
+      "index": "barbarian-8",
+      "class": {"index": "barbarian", "name": "Barbarian", "url": "/api/2014/classes/barbarian"},
+      "url": "/api/2014/classes/barbarian/levels/8"
+    },
+    {
+      "level": 9,
+      "ability_score_bonuses": 2,
+      "prof_bonus": 4,
+      "features": [
+        {
+          "index": "brutal-critical-1-die",
+          "name": "Brutal Critical (1 die)",
+          "url": "/api/2014/features/brutal-critical-1-die"
+        }
+      ],
+      "class_specific": {"rage_count": 4, "rage_damage_bonus": 3, "brutal_critical_dice": 1},
+      "index": "barbarian-9",
+      "class": {"index": "barbarian", "name": "Barbarian", "url": "/api/2014/classes/barbarian"},
+      "url": "/api/2014/classes/barbarian/levels/9"
+    },
+    {
+      "level": 10,
+      "ability_score_bonuses": 2,
+      "prof_bonus": 4,
+      "features": [
+        {
+          "index": "primal-path-improvement-2",
+          "name": "Path feature",
+          "url": "/api/2014/features/primal-path-improvement-2"
+        }
+      ],
+      "class_specific": {"rage_count": 4, "rage_damage_bonus": 3, "brutal_critical_dice": 1},
+      "index": "barbarian-10",
+      "class": {"index": "barbarian", "name": "Barbarian", "url": "/api/2014/classes/barbarian"},
+      "url": "/api/2014/classes/barbarian/levels/10"
+    },
+    {
+      "level": 11,
+      "ability_score_bonuses": 2,
+      "prof_bonus": 4,
+      "features": [
+        {
+          "index": "relentless-rage",
+          "name": "Relentless Rage",
+          "url": "/api/2014/features/relentless-rage"
+        }
+      ],
+      "class_specific": {"rage_count": 4, "rage_damage_bonus": 3, "brutal_critical_dice": 1},
+      "index": "barbarian-11",
+      "class": {"index": "barbarian", "name": "Barbarian", "url": "/api/2014/classes/barbarian"},
+      "url": "/api/2014/classes/barbarian/levels/11"
+    },
+    {
+      "level": 12,
+      "ability_score_bonuses": 3,
+      "prof_bonus": 4,
+      "features": [
+        {
+          "index": "barbarian-ability-score-improvement-3",
+          "name": "Ability Score Improvement",
+          "url": "/api/2014/features/barbarian-ability-score-improvement-3"
+        }
+      ],
+      "class_specific": {"rage_count": 5, "rage_damage_bonus": 3, "brutal_critical_dice": 1},
+      "index": "barbarian-12",
+      "class": {"index": "barbarian", "name": "Barbarian", "url": "/api/2014/classes/barbarian"},
+      "url": "/api/2014/classes/barbarian/levels/12"
+    },
+    {
+      "level": 13,
+      "ability_score_bonuses": 3,
+      "prof_bonus": 5,
+      "features": [
+        {
+          "index": "brutal-critical-2-dice",
+          "name": "Brutal Critical (2 dice)",
+          "url": "/api/2014/features/brutal-critical-2-dice"
+        }
+      ],
+      "class_specific": {"rage_count": 5, "rage_damage_bonus": 3, "brutal_critical_dice": 2},
+      "index": "barbarian-13",
+      "class": {"index": "barbarian", "name": "Barbarian", "url": "/api/2014/classes/barbarian"},
+      "url": "/api/2014/classes/barbarian/levels/13"
+    },
+    {
+      "level": 14,
+      "ability_score_bonuses": 3,
+      "prof_bonus": 5,
+      "features": [
+        {
+          "index": "primal-path-improvement-3",
+          "name": "Path feature",
+          "url": "/api/2014/features/primal-path-improvement-3"
+        }
+      ],
+      "class_specific": {"rage_count": 5, "rage_damage_bonus": 3, "brutal_critical_dice": 2},
+      "index": "barbarian-14",
+      "class": {"index": "barbarian", "name": "Barbarian", "url": "/api/2014/classes/barbarian"},
+      "url": "/api/2014/classes/barbarian/levels/14"
+    },
+    {
+      "level": 15,
+      "ability_score_bonuses": 3,
+      "prof_bonus": 5,
+      "features": [
+        {
+          "index": "persistent-rage",
+          "name": "Persistent Rage",
+          "url": "/api/2014/features/persistent-rage"
+        }
+      ],
+      "class_specific": {"rage_count": 5, "rage_damage_bonus": 3, "brutal_critical_dice": 2},
+      "index": "barbarian-15",
+      "class": {"index": "barbarian", "name": "Barbarian", "url": "/api/2014/classes/barbarian"},
+      "url": "/api/2014/classes/barbarian/levels/15"
+    },
+    {
+      "level": 16,
+      "ability_score_bonuses": 4,
+      "prof_bonus": 5,
+      "features": [
+        {
+          "index": "barbarian-ability-score-improvement-4",
+          "name": "Ability Score Improvement",
+          "url": "/api/2014/features/barbarian-ability-score-improvement-4"
+        }
+      ],
+      "class_specific": {"rage_count": 5, "rage_damage_bonus": 4, "brutal_critical_dice": 2},
+      "index": "barbarian-16",
+      "class": {"index": "barbarian", "name": "Barbarian", "url": "/api/2014/classes/barbarian"},
+      "url": "/api/2014/classes/barbarian/levels/16"
+    },
+    {
+      "level": 17,
+      "ability_score_bonuses": 4,
+      "prof_bonus": 6,
+      "features": [
+        {
+          "index": "brutal-critical-3-dice",
+          "name": "Brutal Critical (3 dice)",
+          "url": "/api/2014/features/brutal-critical-3-dice"
+        }
+      ],
+      "class_specific": {"rage_count": 6, "rage_damage_bonus": 4, "brutal_critical_dice": 3},
+      "index": "barbarian-17",
+      "class": {"index": "barbarian", "name": "Barbarian", "url": "/api/2014/classes/barbarian"},
+      "url": "/api/2014/classes/barbarian/levels/17"
+    },
+    {
+      "level": 18,
+      "ability_score_bonuses": 4,
+      "prof_bonus": 6,
+      "features": [
+        {
+          "index": "indomitable-might",
+          "name": "Indomitable Might",
+          "url": "/api/2014/features/indomitable-might"
+        }
+      ],
+      "class_specific": {"rage_count": 6, "rage_damage_bonus": 4, "brutal_critical_dice": 3},
+      "index": "barbarian-18",
+      "class": {"index": "barbarian", "name": "Barbarian", "url": "/api/2014/classes/barbarian"},
+      "url": "/api/2014/classes/barbarian/levels/18"
+    },
+    {
+      "level": 19,
+      "ability_score_bonuses": 5,
+      "prof_bonus": 6,
+      "features": [
+        {
+          "index": "barbarian-ability-score-improvement-5",
+          "name": "Ability Score Improvement",
+          "url": "/api/2014/features/barbarian-ability-score-improvement-5"
+        }
+      ],
+      "class_specific": {"rage_count": 6, "rage_damage_bonus": 4, "brutal_critical_dice": 3},
+      "index": "barbarian-19",
+      "class": {"index": "barbarian", "name": "Barbarian", "url": "/api/2014/classes/barbarian"},
+      "url": "/api/2014/classes/barbarian/levels/19"
+    },
+    {
+      "level": 20,
+      "ability_score_bonuses": 5,
+      "prof_bonus": 6,
+      "features": [
+        {
+          "index": "primal-champion",
+          "name": "Primal Champion",
+          "url": "/api/2014/features/primal-champion"
+        }
+      ],
+      "class_specific": {"rage_count": 9999, "rage_damage_bonus": 4, "brutal_critical_dice": 3},
+      "index": "barbarian-20",
+      "class": {"index": "barbarian", "name": "Barbarian", "url": "/api/2014/classes/barbarian"},
+      "url": "/api/2014/classes/barbarian/levels/20"
+    }
+  ],
+  "currentLevel": 1,
+  "gear": [],
+  "spells": [],
+  "stats": {
+    "ac": 10,
+    "initiative": 0,
+    "speed": 30,
+    "str": {"base": 0, "bonus": -5, "skills": ["Athletics"]},
+    "dex": {"base": 0, "bonus": -5, "skills": ["Acrobatics", "Sleight of Hand", "Stealth"]},
+    "con": {"base": 0, "bonus": -5},
+    "int": {
+      "base": 0,
+      "bonus": -5,
+      "skills": ["Arcana", "History", "Investigation", "Nature", "Religion"]
+    },
+    "wis": {
+      "base": 0,
+      "bonus": -5,
+      "skills": ["Animal Handling", "Insight", "Medicine", "Perception", "Survival"]
+    },
+    "cha": {
+      "base": 0,
+      "bonus": -5,
+      "skills": ["Deception", "Intimidation", "Performance", "Persuasion"]
+    }
+  },
+  "inventory": [],
+  "health": {"currentHP": 20, "maxHP": 20, "temp": 0},
+  "race": {
+    "name": "Dwarf",
+    "age": "30",
+    "languages": [
+      {"index": "common", "name": "Common", "url": "/api/2014/languages/common"},
+      {"index": "dwarvish", "name": "Dwarvish", "url": "/api/2014/languages/dwarvish"}
+    ],
+    "speed": 25,
+    "size": {"ft": "4", "inch": "2"},
+    "ability_bonus": [
+      {
+        "ability_score": {"index": "con", "name": "CON", "url": "/api/2014/ability-scores/con"},
+        "bonus": 2
+      }
+    ],
+    "starting_proficiencies": [
+      {"index": "battleaxes", "name": "Battleaxes", "url": "/api/2014/proficiencies/battleaxes"},
+      {"index": "handaxes", "name": "Handaxes", "url": "/api/2014/proficiencies/handaxes"},
+      {
+        "index": "light-hammers",
+        "name": "Light hammers",
+        "url": "/api/2014/proficiencies/light-hammers"
+      },
+      {"index": "warhammers", "name": "Warhammers", "url": "/api/2014/proficiencies/warhammers"}
+    ],
+    "traits": [
+      {"index": "darkvision", "name": "Darkvision", "url": "/api/2014/traits/darkvision"},
+      {
+        "index": "dwarven-resilience",
+        "name": "Dwarven Resilience",
+        "url": "/api/2014/traits/dwarven-resilience"
+      },
+      {"index": "stonecunning", "name": "Stonecunning", "url": "/api/2014/traits/stonecunning"},
+      {
+        "index": "dwarven-combat-training",
+        "name": "Dwarven Combat Training",
+        "url": "/api/2014/traits/dwarven-combat-training"
+      },
+      {
+        "index": "tool-proficiency",
+        "name": "Tool Proficiency",
+        "url": "/api/2014/traits/tool-proficiency"
+      }
+    ],
+    "proficiencies": {"skill_proficiencies": {"Smith's Tools": 1, "isMax": true}},
+    "isCustom": false
+  },
+  "subRace": {
+    "name": "na",
+    "ability_improvement": {"isMax": true},
+    "skill_proficiencies": {"isMax": true},
+    "base_proficiencies": [],
+    "languages": [],
+    "traits": []
+  },
+  "notes": [],
+  "currency": {"cp": 0, "sp": 0, "ep": 0, "gp": 0, "pp": 0}
+}

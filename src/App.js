@@ -21,10 +21,10 @@ function App() {
     info: false,
   })
 
-  const [deleteCharacterComponent, setDeleteCharacterComponent] =
-    useState(false)
+  const [deleteCharacterComponent, setDeleteCharacterComponent] = useState(false)
 
   const character = useSelector((store) => store.character.value)
+  const currentCharacter = localStorage.getItem("currentCharacter")
 
   return (
     <div className="App">
@@ -36,7 +36,7 @@ function App() {
         />
       )}
 
-      {!tabs.creator && character && <CharacterDetails />}
+      {!tabs.creator && currentCharacter && character && <CharacterDetails />}
       {tabs.creator && (
         <div className="character-creator-wrapper">
           <CharacterCreator setShowCreator={setTabs} />
@@ -48,7 +48,7 @@ function App() {
         </div>
       )}
 
-      {character && !tabs.creator && (
+      {currentCharacter && character?.characterName && !tabs.creator ? (
         <div className="category-tabs">
           <button
             className="category-btn"
@@ -84,6 +84,8 @@ function App() {
             Spell List
           </button>
         </div>
+      ) : (
+        ""
       )}
 
       {tabs.items && <ItemsTab type={"items-tab"} setShowItemTab={setTabs} />}
@@ -92,8 +94,8 @@ function App() {
 
       {tabs.gear && <Gear />}
 
-      {character && !tabs.creator && <BaseStats />}
-      {character && !tabs.creator && <Inventory />}
+      {currentCharacter && character.characterName && !tabs.creator && <BaseStats />}
+      {currentCharacter && character?.inventory && !tabs.creator ? <Inventory /> : ""}
     </div>
   )
 }

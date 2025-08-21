@@ -48,8 +48,7 @@ const BaseStats = () => {
               id="initiative"
               type="number"
               onChange={(e) =>
-                e.target.value.length <= 2 &&
-                updatePassiveStats("initiative", e.target.value)
+                e.target.value.length <= 2 && updatePassiveStats("initiative", e.target.value)
               }
               value={character?.stats.initiative}
             />
@@ -62,10 +61,7 @@ const BaseStats = () => {
           <input
             type="number"
             onFocus={(e) => e.target.select()}
-            onChange={(e) =>
-              e.target.value.length <= 2 &&
-              updatePassiveStats("ac", e.target.value)
-            }
+            onChange={(e) => e.target.value.length <= 2 && updatePassiveStats("ac", e.target.value)}
             id="ac-input"
             value={character?.stats?.ac}
           ></input>

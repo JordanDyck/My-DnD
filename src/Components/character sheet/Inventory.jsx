@@ -29,7 +29,7 @@ const Inventory = () => {
         <header>Inventory</header>
       </div>
       <div className="currency-container">
-        {Object.entries(character.currency).map((coin, i) => {
+        {Object.entries(character?.currency).map((coin, i) => {
           return (
             <div className="coin-wrapper" key={`coin_${coin[0]}`}>
               <header className="tab-header">{coin[0]}</header>
@@ -48,20 +48,12 @@ const Inventory = () => {
           )
         })}
       </div>
-      {character.inventory.length ? <span>*click item to equip</span> : ""}
+      {character?.inventory?.length ? <span>*click item to equip</span> : ""}
       {character?.inventory?.map((item, index) => {
         const id = item.find((prop) => prop[0] === "id")?.[1]
         const quantity = item.find((prop) => prop[0] === "amount")?.[1]
 
-        return (
-          <InventoryItem
-            item={item}
-            index={index}
-            id={id}
-            key={id}
-            quantity={quantity}
-          />
-        )
+        return <InventoryItem item={item} index={index} id={id} key={id} quantity={quantity} />
       })}
     </div>
   )

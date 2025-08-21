@@ -2,9 +2,7 @@ import {createSlice} from "@reduxjs/toolkit"
 
 const getInitialCharacter = () => {
   try {
-    const lastUsedCharacter = JSON.parse(
-      localStorage.getItem("currentCharacter")
-    )
+    const lastUsedCharacter = JSON.parse(localStorage.getItem("currentCharacter"))
     return JSON.parse(localStorage.getItem(lastUsedCharacter))
   } catch {
     return null
@@ -23,7 +21,8 @@ export const characterSlice = createSlice({
         const data = JSON.parse(localStorage.getItem(action.payload))
         state.value = data
       } catch (error) {
-        console.error("failed to get character", error)
+        console.error("failed to set character. character will now be deleted", error)
+        localStorage.removeItem(action.payload)
       }
     },
 
@@ -32,10 +31,7 @@ export const characterSlice = createSlice({
       // set new state, then upload it to localstorage
       try {
         state.value = action.payload
-        localStorage.setItem(
-          action.payload.characterName,
-          JSON.stringify(action.payload)
-        )
+        localStorage.setItem(action.payload.characterName, JSON.stringify(action.payload))
       } catch (error) {
         console.error("failed to update current character", error)
       }
@@ -49,6 +45,5 @@ export const characterSlice = createSlice({
   },
 })
 
-export const {setCurrentCharacter, updateCharacter, clearCharacterDetails} =
-  characterSlice.actions
+export const {setCurrentCharacter, updateCharacter, clearCharacterDetails} = characterSlice.actions
 export default characterSlice.reducer
