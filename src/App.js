@@ -94,7 +94,7 @@ function App() {
 
       {tabs.gear && <Gear />}
 
-      {currentCharacter && character.characterName && !tabs.creator && <BaseStats />}
+      {currentCharacter && character?.characterName && !tabs.creator && <BaseStats />}
       {currentCharacter && character?.inventory && !tabs.creator ? <Inventory /> : ""}
     </div>
   )

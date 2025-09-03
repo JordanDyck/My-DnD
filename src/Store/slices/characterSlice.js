@@ -15,18 +15,19 @@ export const characterSlice = createSlice({
     value: getInitialCharacter(),
   },
   reducers: {
-    // set current character from local storage to state. do not use to update or display.
+    // set selected character from local storage to state. do not use to update.
     setCurrentCharacter: (state, action) => {
       try {
         const data = JSON.parse(localStorage.getItem(action.payload))
         state.value = data
       } catch (error) {
-        console.error("failed to set character. character will now be deleted", error)
+        console.error("failed to set character. character will be deleted", error)
         localStorage.removeItem(action.payload)
+        state.value = ""
       }
     },
 
-    // used to update and display current character details from state.
+    // used to update and display new character details from state.
     updateCharacter: (state, action) => {
       // set new state, then upload it to localstorage
       try {
@@ -37,7 +38,7 @@ export const characterSlice = createSlice({
       }
     },
 
-    // replace array with new array (used for deleting items)
+    // delete current character from state and localStorage
     clearCharacterDetails: (state, action) => {
       state.value = null
       localStorage.removeItem(action.payload.characterName)

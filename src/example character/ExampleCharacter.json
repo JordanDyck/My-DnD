@@ -3,7 +3,7 @@
   "classDetails": {
     "name": "Barbarian",
     "hit_die": 12,
-    "skill_proficiencies": {"Animal Handling": 1, "Nature": 1, "isMax": true},
+    "skill_proficiencies": {"Animal Handling": 1, "Intimidation": 1, "isMax": true},
     "base_proficiencies": [
       {"index": "light-armor", "name": "Light Armor", "url": "/api/2014/proficiencies/light-armor"},
       {
@@ -42,7 +42,9 @@
   },
   "subClass": {
     "name": "echo knight",
-    "features": [{"feature": "", "featureName": "summon echo", "level": "2"}]
+    "features": [
+      {"feature": "summon an echo within 15 ft of you", "featureName": "summon echo", "level": "1"}
+    ]
   },
   "levels": [
     {
@@ -396,60 +398,56 @@
     }
   },
   "inventory": [],
-  "health": {"currentHP": 20, "maxHP": 20, "temp": 0},
+  "health": {"currentHP": 25, "maxHP": 25, "temp": 0},
   "race": {
-    "name": "Dwarf",
+    "name": "Half-Orc",
     "age": "30",
     "languages": [
       {"index": "common", "name": "Common", "url": "/api/2014/languages/common"},
-      {"index": "dwarvish", "name": "Dwarvish", "url": "/api/2014/languages/dwarvish"}
+      {"index": "orc", "name": "Orc", "url": "/api/2014/languages/orc"}
     ],
-    "speed": 25,
-    "size": {"ft": "4", "inch": "2"},
+    "speed": 30,
+    "size": {"ft": "7", "inch": "5"},
     "ability_bonus": [
       {
-        "ability_score": {"index": "con", "name": "CON", "url": "/api/2014/ability-scores/con"},
+        "ability_score": {"index": "str", "name": "STR", "url": "/api/2014/ability-scores/str"},
         "bonus": 2
+      },
+      {
+        "ability_score": {"index": "con", "name": "CON", "url": "/api/2014/ability-scores/con"},
+        "bonus": 1
       }
     ],
     "starting_proficiencies": [
-      {"index": "battleaxes", "name": "Battleaxes", "url": "/api/2014/proficiencies/battleaxes"},
-      {"index": "handaxes", "name": "Handaxes", "url": "/api/2014/proficiencies/handaxes"},
       {
-        "index": "light-hammers",
-        "name": "Light hammers",
-        "url": "/api/2014/proficiencies/light-hammers"
-      },
-      {"index": "warhammers", "name": "Warhammers", "url": "/api/2014/proficiencies/warhammers"}
+        "index": "skill-intimidation",
+        "name": "Skill: Intimidation",
+        "url": "/api/2014/proficiencies/skill-intimidation"
+      }
     ],
     "traits": [
       {"index": "darkvision", "name": "Darkvision", "url": "/api/2014/traits/darkvision"},
       {
-        "index": "dwarven-resilience",
-        "name": "Dwarven Resilience",
-        "url": "/api/2014/traits/dwarven-resilience"
-      },
-      {"index": "stonecunning", "name": "Stonecunning", "url": "/api/2014/traits/stonecunning"},
-      {
-        "index": "dwarven-combat-training",
-        "name": "Dwarven Combat Training",
-        "url": "/api/2014/traits/dwarven-combat-training"
+        "index": "savage-attacks",
+        "name": "Savage Attacks",
+        "url": "/api/2014/traits/savage-attacks"
       },
       {
-        "index": "tool-proficiency",
-        "name": "Tool Proficiency",
-        "url": "/api/2014/traits/tool-proficiency"
-      }
+        "index": "relentless-endurance",
+        "name": "Relentless Endurance",
+        "url": "/api/2014/traits/relentless-endurance"
+      },
+      {"index": "menacing", "name": "Menacing", "url": "/api/2014/traits/menacing"}
     ],
-    "proficiencies": {"skill_proficiencies": {"Smith's Tools": 1, "isMax": true}},
+    "proficiencies": {},
     "isCustom": false
   },
   "subRace": {
-    "name": "na",
+    "name": "none",
     "ability_improvement": {"isMax": true},
     "skill_proficiencies": {"isMax": true},
     "base_proficiencies": [],
-    "languages": [],
+    "languages": [{"name": ""}],
     "traits": []
   },
   "notes": [],
