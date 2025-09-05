@@ -15,8 +15,8 @@ const CharacterSelecter = ({setShowCreator, deleteCharacter}) => {
   useEffect(() => {
     // if localStorage does not have "currentCharacter", that means its your first time at site, so add example character
     if (!Object.keys(localStorage).includes("currentCharacter")) {
-      dispatch(setCurrentCharacter("john doe"))
-      localStorage.setItem("john doe", JSON.stringify(ExampleCharacter))
+      setLocalStorage("example", ExampleCharacter)
+      dispatch(setCurrentCharacter("example"))
     } else {
       return
     }
@@ -49,6 +49,7 @@ const CharacterSelecter = ({setShowCreator, deleteCharacter}) => {
           setLocalStorage("currentCharacter", e.value)
         }}
         placeholder="select Character"
+        isSearchable={false}
         styles={{
           control: (base) => ({
             ...base,
