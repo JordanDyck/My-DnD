@@ -1,4 +1,3 @@
-import axios from "axios"
 import {useEffect, useRef, useState} from "react"
 import {useDispatch} from "react-redux"
 import {RiDeleteBinLine} from "react-icons/ri"
@@ -6,23 +5,18 @@ import {RiDeleteBinLine} from "react-icons/ri"
 import SpellInfo from "./SpellInfo"
 import {updateCharacter} from "../Store/slices/characterSlice"
 
-const FeatureDesc = ({
-  url,
-  setUrl,
-  currentSpell,
-  setcurrentSpell,
-  character,
-}) => {
+const FeatureDesc = ({url, setUrl, currentSpell, setcurrentSpell, character}) => {
   const [feature, setFeature] = useState()
   const closeRef = useRef()
   const dispatch = useDispatch()
   useEffect(() => {
     if (url) {
       if (url?.name.includes("/")) {
-        axios.get(`https://www.dnd5eapi.co${url.name}`).then((res) => {
-          const data = res.data
-          setFeature(data)
-        })
+        fetch(`https://www.dnd5eapi.co${url.name}`)
+          .then((res) => res.json())
+          .then((data) => {
+            setFeature(data)
+          })
       } else {
         setFeature(url)
       }
@@ -30,9 +24,7 @@ const FeatureDesc = ({
   }, [url])
 
   const deleteSpell = () => {
-    const filteredSpells = character.spells.filter(
-      (spell) => spell.name !== currentSpell.name
-    )
+    const filteredSpells = character.spells.filter((spell) => spell.name !== currentSpell.name)
     const updatedCharacter = {
       ...character,
       spells: filteredSpells,
@@ -76,9 +68,7 @@ const FeatureDesc = ({
     <div className="feature-container" ref={closeRef}>
       {feature && (
         <div className="feature-info">
-          <header className="tab-header">
-            {feature.name.split(" (").shift()}
-          </header>
+          <header className="tab-header">{feature.name.split(" (").shift()}</header>
           <h4 className="h4-title">description:</h4>
           {feature.desc.map((desc, index) => (
             <p key={`${feature.name}_${index}`}>{desc}</p>
@@ -101,9 +91,7 @@ const FeatureDesc = ({
           onClick={() => prepareSpell()}
           style={{pointerEvents: "initial"}}
         >
-          {currentSpell.prepared === false
-            ? "prepare spell"
-            : "unprepare spell"}
+          {currentSpell.prepared === false ? "prepare spell" : "unprepare spell"}
         </button>
       )}
     </div>

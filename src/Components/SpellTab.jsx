@@ -1,5 +1,5 @@
 import "../styles/Spells.scss"
-import axios from "axios"
+
 import {useEffect, useState, useRef} from "react"
 import {MdClose, MdSearch} from "react-icons/md"
 import {TbArrowBack} from "react-icons/tb"
@@ -30,8 +30,8 @@ const SpellTab = ({setShowSpellTab}) => {
   useEffect(() => {
     if (url.spell.length) {
       // gets the current spell info
-      axios
-        .get(`https://www.dnd5eapi.co/api/spells/${url.spell}`)
+      fetch(`https://www.dnd5eapi.co/api/spells/${url.spell}`)
+        .then((res) => res.json())
         .then((res) => {
           if (res.status === 200) {
             const data = res.data
@@ -58,10 +58,8 @@ const SpellTab = ({setShowSpellTab}) => {
   useEffect(() => {
     if (url.school) {
       // gets list of spells from school at selected level
-      axios
-        .get(
-          `https://www.dnd5eapi.co/api/spells?level=${url.level}&school=${url.school}`
-        )
+      fetch(`https://www.dnd5eapi.co/api/spells?level=${url.level}&school=${url.school}`)
+        .then((res) => res.json())
         .then((res) => {
           const data = res.data.results
           setSpellList(data)
@@ -116,9 +114,7 @@ const SpellTab = ({setShowSpellTab}) => {
             if (e.key === "Enter") {
               setUrl((prev) => ({
                 ...prev,
-                spell: spellRef.current.value
-                  .toLowerCase()
-                  .replaceAll(" ", "-"),
+                spell: spellRef.current.value.toLowerCase().replaceAll(" ", "-"),
                 error: false,
               }))
             }

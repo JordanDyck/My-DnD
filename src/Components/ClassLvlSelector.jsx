@@ -1,6 +1,5 @@
 import {useState, useEffect} from "react"
 import Select from "react-select"
-import axios from "axios"
 
 import ".././styles/CharacterSelector.scss"
 import ClassLvlDetails from "./ClassLvlDetails"
@@ -10,20 +9,20 @@ const ClassLvlSelector = ({levelsURL, setStoredDetails}) => {
 
   useEffect(() => {
     if (levelsURL) {
-      axios.get(`https://www.dnd5eapi.co${levelsURL}`).then((res) => {
-        const data = res.data
+      fetch(`https://www.dnd5eapi.co${levelsURL}`)
+        .then((res) => res.json())
+        .then((data) => {
+          const dataCopy = data.filter((lvl) => {
+            delete lvl.updated_at
+            return lvl
+          })
 
-        const dataCopy = data.filter((lvl) => {
-          delete lvl.updated_at
-          return lvl
+          setAllLevels(dataCopy)
+          setStoredDetails((prev) => ({
+            ...prev,
+            levels: dataCopy,
+          }))
         })
-
-        setAllLevels(dataCopy)
-        setStoredDetails((prev) => ({
-          ...prev,
-          levels: dataCopy,
-        }))
-      })
     }
   }, [levelsURL, setStoredDetails])
   const classLvlOptions = allLevels?.map(({level}) => ({

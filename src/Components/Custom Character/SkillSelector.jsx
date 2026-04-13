@@ -1,26 +1,21 @@
 import {useEffect, useState, useCallback} from "react"
-import axios from "axios"
 import useCounter from "../../hooks/useCounter"
 import {RiDeleteBinLine} from "react-icons/ri"
 
-const SkillSelector = ({
-  setDetails,
-  type,
-  data,
-  isCustom,
-  maxChoices,
-  isEditing,
-}) => {
+const SkillSelector = ({setDetails, type, data, isCustom, maxChoices, isEditing}) => {
   const [skills, setSkills] = useState([])
   const [chosenskills, setChosenSkills] = useState({})
   const counter = useCounter([], maxChoices)
   useEffect(() => {
     if (isCustom === true) {
-      axios.get(`https://www.dnd5eapi.co/api/${data}/`).then((res) => {
-        const urlData = res.data.results
+      fetch(`https://www.dnd5eapi.co/api/${data}/`)
+        .then((res) => res.json())
+        .then((data) => {
+          const urlData = data.results
 
-        setSkills(urlData)
-      })
+          setSkills(urlData)
+        })
+        .catch((error) => console.log(error))
     } else {
       // if choices already exist, don't fetch api and just use the existing data.
       setSkills(data)
@@ -111,12 +106,8 @@ const SkillSelector = ({
                   }}
                 >
                   {item.replaceAll("Skill: ", "")}
-                  {type === "ability_improvement"
-                    ? `: ${counter.value[index]}`
-                    : ""}
-                  {counter.value[index] >= counter.maxValue && (
-                    <RiDeleteBinLine />
-                  )}
+                  {type === "ability_improvement" ? `: ${counter.value[index]}` : ""}
+                  {counter.value[index] >= counter.maxValue && <RiDeleteBinLine />}
                 </button>
               )
             })}
@@ -143,8 +134,7 @@ const SkillSelector = ({
 
                 setChosenSkills((prev) => ({
                   ...prev,
-                  [!skill.name.includes("Skill: ") &&
-                  type === "skill_proficiencies"
+                  [!skill.name.includes("Skill: ") && type === "skill_proficiencies"
                     ? `Skill: ${skill.name}`
                     : skill.name]: counter.value?.[index] || 1,
                 }))

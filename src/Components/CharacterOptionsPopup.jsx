@@ -1,20 +1,13 @@
-import axios from "axios"
 import {useEffect, useState} from "react"
 
-const CharacterOptionsPopUp = ({
-  setPopUp,
-  setOptionName,
-  url,
-  type,
-  setIsCustom,
-}) => {
+const CharacterOptionsPopUp = ({setPopUp, setOptionName, url, type, setIsCustom}) => {
   const [options, setOptions] = useState([])
   useEffect(() => {
-    axios.get(`https://www.dnd5eapi.co/api/${url}/`).then((res) => {
-      const data = res.data.results
-
-      setOptions(data)
-    })
+    fetch(`https://www.dnd5eapi.co/api/${url}/`)
+      .then((res) => res.json())
+      .then((data) => {
+        setOptions(data.results)
+      })
   }, [url])
 
   return (

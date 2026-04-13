@@ -1,4 +1,3 @@
-import axios from "axios"
 import {useEffect, useMemo} from "react"
 
 import {classPerkFilter, racePerkFilter} from "./utilities"
@@ -53,8 +52,7 @@ const Perks = ({
           base_proficiencies: characterDetails.proficiencies,
           saving_throws: characterDetails.saving_throws,
           spellcasting: {
-            spell_save:
-              characterDetails?.spellcasting?.spellcasting_ability.name,
+            spell_save: characterDetails?.spellcasting?.spellcasting_ability.name,
           },
           isCustom: false,
         },
@@ -64,10 +62,9 @@ const Perks = ({
 
   useEffect(() => {
     if (category && subCategory) {
-      axios
-        .get(`https://www.dnd5eapi.co/api/${category}/${subCategory}`)
-        .then((res) => {
-          const data = res.data
+      fetch(`https://www.dnd5eapi.co/api/${category}/${subCategory}`)
+        .then((res) => res.json())
+        .then((data) => {
           const {updated_at, _id, ...rest} = data
 
           setCharacterDetails(rest)

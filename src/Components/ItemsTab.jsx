@@ -1,6 +1,5 @@
 import "../styles/ItemsTab.scss"
 import Select from "react-select"
-import axios from "axios"
 import {useState, useEffect} from "react"
 import {useDispatch, useSelector} from "react-redux"
 import {MdCreate, MdClose} from "react-icons/md"
@@ -12,13 +11,7 @@ import ItemCreator from "./ItemCreator"
 import useCounter from "../hooks/useCounter.jsx"
 import {updateCharacter} from "../Store/slices/characterSlice.js"
 
-const ItemsTab = ({
-  type,
-  setDetails,
-  details,
-  linkedCharacter,
-  setShowItemTab,
-}) => {
+const ItemsTab = ({type, setDetails, details, linkedCharacter, setShowItemTab}) => {
   const [itemCategories, setItemCategories] = useState([])
   const [itemList, setItemList] = useState()
   const [currentItem, setCurrentItem] = useState()
@@ -65,50 +58,52 @@ const ItemsTab = ({
   }, [])
   // fetch equipment categories
   useEffect(() => {
-    axios
-      .get(`https://www.dnd5eapi.co/api/equipment-categories/`)
-      .then((res) => {
+    fetch(`https://www.dnd5eapi.co/api/equipment-categories/`)
+      .then((res) => res.json())
+      .then((data) => {
         try {
-          const data = res.data.results
-          setItemCategories(data)
+          const results = data.results
+          setItemCategories(results)
         } catch (error) {
           console.log(error)
         }
       })
+      .catch((error) => console.log(error))
   }, [])
 
   // fetch items in that category
   useEffect(() => {
-    axios
-      .get(`https://www.dnd5eapi.co/api/equipment-categories/${categoryURL}`)
-      .then((res) => {
+    fetch(`https://www.dnd5eapi.co/api/equipment-categories/${categoryURL}`)
+      .then((res) => res.json())
+      .then((data) => {
         try {
-          const data = res.data.equipment?.toSorted((a, b) => {
+          const equipment = data.equipment?.toSorted((a, b) => {
             let itemA = a.name.toUpperCase()
             let itemB = b.name.toUpperCase()
             return itemA < itemB ? -1 : itemA > itemB ? 1 : 0
           })
 
-          setItemList(data)
+          setItemList(equipment)
         } catch (error) {
           console.log(error)
         }
       })
+      .catch((error) => console.log(error))
   }, [categoryURL])
 
   // fetch details about current item
   useEffect(() => {
     if (currentItem?.url) {
-      axios
-        .get(`https://www.dnd5eapi.co${currentItem?.url || ""}`)
-        .then((res) => {
+      fetch(`https://www.dnd5eapi.co${currentItem?.url || ""}`)
+        .then((res) => res.json())
+        .then((data) => {
           try {
-            const data = res.data
             setCurrentItemData(data)
           } catch (error) {
             console.log(error)
           }
         })
+        .catch((error) => console.log(error))
     }
   }, [currentItem, setCurrentItem])
 
@@ -116,15 +111,11 @@ const ItemsTab = ({
     // creates array for currentItemData to be displayed
     const itemInfo = Object.entries(currentItemData)
 
-    const gearCategory =
-      equipmentFilter?.[currentItemData?.gear_category?.index]
+    const gearCategory = equipmentFilter?.[currentItemData?.gear_category?.index]
 
-    const equipmentCategory =
-      equipmentFilter?.[currentItemData?.equipment_category?.index]
+    const equipmentCategory = equipmentFilter?.[currentItemData?.equipment_category?.index]
 
-    const whitelist = equipmentFilter.base
-      .concat(gearCategory)
-      .concat(equipmentCategory)
+    const whitelist = equipmentFilter.base.concat(gearCategory).concat(equipmentCategory)
 
     // if item name has a value, return true. else don't display it
     const filteredInfo = itemInfo.filter((value) => {
@@ -149,8 +140,7 @@ const ItemsTab = ({
         <div className="item-info-container ">
           {filteredInfo.map(([key, value]) => {
             const customizeValue = filter?.[key]?.(value)
-            const valueToCheck =
-              customizeValue === undefined ? value : customizeValue
+            const valueToCheck = customizeValue === undefined ? value : customizeValue
             const renderedValue = handleformat(valueToCheck, key)
 
             if (!showItemCreator) {
@@ -173,10 +163,7 @@ const ItemsTab = ({
               <h4 className="h4-title">amount:</h4>
               <label className="item-count">{counter.value}</label>
               <button onClick={() => counter.increment(0, 1)}>+</button>
-              <button
-                disabled={counter.value <= 1}
-                onClick={() => counter.decrement(1)}
-              >
+              <button disabled={counter.value <= 1} onClick={() => counter.decrement(1)}>
                 -
               </button>
             </div>
@@ -205,7 +192,7 @@ const ItemsTab = ({
                               ["linkedCharacter", character.characterName],
                             ],
                           ],
-                        })
+                        }),
                       )
                     : ""
                 }
@@ -233,7 +220,7 @@ const ItemsTab = ({
                               ["id", filteredInfo[0][1]],
                             ],
                           ],
-                        })
+                        }),
                       )
                     : ""
                 }
@@ -247,9 +234,7 @@ const ItemsTab = ({
               className="add-btn"
               onClick={() => {
                 const stateCopy = {...details, starting_equipment: []}
-                if (
-                  !details?.starting_equipment?.includes(filteredInfo[0][1])
-                ) {
+                if (!details?.starting_equipment?.includes(filteredInfo[0][1])) {
                   return (
                     setDetails((prev) => ({
                       ...stateCopy,
@@ -281,13 +266,7 @@ const ItemsTab = ({
   }
 
   return (
-    <div
-      className={
-        type === "items-tab"
-          ? "items-tab-wrapper"
-          : "starting-equipment-selector"
-      }
-    >
+    <div className={type === "items-tab" ? "items-tab-wrapper" : "starting-equipment-selector"}>
       {type === "items-tab" && (
         <div className="item-tab-btn-container">
           <button
